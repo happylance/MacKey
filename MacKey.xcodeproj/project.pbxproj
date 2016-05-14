@@ -1,0 +1,514 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		40C4AB161CE758F400ED92C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB151CE758F400ED92C5 /* AppDelegate.swift */; };
+		40C4AB181CE758F400ED92C5 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB171CE758F400ED92C5 /* MasterViewController.swift */; };
+		40C4AB1A1CE758F400ED92C5 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB191CE758F400ED92C5 /* DetailViewController.swift */; };
+		40C4AB1D1CE758F400ED92C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40C4AB1B1CE758F400ED92C5 /* Main.storyboard */; };
+		40C4AB1F1CE758F400ED92C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40C4AB1E1CE758F400ED92C5 /* Assets.xcassets */; };
+		40C4AB221CE758F400ED92C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40C4AB201CE758F400ED92C5 /* LaunchScreen.storyboard */; };
+		40C4AB2D1CE758F400ED92C5 /* MacKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB2C1CE758F400ED92C5 /* MacKeyTests.swift */; };
+		40C4AB381CE758F500ED92C5 /* MacKeyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB371CE758F500ED92C5 /* MacKeyUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		40C4AB291CE758F400ED92C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 40C4AB0A1CE758F300ED92C5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 40C4AB111CE758F400ED92C5;
+			remoteInfo = MacKey;
+		};
+		40C4AB341CE758F500ED92C5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 40C4AB0A1CE758F300ED92C5 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 40C4AB111CE758F400ED92C5;
+			remoteInfo = MacKey;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		40C4AB121CE758F400ED92C5 /* MacKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		40C4AB151CE758F400ED92C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		40C4AB171CE758F400ED92C5 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
+		40C4AB191CE758F400ED92C5 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		40C4AB1C1CE758F400ED92C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		40C4AB1E1CE758F400ED92C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		40C4AB211CE758F400ED92C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		40C4AB231CE758F400ED92C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40C4AB281CE758F400ED92C5 /* MacKeyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacKeyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		40C4AB2C1CE758F400ED92C5 /* MacKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacKeyTests.swift; sourceTree = "<group>"; };
+		40C4AB2E1CE758F400ED92C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40C4AB331CE758F500ED92C5 /* MacKeyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacKeyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		40C4AB371CE758F500ED92C5 /* MacKeyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacKeyUITests.swift; sourceTree = "<group>"; };
+		40C4AB391CE758F500ED92C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		40C4AB0F1CE758F400ED92C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40C4AB251CE758F400ED92C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40C4AB301CE758F500ED92C5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		40C4AB091CE758F300ED92C5 = {
+			isa = PBXGroup;
+			children = (
+				40C4AB141CE758F400ED92C5 /* MacKey */,
+				40C4AB2B1CE758F400ED92C5 /* MacKeyTests */,
+				40C4AB361CE758F500ED92C5 /* MacKeyUITests */,
+				40C4AB131CE758F400ED92C5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		40C4AB131CE758F400ED92C5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				40C4AB121CE758F400ED92C5 /* MacKey.app */,
+				40C4AB281CE758F400ED92C5 /* MacKeyTests.xctest */,
+				40C4AB331CE758F500ED92C5 /* MacKeyUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		40C4AB141CE758F400ED92C5 /* MacKey */ = {
+			isa = PBXGroup;
+			children = (
+				40C4AB151CE758F400ED92C5 /* AppDelegate.swift */,
+				40C4AB171CE758F400ED92C5 /* MasterViewController.swift */,
+				40C4AB191CE758F400ED92C5 /* DetailViewController.swift */,
+				40C4AB1B1CE758F400ED92C5 /* Main.storyboard */,
+				40C4AB1E1CE758F400ED92C5 /* Assets.xcassets */,
+				40C4AB201CE758F400ED92C5 /* LaunchScreen.storyboard */,
+				40C4AB231CE758F400ED92C5 /* Info.plist */,
+			);
+			path = MacKey;
+			sourceTree = "<group>";
+		};
+		40C4AB2B1CE758F400ED92C5 /* MacKeyTests */ = {
+			isa = PBXGroup;
+			children = (
+				40C4AB2C1CE758F400ED92C5 /* MacKeyTests.swift */,
+				40C4AB2E1CE758F400ED92C5 /* Info.plist */,
+			);
+			path = MacKeyTests;
+			sourceTree = "<group>";
+		};
+		40C4AB361CE758F500ED92C5 /* MacKeyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				40C4AB371CE758F500ED92C5 /* MacKeyUITests.swift */,
+				40C4AB391CE758F500ED92C5 /* Info.plist */,
+			);
+			path = MacKeyUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		40C4AB111CE758F400ED92C5 /* MacKey */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 40C4AB3C1CE758F500ED92C5 /* Build configuration list for PBXNativeTarget "MacKey" */;
+			buildPhases = (
+				40C4AB0E1CE758F400ED92C5 /* Sources */,
+				40C4AB0F1CE758F400ED92C5 /* Frameworks */,
+				40C4AB101CE758F400ED92C5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MacKey;
+			productName = MacKey;
+			productReference = 40C4AB121CE758F400ED92C5 /* MacKey.app */;
+			productType = "com.apple.product-type.application";
+		};
+		40C4AB271CE758F400ED92C5 /* MacKeyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 40C4AB3F1CE758F500ED92C5 /* Build configuration list for PBXNativeTarget "MacKeyTests" */;
+			buildPhases = (
+				40C4AB241CE758F400ED92C5 /* Sources */,
+				40C4AB251CE758F400ED92C5 /* Frameworks */,
+				40C4AB261CE758F400ED92C5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				40C4AB2A1CE758F400ED92C5 /* PBXTargetDependency */,
+			);
+			name = MacKeyTests;
+			productName = MacKeyTests;
+			productReference = 40C4AB281CE758F400ED92C5 /* MacKeyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		40C4AB321CE758F500ED92C5 /* MacKeyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 40C4AB421CE758F500ED92C5 /* Build configuration list for PBXNativeTarget "MacKeyUITests" */;
+			buildPhases = (
+				40C4AB2F1CE758F500ED92C5 /* Sources */,
+				40C4AB301CE758F500ED92C5 /* Frameworks */,
+				40C4AB311CE758F500ED92C5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				40C4AB351CE758F500ED92C5 /* PBXTargetDependency */,
+			);
+			name = MacKeyUITests;
+			productName = MacKeyUITests;
+			productReference = 40C4AB331CE758F500ED92C5 /* MacKeyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		40C4AB0A1CE758F300ED92C5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Liu Liang";
+				TargetAttributes = {
+					40C4AB111CE758F400ED92C5 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 7YC8KN9YF3;
+					};
+					40C4AB271CE758F400ED92C5 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 7YC8KN9YF3;
+						TestTargetID = 40C4AB111CE758F400ED92C5;
+					};
+					40C4AB321CE758F500ED92C5 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 7YC8KN9YF3;
+						TestTargetID = 40C4AB111CE758F400ED92C5;
+					};
+				};
+			};
+			buildConfigurationList = 40C4AB0D1CE758F300ED92C5 /* Build configuration list for PBXProject "MacKey" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 40C4AB091CE758F300ED92C5;
+			productRefGroup = 40C4AB131CE758F400ED92C5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				40C4AB111CE758F400ED92C5 /* MacKey */,
+				40C4AB271CE758F400ED92C5 /* MacKeyTests */,
+				40C4AB321CE758F500ED92C5 /* MacKeyUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		40C4AB101CE758F400ED92C5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40C4AB221CE758F400ED92C5 /* LaunchScreen.storyboard in Resources */,
+				40C4AB1F1CE758F400ED92C5 /* Assets.xcassets in Resources */,
+				40C4AB1D1CE758F400ED92C5 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40C4AB261CE758F400ED92C5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40C4AB311CE758F500ED92C5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		40C4AB0E1CE758F400ED92C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40C4AB1A1CE758F400ED92C5 /* DetailViewController.swift in Sources */,
+				40C4AB181CE758F400ED92C5 /* MasterViewController.swift in Sources */,
+				40C4AB161CE758F400ED92C5 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40C4AB241CE758F400ED92C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40C4AB2D1CE758F400ED92C5 /* MacKeyTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40C4AB2F1CE758F500ED92C5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40C4AB381CE758F500ED92C5 /* MacKeyUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		40C4AB2A1CE758F400ED92C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 40C4AB111CE758F400ED92C5 /* MacKey */;
+			targetProxy = 40C4AB291CE758F400ED92C5 /* PBXContainerItemProxy */;
+		};
+		40C4AB351CE758F500ED92C5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 40C4AB111CE758F400ED92C5 /* MacKey */;
+			targetProxy = 40C4AB341CE758F500ED92C5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		40C4AB1B1CE758F400ED92C5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				40C4AB1C1CE758F400ED92C5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		40C4AB201CE758F400ED92C5 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				40C4AB211CE758F400ED92C5 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		40C4AB3A1CE758F500ED92C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		40C4AB3B1CE758F500ED92C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		40C4AB3D1CE758F500ED92C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MacKey/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Lance.MacKey;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		40C4AB3E1CE758F500ED92C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = MacKey/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Lance.MacKey;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		40C4AB401CE758F500ED92C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MacKeyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Lance.MacKeyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacKey.app/MacKey";
+			};
+			name = Debug;
+		};
+		40C4AB411CE758F500ED92C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MacKeyTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Lance.MacKeyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacKey.app/MacKey";
+			};
+			name = Release;
+		};
+		40C4AB431CE758F500ED92C5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = MacKeyUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Lance.MacKeyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = MacKey;
+			};
+			name = Debug;
+		};
+		40C4AB441CE758F500ED92C5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = MacKeyUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Lance.MacKeyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = MacKey;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		40C4AB0D1CE758F300ED92C5 /* Build configuration list for PBXProject "MacKey" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40C4AB3A1CE758F500ED92C5 /* Debug */,
+				40C4AB3B1CE758F500ED92C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		40C4AB3C1CE758F500ED92C5 /* Build configuration list for PBXNativeTarget "MacKey" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40C4AB3D1CE758F500ED92C5 /* Debug */,
+				40C4AB3E1CE758F500ED92C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		40C4AB3F1CE758F500ED92C5 /* Build configuration list for PBXNativeTarget "MacKeyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40C4AB401CE758F500ED92C5 /* Debug */,
+				40C4AB411CE758F500ED92C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		40C4AB421CE758F500ED92C5 /* Build configuration list for PBXNativeTarget "MacKeyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40C4AB431CE758F500ED92C5 /* Debug */,
+				40C4AB441CE758F500ED92C5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 40C4AB0A1CE758F300ED92C5 /* Project object */;
+}
