@@ -11,8 +11,7 @@ import UIKit
 class MasterViewController: UITableViewController {
 
     var detailViewController: DetailViewController? = nil
-    var objects = [AnyObject]()
-
+    var selectedCell:UITableViewCell? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,9 +37,19 @@ class MasterViewController: UITableViewController {
     }
 
     func insertNewObject(sender: AnyObject) {
-        objects.insert(NSDate(), atIndex: 0)
-        let indexPath = NSIndexPath(forRow: 0, inSection: 0)
-        self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        let host = MacHost()
+        host.requireLoginInfo { (didGetLoginInfo) in
+            if (didGetLoginInfo) {
+                let hostAliases = self.hostAliases()
+                let index = hostAliases.binarySearch{$0 < host.alias}
+                
+                MacHostsManager.sharedInstance.hosts[host.alias] = host
+                MacHostsManager.sharedInstance.saveHosts()
+                
+                let indexPath = NSIndexPath(forRow: index, inSection: 0)
+                self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            }
+        }
     }
 
     // MARK: - Segues
@@ -48,11 +57,16 @@ class MasterViewController: UITableViewController {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
-                let object = objects[indexPath.row] as! NSDate
+                let alias = self.hostAliases()[indexPath.row]
+                let object = MacHostsManager.sharedInstance.hosts[alias]
                 let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
-                controller.detailItem = object
+                controller.macHost = object
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
                 controller.navigationItem.leftItemsSupplementBackButton = true
+                
+                if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+                    updateSelectCell(cell)
+                }
             }
         }
     }
@@ -64,15 +78,22 @@ class MasterViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return objects.count
+        return MacHostsManager.sharedInstance.hosts.count
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
 
-        let object = objects[indexPath.row] as! NSDate
-        cell.textLabel!.text = object.description
+        let object = hostAliases()[indexPath.row]
+        cell.textLabel!.text = object
+        if object == MacHostsManager.sharedInstance.latestHostAlias {
+            updateSelectCell(cell)
+        }
         return cell
+    }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
 
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -80,15 +101,56 @@ class MasterViewController: UITableViewController {
         return true
     }
 
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            objects.removeAtIndex(indexPath.row)
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+        
+        let editRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Edit", handler:{action, indexpath in
+            tableView.setEditing(false, animated: true)
+            
+            let cell = tableView.cellForRowAtIndexPath(indexPath)
+            let hostAlias = cell?.textLabel?.text
+            if hostAlias == nil {
+                print("hostAlias is nil")
+                return
+            }
+            let host = MacHostsManager.sharedInstance.hosts[hostAlias!]
+            if host  == nil {
+                print("host is nil for \(hostAlias!)")
+                return
+            }
+            host!.requireLoginInfo { (didGetLoginInfo) in
+                if (didGetLoginInfo) {
+                    MacHostsManager.sharedInstance.hosts[host!.alias] = host
+                    MacHostsManager.sharedInstance.saveHosts()
+                }
+            }
+
+        });
+        
+        let deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
+            let cell = tableView.cellForRowAtIndexPath(indexPath)
+            let hostAlias = cell?.textLabel?.text
+            if hostAlias == nil {
+                print("hostAlias is nil")
+                return
+            }
+            MacHostsManager.sharedInstance.hosts.removeValueForKey(hostAlias!)
+            MacHostsManager.sharedInstance.saveHosts()
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+        });
+        
+        return [deleteRowAction, editRowAction]
+    }
+    
+    func hostAliases() -> [String] {
+        return MacHostsManager.sharedInstance.hosts.keys.sort()
+    }
+    
+    func updateSelectCell(newSelectedCell: UITableViewCell) {
+        if newSelectedCell != selectedCell {
+            selectedCell?.accessoryType = .None
+            selectedCell = newSelectedCell
+            newSelectedCell.accessoryType = .Checkmark
         }
     }
-
-
 }
 

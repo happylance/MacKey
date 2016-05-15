@@ -12,34 +12,65 @@ class DetailViewController: UIViewController {
 
     @IBOutlet weak var detailDescriptionLabel: UILabel!
 
-
-    var detailItem: AnyObject? {
+    var macHost: MacHost? {
         didSet {
-            // Update the view.
-            self.configureView()
-        }
-    }
-
-    func configureView() {
-        // Update the user interface for the detail item.
-        if let detail = self.detailItem {
-            if let label = self.detailDescriptionLabel {
-                label.text = detail.description
+            TouchIDUtils.runTouchID { (result) in
+                switch(result) {
+                case .Success:
+                    self.unlockHostAndConfigureView()
+                case .Failure:
+                    if TouchIDUtils.isUserCancel(result.error!) {
+                        self.setDetailLabel(TouchIDUtils.getErrorMessage(result.error!))
+                        return
+                    }
+                    TouchIDUtils.showExitAlert(result.error!, controller: self)
+                }
             }
         }
     }
 
+    func unlockHostAndConfigureView() {
+        // Update the user interface for the detail item.
+        if let macHost = self.macHost {
+            let cmd = "unlock"
+            setDetailLabel("Unlocking...")
+            MacHostsManager.sharedInstance.latestHostAlias = macHost.alias
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                let result = macHost.executeCmd(cmd)
+                dispatch_async(dispatch_get_main_queue(), {
+                    let latestHostAlias = MacHostsManager.sharedInstance.latestHostAlias
+                    if macHost.alias != latestHostAlias {
+                        print("Ignore the result of '\(cmd)' for '\(macHost.alias)' because the latest host now is '\(latestHostAlias)'")
+                        return
+                    }
+                    
+                    switch result {
+                    case .Success:
+                        self.setDetailLabel("\(result.value!)")
+                    case .Failure:
+                        self.setDetailLabel("\(result.error?.localizedDescription ?? "")")
+                    }
+                })
+            })
+        }
+    }
+    
+    func setDetailLabel(string: String) {
+        self.detailDescriptionLabel?.text = string
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        self.configureView()
+        
+        if let label = self.detailDescriptionLabel {
+            let animation: CATransition = CATransition()
+            animation.duration = 0.5
+            animation.type = kCATransitionFade
+            animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+            label.layer.addAnimation(animation, forKey: "changeTextTransition")
+            
+            label.text = ""
+        }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
 

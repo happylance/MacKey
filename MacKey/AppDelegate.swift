@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SimpleTouch
+import Result
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
@@ -20,6 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
         navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
         splitViewController.delegate = self
+        
+        dispatch_async(dispatch_get_main_queue(), {
+            TouchIDUtils.checkTouchIDSupport{ (result) in
+                self.handleTouchIDResult(result)
+            }
+        });
         return true
     }
 
@@ -35,6 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+        
+        TouchIDUtils.runTouchID { (result) in
+            self.handleTouchIDResult(result)
+        }
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
@@ -50,12 +62,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController, ontoPrimaryViewController primaryViewController:UIViewController) -> Bool {
         guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
         guard let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController else { return false }
-        if topAsDetailController.detailItem == nil {
+        if topAsDetailController.macHost == nil {
             // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
             return true
         }
         return false
     }
+    
+    func handleTouchIDResult(result: Result<Bool, TouchIDError>) {
+        switch(result) {
+        case .Success:
+            MacHostsManager.sharedInstance.unlockLatestHost()
+        case .Failure:
+            if TouchIDUtils.isUserCancel(result.error!) {
+                return
+            }
+            if let controller = self.window?.rootViewController {
+                TouchIDUtils.showExitAlert(result.error!, controller: controller)
+            }
+        }
+    }
 
+    func showExitAlert(message: String) {
+        let alertVC = UIAlertController(title: "Sorry that this app will exit", message: message, preferredStyle: .Alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: {
+            (action)->() in
+            exit(0)
+        })
+        alertVC.addAction(defaultAction)
+        self.window?.rootViewController?.presentViewController(alertVC, animated: true, completion: nil)
+    }
 }
 

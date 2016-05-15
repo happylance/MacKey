@@ -1,0 +1,4 @@
+github "NMSSH/NMSSH" "2.2.5"
+github "antitypical/Result" "2.0.0"
+github "jrendel/SwiftKeychainWrapper" "1.0.11"
+github "simple-machines/simple-touch" "1.0.0"

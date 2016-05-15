@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		401263831CE770DD00FAE75C /* NMSSH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4012637F1CE770DD00FAE75C /* NMSSH.framework */; };
+		401263841CE770DD00FAE75C /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401263801CE770DD00FAE75C /* Result.framework */; };
+		401263851CE770DD00FAE75C /* SimpleTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401263811CE770DD00FAE75C /* SimpleTouch.framework */; };
+		401263861CE770DD00FAE75C /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401263821CE770DD00FAE75C /* SwiftKeychainWrapper.framework */; };
+		4012638E1CE77D2D00FAE75C /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263891CE77D2D00FAE75C /* BinarySearch.swift */; };
+		401263911CE77D2D00FAE75C /* SshUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4012638C1CE77D2D00FAE75C /* SshUtils.swift */; };
+		401263981CE77E3B00FAE75C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263971CE77E3B00FAE75C /* Constants.swift */; };
+		4012639F1CE79F6400FAE75C /* MacHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4012639E1CE79F6400FAE75C /* MacHost.swift */; };
+		401263A11CE79F7A00FAE75C /* MacHost+RequireInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263A01CE79F7A00FAE75C /* MacHost+RequireInfo.swift */; };
+		401263A31CE7BD3C00FAE75C /* MacHost+SSH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263A21CE7BD3C00FAE75C /* MacHost+SSH.swift */; };
+		401263A71CE7C9A300FAE75C /* MacHostsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263A61CE7C9A300FAE75C /* MacHostsManager.swift */; };
+		401263A91CE8B04800FAE75C /* TouchIDUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263A81CE8B04800FAE75C /* TouchIDUtils.swift */; };
 		40C4AB161CE758F400ED92C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB151CE758F400ED92C5 /* AppDelegate.swift */; };
 		40C4AB181CE758F400ED92C5 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB171CE758F400ED92C5 /* MasterViewController.swift */; };
 		40C4AB1A1CE758F400ED92C5 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB191CE758F400ED92C5 /* DetailViewController.swift */; };
@@ -35,6 +47,18 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4012637F1CE770DD00FAE75C /* NMSSH.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NMSSH.framework; path = Carthage/Build/iOS/NMSSH.framework; sourceTree = "<group>"; };
+		401263801CE770DD00FAE75C /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
+		401263811CE770DD00FAE75C /* SimpleTouch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SimpleTouch.framework; path = Carthage/Build/iOS/SimpleTouch.framework; sourceTree = "<group>"; };
+		401263821CE770DD00FAE75C /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftKeychainWrapper.framework; path = Carthage/Build/iOS/SwiftKeychainWrapper.framework; sourceTree = "<group>"; };
+		401263891CE77D2D00FAE75C /* BinarySearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BinarySearch.swift; path = Utils/BinarySearch.swift; sourceTree = "<group>"; };
+		4012638C1CE77D2D00FAE75C /* SshUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SshUtils.swift; path = Utils/SshUtils.swift; sourceTree = "<group>"; };
+		401263971CE77E3B00FAE75C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		4012639E1CE79F6400FAE75C /* MacHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacHost.swift; path = Models/MacHost.swift; sourceTree = "<group>"; };
+		401263A01CE79F7A00FAE75C /* MacHost+RequireInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MacHost+RequireInfo.swift"; path = "Models/MacHost+RequireInfo.swift"; sourceTree = "<group>"; };
+		401263A21CE7BD3C00FAE75C /* MacHost+SSH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MacHost+SSH.swift"; path = "Models/MacHost+SSH.swift"; sourceTree = "<group>"; };
+		401263A61CE7C9A300FAE75C /* MacHostsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacHostsManager.swift; sourceTree = "<group>"; };
+		401263A81CE8B04800FAE75C /* TouchIDUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchIDUtils.swift; path = Utils/TouchIDUtils.swift; sourceTree = "<group>"; };
 		40C4AB121CE758F400ED92C5 /* MacKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40C4AB151CE758F400ED92C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40C4AB171CE758F400ED92C5 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +80,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				401263861CE770DD00FAE75C /* SwiftKeychainWrapper.framework in Frameworks */,
+				401263831CE770DD00FAE75C /* NMSSH.framework in Frameworks */,
+				401263851CE770DD00FAE75C /* SimpleTouch.framework in Frameworks */,
+				401263841CE770DD00FAE75C /* Result.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,9 +104,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		401263881CE77D2000FAE75C /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				401263891CE77D2D00FAE75C /* BinarySearch.swift */,
+				4012638C1CE77D2D00FAE75C /* SshUtils.swift */,
+				401263A81CE8B04800FAE75C /* TouchIDUtils.swift */,
+			);
+			name = Utils;
+			sourceTree = "<group>";
+		};
+		4012639B1CE79EF300FAE75C /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4012639E1CE79F6400FAE75C /* MacHost.swift */,
+				401263A01CE79F7A00FAE75C /* MacHost+RequireInfo.swift */,
+				401263A21CE7BD3C00FAE75C /* MacHost+SSH.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		40C4AB091CE758F300ED92C5 = {
 			isa = PBXGroup;
 			children = (
+				4012637F1CE770DD00FAE75C /* NMSSH.framework */,
+				401263801CE770DD00FAE75C /* Result.framework */,
+				401263811CE770DD00FAE75C /* SimpleTouch.framework */,
+				401263821CE770DD00FAE75C /* SwiftKeychainWrapper.framework */,
 				40C4AB141CE758F400ED92C5 /* MacKey */,
 				40C4AB2B1CE758F400ED92C5 /* MacKeyTests */,
 				40C4AB361CE758F500ED92C5 /* MacKeyUITests */,
@@ -99,13 +151,14 @@
 		40C4AB141CE758F400ED92C5 /* MacKey */ = {
 			isa = PBXGroup;
 			children = (
+				4012639B1CE79EF300FAE75C /* Models */,
+				401263881CE77D2000FAE75C /* Utils */,
+				40C4AB451CE7592300ED92C5 /* Resources */,
 				40C4AB151CE758F400ED92C5 /* AppDelegate.swift */,
+				401263971CE77E3B00FAE75C /* Constants.swift */,
+				401263A61CE7C9A300FAE75C /* MacHostsManager.swift */,
 				40C4AB171CE758F400ED92C5 /* MasterViewController.swift */,
 				40C4AB191CE758F400ED92C5 /* DetailViewController.swift */,
-				40C4AB1B1CE758F400ED92C5 /* Main.storyboard */,
-				40C4AB1E1CE758F400ED92C5 /* Assets.xcassets */,
-				40C4AB201CE758F400ED92C5 /* LaunchScreen.storyboard */,
-				40C4AB231CE758F400ED92C5 /* Info.plist */,
 			);
 			path = MacKey;
 			sourceTree = "<group>";
@@ -128,6 +181,17 @@
 			path = MacKeyUITests;
 			sourceTree = "<group>";
 		};
+		40C4AB451CE7592300ED92C5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				40C4AB1B1CE758F400ED92C5 /* Main.storyboard */,
+				40C4AB1E1CE758F400ED92C5 /* Assets.xcassets */,
+				40C4AB201CE758F400ED92C5 /* LaunchScreen.storyboard */,
+				40C4AB231CE758F400ED92C5 /* Info.plist */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,6 +202,7 @@
 				40C4AB0E1CE758F400ED92C5 /* Sources */,
 				40C4AB0F1CE758F400ED92C5 /* Frameworks */,
 				40C4AB101CE758F400ED92C5 /* Resources */,
+				401263871CE7731400FAE75C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -257,14 +322,42 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		401263871CE7731400FAE75C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/NMSSH.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftKeychainWrapper.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SimpleTouch.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		40C4AB0E1CE758F400ED92C5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4012638E1CE77D2D00FAE75C /* BinarySearch.swift in Sources */,
 				40C4AB1A1CE758F400ED92C5 /* DetailViewController.swift in Sources */,
+				4012639F1CE79F6400FAE75C /* MacHost.swift in Sources */,
+				401263A71CE7C9A300FAE75C /* MacHostsManager.swift in Sources */,
+				401263A31CE7BD3C00FAE75C /* MacHost+SSH.swift in Sources */,
 				40C4AB181CE758F400ED92C5 /* MasterViewController.swift in Sources */,
+				401263911CE77D2D00FAE75C /* SshUtils.swift in Sources */,
+				401263A91CE8B04800FAE75C /* TouchIDUtils.swift in Sources */,
 				40C4AB161CE758F400ED92C5 /* AppDelegate.swift in Sources */,
+				401263A11CE79F7A00FAE75C /* MacHost+RequireInfo.swift in Sources */,
+				401263981CE77E3B00FAE75C /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +501,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MacKey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Lance.MacKey;
@@ -419,6 +516,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MacKey/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Lance.MacKey;
@@ -491,6 +592,7 @@
 				40C4AB3E1CE758F500ED92C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		40C4AB3F1CE758F500ED92C5 /* Build configuration list for PBXNativeTarget "MacKeyTests" */ = {
 			isa = XCConfigurationList;
@@ -499,6 +601,7 @@
 				40C4AB411CE758F500ED92C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		40C4AB421CE758F500ED92C5 /* Build configuration list for PBXNativeTarget "MacKeyUITests" */ = {
 			isa = XCConfigurationList;
@@ -507,6 +610,7 @@
 				40C4AB441CE758F500ED92C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
