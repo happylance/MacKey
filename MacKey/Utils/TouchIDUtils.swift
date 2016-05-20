@@ -82,20 +82,4 @@ class TouchIDUtils {
             return "User opted for fallback authetication"
         }
     }
-    
-    static func showExitAlert(error: TouchIDError, controller: UIViewController) {
-        let message = getErrorMessage(error)
-        let alertVC = UIAlertController(title: "Sorry that this app will exit", message: message, preferredStyle: .Alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: {
-            (action)->() in
-            exit(0)
-        })
-        alertVC.addAction(defaultAction)
-        controller.presentViewController(alertVC, animated: true, completion: nil)
-    }
-    
-    static func isUserCancel(error: TouchIDError) -> Bool {
-        return error == .UserCancel
-    }
-
 }

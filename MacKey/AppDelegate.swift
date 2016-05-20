@@ -74,23 +74,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
         case .Success:
             MacHostsManager.sharedInstance.unlockLatestHost()
         case .Failure:
-            if TouchIDUtils.isUserCancel(result.error!) {
-                return
-            }
-            if let controller = self.window?.rootViewController {
-                TouchIDUtils.showExitAlert(result.error!, controller: controller)
-            }
+            print(result.error!)
         }
-    }
-
-    func showExitAlert(message: String) {
-        let alertVC = UIAlertController(title: "Sorry that this app will exit", message: message, preferredStyle: .Alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: {
-            (action)->() in
-            exit(0)
-        })
-        alertVC.addAction(defaultAction)
-        self.window?.rootViewController?.presentViewController(alertVC, animated: true, completion: nil)
     }
 }
 

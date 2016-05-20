@@ -19,11 +19,7 @@ class DetailViewController: UIViewController {
                 case .Success:
                     self.unlockHostAndConfigureView()
                 case .Failure:
-                    if TouchIDUtils.isUserCancel(result.error!) {
-                        self.setDetailLabel(TouchIDUtils.getErrorMessage(result.error!))
-                        return
-                    }
-                    TouchIDUtils.showExitAlert(result.error!, controller: self)
+                    self.setDetailLabel(TouchIDUtils.getErrorMessage(result.error!))
                 }
             }
         }
