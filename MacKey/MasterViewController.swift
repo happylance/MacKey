@@ -22,6 +22,11 @@ class MasterViewController: UITableViewController {
 
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(insertNewObject(_:)))
         self.navigationItem.rightBarButtonItem = addButton
+        
+        tableView.transform = CGAffineTransformMakeScale(1, -1)
+        
+        // Hide empty rows
+        tableView.tableFooterView = UIView()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -61,6 +66,7 @@ class MasterViewController: UITableViewController {
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+        cell.transform = CGAffineTransformMakeScale(1, -1)
 
         let object = hostAliases()[indexPath.row]
         cell.textLabel!.text = object
