@@ -21,7 +21,6 @@
 		401263A91CE8B04800FAE75C /* TouchIDUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263A81CE8B04800FAE75C /* TouchIDUtils.swift */; };
 		40C4AB161CE758F400ED92C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB151CE758F400ED92C5 /* AppDelegate.swift */; };
 		40C4AB181CE758F400ED92C5 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB171CE758F400ED92C5 /* MasterViewController.swift */; };
-		40C4AB1A1CE758F400ED92C5 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB191CE758F400ED92C5 /* DetailViewController.swift */; };
 		40C4AB1D1CE758F400ED92C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40C4AB1B1CE758F400ED92C5 /* Main.storyboard */; };
 		40C4AB1F1CE758F400ED92C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40C4AB1E1CE758F400ED92C5 /* Assets.xcassets */; };
 		40C4AB221CE758F400ED92C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40C4AB201CE758F400ED92C5 /* LaunchScreen.storyboard */; };
@@ -62,7 +61,6 @@
 		40C4AB121CE758F400ED92C5 /* MacKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40C4AB151CE758F400ED92C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40C4AB171CE758F400ED92C5 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		40C4AB191CE758F400ED92C5 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		40C4AB1C1CE758F400ED92C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		40C4AB1E1CE758F400ED92C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40C4AB211CE758F400ED92C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -158,7 +156,6 @@
 				401263971CE77E3B00FAE75C /* Constants.swift */,
 				401263A61CE7C9A300FAE75C /* MacHostsManager.swift */,
 				40C4AB171CE758F400ED92C5 /* MasterViewController.swift */,
-				40C4AB191CE758F400ED92C5 /* DetailViewController.swift */,
 			);
 			path = MacKey;
 			sourceTree = "<group>";
@@ -348,7 +345,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				4012638E1CE77D2D00FAE75C /* BinarySearch.swift in Sources */,
-				40C4AB1A1CE758F400ED92C5 /* DetailViewController.swift in Sources */,
 				4012639F1CE79F6400FAE75C /* MacHost.swift in Sources */,
 				401263A71CE7C9A300FAE75C /* MacHostsManager.swift in Sources */,
 				401263A31CE7BD3C00FAE75C /* MacHost+SSH.swift in Sources */,

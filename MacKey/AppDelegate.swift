@@ -11,21 +11,19 @@ import SimpleTouch
 import Result
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var viewController: MasterViewController?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        let splitViewController = self.window!.rootViewController as! UISplitViewController
-        let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
-        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem()
-        splitViewController.delegate = self
+        let navigationController = self.window!.rootViewController as? UINavigationController
+        viewController = navigationController?.topViewController as? MasterViewController
         
         dispatch_async(dispatch_get_main_queue(), {
             TouchIDUtils.checkTouchIDSupport{ (result) in
-                self.handleTouchIDResult(result)
+                self.viewController?.handleTouchIDResult(result)
             }
         });
         return true
@@ -39,13 +37,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
     func applicationDidEnterBackground(application: UIApplication) {
         // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
         // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+        self.viewController?.clearUnlockStatus()
     }
 
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
         
         TouchIDUtils.runTouchID { (result) in
-            self.handleTouchIDResult(result)
+            self.viewController?.handleTouchIDResult(result)
         }
     }
 
@@ -55,27 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDele
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
-    // MARK: - Split view
-
-    func splitViewController(splitViewController: UISplitViewController, collapseSecondaryViewController secondaryViewController:UIViewController, ontoPrimaryViewController primaryViewController:UIViewController) -> Bool {
-        guard let secondaryAsNavController = secondaryViewController as? UINavigationController else { return false }
-        guard let topAsDetailController = secondaryAsNavController.topViewController as? DetailViewController else { return false }
-        if topAsDetailController.macHost == nil {
-            // Return true to indicate that we have handled the collapse by doing nothing; the secondary controller will be discarded.
-            return true
-        }
-        return false
-    }
-    
-    func handleTouchIDResult(result: Result<Bool, TouchIDError>) {
-        switch(result) {
-        case .Success:
-            MacHostsManager.sharedInstance.unlockLatestHost()
-        case .Failure:
-            print(result.error!)
-        }
     }
 }
 

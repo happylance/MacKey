@@ -17,7 +17,7 @@ extension MacHost {
             switch result {
             case .Success:
                 if result.value! == "" {
-                    result = .Success("Mac is unlocked.")
+                    result = .Success("Mac is unlocked")
                 }
             default:
                 break
@@ -33,8 +33,8 @@ extension MacHost {
         case "unlock":
             return "caffeinate  -u -t 1;" +  // Wake up the screen.
                 "d=$(/usr/bin/python -c 'import Quartz; print Quartz.CGSessionCopyCurrentDictionary()');" +
-                "echo $d | grep -q 'OnConsoleKey = 0' && { echo 'Sorry that you have unlock manually.'; echo $d; return; };" +
-                "echo $d | grep -q 'ScreenIsLocked = 1' || { echo 'Mac is already unlocked.'; return; }; " +
+                "echo $d | grep -q 'OnConsoleKey = 0' && { echo 'Needs to unlock manually'; echo $d; return; };" +
+                "echo $d | grep -q 'ScreenIsLocked = 1' || { echo 'Mac is already unlocked'; return; }; " +
                 "osascript -e 'tell application \"System Events\"' -e 'keystroke \"\(self.password)\"' -e 'delay 0.5' -e 'keystroke return' -e 'end tell'"
         case "sleep":
             return "osascript -e 'tell application \"Finder\" to sleep'"

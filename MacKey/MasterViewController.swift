@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import SimpleTouch
+import Result
 
 class MasterViewController: UITableViewController {
 
-    var detailViewController: DetailViewController? = nil
-    var selectedCell:UITableViewCell? = nil
-
+    var selectedCell: UITableViewCell? = nil
+    var latestHostUnlockStatus: String? = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -20,14 +22,9 @@ class MasterViewController: UITableViewController {
 
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(insertNewObject(_:)))
         self.navigationItem.rightBarButtonItem = addButton
-        if let split = self.splitViewController {
-            let controllers = split.viewControllers
-            self.detailViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? DetailViewController
-        }
     }
 
     override func viewWillAppear(animated: Bool) {
-        self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
         super.viewWillAppear(animated)
     }
 
@@ -52,25 +49,6 @@ class MasterViewController: UITableViewController {
         }
     }
 
-    // MARK: - Segues
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        if segue.identifier == "showDetail" {
-            if let indexPath = self.tableView.indexPathForSelectedRow {
-                let alias = self.hostAliases()[indexPath.row]
-                let object = MacHostsManager.sharedInstance.hosts[alias]
-                let controller = (segue.destinationViewController as! UINavigationController).topViewController as! DetailViewController
-                controller.macHost = object
-                controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem()
-                controller.navigationItem.leftItemsSupplementBackButton = true
-                
-                if let cell = tableView.cellForRowAtIndexPath(indexPath) {
-                    updateSelectCell(cell)
-                }
-            }
-        }
-    }
-
     // MARK: - Table View
 
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -88,12 +66,26 @@ class MasterViewController: UITableViewController {
         cell.textLabel!.text = object
         if object == MacHostsManager.sharedInstance.latestHostAlias {
             updateSelectCell(cell)
+            cell.detailTextLabel?.text = latestHostUnlockStatus
+        } else {
+            cell.detailTextLabel?.text = ""
         }
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        let alias = self.hostAliases()[indexPath.row]
+        MacHostsManager.sharedInstance.latestHostAlias = alias
+        requireTouchID()
+        
+        latestHostUnlockStatus = ""
+        self.selectedCell?.detailTextLabel?.text = ""
+        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+            updateSelectCell(cell)
+        }
+        
     }
 
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -148,9 +140,66 @@ class MasterViewController: UITableViewController {
     func updateSelectCell(newSelectedCell: UITableViewCell) {
         if newSelectedCell != selectedCell {
             selectedCell?.accessoryType = .None
+            selectedCell?.detailTextLabel?.text = ""
             selectedCell = newSelectedCell
             newSelectedCell.accessoryType = .Checkmark
         }
     }
+    
+    
+    func requireTouchID() {
+        TouchIDUtils.runTouchID { (result) in
+            self.handleTouchIDResult(result)
+        }
+    }
+    
+    func unlockHostAndConfigureView() {
+        // Update the user interface for the detail item.
+        if let macHost = MacHostsManager.sharedInstance.latestHost() {
+            let cmd = "unlock"
+            setDetailLabel("Unlocking...")
+            MacHostsManager.sharedInstance.latestHostAlias = macHost.alias
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                let result = macHost.executeCmd(cmd)
+                dispatch_async(dispatch_get_main_queue(), {
+                    let latestHostAlias = MacHostsManager.sharedInstance.latestHostAlias
+                    if macHost.alias != latestHostAlias {
+                        print("Ignore the result of '\(cmd)' for '\(macHost.alias)' because the latest host now is '\(latestHostAlias)'")
+                        return
+                    }
+                    
+                    switch result {
+                    case .Success:
+                        self.setDetailLabel("\(result.value!)")
+                    case .Failure:
+                        self.setDetailLabel("\(result.error?.localizedDescription ?? "")")
+                    }
+                })
+            })
+        }
+    }
+    
+    func setDetailLabel(string: String) {
+        latestHostUnlockStatus = string
+        if let selectedCell = self.selectedCell {
+            if let seletedCellIndex = self.tableView.indexPathForCell(selectedCell) {
+                self.tableView.reloadRowsAtIndexPaths([seletedCellIndex], withRowAnimation: .None)
+            }
+        }
+    }
+    
+    func handleTouchIDResult(result: Result<Bool, TouchIDError>) {
+        switch(result) {
+        case .Success:
+            self.unlockHostAndConfigureView()
+        case .Failure:
+            self.setDetailLabel(TouchIDUtils.getErrorMessage(result.error!))
+        }
+    }
+    
+    func clearUnlockStatus() {
+        setDetailLabel("")
+    }
+
 }
 
