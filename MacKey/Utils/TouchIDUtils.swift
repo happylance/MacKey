@@ -39,20 +39,22 @@ class TouchIDUtils {
             case .Success:
                 print("Touch ID evaluated successfully")
                 handler(.Success(true))
-                /*let latestMacHost = MacHostsManager.sharedInstance.latestHost()
-                if latestMacHost != nil {
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-                        latestMacHost?.executeCmd("unlock")
-                    })
-                }*/
             case .Error(let error):
                  handler(.Failure(error))
             }
         }
-        SimpleTouch.presentTouchID("Authentication required to proceed", fallbackTitle: "", callback: callback)
+        
+        SimpleTouch.presentTouchID(touchIDRequestMessage(), fallbackTitle: "", callback: callback)
     }
     
-   
+    static func touchIDRequestMessage() -> String {
+        let latestHostAlias = MacHostsManager.sharedInstance.latestHostAlias
+        if latestHostAlias.characters.count > 0 {
+            return "Authentication required to unlock '\(latestHostAlias)'"
+        } else {
+            return "Authentication required to proceed"
+        }
+    }
     
     static func getErrorMessage(error: TouchIDError) -> String {
         switch error {
