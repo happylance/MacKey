@@ -17,7 +17,7 @@ extension MacHost {
             switch result {
             case .Success:
                 if result.value! == "" {
-                    result = .Success("Mac is unlocked")
+                    result = .Success("Unlock request was sent")
                 }
             default:
                 break
