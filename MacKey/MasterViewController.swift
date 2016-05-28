@@ -10,6 +10,8 @@ import UIKit
 import SimpleTouch
 import Result
 
+let readMeURL = "https://github.com/happylance/MacKey/blob/master/README.md"
+
 class MasterViewController: UITableViewController {
 
     var selectedCell: UITableViewCell? = nil
@@ -20,8 +22,13 @@ class MasterViewController: UITableViewController {
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
 
+        
+        let infoButton = UIButton(type: .InfoLight)
+        infoButton.addTarget(self, action: #selector(showInfoPage), forControlEvents: .TouchUpInside)
+        let infoItem = UIBarButtonItem(customView: infoButton)
+        
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(insertNewObject(_:)))
-        self.navigationItem.rightBarButtonItem = addButton
+        self.navigationItem.rightBarButtonItems = [addButton, infoItem]
                 
         // Hide empty rows
         tableView.tableFooterView = UIView()
@@ -50,6 +57,10 @@ class MasterViewController: UITableViewController {
                 self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             }
         }
+    }
+    
+    func showInfoPage() {
+        UIApplication.sharedApplication().openURL(NSURL(string: readMeURL)!)
     }
 
     // MARK: - Table View
