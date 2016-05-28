@@ -196,6 +196,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 40C4AB3C1CE758F500ED92C5 /* Build configuration list for PBXNativeTarget "MacKey" */;
 			buildPhases = (
+				403A1FAA1CFA453300DB2173 /* Update Bundle Version */,
 				40C4AB0E1CE758F400ED92C5 /* Sources */,
 				40C4AB0F1CE758F400ED92C5 /* Frameworks */,
 				40C4AB101CE758F400ED92C5 /* Resources */,
@@ -336,6 +337,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
+		403A1FAA1CFA453300DB2173 /* Update Bundle Version */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Bundle Version";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$SRCROOT/Scripts/increaseBundleVersion.sh\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
