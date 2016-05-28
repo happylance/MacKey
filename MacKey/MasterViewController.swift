@@ -81,14 +81,15 @@ class MasterViewController: UITableViewController {
         
         let alias = self.hostAliases()[indexPath.row]
         MacHostsManager.sharedInstance.latestHostAlias = alias
-        requireTouchID()
         
         latestHostUnlockStatus = ""
         self.selectedCell?.detailTextLabel?.text = ""
+
         if let cell = tableView.cellForRowAtIndexPath(indexPath) {
             updateSelectCell(cell)
         }
         
+        wakeUpAndRequireTouchID()
     }
 
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
@@ -173,9 +174,9 @@ class MasterViewController: UITableViewController {
                     
                     switch result {
                     case .Success:
-                        self.setDetailLabel("\(result.value!)")
+                        self.setDetailLabel(result.value == "" ?  "Unlock request was sent" : result.value!)
                     case .Failure:
-                        self.setDetailLabel("\(result.error?.localizedDescription ?? "")")
+                        self.setDetailLabel(result.error?.localizedDescription ?? "")
                     }
                 })
             })
@@ -202,6 +203,36 @@ class MasterViewController: UITableViewController {
     
     func clearUnlockStatus() {
         setDetailLabel("")
+    }
+    
+    func wakeUpAndRequireTouchID() {
+        if let macHost = MacHostsManager.sharedInstance.latestHost() {
+            let cmd = "wake"
+            setDetailLabel("Connecting...")
+            MacHostsManager.sharedInstance.latestHostAlias = macHost.alias
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+                let result = macHost.executeCmd(cmd)
+                dispatch_async(dispatch_get_main_queue(), {
+                    let latestHostAlias = MacHostsManager.sharedInstance.latestHostAlias
+                    if macHost.alias != latestHostAlias {
+                        print("Ignore the result of '\(cmd)' for '\(macHost.alias)' because the latest host now is '\(latestHostAlias)'")
+                        return
+                    }
+                    
+                    switch result {
+                    case .Success:
+                        if result.value == "" {
+                            self.setDetailLabel("Connected")
+                            self.requireTouchID()
+                        } else {
+                            self.setDetailLabel(result.value!)
+                        }
+                    case .Failure:
+                        self.setDetailLabel(result.error?.localizedDescription ?? "")
+                    }
+                })
+            })
+        }
     }
 
 }

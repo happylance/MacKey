@@ -22,9 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         viewController = navigationController?.topViewController as? MasterViewController
         
         dispatch_async(dispatch_get_main_queue(), {
-            TouchIDUtils.checkTouchIDSupport{ (result) in
-                self.viewController?.handleTouchIDResult(result)
-            }
+            self.viewController?.wakeUpAndRequireTouchID()
         });
         return true
     }
@@ -43,9 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
         
-        TouchIDUtils.runTouchID { (result) in
-            self.viewController?.handleTouchIDResult(result)
-        }
+        self.viewController?.wakeUpAndRequireTouchID()
     }
 
     func applicationDidBecomeActive(application: UIApplication) {
