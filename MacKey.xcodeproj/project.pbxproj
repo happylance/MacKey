@@ -521,6 +521,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nlprliu.MacKey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = arm64;
 			};
 			name = Debug;
 		};
@@ -539,6 +540,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nlprliu.MacKey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				VALID_ARCHS = arm64;
 			};
 			name = Release;
 		};
