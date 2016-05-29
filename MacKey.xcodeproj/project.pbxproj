@@ -350,7 +350,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"$SRCROOT/Scripts/increaseBundleVersion.sh\"";
+			shellScript = "[ \"$CONFIGURATION\" = \"Release\" ] || exit 0\n \"$SRCROOT/Scripts/increaseBundleVersion.sh\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
