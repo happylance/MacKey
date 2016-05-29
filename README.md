@@ -1,6 +1,6 @@
 # MacKey
 
-MacKey is an iOS app which can be used to unlock Mac using touch ID and ssh connection.
+MacKey is an iOS app which can be used to unlock Mac using touch ID and SSH connection.
 
 ## Prerequisites
 1. This app will only work on an iOS device with Touch ID enabled.
@@ -20,4 +20,8 @@ MacKey is an iOS app which can be used to unlock Mac using touch ID and ssh conn
   Replace `cat` with `pmset displaysleepnow`. Use `Command+S` to save the app as an application. 
   Then drag the saved applicaiton to Dock. Click on the new application in Dock will make the display sleep.
 
+## Security
+1. Host address, user name and password are saved in iOS keychain.
+2. Every unlock action is protected by a related touch ID authentication.
+3. Communications between this app and Mac are protected by SSH connection using NMSSH framework.
   
