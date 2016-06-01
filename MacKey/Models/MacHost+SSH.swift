@@ -22,7 +22,7 @@ extension MacHost {
         switch cmd {
         case "unlock":
             return getDetailCommand("wake") +
-                "osascript -e 'tell application \"System Events\"' -e 'keystroke \"\(self.password)\"' -e 'delay 0.5' -e 'keystroke return' -e 'end tell'"
+                "osascript -e 'tell application \"System Events\"' -e 'key code 123' -e 'delay 0.1' -e 'keystroke \"\(self.password)\"' -e 'delay 0.5' -e 'keystroke return' -e 'end tell'"
         case "wake":
             return "caffeinate  -u -t 1 &;" +  // Wake up the screen.
                 "d=$(/usr/bin/python -c 'import Quartz; print Quartz.CGSessionCopyCurrentDictionary()');" +
