@@ -22,12 +22,9 @@ extension MacHost {
         switch cmd {
         case "unlock":
             return getDetailCommand("wake") +
-                "osascript -e 'tell application \"System Events\"' -e 'key code 123' -e 'delay 0.1' -e 'keystroke \"\(self.password)\"' -e 'delay 0.5' -e 'keystroke return' -e 'end tell'"
+                "&& echo 'osascript -e '\"'\"'tell application \"System Events\"'\"'\"' -e '\"'\"'key code 123'\"'\"' -e '\"'\"'delay 0.1'\"'\"' -e '\"'\"'keystroke \"\(self.password)\"'\"'\"' -e '\"'\"'delay 0.5'\"'\"' -e '\"'\"'keystroke return'\"'\"' -e '\"'\"'end tell'\"'\"'' | sh"
         case "wake":
-            return "caffeinate  -u -t 1 &;" +  // Wake up the screen.
-                "d=$(/usr/bin/python -c 'import Quartz; print Quartz.CGSessionCopyCurrentDictionary()');" +
-                "echo $d | grep -q 'OnConsoleKey = 0' && { echo 'Needs to unlock manually'; return; };" +
-                "echo $d | grep -q 'ScreenIsLocked = 1' || { echo 'Mac is already unlocked'; return; }; "
+            return "echo 'caffeinate  -u -t 1 & d=$(/usr/bin/python -c \"import Quartz; print Quartz.CGSessionCopyCurrentDictionary()\");echo \"$d\" | grep -q \"OnConsoleKey = 0\" && { echo \"Needs to unlock manually\"; return; };echo \"$d\" | grep -q \"ScreenIsLocked = 1\" || { echo \"Mac is already unlocked\"; };' | sh"
         default:
             return cmd;
         }
