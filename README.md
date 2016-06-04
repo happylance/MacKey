@@ -26,9 +26,15 @@ MacKey is an iOS app which can be used to unlock Mac using touch ID and SSH conn
 3. Communications between this app and Mac are protected by SSH connection using NMSSH framework.
 4. It is recommended to delete all the hosts manually before deleting this app.
 
-## Known issue
+## Trouble shooting
+####If you see `Connection failed` or empty message, please try the following possible solutions.
+1. Check whether `Remote Login` is enabled in `System Preferences` -> `Sharing`. If it is not enabled, enable `Remote Login`. Then log out and log in again on Mac.
+2. Check whether your Mac and iOS device are under the same WiFi network.
+3. Try to use IP address instead of machine name.
+
+####If you see the following error, please update your app to the latest version on App Store.
 ```
 bash: syntax error near unexpected token `;'
 ```
-A workaround for this issue is to install oh-my-zsh at https://github.com/robbyrussell/oh-my-zsh
+
 ## [Privacy Policy](https://github.com/happylance/MacKey/blob/master/Privacy-Policy.md)
