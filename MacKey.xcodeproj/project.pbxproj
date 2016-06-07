@@ -23,7 +23,6 @@
 		40C4AB181CE758F400ED92C5 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB171CE758F400ED92C5 /* MasterViewController.swift */; };
 		40C4AB1D1CE758F400ED92C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40C4AB1B1CE758F400ED92C5 /* Main.storyboard */; };
 		40C4AB1F1CE758F400ED92C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40C4AB1E1CE758F400ED92C5 /* Assets.xcassets */; };
-		40C4AB221CE758F400ED92C5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40C4AB201CE758F400ED92C5 /* LaunchScreen.storyboard */; };
 		40C4AB2D1CE758F400ED92C5 /* MacKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB2C1CE758F400ED92C5 /* MacKeyTests.swift */; };
 		40C4AB381CE758F500ED92C5 /* MacKeyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB371CE758F500ED92C5 /* MacKeyUITests.swift */; };
 /* End PBXBuildFile section */
@@ -63,7 +62,6 @@
 		40C4AB171CE758F400ED92C5 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		40C4AB1C1CE758F400ED92C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		40C4AB1E1CE758F400ED92C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		40C4AB211CE758F400ED92C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		40C4AB231CE758F400ED92C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40C4AB281CE758F400ED92C5 /* MacKeyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacKeyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40C4AB2C1CE758F400ED92C5 /* MacKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacKeyTests.swift; sourceTree = "<group>"; };
@@ -183,7 +181,6 @@
 			children = (
 				40C4AB1B1CE758F400ED92C5 /* Main.storyboard */,
 				40C4AB1E1CE758F400ED92C5 /* Assets.xcassets */,
-				40C4AB201CE758F400ED92C5 /* LaunchScreen.storyboard */,
 				40C4AB231CE758F400ED92C5 /* Info.plist */,
 			);
 			name = Resources;
@@ -298,7 +295,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40C4AB221CE758F400ED92C5 /* LaunchScreen.storyboard in Resources */,
 				40C4AB1F1CE758F400ED92C5 /* Assets.xcassets in Resources */,
 				40C4AB1D1CE758F400ED92C5 /* Main.storyboard in Resources */,
 			);
@@ -410,14 +406,6 @@
 				40C4AB1C1CE758F400ED92C5 /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		40C4AB201CE758F400ED92C5 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				40C4AB211CE758F400ED92C5 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
