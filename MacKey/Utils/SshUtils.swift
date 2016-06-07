@@ -33,6 +33,9 @@ class SshUtils {
         let response = session.channel.execute(command, error:&error, timeout:10)
         NMSSHLogger.sharedLogger().logLevel = logLevel
         if let error = error {
+            if response != nil && response.characters.count > 0 {
+                return .Failure(NSError(domain:"Commands", code: 1, userInfo: [NSLocalizedDescriptionKey : response]))
+            }
             print(error)
             return .Failure(error)
         }

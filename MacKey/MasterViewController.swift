@@ -185,7 +185,7 @@ class MasterViewController: UITableViewController {
                     
                     switch result {
                     case .Success:
-                        self.setDetailLabel(result.value == "" ?  "Unlock request was sent" : result.value!)
+                        self.setDetailLabel(result.value!)
                     case .Failure:
                         self.setDetailLabel(result.error?.localizedDescription ?? "")
                     }
