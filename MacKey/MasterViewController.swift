@@ -20,7 +20,7 @@ class MasterViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationItem.leftBarButtonItem = self.editButtonItem()
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(editSelectedCell))
 
         
         let infoButton = UIButton(type: .InfoLight)
@@ -61,6 +61,30 @@ class MasterViewController: UITableViewController {
     
     func showInfoPage() {
         UIApplication.sharedApplication().openURL(NSURL(string: readMeURL)!)
+    }
+    
+    func editSelectedCell() {
+        editCell(selectedCell)
+    }
+    
+    func editCell(cell: UITableViewCell?) {
+        guard let cell = cell else { return }
+        let hostAlias = cell.textLabel?.text
+        if hostAlias == nil {
+            print("hostAlias is nil")
+            return
+        }
+        let host = MacHostsManager.sharedInstance.hosts[hostAlias!]
+        if host  == nil {
+            print("host is nil for \(hostAlias!)")
+            return
+        }
+        host!.requireLoginInfo { (didGetLoginInfo) in
+            if (didGetLoginInfo) {
+                MacHostsManager.sharedInstance.hosts[host!.alias] = host
+                MacHostsManager.sharedInstance.saveHosts()
+            }
+        }
     }
 
     // MARK: - Table View
@@ -112,25 +136,7 @@ class MasterViewController: UITableViewController {
         
         let editRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Edit", handler:{action, indexpath in
             tableView.setEditing(false, animated: true)
-            
-            let cell = tableView.cellForRowAtIndexPath(indexPath)
-            let hostAlias = cell?.textLabel?.text
-            if hostAlias == nil {
-                print("hostAlias is nil")
-                return
-            }
-            let host = MacHostsManager.sharedInstance.hosts[hostAlias!]
-            if host  == nil {
-                print("host is nil for \(hostAlias!)")
-                return
-            }
-            host!.requireLoginInfo { (didGetLoginInfo) in
-                if (didGetLoginInfo) {
-                    MacHostsManager.sharedInstance.hosts[host!.alias] = host
-                    MacHostsManager.sharedInstance.saveHosts()
-                }
-            }
-
+            self.editCell(tableView.cellForRowAtIndexPath(indexPath))
         });
         
         let deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
@@ -245,6 +251,5 @@ class MasterViewController: UITableViewController {
             })
         }
     }
-
 }
 
