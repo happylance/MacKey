@@ -6,6 +6,14 @@ MacKey is an iOS app which can be used to unlock Mac using touch ID and SSH conn
 1. This app will only work on an iOS device with Touch ID enabled.
 2. On Mac, `Remote Login` needs to be enabled in `System Preferences` -> `Sharing`.
 
+## Setup
+Tap on "+" button. Input the following information.
+
+1. Enter alias: This can be any string which you would like to use as an alias of your mac. If you need to add host info for multiple macs, please use different aliases for different macs.
+2. Enter host: This can be the IP address or machine name of your mac. You can get it from `System Preferences` -> `Sharing` -> `Remote Login`. You can find the IP address or machine name under `Computers on your local network can access your computer at:`.
+3. Enter username: This is the username of your account for your mac.
+4. Enter password: This is the password of your account for your mac.
+
 ## Recommended way to lock screen on Mac
 1. Open `System Preferences` -> `Security & Privacy`. Check `Require password immediately after sleep or screen saver begins`.
 2. Use one of the following methods to turn off the screen.
