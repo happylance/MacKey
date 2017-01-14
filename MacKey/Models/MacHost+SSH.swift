@@ -15,15 +15,15 @@ let checkStatusCommand = "echo 'd=$(/usr/bin/python -c \"import Quartz; print Qu
 
 
 extension MacHost {
-    func executeCmd(cmd: String) -> Result<String, NSError> {
+    @discardableResult func executeCmd(_ cmd: String) -> Result<String, NSError> {
         if cmd == "unlock" || cmd == "wake" {
             let command = getDetailCommand(cmd)
             return SshUtils.executeSshCmdWithPassword(command, host: host, username: user, password: password)
         }
-        return .Failure(NSError(domain:"MacKey", code: 121, userInfo: [NSLocalizedDescriptionKey : "This command is not supported."]))
+        return .failure(NSError(domain:"MacKey", code: 121, userInfo: [NSLocalizedDescriptionKey : "This command is not supported."]))
     }
     
-    func getDetailCommand(cmd: String) -> String {
+    func getDetailCommand(_ cmd: String) -> String {
         switch cmd {
         case "unlock":
             return wakeCommand + " && " + getUnlockCommand() + " && " + checkStatusCommand
@@ -35,6 +35,6 @@ extension MacHost {
     }
     
     func getUnlockCommand() -> String {
-        return "echo 'osascript -e '\"'\"'tell application \"System Events\"'\"'\"' -e '\"'\"'key code 123'\"'\"' -e '\"'\"'delay 0.1'\"'\"' -e '\"'\"'keystroke \"\(self.password)\"'\"'\"' -e '\"'\"'delay 0.5'\"'\"' -e '\"'\"'keystroke return'\"'\"' -e '\"'\"'end tell'\"'\"'' | sh"
+        return "echo 'osascript -e '\"'\"'tell application \"System Events\"'\"'\"' -e '\"'\"'key code 123'\"'\"' -e '\"'\"'delay 0.1'\"'\"' -e '\"'\"'keystroke \"\(self.password)\"'\"'\"' -e '\"'\"'delay 0.5'\"'\"' -e '\"'\"'keystroke return'\"'\"' -e '\"'\"'delay 0.1'\"'\"' -e '\"'\"'end tell'\"'\"'' | sh"
     }
 }

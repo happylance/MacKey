@@ -16,5 +16,5 @@ class Constants {
     static let port = "port"
     static let user = "user"
     static let password = "password"
-    static let defaults = NSUserDefaults.standardUserDefaults()
+    static let defaults = UserDefaults.standard
 }

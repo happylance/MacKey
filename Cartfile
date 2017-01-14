@@ -1,4 +1,4 @@
 github "NMSSH/NMSSH"
 github "antitypical/Result"
 github "jrendel/SwiftKeychainWrapper"
-github "simple-machines/simple-touch"
+github "simple-machines/simple-touch" "master"

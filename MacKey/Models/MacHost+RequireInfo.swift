@@ -10,13 +10,13 @@ import UIKit
 import SwiftKeychainWrapper
 
 extension MacHost {
-    func requireLoginInfo(didGetLoginInfo:(Bool)->()) {
-        let alert = UIAlertController(title: nil, message: "Please input host information", preferredStyle: UIAlertControllerStyle.Alert)
+    func requireLoginInfo(_ didGetLoginInfo:@escaping (Bool)->()) {
+        let alert = UIAlertController(title: nil, message: "Please input host information", preferredStyle: UIAlertControllerStyle.alert)
         var aliasField: UITextField?
         var hostField: UITextField?
         var usernameField: UITextField?
         var passwordField: UITextField?
-        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler:{
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:{
             (action)->() in
             self.alias = aliasField?.text ?? ""
             if self.alias.isEmpty {
@@ -44,30 +44,30 @@ extension MacHost {
             
             didGetLoginInfo(true)
         }))
-        alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+        alert.addTextField(configurationHandler: {(textField: UITextField!) in
             textField.placeholder = "Enter alias:"
             textField.text = self.alias
             aliasField = textField
         })
-        alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+        alert.addTextField(configurationHandler: {(textField: UITextField!) in
             textField.placeholder = "Enter host:"
             textField.text = self.host
             hostField = textField
         })
-        alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+        alert.addTextField(configurationHandler: {(textField: UITextField!) in
             textField.placeholder = "Enter username:"
             textField.text = self.user
             usernameField = textField
         })
-        alert.addTextFieldWithConfigurationHandler({(textField: UITextField!) in
+        alert.addTextField(configurationHandler: {(textField: UITextField!) in
             textField.placeholder = "Enter password:"
             textField.text = self.password
-            textField.secureTextEntry = true
+            textField.isSecureTextEntry = true
             passwordField = textField
         })
-        let rootController = UIApplication.sharedApplication().keyWindow?.rootViewController
+        let rootController = UIApplication.shared.keyWindow?.rootViewController
         if (rootController != nil) {
-            rootController!.presentViewController(alert, animated: true, completion: nil)
+            rootController!.present(alert, animated: true, completion: nil)
         }
     }
 

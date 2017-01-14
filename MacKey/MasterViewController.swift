@@ -20,21 +20,21 @@ class MasterViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(editSelectedCell))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editSelectedCell))
 
         
-        let infoButton = UIButton(type: .InfoLight)
-        infoButton.addTarget(self, action: #selector(showInfoPage), forControlEvents: .TouchUpInside)
+        let infoButton = UIButton(type: .infoLight)
+        infoButton.addTarget(self, action: #selector(showInfoPage), for: .touchUpInside)
         let infoItem = UIBarButtonItem(customView: infoButton)
         
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(insertNewObject(_:)))
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
         self.navigationItem.rightBarButtonItems = [addButton, infoItem]
                 
         // Hide empty rows
         tableView.tableFooterView = UIView()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
 
@@ -43,7 +43,7 @@ class MasterViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    func insertNewObject(sender: AnyObject) {
+    func insertNewObject(_ sender: AnyObject) {
         let host = MacHost()
         host.requireLoginInfo { (didGetLoginInfo) in
             if (didGetLoginInfo) {
@@ -53,21 +53,21 @@ class MasterViewController: UITableViewController {
                 MacHostsManager.sharedInstance.hosts[host.alias] = host
                 MacHostsManager.sharedInstance.saveHosts()
                 
-                let indexPath = NSIndexPath(forRow: index, inSection: 0)
-                self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                let indexPath = IndexPath(row: index, section: 0)
+                self.tableView.insertRows(at: [indexPath], with: .automatic)
             }
         }
     }
     
     func showInfoPage() {
-        UIApplication.sharedApplication().openURL(NSURL(string: readMeURL)!)
+        UIApplication.shared.openURL(URL(string: readMeURL)!)
     }
     
     func editSelectedCell() {
         editCell(selectedCell)
     }
     
-    func editCell(cell: UITableViewCell?) {
+    func editCell(_ cell: UITableViewCell?) {
         guard let cell = cell else { return }
         let hostAlias = cell.textLabel?.text
         if hostAlias == nil {
@@ -89,16 +89,16 @@ class MasterViewController: UITableViewController {
 
     // MARK: - Table View
 
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return MacHostsManager.sharedInstance.hosts.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
 
         let object = hostAliases()[indexPath.row]
         cell.textLabel!.text = object
@@ -111,8 +111,8 @@ class MasterViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
         let alias = self.hostAliases()[indexPath.row]
         MacHostsManager.sharedInstance.latestHostAlias = alias
@@ -120,50 +120,50 @@ class MasterViewController: UITableViewController {
         latestHostUnlockStatus = ""
         self.selectedCell?.detailTextLabel?.text = ""
 
-        if let cell = tableView.cellForRowAtIndexPath(indexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) {
             updateSelectCell(cell)
         }
         
         wakeUpAndRequireTouchID()
     }
 
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
 
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        let editRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Normal, title: "Edit", handler:{action, indexpath in
+        let editRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: "Edit", handler:{action, indexpath in
             tableView.setEditing(false, animated: true)
-            self.editCell(tableView.cellForRowAtIndexPath(indexPath))
+            self.editCell(tableView.cellForRow(at: indexPath))
         });
         
-        let deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.Default, title: "Delete", handler:{action, indexpath in
-            let cell = tableView.cellForRowAtIndexPath(indexPath)
+        let deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Delete", handler:{action, indexpath in
+            let cell = tableView.cellForRow(at: indexPath)
             let hostAlias = cell?.textLabel?.text
             if hostAlias == nil {
                 print("hostAlias is nil")
                 return
             }
-            MacHostsManager.sharedInstance.hosts.removeValueForKey(hostAlias!)
+            MacHostsManager.sharedInstance.hosts.removeValue(forKey: hostAlias!)
             MacHostsManager.sharedInstance.saveHosts()
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
+            tableView.deleteRows(at: [indexPath], with: .fade)
         });
         
         return [deleteRowAction, editRowAction]
     }
     
     func hostAliases() -> [String] {
-        return MacHostsManager.sharedInstance.hosts.keys.sort()
+        return MacHostsManager.sharedInstance.hosts.keys.sorted()
     }
     
-    func updateSelectCell(newSelectedCell: UITableViewCell) {
+    func updateSelectCell(_ newSelectedCell: UITableViewCell) {
         if newSelectedCell != selectedCell {
-            selectedCell?.accessoryType = .None
+            selectedCell?.accessoryType = .none
             selectedCell?.detailTextLabel?.text = ""
             selectedCell = newSelectedCell
-            newSelectedCell.accessoryType = .Checkmark
+            newSelectedCell.accessoryType = .checkmark
         }
     }
     
@@ -180,9 +180,10 @@ class MasterViewController: UITableViewController {
             let cmd = "unlock"
             setDetailLabel("Unlocking...")
             MacHostsManager.sharedInstance.latestHostAlias = macHost.alias
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+           
+            DispatchQueue.global().async(execute: {
                 let result = macHost.executeCmd(cmd)
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     let latestHostAlias = MacHostsManager.sharedInstance.latestHostAlias
                     if macHost.alias != latestHostAlias {
                         print("Ignore the result of '\(cmd)' for '\(macHost.alias)' because the latest host now is '\(latestHostAlias)'")
@@ -190,9 +191,9 @@ class MasterViewController: UITableViewController {
                     }
                     
                     switch result {
-                    case .Success:
+                    case .success:
                         self.setDetailLabel(result.value!)
-                    case .Failure:
+                    case .failure:
                         self.setDetailLabel(result.error?.localizedDescription ?? "")
                     }
                 })
@@ -200,20 +201,20 @@ class MasterViewController: UITableViewController {
         }
     }
     
-    func setDetailLabel(string: String) {
+    func setDetailLabel(_ string: String) {
         latestHostUnlockStatus = string
         if let selectedCell = self.selectedCell {
-            if let seletedCellIndex = self.tableView.indexPathForCell(selectedCell) {
-                self.tableView.reloadRowsAtIndexPaths([seletedCellIndex], withRowAnimation: .None)
+            if let seletedCellIndex = self.tableView.indexPath(for: selectedCell) {
+                self.tableView.reloadRows(at: [seletedCellIndex], with: .none)
             }
         }
     }
     
-    func handleTouchIDResult(result: Result<Bool, TouchIDError>) {
+    func handleTouchIDResult(_ result: Result<Bool, TouchIDError>) {
         switch(result) {
-        case .Success:
+        case .success:
             self.unlockHostAndConfigureView()
-        case .Failure:
+        case .failure:
             self.setDetailLabel(TouchIDUtils.getErrorMessage(result.error!))
         }
     }
@@ -227,9 +228,9 @@ class MasterViewController: UITableViewController {
             let cmd = "wake"
             setDetailLabel("Connecting...")
             MacHostsManager.sharedInstance.latestHostAlias = macHost.alias
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            DispatchQueue.global().async(execute: {
                 let result = macHost.executeCmd(cmd)
-                dispatch_async(dispatch_get_main_queue(), {
+                DispatchQueue.main.async(execute: {
                     let latestHostAlias = MacHostsManager.sharedInstance.latestHostAlias
                     if macHost.alias != latestHostAlias {
                         print("Ignore the result of '\(cmd)' for '\(macHost.alias)' because the latest host now is '\(latestHostAlias)'")
@@ -237,14 +238,14 @@ class MasterViewController: UITableViewController {
                     }
                     
                     switch result {
-                    case .Success:
+                    case .success:
                         if result.value == "" {
                             self.setDetailLabel("Connected")
                             self.requireTouchID()
                         } else {
                             self.setDetailLabel(result.value!)
                         }
-                    case .Failure:
+                    case .failure:
                         self.setDetailLabel(result.error?.localizedDescription ?? "")
                     }
                 })

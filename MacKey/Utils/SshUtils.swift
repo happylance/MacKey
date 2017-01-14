@@ -11,37 +11,41 @@ import NMSSH
 import Result
 
 class SshUtils {
-    static func executeSshCmdWithPassword(command: String, host: String, username: String, password: String) -> Result<String, NSError> {
-        let session = NMSSHSession(host:host, andUsername:username)
+    static func executeSshCmdWithPassword(_ command: String, host: String, username: String, password: String) -> Result<String, NSError> {
+        guard let session = NMSSHSession(host:host, andUsername:username) else {
+            return .failure(NSError(domain:"Commands", code: 101, userInfo: [NSLocalizedDescriptionKey : "Failed to create NMSSHSession"]))
+        }
         session.connect()
-        if session.connected {
-            session.authenticateByKeyboardInteractiveUsingBlock({ (request: String!) -> String! in
+        if session.isConnected {
+            session.authenticateByKeyboardInteractive({ (request: String?) -> String? in
                 return password
             })
-            if (session.authorized) {
+            if session.isAuthorized {
                 print("Authentication succeeded");
             } else {
-                return .Failure(NSError(domain:"Commands", code: 101, userInfo: [NSLocalizedDescriptionKey : "Authentication failed"]))
+                return .failure(NSError(domain:"Commands", code: 101, userInfo: [NSLocalizedDescriptionKey : "Authentication failed"]))
             }
         } else {
-            return .Failure(NSError(domain:"Commands", code: 102, userInfo: [NSLocalizedDescriptionKey : "Connection failed"]))
+            return .failure(NSError(domain:"Commands", code: 102, userInfo: [NSLocalizedDescriptionKey : "Connection failed"]))
         }
         
         var error : NSError? = nil
-        let logLevel = NMSSHLogger.sharedLogger().logLevel
-        NMSSHLogger.sharedLogger().logLevel = .Error
-        let response = session.channel.execute(command, error:&error, timeout:10)
-        NMSSHLogger.sharedLogger().logLevel = logLevel
+        let logLevel = NMSSHLogger.shared().logLevel
+        NMSSHLogger.shared().logLevel = .error
+        guard let response = session.channel.execute(command, error:&error, timeout:10) else {
+            return .failure(NSError(domain:"Commands", code: 102, userInfo: [NSLocalizedDescriptionKey : "Response is nil"]))
+        }
+        NMSSHLogger.shared().logLevel = logLevel
         if let error = error {
-            if response != nil && response.characters.count > 0 {
-                return .Failure(NSError(domain:"Commands", code: 1, userInfo: [NSLocalizedDescriptionKey : response]))
+            if response.characters.count > 0 {
+                return .failure(NSError(domain:"Commands", code: 1, userInfo: [NSLocalizedDescriptionKey : response]))
             }
             print(error)
-            return .Failure(error)
+            return .failure(error)
         }
         
         print(response)
         session.disconnect()
-        return .Success(response)
+        return .success(response)
     }
 }

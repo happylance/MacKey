@@ -29,19 +29,19 @@ class MacHost: NSObject, NSCoding {
     }
     
     required convenience init?(coder aDecoder: NSCoder) {
-        let alias = aDecoder.decodeObjectForKey(Constants.alias) as! String
-        let host = aDecoder.decodeObjectForKey(Constants.host) as! String
-        let user = aDecoder.decodeObjectForKey(Constants.user) as! String
-        let password = aDecoder.decodeObjectForKey(Constants.password) as! String
+        let alias = aDecoder.decodeObject(forKey: Constants.alias) as! String
+        let host = aDecoder.decodeObject(forKey: Constants.host) as! String
+        let user = aDecoder.decodeObject(forKey: Constants.user) as! String
+        let password = aDecoder.decodeObject(forKey: Constants.password) as! String
         
         self.init(alias: alias, host: host, user: user, password: password)
     }
     
-    func encodeWithCoder(aCoder: NSCoder) {
-        aCoder.encodeObject(self.alias, forKey: Constants.alias)
-        aCoder.encodeObject(self.host, forKey: Constants.host)
-        aCoder.encodeObject(self.user, forKey: Constants.user)
-        aCoder.encodeObject(self.password, forKey: Constants.password)
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(self.alias, forKey: Constants.alias)
+        aCoder.encode(self.host, forKey: Constants.host)
+        aCoder.encode(self.user, forKey: Constants.user)
+        aCoder.encode(self.password, forKey: Constants.password)
     }
     
     

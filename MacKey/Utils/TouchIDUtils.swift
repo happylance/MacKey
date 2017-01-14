@@ -11,20 +11,20 @@ import SimpleTouch
 import Result
 
 class TouchIDUtils {
-    static func checkTouchIDSupport(handler:(Result<Bool, TouchIDError>)->()) {
+    static func checkTouchIDSupport(_ handler:@escaping (Result<Bool, TouchIDError>)->()) {
         switch SimpleTouch.hardwareSupportsTouchID {
-        case .Success:
+        case .success:
             print("Hardware supports Touch ID")
-        case .Error(let error):
-            handler(.Failure(error))
+        case .error(let error):
+            handler(.failure(error))
             return
         }
         
         switch SimpleTouch.isTouchIDEnabled {
-        case .Success:
+        case .success:
             print("Can evaluate Touch ID")
-        case .Error(let error):
-            handler(.Failure(error))
+        case .error(let error):
+            handler(.failure(error))
             return
         }
         
@@ -33,14 +33,14 @@ class TouchIDUtils {
         }
     }
     
-    static func runTouchID(handler:(Result<Bool, TouchIDError>)->()) {
+    static func runTouchID(_ handler:@escaping (Result<Bool, TouchIDError>)->()) {
         let callback: TouchIDPresenterCallback = { response in
             switch response {
-            case .Success:
+            case .success:
                 print("Touch ID evaluated successfully")
-                handler(.Success(true))
-            case .Error(let error):
-                 handler(.Failure(error))
+                handler(.success(true))
+            case .error(let error):
+                 handler(.failure(error))
             }
         }
         
@@ -56,31 +56,31 @@ class TouchIDUtils {
         }
     }
     
-    static func getErrorMessage(error: TouchIDError) -> String {
+    static func getErrorMessage(_ error: TouchIDError) -> String {
         switch error {
-        case .AppCancel:
+        case .appCancel:
             return "App cancelled authentication"
-        case .AuthenticationFailed:
+        case .authenticationFailed:
             return "Authentication failed"
-        case .InvalidContext:
+        case .invalidContext:
             return "Invalid authentication context"
-        case .PasscodeNotSet:
+        case .passcodeNotSet:
             return "Users passcode not set"
-        case .SystemCancel:
+        case .systemCancel:
             return "System cancelled authetication"
-        case .TouchIDLockout:
+        case .touchIDLockout:
             return "User is locked out of Touch ID"
-        case .TouchIDNotAvailable:
+        case .touchIDNotAvailable:
             return "Touch ID is not available on this device"
-        case .TouchIDNotEnrolled:
+        case .touchIDNotEnrolled:
             return "User has not enrolled for Touch ID"
-        case .UndeterminedState:
+        case .undeterminedState:
             return "Undetermined error. If you can get this message to display I'd love to know how."
-        case .UnknownError(let error):
+        case .unknownError(let error):
             return "Unknown error. If you can get this message to display I'd love to know how. Error description: \(error.localizedDescription)"
-        case .UserCancel:
+        case .userCancel:
             return "User cancelled authentication"
-        case .UserFallback:
+        case .userFallback:
             return "User opted for fallback authetication"
         }
     }
