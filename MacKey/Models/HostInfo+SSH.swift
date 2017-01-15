@@ -14,7 +14,7 @@ let wakeCommand = "echo 'caffeinate -u -t 1 & d=$(/usr/bin/python -c \"import Qu
 let checkStatusCommand = "echo 'd=$(/usr/bin/python -c \"import Quartz; print Quartz.CGSessionCopyCurrentDictionary()\"); echo \"$d\" | grep -q \"ScreenIsLocked = 1\" && { echo \"Failed to unlock Mac\"; exit 1; } || { echo \"Mac is unlocked\"; exit 0; }' | sh"
 
 
-extension MacHost {
+extension HostInfo {
     @discardableResult func executeCmd(_ cmd: String) -> Result<String, NSError> {
         if cmd == "unlock" || cmd == "wake" {
             let command = getDetailCommand(cmd)

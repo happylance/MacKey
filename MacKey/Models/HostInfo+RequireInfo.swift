@@ -9,8 +9,8 @@
 import UIKit
 import SwiftKeychainWrapper
 
-extension MacHost {
-    func requireLoginInfo(_ didGetLoginInfo:@escaping (Bool)->()) {
+extension HostInfo {
+    func requireLoginInfo(_ didGetLoginInfo:@escaping (HostInfo?) -> ()) {
         let alert = UIAlertController(title: nil, message: "Please input host information", preferredStyle: UIAlertControllerStyle.alert)
         var aliasField: UITextField?
         var hostField: UITextField?
@@ -18,31 +18,31 @@ extension MacHost {
         var passwordField: UITextField?
         alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:{
             (action)->() in
-            self.alias = aliasField?.text ?? ""
-            if self.alias.isEmpty {
-                didGetLoginInfo(false)
+            let alias = aliasField?.text ?? ""
+            if alias.isEmpty {
+                didGetLoginInfo(nil)
                 return
             }
             
-            self.host = hostField?.text ?? ""
-            if self.host.isEmpty {
-                didGetLoginInfo(false)
+            let host = hostField?.text ?? ""
+            if host.isEmpty {
+                didGetLoginInfo(nil)
                 return
             }
             
-            self.user = usernameField?.text ?? ""
-            if self.user .isEmpty {
-                didGetLoginInfo(false)
+            let user = usernameField?.text ?? ""
+            if user.isEmpty {
+                didGetLoginInfo(nil)
                 return
             }
             
-            self.password = passwordField?.text ?? ""
-            if self.password.isEmpty {
-                didGetLoginInfo(false)
+            let password = passwordField?.text ?? ""
+            if password.isEmpty {
+                didGetLoginInfo(nil)
                 return
             }
-            
-            didGetLoginInfo(true)
+            let newHost = HostInfo(alias: alias, host: host, user: user, password: password)
+            didGetLoginInfo(newHost)
         }))
         alert.addTextField(configurationHandler: {(textField: UITextField!) in
             textField.placeholder = "Enter alias:"

@@ -9,6 +9,9 @@
 import UIKit
 import SimpleTouch
 import Result
+import ReSwift
+
+var store = Store<State>(reducer: AppReducer(), state: nil)
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

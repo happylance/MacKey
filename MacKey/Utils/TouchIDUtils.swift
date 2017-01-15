@@ -48,7 +48,7 @@ class TouchIDUtils {
     }
     
     static func touchIDRequestMessage() -> String {
-        let latestHostAlias = MacHostsManager.sharedInstance.latestHostAlias
+        let latestHostAlias = store.state.latestHostAlias
         if latestHostAlias.characters.count > 0 {
             return "Authentication required to unlock '\(latestHostAlias)'"
         } else {
