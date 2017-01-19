@@ -17,7 +17,8 @@ struct HostsReducer {
             hostRemoved: action is RemoveHost,
             hostSelected: action is SelectHost,
             hostsUpdated: hostsUpdatedReducer(action, state: state),
-            latestHostAlias: (action as? SelectHost)?.host.alias ?? state.latestHostAlias,
+            latestHostAlias: latestHostAliasReducer(action, state: state),
+            latestHostAliasChanged: latestHostAliasReducer(action, state: state) != state.latestHostAlias,
             newHost: (action as? AddHost)?.host,
             removedHost: (action as? RemoveHost)?.host
         )
@@ -65,6 +66,23 @@ struct HostsReducer {
         }
     }
     
+    private static func latestHostAliasReducer(_ action: Action, state: HostsState) -> String {
+        switch action {
+        case let action as SelectHost:
+            return action.host.alias
+        case let action as UpdateHost:
+            let newHost = action.newHost
+            let oldHost = action.oldHost
+            if newHost.alias != oldHost.alias, state.allHosts.keys.contains(newHost.alias) {
+                // Do not update state if newHost.alias is already used for other hosts.
+                return state.latestHostAlias
+            }
+            return newHost.alias
+        default:
+            return state.latestHostAlias
+        }
+    }
+    
     private static func initialHostsState() -> HostsState {
         return HostsState(
             allHosts: MacHostsInfoService().macHostsInfo(),
@@ -73,6 +91,7 @@ struct HostsReducer {
             hostSelected: false,
             hostsUpdated: false,
             latestHostAlias: LatestHostAliasServivce.alias,
+            latestHostAliasChanged: false,
             newHost: nil,
             removedHost: nil
         )

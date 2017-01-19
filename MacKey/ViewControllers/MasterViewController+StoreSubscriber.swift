@@ -24,8 +24,10 @@ extension MasterViewController: StoreSubscriber {
             newStateWithUpdatedHost(state: state)
         }
         if state.hostSelected {
-            LatestHostAliasServivce.alias = state.latestHostAlias
             wakeUpAndRequireTouchID()
+        }
+        if state.latestHostAliasChanged {
+            LatestHostAliasServivce.alias = state.latestHostAlias
         }
     }
 

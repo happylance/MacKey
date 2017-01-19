@@ -12,9 +12,10 @@ struct HostsState {
     var hostRemoved: Bool
     var hostSelected: Bool
     var hostsUpdated: Bool
-    var latestHostAlias = ""
-    var newHost: HostInfo? = nil
-    var removedHost: HostInfo? = nil
+    var latestHostAlias: String
+    var latestHostAliasChanged: Bool
+    var newHost: HostInfo?
+    var removedHost: HostInfo?
 }
 
 typealias Hosts = [String: HostInfo]
