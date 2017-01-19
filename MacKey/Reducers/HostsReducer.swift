@@ -90,7 +90,7 @@ struct HostsReducer {
             hostRemoved: false,
             hostSelected: false,
             hostsUpdated: false,
-            latestHostAlias: LatestHostAliasServivce.alias,
+            latestHostAlias: LatestHostAliasService.alias,
             latestHostAliasChanged: false,
             newHost: nil,
             removedHost: nil

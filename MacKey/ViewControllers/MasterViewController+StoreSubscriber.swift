@@ -26,9 +26,6 @@ extension MasterViewController: StoreSubscriber {
         if state.hostSelected {
             wakeUpAndRequireTouchID()
         }
-        if state.latestHostAliasChanged {
-            LatestHostAliasServivce.alias = state.latestHostAlias
-        }
     }
 
     private func newStateWithNewHost(_ newHost: HostInfo, state: HostsState) {

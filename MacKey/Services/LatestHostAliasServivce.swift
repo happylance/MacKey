@@ -6,17 +6,24 @@
 //  Copyright © 2017 Liu Liang. All rights reserved.
 //
 
-import Foundation
+import ReSwift
 
-fileprivate let latestHostAliasKey = "latestHostAlias"
+private let latestHostAliasKey = "latestHostAlias"
 
-class LatestHostAliasServivce {
+class LatestHostAliasService : NSObject, StoreSubscriber {
+    static private let subscriber = LatestHostAliasService()
+    override class func initialize() { DispatchQueue.main.async(execute: { subscribe() }) }
+    private class func subscribe() { store.subscribe(subscriber) { $0.hostsState } }
+    
     static var alias: String {
         get {
             return UserDefaults.standard.string(forKey: latestHostAliasKey) ?? ""
         }
-        set {
-            UserDefaults.standard.set(newValue, forKey: latestHostAliasKey)
+    }
+
+    func newState(state: HostsState) {
+        if state.latestHostAliasChanged {
+            UserDefaults.standard.set(state.latestHostAlias, forKey: latestHostAliasKey)
             UserDefaults.standard.synchronize()
         }
     }
