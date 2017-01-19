@@ -51,6 +51,5 @@ extension MasterViewController: StoreSubscriber {
         if (!state.hostAdded && !state.hostRemoved) {
             self.tableView.reloadData()
         }
-        MacHostsInfoService().saveMacHostsInfo(hosts: state.allHosts)
     }
 }

@@ -8,10 +8,13 @@
 
 import Foundation
 import SwiftKeychainWrapper
+import ReSwift
 
 fileprivate let hostsKey = "Hosts"
 
-class MacHostsInfoService {
+class MacHostsInfoService : NSObject {
+    static fileprivate let subscriber = MacHostsInfoService()
+    override class func initialize() { DispatchQueue.main.async(execute: { subscribe() }) }
     
     func macHostsInfo() -> Hosts {
         let hostsData = KeychainWrapper.standard.object(forKey:hostsKey)
@@ -21,7 +24,7 @@ class MacHostsInfoService {
         return Hosts()
     }
     
-    func saveMacHostsInfo(hosts: Hosts) {
+    fileprivate func saveMacHostsInfo(hosts: Hosts) {
         let legacyMacHosts = toLegacyMacHosts(hostsInfo: hosts)
         let data = NSKeyedArchiver.archivedData(withRootObject:legacyMacHosts)
         KeychainWrapper.standard.set(data, forKey: hostsKey)
@@ -43,5 +46,14 @@ class MacHostsInfoService {
             legacyMacHosts[source.key] = MacHost(hostInfo: source.value)
         }
         return legacyMacHosts
+    }
+}
+
+extension MacHostsInfoService: StoreSubscriber {
+    fileprivate class func subscribe() { store.subscribe(subscriber) { $0.hostsState } }
+    func newState(state: HostsState) {
+        if state.hostsUpdated {
+            saveMacHostsInfo(hosts: state.allHosts)
+        }
     }
 }
