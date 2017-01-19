@@ -7,12 +7,14 @@
 //
 
 struct HostsState {
-    var allHosts = Hosts()
+    var allHosts: Hosts
+    var hostAdded: Bool
+    var hostRemoved: Bool
+    var hostSelected: Bool
+    var hostsUpdated: Bool
+    var latestHostAlias = ""
     var newHost: HostInfo? = nil
     var removedHost: HostInfo? = nil
-    var hostsUpdated = false
-    var latestHostAlias = ""
-    var hostSelected = false
 }
 
 typealias Hosts = [String: HostInfo]

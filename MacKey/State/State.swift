@@ -9,7 +9,7 @@
 import ReSwift
 
 struct State : StateType {
-    var hostsState = HostsState()
+    var hostsState: HostsState
 }
 
 extension State {

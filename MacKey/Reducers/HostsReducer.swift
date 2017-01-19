@@ -10,38 +10,43 @@ import ReSwift
 
 struct HostsReducer {
     static func handleAction(_ action: Action, state: HostsState?) -> HostsState {
-        var state = state ?? initialHostsState()
-        
-        state.newHost = nil
-        state.removedHost = nil
-        state.hostsUpdated = hostsUpdatedReducer(action: action, state: state)
-        state.latestHostAlias = latestHostAliasReducer(action: action, state: state.latestHostAlias)
-        state.hostSelected = action is SelectHost
-
+        let state = state ?? initialHostsState()
+        return HostsState(
+            allHosts: allHostsReducer(action, state: state),
+            hostAdded: action is AddHost,
+            hostRemoved: action is RemoveHost,
+            hostSelected: action is SelectHost,
+            hostsUpdated: hostsUpdatedReducer(action, state: state),
+            latestHostAlias: (action as? SelectHost)?.host.alias ?? state.latestHostAlias,
+            newHost: (action as? AddHost)?.host,
+            removedHost: (action as? RemoveHost)?.host
+        )
+    }
+    
+    private static func allHostsReducer(_ action: Action, state: HostsState) -> Hosts {
+        var hosts = state.allHosts
         switch action {
         case let action as AddHost:
             let newHost = action.host
-            state.allHosts[newHost.alias] = newHost
-            state.newHost = newHost
+            hosts[newHost.alias] = newHost
         case let action as RemoveHost:
             let oldHost = action.host
-            state.allHosts.removeValue(forKey: oldHost.alias)
-            state.removedHost = oldHost
+            hosts.removeValue(forKey: oldHost.alias)
         case let action as UpdateHost where state.hostsUpdated:
             let updatedHost = action.newHost
             let oldHost = action.oldHost
             if updatedHost.alias != oldHost.alias {
-                state.allHosts.removeValue(forKey: oldHost.alias)
+                hosts.removeValue(forKey: oldHost.alias)
             }
-            state.allHosts[updatedHost.alias] = updatedHost
+            hosts[updatedHost.alias] = updatedHost
         default:
             break
         }
         
-        return state
+        return hosts
     }
     
-    private static func hostsUpdatedReducer(action: Action, state: HostsState) -> Bool {
+    private static func hostsUpdatedReducer(_ action: Action, state: HostsState) -> Bool {
         switch action {
         case is AddHost:
             return true
@@ -60,23 +65,16 @@ struct HostsReducer {
         }
     }
     
-    private static func latestHostAliasReducer(action: Action, state: String?) -> String {
-        switch action {
-        case let action as SelectHost:
-            return action.host.alias
-        default:
-            return state ?? ""
-        }
-    }
-    
     private static func initialHostsState() -> HostsState {
         return HostsState(
             allHosts: MacHostsInfoService().macHostsInfo(),
-            newHost: nil,
-            removedHost: nil,
+            hostAdded: false,
+            hostRemoved: false,
+            hostSelected: false,
             hostsUpdated: false,
             latestHostAlias: LatestHostAliasServivce.alias,
-            hostSelected: false
+            newHost: nil,
+            removedHost: nil
         )
     }
 }
