@@ -31,6 +31,7 @@
 		408507E61E2C166000C2E0D1 /* MasterViewController+StoreSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507E51E2C166000C2E0D1 /* MasterViewController+StoreSubscriber.swift */; };
 		408507EA1E2C16BC00C2E0D1 /* MasterViewController+unlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507E91E2C16BC00C2E0D1 /* MasterViewController+unlock.swift */; };
 		408508071E2C495200C2E0D1 /* LatestHostAliasServivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408508061E2C495200C2E0D1 /* LatestHostAliasServivce.swift */; };
+		40A8B65E1E33FE1F00C71EE7 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A8B65D1E33FE1F00C71EE7 /* RxSwift.framework */; };
 		40C4AB161CE758F400ED92C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB151CE758F400ED92C5 /* AppDelegate.swift */; };
 		40C4AB1D1CE758F400ED92C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40C4AB1B1CE758F400ED92C5 /* Main.storyboard */; };
 		40C4AB1F1CE758F400ED92C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40C4AB1E1CE758F400ED92C5 /* Assets.xcassets */; };
@@ -82,6 +83,7 @@
 		408507E51E2C166000C2E0D1 /* MasterViewController+StoreSubscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MasterViewController+StoreSubscriber.swift"; path = "ViewControllers/MasterViewController+StoreSubscriber.swift"; sourceTree = "<group>"; };
 		408507E91E2C16BC00C2E0D1 /* MasterViewController+unlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MasterViewController+unlock.swift"; path = "ViewControllers/MasterViewController+unlock.swift"; sourceTree = "<group>"; };
 		408508061E2C495200C2E0D1 /* LatestHostAliasServivce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LatestHostAliasServivce.swift; path = Services/LatestHostAliasServivce.swift; sourceTree = "<group>"; };
+		40A8B65D1E33FE1F00C71EE7 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		40C4AB121CE758F400ED92C5 /* MacKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40C4AB151CE758F400ED92C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40C4AB1C1CE758F400ED92C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 			files = (
 				40FD80311E2A75CE00949ACA /* ReSwiftRouter.framework in Frameworks */,
 				401263861CE770DD00FAE75C /* SwiftKeychainWrapper.framework in Frameworks */,
+				40A8B65E1E33FE1F00C71EE7 /* RxSwift.framework in Frameworks */,
 				401263831CE770DD00FAE75C /* NMSSH.framework in Frameworks */,
 				401263851CE770DD00FAE75C /* SimpleTouch.framework in Frameworks */,
 				40FD80301E2A75CE00949ACA /* ReSwift.framework in Frameworks */,
@@ -200,6 +203,7 @@
 		40C4AB091CE758F300ED92C5 = {
 			isa = PBXGroup;
 			children = (
+				40A8B65D1E33FE1F00C71EE7 /* RxSwift.framework */,
 				40FD802E1E2A75CE00949ACA /* ReSwift.framework */,
 				40FD802F1E2A75CE00949ACA /* ReSwiftRouter.framework */,
 				4012637F1CE770DD00FAE75C /* NMSSH.framework */,
@@ -413,6 +417,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SimpleTouch.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ReSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ReSwiftRouter.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 			);
 			outputPaths = (
 			);
