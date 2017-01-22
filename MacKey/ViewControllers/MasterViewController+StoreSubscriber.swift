@@ -13,25 +13,26 @@ import ReSwift
 
 extension MasterViewController: StoreSubscriber {
     func newState(state newState: HostsState?) {
-        let cachedHosts = cachedHostsState?.allHosts
-        cachedHostsState = newState
+        guard let state = newState, let cachedHosts = cachedHostsState?.allHosts else {
+            cachedHostsState = newState
+            return
+        }
         
-        guard let state = newState, let previousHosts = cachedHosts else { return }
-        
-        let newHost = state.newHostAfter(previousHosts)
+        let newHost = state.newHostAfter(cachedHosts)
         if let newHost = newHost {
             newStateWithNewHost(newHost, state: state)
         }
-        let removedHost = state.removedHostFrom(previousHosts)
+        let removedHost = state.removedHostFrom(cachedHosts)
         if let removedHost = removedHost {
             newStateWithRemovedHost(removedHost, state: state)
         }
-        if state.hostsUpdated && newHost == nil && removedHost == nil {
+        if state.allHosts != cachedHosts && newHost == nil && removedHost == nil {
             self.tableView.reloadData()
         }
         if state.hostSelected {
             wakeUpAndRequireTouchID()
         }
+        cachedHostsState = newState
     }
 
     private func newStateWithNewHost(_ newHost: HostInfo, state: HostsState) {

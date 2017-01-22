@@ -104,7 +104,8 @@ class HostDetailsViewController: UITableViewController {
                 return nil
             }
             
-            return UpdateHost(oldHost: oldHost, newHost: newHost)
+            store.dispatch(UpdateHost(oldHost: oldHost, newHost: newHost))
+            return nil
         } else {
             return AddHost(host: newHost)
         }

@@ -15,11 +15,14 @@ fileprivate let hostsKey = "Hosts"
 class MacHostsInfoService : NSObject {
     static fileprivate let subscriber = MacHostsInfoService()
     override class func initialize() { DispatchQueue.main.async(execute: { subscribe() }) }
+    fileprivate var cachedHosts: Hosts = Hosts()
     
     func macHostsInfo() -> Hosts {
         let hostsData = KeychainWrapper.standard.object(forKey:hostsKey)
         if let hostsFromKeyChain = hostsData as? [String: MacHost] {
-            return toHostsInfo(legacyMacHosts: hostsFromKeyChain)
+            let hosts = toHostsInfo(legacyMacHosts: hostsFromKeyChain)
+            MacHostsInfoService.subscriber.cachedHosts = hosts
+            return hosts
         }
         return Hosts()
     }
@@ -52,7 +55,8 @@ class MacHostsInfoService : NSObject {
 extension MacHostsInfoService: StoreSubscriber {
     fileprivate class func subscribe() { store.subscribe(subscriber) { $0.hostsState } }
     func newState(state: HostsState) {
-        if state.hostsUpdated {
+        if state.allHosts != cachedHosts {
+            cachedHosts = state.allHosts
             saveMacHostsInfo(hosts: state.allHosts)
         }
     }

@@ -10,7 +10,6 @@ struct HostsState {
     var allHosts: Hosts
     var editingHostAlias: String?
     var hostSelected: Bool
-    var hostsUpdated: Bool
     var latestHostAlias: String
 }
 

@@ -18,7 +18,6 @@ struct HostsReducer {
             allHosts: allHostsReducer(action, state: state),
             editingHostAlias: editingHostAliasReducer(action, state: state),
             hostSelected: action is SelectHost,
-            hostsUpdated: hostsUpdatedReducer(action, state: state),
             latestHostAlias: latestHostAliasReducer(action, state: state)
         )
     }
@@ -32,7 +31,7 @@ struct HostsReducer {
         case let action as RemoveHost:
             let oldHost = action.host
             hosts.removeValue(forKey: oldHost.alias)
-        case let action as UpdateHost where hostsUpdatedReducer(action, state: state):
+        case let action as UpdateHost:
             let updatedHost = action.newHost
             let oldHost = action.oldHost
             if updatedHost.alias != oldHost.alias {
@@ -61,25 +60,6 @@ struct HostsReducer {
         return state.editingHostAlias
     }
     
-    private static func hostsUpdatedReducer(_ action: Action, state: HostsState) -> Bool {
-        switch action {
-        case is AddHost:
-            return true
-        case is RemoveHost:
-            return true
-        case let action as UpdateHost:
-            let newHost = action.newHost
-            let oldHost = action.oldHost
-            if newHost.alias != oldHost.alias, state.allHosts.keys.contains(newHost.alias) {
-                // Do not update state if newHost.alias is already used for other hosts.
-                return false
-            }
-            return newHost != oldHost
-        default:
-            return false
-        }
-    }
-    
     private static func latestHostAliasReducer(_ action: Action, state: HostsState) -> String {
         switch action {
         case let action as SelectHost:
@@ -102,7 +82,6 @@ struct HostsReducer {
             allHosts: MacHostsInfoService().macHostsInfo(),
             editingHostAlias: nil,
             hostSelected: false,
-            hostsUpdated: false,
             latestHostAlias: LatestHostAliasService.alias
         )
     }
