@@ -6,11 +6,15 @@
 //  Copyright © 2017 Liu Liang. All rights reserved.
 //
 
-struct HostInfo {
+struct HostInfo: CustomStringConvertible {
     var alias: String = ""
     var host: String = ""
     var user: String = ""
     var password: String = ""
+    
+    var description: String {
+        return "(\(alias),\(host),\(user))"
+    }
 }
 
 extension HostInfo: Equatable {

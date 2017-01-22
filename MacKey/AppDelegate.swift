@@ -10,6 +10,7 @@ import UIKit
 import SimpleTouch
 import Result
 import ReSwift
+import ReSwiftRouter
 
 var store = Store<State>(reducer: AppReducer(), state: nil)
 
@@ -18,11 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var viewController: MasterViewController?
+    var router: Router<State>?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let navigationController = self.window!.rootViewController as? UINavigationController
         viewController = navigationController?.topViewController as? MasterViewController
+        
+        router = Router(store: store, rootRoutable: viewController!) { state in
+            state.navigationState
+        }
         
         DispatchQueue.main.async(execute: {
             self.viewController?.wakeUpAndRequireTouchID()

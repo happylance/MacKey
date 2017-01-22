@@ -10,6 +10,7 @@ import UIKit
 import SimpleTouch
 import Result
 import ReSwift
+import ReSwiftRouter
 
 let readMeURL = "https://github.com/happylance/MacKey/blob/master/README.md"
 
@@ -50,11 +51,7 @@ class MasterViewController: UITableViewController {
     }
 
     func insertNewObject(_ sender: AnyObject) {
-        HostInfo().requireLoginInfo { newHost in
-            if let newHost = newHost {
-                store.dispatch(AddHost(host: newHost))
-            }
-        }
+        store.dispatch(SetRouteAction([hostDetaisViewRoute]))
     }
     
     func editSelectedCell() {
@@ -68,20 +65,13 @@ class MasterViewController: UITableViewController {
     fileprivate func editCell(_ cell: UITableViewCell?) {
         guard let cell = cell else { return }
         let hostAlias = cell.textLabel?.text
-        if hostAlias == nil {
+        guard let alias = hostAlias else {
             print("hostAlias is nil")
             return
         }
-        guard let host = store.state.allHosts[hostAlias!] else {
-            print("host is nil for \(hostAlias!)")
-            return
-        }
-        let oldHost = host
-        host.requireLoginInfo { newHost in
-            if let newHost = newHost {
-                store.dispatch(UpdateHost(oldHost: oldHost, newHost: newHost))
-            }
-        }
+        
+        store.dispatch(EditHost(alias: alias))
+        store.dispatch(SetRouteAction([hostDetaisViewRoute]))
     }
     
     fileprivate func updateSelectCell(_ newSelectedCell: UITableViewCell) {

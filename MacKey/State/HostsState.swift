@@ -8,6 +8,7 @@
 
 struct HostsState {
     var allHosts: Hosts
+    var editingHostAlias: String?
     var hostAdded: Bool
     var hostRemoved: Bool
     var hostSelected: Bool

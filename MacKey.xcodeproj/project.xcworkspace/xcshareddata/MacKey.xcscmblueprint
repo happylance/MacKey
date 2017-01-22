@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "BDE8DBE7E7D0088F8459BA2C292558F7191FF68D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "4AFE2EDB1750F02655F3B1F4AAB432EACF2D5532" : 9223372036854775807,
+    "BDE8DBE7E7D0088F8459BA2C292558F7191FF68D" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "2D07D163-4D4E-489B-8687-4BF17DC6AEA3",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "4AFE2EDB1750F02655F3B1F4AAB432EACF2D5532" : "MacKey\/Carthage\/Checkouts\/ReSwift-Router\/",
+    "BDE8DBE7E7D0088F8459BA2C292558F7191FF68D" : "MacKey\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "MacKey",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "MacKey.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/ReSwift\/ReSwiftRouter.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4AFE2EDB1750F02655F3B1F4AAB432EACF2D5532"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:happylance\/MacKey.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "BDE8DBE7E7D0088F8459BA2C292558F7191FF68D"
+    }
+  ]
+}

@@ -7,11 +7,13 @@
 //
 
 import ReSwift
+import ReSwiftRouter
 
 struct AppReducer: Reducer {
     func handleAction(action: Action, state: State?) -> State {
         return State(
-            hostsState: HostsReducer.handleAction(action, state:state?.hostsState)
+            hostsState: HostsReducer.handleAction(action, state:state?.hostsState),
+            navigationState: NavigationReducer.handleAction(action, state: state?.navigationState)
         )
     }
 

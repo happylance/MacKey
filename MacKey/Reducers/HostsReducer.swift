@@ -7,12 +7,16 @@
 //
 
 import ReSwift
+import ReSwiftRouter
 
 struct HostsReducer {
     static func handleAction(_ action: Action, state: HostsState?) -> HostsState {
         let state = state ?? initialHostsState()
+        print(state)
+        print(action)
         return HostsState(
             allHosts: allHostsReducer(action, state: state),
+            editingHostAlias: editingHostAliasReducer(action, state: state),
             hostAdded: action is AddHost,
             hostRemoved: action is RemoveHost,
             hostSelected: action is SelectHost,
@@ -33,7 +37,7 @@ struct HostsReducer {
         case let action as RemoveHost:
             let oldHost = action.host
             hosts.removeValue(forKey: oldHost.alias)
-        case let action as UpdateHost where state.hostsUpdated:
+        case let action as UpdateHost where hostsUpdatedReducer(action, state: state):
             let updatedHost = action.newHost
             let oldHost = action.oldHost
             if updatedHost.alias != oldHost.alias {
@@ -45,6 +49,21 @@ struct HostsReducer {
         }
         
         return hosts
+    }
+    
+    private static func editingHostAliasReducer(_ action: Action, state: HostsState) -> String? {
+        switch action {
+        case let action as EditHost:
+            return action.alias
+        case _ as CancelHostDetails:
+            return nil
+        case _ as UpdateHost:
+            return nil
+        default:
+            break
+        }
+        
+        return state.editingHostAlias
     }
     
     private static func hostsUpdatedReducer(_ action: Action, state: HostsState) -> Bool {
@@ -86,6 +105,7 @@ struct HostsReducer {
     private static func initialHostsState() -> HostsState {
         return HostsState(
             allHosts: MacHostsInfoService().macHostsInfo(),
+            editingHostAlias: nil,
             hostAdded: false,
             hostRemoved: false,
             hostSelected: false,

@@ -7,9 +7,11 @@
 //
 
 import ReSwift
+import ReSwiftRouter
 
 struct State : StateType {
     var hostsState: HostsState
+    var navigationState: NavigationState
 }
 
 extension State {

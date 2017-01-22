@@ -1,0 +1,6 @@
+[submodule "Carthage/Checkouts/ReSwift"]
+	path = Carthage/Checkouts/ReSwift
+	url = https://github.com/ReSwift/ReSwift.git
+[submodule "Carthage/Checkouts/ReSwift-Router"]
+	path = Carthage/Checkouts/ReSwift-Router
+	url = https://github.com/happylance/ReSwift-Router.git
