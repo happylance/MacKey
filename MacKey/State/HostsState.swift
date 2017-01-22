@@ -9,13 +9,23 @@
 struct HostsState {
     var allHosts: Hosts
     var editingHostAlias: String?
-    var hostAdded: Bool
-    var hostRemoved: Bool
     var hostSelected: Bool
     var hostsUpdated: Bool
     var latestHostAlias: String
-    var newHost: HostInfo?
-    var removedHost: HostInfo?
 }
 
 typealias Hosts = [String: HostInfo]
+
+extension HostsState {
+    func newHostAfter(_ previousHosts: Hosts) -> HostInfo? {
+        if allHosts.count <= previousHosts.count { return nil }
+        return allHosts.values.filter { !previousHosts.values.contains($0) }
+                .first
+    }
+    
+    func removedHostFrom(_ previousHosts: Hosts) -> HostInfo? {
+        if allHosts.count >= previousHosts.count { return nil }
+        return previousHosts.values.filter { !self.allHosts.values.contains($0) }
+            .first
+    }
+}

@@ -18,6 +18,7 @@ class MasterViewController: UITableViewController {
 
     var selectedCell: UITableViewCell? = nil
     var latestHostUnlockStatus: String? = nil
+    var cachedHostsState: HostsState?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,6 +35,8 @@ class MasterViewController: UITableViewController {
                 
         // Hide empty rows
         tableView.tableFooterView = UIView()
+        
+        cachedHostsState = store.state.hostsState
     }
 
     override func viewWillAppear(_ animated: Bool) {

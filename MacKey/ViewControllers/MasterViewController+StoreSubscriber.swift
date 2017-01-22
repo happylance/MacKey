@@ -12,16 +12,22 @@ import Result
 import ReSwift
 
 extension MasterViewController: StoreSubscriber {
-    func newState(state: HostsState?) {
-        guard let state = state else { return }
-        if let newHost = state.newHost {
+    func newState(state newState: HostsState?) {
+        let cachedHosts = cachedHostsState?.allHosts
+        cachedHostsState = newState
+        
+        guard let state = newState, let previousHosts = cachedHosts else { return }
+        
+        let newHost = state.newHostAfter(previousHosts)
+        if let newHost = newHost {
             newStateWithNewHost(newHost, state: state)
         }
-        if let removedHost = state.removedHost {
+        let removedHost = state.removedHostFrom(previousHosts)
+        if let removedHost = removedHost {
             newStateWithRemovedHost(removedHost, state: state)
         }
-        if state.hostsUpdated {
-            newStateWithUpdatedHost(state: state)
+        if state.hostsUpdated && newHost == nil && removedHost == nil {
+            self.tableView.reloadData()
         }
         if state.hostSelected {
             wakeUpAndRequireTouchID()
@@ -44,12 +50,6 @@ extension MasterViewController: StoreSubscriber {
         
         if let indexPath = indexPathToRemove {
             tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
-    
-    private func newStateWithUpdatedHost(state: HostsState) {
-        if (!state.hostAdded && !state.hostRemoved) {
-            self.tableView.reloadData()
         }
     }
 }
