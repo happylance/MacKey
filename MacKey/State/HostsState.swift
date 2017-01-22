@@ -14,7 +14,6 @@ struct HostsState {
     var hostSelected: Bool
     var hostsUpdated: Bool
     var latestHostAlias: String
-    var latestHostAliasChanged: Bool
     var newHost: HostInfo?
     var removedHost: HostInfo?
 }

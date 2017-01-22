@@ -17,12 +17,16 @@ class LatestHostAliasService : NSObject, StoreSubscriber {
     
     static var alias: String {
         get {
-            return UserDefaults.standard.string(forKey: latestHostAliasKey) ?? ""
+            let latestHostAlias = UserDefaults.standard.string(forKey: latestHostAliasKey) ?? ""
+            subscriber.cachedAlias = latestHostAlias
+            return latestHostAlias
         }
     }
+    private var cachedAlias: String?
 
     func newState(state: HostsState) {
-        if state.latestHostAliasChanged {
+        if state.latestHostAlias != cachedAlias {
+            cachedAlias = state.latestHostAlias
             UserDefaults.standard.set(state.latestHostAlias, forKey: latestHostAliasKey)
             UserDefaults.standard.synchronize()
         }

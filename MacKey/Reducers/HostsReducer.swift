@@ -22,7 +22,6 @@ struct HostsReducer {
             hostSelected: action is SelectHost,
             hostsUpdated: hostsUpdatedReducer(action, state: state),
             latestHostAlias: latestHostAliasReducer(action, state: state),
-            latestHostAliasChanged: latestHostAliasReducer(action, state: state) != state.latestHostAlias,
             newHost: (action as? AddHost)?.host,
             removedHost: (action as? RemoveHost)?.host
         )
@@ -111,7 +110,6 @@ struct HostsReducer {
             hostSelected: false,
             hostsUpdated: false,
             latestHostAlias: LatestHostAliasService.alias,
-            latestHostAliasChanged: false,
             newHost: nil,
             removedHost: nil
         )
