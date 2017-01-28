@@ -20,7 +20,7 @@ class MasterViewController: UITableViewController {
     var latestHostUnlockStatus: String? = nil
     var cachedHostsState: HostsState?
     
-    private var disposeBag = DisposeBag()
+    private let disposeBag = DisposeBag()
     
     fileprivate var state: State {
         return store.observable.value
@@ -33,43 +33,30 @@ class MasterViewController: UITableViewController {
 
         
         let infoButton = UIButton(type: .infoLight)
-        infoButton.addTarget(self, action: #selector(showInfoPage), for: .touchUpInside)
+        infoButton.rx.tap.subscribe(onNext: {
+            UIApplication.shared.openURL(URL(string: readMeURL)!)
+        }).addDisposableTo(disposeBag)
         let infoItem = UIBarButtonItem(customView: infoButton)
         
-        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(insertNewObject(_:)))
+        let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
+        addButton.rx.tap.subscribe(onNext: { [unowned self] in
+            self.showHostDetaisViewController(animated: true)
+        }).addDisposableTo(disposeBag)
         self.navigationItem.rightBarButtonItems = [addButton, infoItem]
                 
         // Hide empty rows
         tableView.tableFooterView = UIView()
         
         cachedHostsState = state.hostsState
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         
         store.observable.asObservable().map { $0.hostsState }
             .subscribe(onNext: { [unowned self] in
                 self.newState(state: $0)
             }).addDisposableTo(disposeBag)
-        
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        disposeBag = DisposeBag()
     }
 
-    func insertNewObject(_ sender: AnyObject) {
-        showHostDetaisViewController(animated: true)
-    }
-    
     func editSelectedCell() {
         editCell(selectedCell)
-    }
-    
-    func showInfoPage() {
-        UIApplication.shared.openURL(URL(string: readMeURL)!)
     }
     
     fileprivate func editCell(_ cell: UITableViewCell?) {
