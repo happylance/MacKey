@@ -11,6 +11,7 @@ import SimpleTouch
 import Result
 import ReactiveReSwift
 import RxSwift
+import RxCocoa
 
 let readMeURL = "https://github.com/happylance/MacKey/blob/master/README.md"
 
@@ -22,7 +23,7 @@ class MasterViewController: UITableViewController {
     
     private let disposeBag = DisposeBag()
     
-    fileprivate var state: State {
+    fileprivate var latestState: State {
         return store.observable.value
     }
     
@@ -50,18 +51,52 @@ class MasterViewController: UITableViewController {
         // Hide empty rows
         tableView.tableFooterView = UIView()
         
-        cachedHostsState = state.hostsState
+        let storeState = store.observable.asDriver()
+        let hostSelected = storeState.map { $0.hostsState.hostSelected }
+            .filter { $0 }
         
-        store.observable.asObservable().map { $0.hostsState }
-            .subscribe(onNext: { [unowned self] in
-                self.newState(state: $0)
+            hostSelected.drive(onNext: { [unowned self] hostSelected in
+                self.wakeUpAndRequireTouchID()
             }).addDisposableTo(disposeBag)
         
-        tableView.rx.itemSelected
-            .subscribe(onNext: { [unowned self] indexPath in
+        let hostsState = storeState.map { $0.hostsState }
+            .distinctUntilChanged { $0.allHosts == $1.allHosts }
+        let stateDiff: Driver<(HostsState, HostsState)> = Driver.zip([hostsState, hostsState.skip(1)]) { (stateArray) -> (HostsState, HostsState) in
+            return (stateArray[0], stateArray[1])
+        }
+        
+        stateDiff.drive(onNext: { [unowned self] (prevState: HostsState, state: HostsState) -> () in
+            let newHost = HostsState.newHostAfter(prevState.allHosts, in: state.allHosts)
+            if let newHost = newHost {
+                let index = state.sortedHostAliases.binarySearch{$0 < newHost.alias}
+                let indexPath = IndexPath(row: index, section: 0)
+                self.tableView.insertRows(at: [indexPath], with: .automatic)
+            }
+            let removedHost = HostsState.removedHostFrom(prevState.allHosts, in: state.allHosts)
+            if let removedHost = removedHost {
+                var indexPathToRemove: IndexPath? = nil
+                self.tableView.visibleCells.forEach { cell in
+                    if let hostAlias = cell.textLabel?.text, hostAlias == removedHost.alias {
+                        indexPathToRemove = self.tableView.indexPath(for: cell)
+                    }
+                }
+                
+                if let indexPath = indexPathToRemove {
+                    self.tableView.deleteRows(at: [indexPath], with: .fade)
+                }
+            }
+            if newHost == nil && removedHost == nil {
+                self.tableView.reloadData()
+            }
+            }).addDisposableTo(disposeBag)
+        
+        
+        tableView.rx.itemSelected.asDriver()
+            .withLatestFrom(storeState) { ($0, $1) }
+            .drive(onNext: { [unowned self] (indexPath, storeState) in
                 self.tableView.deselectRow(at: indexPath, animated: true)
-                let alias = self.state.sortedHostAliases[indexPath.row]
-                guard let host = self.state.allHosts[alias] else { return }
+                let alias = storeState.hostsState.sortedHostAliases[indexPath.row]
+                guard let host = storeState.allHosts[alias] else { return }
                 store.dispatch(SelectHost(host: host))
                 
                 self.latestHostUnlockStatus = ""
@@ -102,15 +137,15 @@ extension MasterViewController  { // UITableViewDataSource
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return state.allHosts.count
+        return latestState.allHosts.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        let object = state.sortedHostAliases[indexPath.row]
+        let object = latestState.hostsState.sortedHostAliases[indexPath.row]
         cell.textLabel!.text = object
-        if object == state.latestHostAlias {
+        if object == latestState.latestHostAlias {
             updateSelectCell(cell)
             cell.detailTextLabel?.text = latestHostUnlockStatus
         } else {

@@ -30,7 +30,6 @@
 		408507DC1E2B147A00C2E0D1 /* UpdateHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507DB1E2B147A00C2E0D1 /* UpdateHost.swift */; };
 		408507DE1E2BB9AB00C2E0D1 /* HostInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507DD1E2BB9AB00C2E0D1 /* HostInfo.swift */; };
 		408507E01E2BEB7000C2E0D1 /* SelectHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507DF1E2BEB7000C2E0D1 /* SelectHost.swift */; };
-		408507E61E2C166000C2E0D1 /* MasterViewController+StoreSubscriber.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507E51E2C166000C2E0D1 /* MasterViewController+StoreSubscriber.swift */; };
 		408507EA1E2C16BC00C2E0D1 /* MasterViewController+unlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507E91E2C16BC00C2E0D1 /* MasterViewController+unlock.swift */; };
 		408508071E2C495200C2E0D1 /* LatestHostAliasServivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408508061E2C495200C2E0D1 /* LatestHostAliasServivce.swift */; };
 		40A645921E3C359700CB62B1 /* MasterViewController+Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8B6621E340E1E00C71EE7 /* MasterViewController+Routes.swift */; };
@@ -138,7 +137,6 @@
 		408507DB1E2B147A00C2E0D1 /* UpdateHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpdateHost.swift; path = Actions/UpdateHost.swift; sourceTree = "<group>"; };
 		408507DD1E2BB9AB00C2E0D1 /* HostInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostInfo.swift; path = Models/HostInfo.swift; sourceTree = "<group>"; };
 		408507DF1E2BEB7000C2E0D1 /* SelectHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectHost.swift; path = Actions/SelectHost.swift; sourceTree = "<group>"; };
-		408507E51E2C166000C2E0D1 /* MasterViewController+StoreSubscriber.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MasterViewController+StoreSubscriber.swift"; path = "ViewControllers/MasterViewController+StoreSubscriber.swift"; sourceTree = "<group>"; };
 		408507E91E2C16BC00C2E0D1 /* MasterViewController+unlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MasterViewController+unlock.swift"; path = "ViewControllers/MasterViewController+unlock.swift"; sourceTree = "<group>"; };
 		408508061E2C495200C2E0D1 /* LatestHostAliasServivce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LatestHostAliasServivce.swift; path = Services/LatestHostAliasServivce.swift; sourceTree = "<group>"; };
 		40A8B65D1E33FE1F00C71EE7 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
@@ -263,7 +261,6 @@
 			isa = PBXGroup;
 			children = (
 				408507CC1E2ACFFE00C2E0D1 /* MasterViewController.swift */,
-				408507E51E2C166000C2E0D1 /* MasterViewController+StoreSubscriber.swift */,
 				408507E91E2C16BC00C2E0D1 /* MasterViewController+unlock.swift */,
 				40BD24F01E330BFE004C8BD8 /* HostDetailsViewController.swift */,
 			);
@@ -611,7 +608,6 @@
 				408507CD1E2ACFFE00C2E0D1 /* MasterViewController.swift in Sources */,
 				401263A31CE7BD3C00FAE75C /* HostInfo+SSH.swift in Sources */,
 				40A8B66B1E342D3300C71EE7 /* CancelHostDetails.swift in Sources */,
-				408507E61E2C166000C2E0D1 /* MasterViewController+StoreSubscriber.swift in Sources */,
 				40A645921E3C359700CB62B1 /* MasterViewController+Routes.swift in Sources */,
 				401263911CE77D2D00FAE75C /* SshUtils.swift in Sources */,
 				408507DC1E2B147A00C2E0D1 /* UpdateHost.swift in Sources */,

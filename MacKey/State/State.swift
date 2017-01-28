@@ -17,10 +17,6 @@ extension State {
         return hostsState.allHosts
     }
     
-    var sortedHostAliases: [String] {
-        return allHosts.keys.sorted()
-    }
-    
     var latestHostAlias: String {
         return hostsState.latestHostAlias
     }
