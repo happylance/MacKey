@@ -19,7 +19,6 @@ class MasterViewController: UITableViewController {
 
     var selectedCell: UITableViewCell? = nil
     var latestHostUnlockStatus: String? = nil
-    var cachedHostsState: HostsState?
     
     private let disposeBag = DisposeBag()
     

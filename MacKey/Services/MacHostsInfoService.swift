@@ -13,7 +13,6 @@ import RxSwift
 
 fileprivate let hostsKey = "Hosts"
 private let disposeBag = DisposeBag()
-private var cachedHosts: Hosts = Hosts()
 class MacHostsInfoService : NSObject {
     static fileprivate let subscriber = MacHostsInfoService()
     override class func initialize() { DispatchQueue.main.async(execute: { subscribe() }) }
@@ -22,7 +21,6 @@ class MacHostsInfoService : NSObject {
         let hostsData = KeychainWrapper.standard.object(forKey:hostsKey)
         if let hostsFromKeyChain = hostsData as? [String: MacHost] {
             let hosts = toHostsInfo(legacyMacHosts: hostsFromKeyChain)
-            cachedHosts = hosts
             return hosts
         }
         return Hosts()
@@ -49,18 +47,16 @@ class MacHostsInfoService : NSObject {
 
 extension MacHostsInfoService {
     fileprivate class func subscribe() {
-        store.observable.asObservable().map { $0.hostsState }
-            .subscribe(onNext: {
-                if $0.allHosts != cachedHosts {
-                    cachedHosts = $0.allHosts
-                    
-                    var legacyMacHosts = [String: MacHost]()
-                    $0.allHosts.forEach { (source: (key: String, value: HostInfo)) in
-                        legacyMacHosts[source.key] = MacHost(hostInfo: source.value)
-                    }
-                    let data = NSKeyedArchiver.archivedData(withRootObject:legacyMacHosts)
-                    KeychainWrapper.standard.set(data, forKey: hostsKey)
+        store.observable.asObservable().map { $0.hostsState.allHosts }
+            .distinctUntilChanged { $0 == $1 }
+            .skip(1)
+            .subscribe(onNext: { (allHosts: Hosts) in
+                var legacyMacHosts = [String: MacHost]()
+                allHosts.forEach { (source: (key: String, value: HostInfo)) in
+                    legacyMacHosts[source.key] = MacHost(hostInfo: source.value)
                 }
+                let data = NSKeyedArchiver.archivedData(withRootObject:legacyMacHosts)
+                KeychainWrapper.standard.set(data, forKey: hostsKey)
         }).addDisposableTo(disposeBag)
     }
 }
