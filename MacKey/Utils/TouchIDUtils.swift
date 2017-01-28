@@ -48,7 +48,7 @@ class TouchIDUtils {
     }
     
     static func touchIDRequestMessage() -> String {
-        let latestHostAlias = store.state.latestHostAlias
+        let latestHostAlias = store.observable.value.latestHostAlias
         if latestHostAlias.characters.count > 0 {
             return "Authentication required to unlock '\(latestHostAlias)'"
         } else {

@@ -9,27 +9,35 @@
 import UIKit
 import SimpleTouch
 import Result
-import ReSwift
-import ReSwiftRouter
+import ReactiveReSwift
+import RxSwift
 
-var store = Store<State>(reducer: AppReducer(), state: nil)
+let middleware = Middleware<State>().sideEffect { _, _, action in
+    print("Received action:")
+    }.map { _, action in
+        print(action)
+        return action
+}
 
+// The global application store, which is responsible for managing the appliction state.
+let store = Store(
+    reducer: AppReducer,
+    observable: Variable(State()),
+    middleware: middleware
+)
+
+private let disposeBag = DisposeBag()
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var viewController: MasterViewController?
-    var router: Router<State>?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         let navigationController = self.window!.rootViewController as? UINavigationController
         viewController = navigationController?.topViewController as? MasterViewController
-        
-        router = Router(store: store, rootRoutable: viewController!) { state in
-            state.navigationState
-        }
-        
+
         DispatchQueue.main.async(execute: {
             self.viewController?.wakeUpAndRequireTouchID()
         });

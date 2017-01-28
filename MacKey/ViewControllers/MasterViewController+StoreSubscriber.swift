@@ -9,12 +9,12 @@
 import UIKit
 import SimpleTouch
 import Result
-import ReSwift
+import ReactiveReSwift
 
-extension MasterViewController: StoreSubscriber {
+extension MasterViewController {
     func newState(state newState: HostsState?) {
+        defer { cachedHostsState = newState }
         guard let state = newState, let cachedHosts = cachedHostsState?.allHosts else {
-            cachedHostsState = newState
             return
         }
         
@@ -32,11 +32,10 @@ extension MasterViewController: StoreSubscriber {
         if state.hostSelected {
             wakeUpAndRequireTouchID()
         }
-        cachedHostsState = newState
     }
 
     private func newStateWithNewHost(_ newHost: HostInfo, state: HostsState) {
-        let index = store.state.sortedHostAliases.binarySearch{$0 < newHost.alias}
+        let index = store.observable.value.sortedHostAliases.binarySearch{$0 < newHost.alias}
         let indexPath = IndexPath(row: index, section: 0)
         self.tableView.insertRows(at: [indexPath], with: .automatic)
     }

@@ -9,8 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import ReSwift
-import ReSwiftRouter
+import ReactiveReSwift
 
 class HostDetailsViewController: UITableViewController {
     @IBOutlet weak var aliasOutlet: UITextField!
@@ -32,54 +31,54 @@ class HostDetailsViewController: UITableViewController {
         
         validationOutlet.text = "Alias is already taken."
         
-        
-        let aliasValid = aliasOutlet.rx.text.orEmpty
+        let aliasValid = aliasOutlet.rx.text.orEmpty.asDriver()
             .map { [weak self] in $0.characters.count > 0 && self?.isAliasAvailable($0) ?? false }
-            .shareReplay(1)
-        let aliasAvailable = aliasOutlet.rx.text.orEmpty
+        let aliasAvailable = aliasOutlet.rx.text.orEmpty.asDriver()
             .map { [weak self] in self?.isAliasAvailable($0) ?? false }
-            .shareReplay(1)
         
-        aliasAvailable.bindTo(validationOutlet.rx.isHidden)
+        aliasAvailable.drive(validationOutlet.rx.isHidden)
             .addDisposableTo(disposeBag)
         
-        let hostValid = hostOutlet.rx.text.orEmpty
+        let hostValid = hostOutlet.rx.text.orEmpty.asDriver()
             .map { $0.characters.count > 0 }
-            .shareReplay(1)
         
-        let usernameValid = usernameOutlet.rx.text.orEmpty
+        let usernameValid = usernameOutlet.rx.text.orEmpty.asDriver()
             .map { $0.characters.count > 0 }
-            .shareReplay(1)
         
-        let passwordValid = passwordOutlet.rx.text.orEmpty
+        let passwordValid = passwordOutlet.rx.text.orEmpty.asDriver()
             .map { $0.characters.count > 0 }
-            .shareReplay(1)
-        
+
         let isChanged = isAnyFieldChanged()
-        let saveEnabled = Observable.combineLatest(aliasValid,
+        let saveEnabled = Driver.combineLatest(aliasValid,
                                                               hostValid,
                                                               usernameValid,
                                                               passwordValid, isChanged
         ){ $0 && $1 && $2 && $3 && $4}
-        .shareReplay(1)
         
-        saveEnabled.bindTo(saveOutlet.rx.isEnabled).addDisposableTo(disposeBag)
+        saveEnabled.drive(saveOutlet.rx.isEnabled).addDisposableTo(disposeBag)
         
         saveOutlet.rx.tap
-            .subscribe(onNext: { [weak self] in
-                store.dispatch(SetRouteAction([], animated: true, completionAction: self?.saveHostAction()))
+            .subscribe(onNext: { [unowned self] in
+                let action = self.saveHostAction()
+                self.dismiss(animated: true) {
+                    if let action = action {
+                        store.dispatch(action)
+                    }
+                }
             } )
             .addDisposableTo(disposeBag)
  
         cancelOutlet.rx.tap
-            .subscribe(onNext: {
-                store.dispatch(SetRouteAction([], animated: true, completionAction: CancelHostDetails()))
+            .subscribe(onNext: {[unowned self] in
+                self.dismiss(animated: true) {
+                    store.dispatch(CancelHostDetails())
+                }
             })
             .addDisposableTo(disposeBag)
     }
     
     private var hostsState : HostsState {
-        return store.state.hostsState
+        return store.observable.value.hostsState
     }
     
     private func populateHostInfo() {
@@ -116,31 +115,26 @@ class HostDetailsViewController: UITableViewController {
         return !hostsState.allHosts.keys.contains(alias)
     }
     
-    private func isAnyFieldChanged() -> Observable<Bool> {
+    private func isAnyFieldChanged() -> Driver<Bool> {
         let oldAlias = aliasOutlet.text
         let oldHost = hostOutlet.text
         let oldUsername = usernameOutlet.text
         let oldPassword = passwordOutlet.text
         
-        let aliasChanged = aliasOutlet.rx.text.orEmpty
+        let aliasChanged = aliasOutlet.rx.text.orEmpty.asDriver()
             .map { $0 != oldAlias }
-            .shareReplay(1)
-        let hostChanged = hostOutlet.rx.text.orEmpty
+        let hostChanged = hostOutlet.rx.text.orEmpty.asDriver()
             .map { $0 != oldHost }
-            .shareReplay(1)
-        let usernameChanged = usernameOutlet.rx.text.orEmpty
+        let usernameChanged = usernameOutlet.rx.text.orEmpty.asDriver()
             .map { $0 != oldUsername }
-            .shareReplay(1)
-        let passwordChanged = passwordOutlet.rx.text.orEmpty
+        let passwordChanged = passwordOutlet.rx.text.orEmpty.asDriver()
             .map { $0 != oldPassword }
-            .shareReplay(1)
         
-        return Observable.combineLatest(aliasChanged,
+        return Driver.combineLatest(aliasChanged,
                                                hostChanged,
                                                usernameChanged,
                                                passwordChanged
         ){ $0 || $1 || $2 || $3}
-            .shareReplay(1)
 
     }
 }

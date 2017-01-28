@@ -6,7 +6,7 @@
 //  Copyright © 2017 Liu Liang. All rights reserved.
 //
 
-import ReSwift
+import ReactiveReSwift
 
 struct EditHost: Action {
     let alias: String

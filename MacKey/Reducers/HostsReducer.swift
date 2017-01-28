@@ -6,19 +6,25 @@
 //  Copyright © 2017 Liu Liang. All rights reserved.
 //
 
-import ReSwift
-import ReSwiftRouter
+import ReactiveReSwift
 
 struct HostsReducer {
     static func handleAction(_ action: Action, state: HostsState?) -> HostsState {
         let state = state ?? initialHostsState()
-        print(state)
-        print(action)
         return HostsState(
             allHosts: allHostsReducer(action, state: state),
             editingHostAlias: editingHostAliasReducer(action, state: state),
             hostSelected: action is SelectHost,
             latestHostAlias: latestHostAliasReducer(action, state: state)
+        )
+    }
+    
+    static func initialHostsState() -> HostsState {
+        return HostsState(
+            allHosts: MacHostsInfoService().macHostsInfo(),
+            editingHostAlias: nil,
+            hostSelected: false,
+            latestHostAlias: LatestHostAliasService.alias
         )
     }
     
@@ -75,14 +81,5 @@ struct HostsReducer {
         default:
             return state.latestHostAlias
         }
-    }
-    
-    private static func initialHostsState() -> HostsState {
-        return HostsState(
-            allHosts: MacHostsInfoService().macHostsInfo(),
-            editingHostAlias: nil,
-            hostSelected: false,
-            latestHostAlias: LatestHostAliasService.alias
-        )
     }
 }

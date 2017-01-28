@@ -8,29 +8,24 @@
 
 import Foundation
 import SwiftKeychainWrapper
-import ReSwift
+import ReactiveReSwift
+import RxSwift
 
 fileprivate let hostsKey = "Hosts"
-
+private let disposeBag = DisposeBag()
+private var cachedHosts: Hosts = Hosts()
 class MacHostsInfoService : NSObject {
     static fileprivate let subscriber = MacHostsInfoService()
     override class func initialize() { DispatchQueue.main.async(execute: { subscribe() }) }
-    fileprivate var cachedHosts: Hosts = Hosts()
     
     func macHostsInfo() -> Hosts {
         let hostsData = KeychainWrapper.standard.object(forKey:hostsKey)
         if let hostsFromKeyChain = hostsData as? [String: MacHost] {
             let hosts = toHostsInfo(legacyMacHosts: hostsFromKeyChain)
-            MacHostsInfoService.subscriber.cachedHosts = hosts
+            cachedHosts = hosts
             return hosts
         }
         return Hosts()
-    }
-    
-    fileprivate func saveMacHostsInfo(hosts: Hosts) {
-        let legacyMacHosts = toLegacyMacHosts(hostsInfo: hosts)
-        let data = NSKeyedArchiver.archivedData(withRootObject:legacyMacHosts)
-        KeychainWrapper.standard.set(data, forKey: hostsKey)
     }
     
     private func toHostsInfo(legacyMacHosts: [String: MacHost]) -> [String: HostInfo] {
@@ -52,12 +47,20 @@ class MacHostsInfoService : NSObject {
     }
 }
 
-extension MacHostsInfoService: StoreSubscriber {
-    fileprivate class func subscribe() { store.subscribe(subscriber) { $0.hostsState } }
-    func newState(state: HostsState) {
-        if state.allHosts != cachedHosts {
-            cachedHosts = state.allHosts
-            saveMacHostsInfo(hosts: state.allHosts)
-        }
+extension MacHostsInfoService {
+    fileprivate class func subscribe() {
+        store.observable.asObservable().map { $0.hostsState }
+            .subscribe(onNext: {
+                if $0.allHosts != cachedHosts {
+                    cachedHosts = $0.allHosts
+                    
+                    var legacyMacHosts = [String: MacHost]()
+                    $0.allHosts.forEach { (source: (key: String, value: HostInfo)) in
+                        legacyMacHosts[source.key] = MacHost(hostInfo: source.value)
+                    }
+                    let data = NSKeyedArchiver.archivedData(withRootObject:legacyMacHosts)
+                    KeychainWrapper.standard.set(data, forKey: hostsKey)
+                }
+        }).addDisposableTo(disposeBag)
     }
 }

@@ -2,5 +2,5 @@ github "NMSSH/NMSSH"
 github "antitypical/Result"
 github "jrendel/SwiftKeychainWrapper"
 github "simple-machines/simple-touch" "master"
-github "happylance/ReSwift-Router" "master"
 github "ReactiveX/RxSwift" ~> 3.0
+github "ReSwift/ReactiveReSwift" ~> 3.0

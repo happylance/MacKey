@@ -6,29 +6,32 @@
 //  Copyright © 2017 Liu Liang. All rights reserved.
 //
 
-import ReSwift
+import ReactiveReSwift
+import RxSwift
 
 private let latestHostAliasKey = "latestHostAlias"
-
-class LatestHostAliasService : NSObject, StoreSubscriber {
+private let disposeBag = DisposeBag()
+private var cachedAlias: String?
+class LatestHostAliasService : NSObject {
     static private let subscriber = LatestHostAliasService()
     override class func initialize() { DispatchQueue.main.async(execute: { subscribe() }) }
-    private class func subscribe() { store.subscribe(subscriber) { $0.hostsState } }
+    private class func subscribe() {
+        store.observable.asObservable().map { $0.hostsState }
+            .subscribe(onNext: {
+                if $0.latestHostAlias != cachedAlias {
+                    cachedAlias = $0.latestHostAlias
+                    UserDefaults.standard.set($0.latestHostAlias, forKey: latestHostAliasKey)
+                    UserDefaults.standard.synchronize()
+                }
+            })
+        .addDisposableTo(disposeBag)
+    }
     
     static var alias: String {
         get {
             let latestHostAlias = UserDefaults.standard.string(forKey: latestHostAliasKey) ?? ""
-            subscriber.cachedAlias = latestHostAlias
+            cachedAlias = latestHostAlias
             return latestHostAlias
-        }
-    }
-    private var cachedAlias: String?
-
-    func newState(state: HostsState) {
-        if state.latestHostAlias != cachedAlias {
-            cachedAlias = state.latestHostAlias
-            UserDefaults.standard.set(state.latestHostAlias, forKey: latestHostAliasKey)
-            UserDefaults.standard.synchronize()
         }
     }
 }

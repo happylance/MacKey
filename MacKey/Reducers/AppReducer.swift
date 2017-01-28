@@ -6,15 +6,12 @@
 //  Copyright © 2017 Liu Liang. All rights reserved.
 //
 
-import ReSwift
-import ReSwiftRouter
+import ReactiveReSwift
 
-struct AppReducer: Reducer {
-    func handleAction(action: Action, state: State?) -> State {
-        return State(
-            hostsState: HostsReducer.handleAction(action, state:state?.hostsState),
-            navigationState: NavigationReducer.handleAction(action, state: state?.navigationState)
-        )
-    }
-
+let AppReducer = Reducer<State> { action, state in
+    let hostsState = HostsReducer.handleAction(action, state:state.hostsState)
+    print(hostsState)
+    return State(
+        hostsState: hostsState
+    )
 }

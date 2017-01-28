@@ -9,8 +9,8 @@
 import UIKit
 import SimpleTouch
 import Result
-import ReSwift
-import ReSwiftRouter
+import ReactiveReSwift
+import RxSwift
 
 let readMeURL = "https://github.com/happylance/MacKey/blob/master/README.md"
 
@@ -19,6 +19,12 @@ class MasterViewController: UITableViewController {
     var selectedCell: UITableViewCell? = nil
     var latestHostUnlockStatus: String? = nil
     var cachedHostsState: HostsState?
+    
+    private var disposeBag = DisposeBag()
+    
+    fileprivate var state: State {
+        return store.observable.value
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,25 +42,26 @@ class MasterViewController: UITableViewController {
         // Hide empty rows
         tableView.tableFooterView = UIView()
         
-        cachedHostsState = store.state.hostsState
+        cachedHostsState = state.hostsState
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        store.subscribe(self) { state in
-            state.hostsState
-        }
+        store.observable.asObservable().map { $0.hostsState }
+            .subscribe(onNext: { [unowned self] in
+                self.newState(state: $0)
+            }).addDisposableTo(disposeBag)
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        store.unsubscribe(self)
+        disposeBag = DisposeBag()
     }
 
     func insertNewObject(_ sender: AnyObject) {
-        store.dispatch(SetRouteAction([hostDetaisViewRoute]))
+        showHostDetaisViewController(animated: true)
     }
     
     func editSelectedCell() {
@@ -74,7 +81,7 @@ class MasterViewController: UITableViewController {
         }
         
         store.dispatch(EditHost(alias: alias))
-        store.dispatch(SetRouteAction([hostDetaisViewRoute]))
+        showHostDetaisViewController(animated: true)
     }
     
     fileprivate func updateSelectCell(_ newSelectedCell: UITableViewCell) {
@@ -93,15 +100,15 @@ extension MasterViewController  { // UITableViewDataSource
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return store.state.allHosts.count
+        return state.allHosts.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        let object = store.state.sortedHostAliases[indexPath.row]
+        let object = state.sortedHostAliases[indexPath.row]
         cell.textLabel!.text = object
-        if object == store.state.latestHostAlias {
+        if object == state.latestHostAlias {
             updateSelectCell(cell)
             cell.detailTextLabel?.text = latestHostUnlockStatus
         } else {
@@ -120,8 +127,8 @@ extension MasterViewController { // UITableViewDelegate
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let alias = store.state.sortedHostAliases[indexPath.row]
-        guard let host = store.state.allHosts[alias] else { return }
+        let alias = state.sortedHostAliases[indexPath.row]
+        guard let host = state.allHosts[alias] else { return }
         store.dispatch(SelectHost(host: host))
         
         latestHostUnlockStatus = ""
@@ -145,7 +152,7 @@ extension MasterViewController { // UITableViewDelegate
                 print("hostAlias is nil")
                 return
             }
-            guard let host = store.state.allHosts[hostAlias] else { return }
+            guard let host = store.observable.value.allHosts[hostAlias] else { return }
             store.dispatch(RemoveHost(host: host))
         });
         

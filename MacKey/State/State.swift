@@ -6,12 +6,10 @@
 //  Copyright © 2017 Liu Liang. All rights reserved.
 //
 
-import ReSwift
-import ReSwiftRouter
+import ReactiveReSwift
 
 struct State : StateType {
-    var hostsState: HostsState
-    var navigationState: NavigationState
+    var hostsState: HostsState = HostsReducer.initialHostsState()
 }
 
 extension State {
