@@ -29,8 +29,11 @@ class MasterViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(editSelectedCell))
-
+        let editButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
+        editButtonItem.rx.tap.subscribe(onNext: { [unowned self] in
+            self.editCell(self.selectedCell)
+        }).addDisposableTo(disposeBag)
+        self.navigationItem.leftBarButtonItem = editButtonItem
         
         let infoButton = UIButton(type: .infoLight)
         infoButton.rx.tap.subscribe(onNext: {
@@ -53,10 +56,22 @@ class MasterViewController: UITableViewController {
             .subscribe(onNext: { [unowned self] in
                 self.newState(state: $0)
             }).addDisposableTo(disposeBag)
-    }
+        
+        tableView.rx.itemSelected
+            .subscribe(onNext: { [unowned self] indexPath in
+                self.tableView.deselectRow(at: indexPath, animated: true)
+                let alias = self.state.sortedHostAliases[indexPath.row]
+                guard let host = self.state.allHosts[alias] else { return }
+                store.dispatch(SelectHost(host: host))
+                
+                self.latestHostUnlockStatus = ""
+                self.selectedCell?.detailTextLabel?.text = ""
+                
+                if let cell = self.tableView.cellForRow(at: indexPath) {
+                    self.updateSelectCell(cell)
+                }
 
-    func editSelectedCell() {
-        editCell(selectedCell)
+            }).addDisposableTo(disposeBag)
     }
     
     fileprivate func editCell(_ cell: UITableViewCell?) {
@@ -103,29 +118,9 @@ extension MasterViewController  { // UITableViewDataSource
         }
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
 }
 
 extension MasterViewController { // UITableViewDelegate
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        
-        let alias = state.sortedHostAliases[indexPath.row]
-        guard let host = state.allHosts[alias] else { return }
-        store.dispatch(SelectHost(host: host))
-        
-        latestHostUnlockStatus = ""
-        self.selectedCell?.detailTextLabel?.text = ""
-        
-        if let cell = tableView.cellForRow(at: indexPath) {
-            updateSelectCell(cell)
-        }
-    }
-    
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let editRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: "Edit", handler:{action, indexpath in
@@ -145,5 +140,4 @@ extension MasterViewController { // UITableViewDelegate
         
         return [deleteRowAction, editRowAction]
     }
-
 }
