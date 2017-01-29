@@ -14,7 +14,6 @@
 		4012638E1CE77D2D00FAE75C /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263891CE77D2D00FAE75C /* BinarySearch.swift */; };
 		401263911CE77D2D00FAE75C /* SshUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4012638C1CE77D2D00FAE75C /* SshUtils.swift */; };
 		4012639F1CE79F6400FAE75C /* MacHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4012639E1CE79F6400FAE75C /* MacHost.swift */; };
-		401263A11CE79F7A00FAE75C /* HostInfo+RequireInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263A01CE79F7A00FAE75C /* HostInfo+RequireInfo.swift */; };
 		401263A31CE7BD3C00FAE75C /* HostInfo+SSH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263A21CE7BD3C00FAE75C /* HostInfo+SSH.swift */; };
 		401263A91CE8B04800FAE75C /* TouchIDUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263A81CE8B04800FAE75C /* TouchIDUtils.swift */; };
 		403692841E35A17200571EB5 /* ReSwiftRxBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403692831E35A17200571EB5 /* ReSwiftRxBridge.swift */; };
@@ -122,7 +121,6 @@
 		401263891CE77D2D00FAE75C /* BinarySearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BinarySearch.swift; path = Utils/BinarySearch.swift; sourceTree = "<group>"; };
 		4012638C1CE77D2D00FAE75C /* SshUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SshUtils.swift; path = Utils/SshUtils.swift; sourceTree = "<group>"; };
 		4012639E1CE79F6400FAE75C /* MacHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacHost.swift; path = Models/MacHost.swift; sourceTree = "<group>"; };
-		401263A01CE79F7A00FAE75C /* HostInfo+RequireInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "HostInfo+RequireInfo.swift"; path = "Models/HostInfo+RequireInfo.swift"; sourceTree = "<group>"; };
 		401263A21CE7BD3C00FAE75C /* HostInfo+SSH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "HostInfo+SSH.swift"; path = "Models/HostInfo+SSH.swift"; sourceTree = "<group>"; };
 		401263A81CE8B04800FAE75C /* TouchIDUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchIDUtils.swift; path = Utils/TouchIDUtils.swift; sourceTree = "<group>"; };
 		403692641E3595CF00571EB5 /* ReactiveReSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveReSwift.xcodeproj; path = Carthage/Checkouts/ReactiveReSwift/ReactiveReSwift.xcodeproj; sourceTree = "<group>"; };
@@ -209,7 +207,6 @@
 			isa = PBXGroup;
 			children = (
 				408507DD1E2BB9AB00C2E0D1 /* HostInfo.swift */,
-				401263A01CE79F7A00FAE75C /* HostInfo+RequireInfo.swift */,
 				401263A21CE7BD3C00FAE75C /* HostInfo+SSH.swift */,
 				4012639E1CE79F6400FAE75C /* MacHost.swift */,
 			);
@@ -641,7 +638,6 @@
 				40C4AB161CE758F400ED92C5 /* AppDelegate.swift in Sources */,
 				408507D61E2ADC6800C2E0D1 /* AddHost.swift in Sources */,
 				408507D11E2AD9C200C2E0D1 /* HostsReducer.swift in Sources */,
-				401263A11CE79F7A00FAE75C /* HostInfo+RequireInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
