@@ -34,6 +34,7 @@
 		408508071E2C495200C2E0D1 /* LatestHostAliasServivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408508061E2C495200C2E0D1 /* LatestHostAliasServivce.swift */; };
 		40A645921E3C359700CB62B1 /* MasterViewController+Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8B6621E340E1E00C71EE7 /* MasterViewController+Routes.swift */; };
 		40A645A51E3D64E100CB62B1 /* HostDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645A41E3D64E100CB62B1 /* HostDetailsViewModel.swift */; };
+		40A645A71E3D71F300CB62B1 /* MasterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645A61E3D71F300CB62B1 /* MasterViewModel.swift */; };
 		40A8B65E1E33FE1F00C71EE7 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A8B65D1E33FE1F00C71EE7 /* RxSwift.framework */; };
 		40A8B6651E34132600C71EE7 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A8B6641E34132600C71EE7 /* RxCocoa.framework */; };
 		40A8B6671E34295900C71EE7 /* EditHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8B6661E34295900C71EE7 /* EditHost.swift */; };
@@ -141,6 +142,7 @@
 		408507E91E2C16BC00C2E0D1 /* MasterViewController+unlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MasterViewController+unlock.swift"; path = "ViewControllers/MasterViewController+unlock.swift"; sourceTree = "<group>"; };
 		408508061E2C495200C2E0D1 /* LatestHostAliasServivce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LatestHostAliasServivce.swift; path = Services/LatestHostAliasServivce.swift; sourceTree = "<group>"; };
 		40A645A41E3D64E100CB62B1 /* HostDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostDetailsViewModel.swift; path = ViewModels/HostDetailsViewModel.swift; sourceTree = "<group>"; };
+		40A645A61E3D71F300CB62B1 /* MasterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterViewModel.swift; path = ViewModels/MasterViewModel.swift; sourceTree = "<group>"; };
 		40A8B65D1E33FE1F00C71EE7 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		40A8B6621E340E1E00C71EE7 /* MasterViewController+Routes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MasterViewController+Routes.swift"; path = "Routes/MasterViewController+Routes.swift"; sourceTree = "<group>"; };
 		40A8B6641E34132600C71EE7 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -282,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				40A645A41E3D64E100CB62B1 /* HostDetailsViewModel.swift */,
+				40A645A61E3D71F300CB62B1 /* MasterViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				40A8B6671E34295900C71EE7 /* EditHost.swift in Sources */,
 				403692841E35A17200571EB5 /* ReSwiftRxBridge.swift in Sources */,
 				401263A91CE8B04800FAE75C /* TouchIDUtils.swift in Sources */,
+				40A645A71E3D71F300CB62B1 /* MasterViewModel.swift in Sources */,
 				408507DA1E2B0AEC00C2E0D1 /* HostsState.swift in Sources */,
 				408507E01E2BEB7000C2E0D1 /* SelectHost.swift in Sources */,
 				408507D41E2ADA8900C2E0D1 /* MacHostsInfoService.swift in Sources */,

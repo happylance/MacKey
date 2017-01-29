@@ -50,21 +50,13 @@ class MasterViewController: UITableViewController {
         // Hide empty rows
         tableView.tableFooterView = UIView()
         
-        let storeState = store.observable.asDriver()
-        let hostSelected = storeState.map { $0.hostsState.hostSelected }
-            .filter { $0 }
+        let viewModel = MasterViewModel(itemSelected: tableView.rx.itemSelected.asDriver())
         
-            hostSelected.drive(onNext: { [unowned self] hostSelected in
+        viewModel.hostSelected.drive(onNext: { [unowned self] hostSelected in
                 self.wakeUpAndRequireTouchID()
             }).addDisposableTo(disposeBag)
-        
-        let hostsState = storeState.map { $0.hostsState }
-            .distinctUntilChanged { $0.allHosts == $1.allHosts }
-        let stateDiff: Driver<(HostsState, HostsState)> = Driver.zip([hostsState, hostsState.skip(1)]) { (stateArray) -> (HostsState, HostsState) in
-            return (stateArray[0], stateArray[1])
-        }
-        
-        stateDiff.drive(onNext: { [unowned self] (prevState: HostsState, state: HostsState) -> () in
+
+        viewModel.stateDiff.drive(onNext: { [unowned self] (prevState: HostsState, state: HostsState) -> () in
             let newHost = HostsState.newHostAfter(prevState.allHosts, in: state.allHosts)
             if let newHost = newHost {
                 let index = state.sortedHostAliases.binarySearch{$0 < newHost.alias}
@@ -89,23 +81,20 @@ class MasterViewController: UITableViewController {
             }
             }).addDisposableTo(disposeBag)
         
-        
-        tableView.rx.itemSelected.asDriver()
-            .withLatestFrom(storeState) { ($0, $1) }
-            .drive(onNext: { [unowned self] (indexPath, storeState) in
-                self.tableView.deselectRow(at: indexPath, animated: true)
-                let alias = storeState.hostsState.sortedHostAliases[indexPath.row]
-                guard let host = storeState.allHosts[alias] else { return }
-                store.dispatch(SelectHost(host: host))
-                
-                self.latestHostUnlockStatus = ""
-                self.selectedCell?.detailTextLabel?.text = ""
-                
-                if let cell = self.tableView.cellForRow(at: indexPath) {
-                    self.updateSelectCell(cell)
-                }
-
-            }).addDisposableTo(disposeBag)
+        viewModel.selectedIndex.drive(onNext: { [unowned self] (indexPath, hostsState) in
+            self.tableView.deselectRow(at: indexPath, animated: true)
+            let alias = hostsState.sortedHostAliases[indexPath.row]
+            guard let host = hostsState.allHosts[alias] else { return }
+            store.dispatch(SelectHost(host: host))
+            
+            self.latestHostUnlockStatus = ""
+            self.selectedCell?.detailTextLabel?.text = ""
+            
+            if let cell = self.tableView.cellForRow(at: indexPath) {
+                self.updateSelectCell(cell)
+            }
+            
+        }).addDisposableTo(disposeBag)
     }
     
     fileprivate func editCell(_ cell: UITableViewCell?) {
