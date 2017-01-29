@@ -51,10 +51,6 @@ class MasterViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         
         let viewModel = MasterViewModel(itemSelected: tableView.rx.itemSelected.asDriver())
-        
-        viewModel.hostSelected.drive(onNext: { [unowned self] hostSelected in
-                self.wakeUpAndRequireTouchID()
-            }).addDisposableTo(disposeBag)
 
         viewModel.stateDiff.drive(onNext: { [unowned self] (prevState: HostsState, state: HostsState) -> () in
             let newHost = HostsState.newHostAfter(prevState.allHosts, in: state.allHosts)
@@ -94,6 +90,7 @@ class MasterViewController: UITableViewController {
                 self.updateSelectCell(cell)
             }
             
+            self.wakeUpAndRequireTouchID()
         }).addDisposableTo(disposeBag)
     }
     

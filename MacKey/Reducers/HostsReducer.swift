@@ -14,7 +14,6 @@ struct HostsReducer {
         return HostsState(
             allHosts: allHostsReducer(action, state: state),
             editingHostAlias: editingHostAliasReducer(action, state: state),
-            hostSelected: action is SelectHost,
             latestHostAlias: latestHostAliasReducer(action, state: state)
         )
     }
@@ -23,7 +22,6 @@ struct HostsReducer {
         return HostsState(
             allHosts: MacHostsInfoService().macHostsInfo(),
             editingHostAlias: nil,
-            hostSelected: false,
             latestHostAlias: LatestHostAliasService.alias
         )
     }

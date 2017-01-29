@@ -12,15 +12,11 @@ import RxSwift
 import RxCocoa
 
 class MasterViewModel {
-    let hostSelected: Driver<Bool>
     let stateDiff: Driver<(HostsState, HostsState)>
     let selectedIndex: Driver<(IndexPath, HostsState)>
     
     init(itemSelected: Driver<IndexPath>) {
         let storeState = store.observable.asDriver()
-        hostSelected = storeState.map { $0.hostsState.hostSelected }
-            .filter { $0 }
-
         let hostsState = storeState.map { $0.hostsState }
             .distinctUntilChanged { $0.allHosts == $1.allHosts }
         
