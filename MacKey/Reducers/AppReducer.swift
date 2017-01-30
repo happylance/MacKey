@@ -9,9 +9,7 @@
 import ReactiveReSwift
 
 let AppReducer = Reducer<State> { action, state in
-    let hostsState = HostsReducer.handleAction(action, state:state.hostsState)
-    print(hostsState)
     return State(
-        hostsState: hostsState
+        hostsState: dlog(HostsReducer.handleAction(action, state:state.hostsState))
     )
 }

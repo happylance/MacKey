@@ -13,12 +13,24 @@ import ReactiveReSwift
 import RxSwift
 import NMSSH
 
-let middleware = Middleware<State>().sideEffect { _, _, action in
-    print("Received action:")
-    }.map { _, action in
-        print(action)
-        return action
+@discardableResult func dlog<T>(_ arg: T) -> T {
+    return debugLog(arg)
 }
+
+@discardableResult func dlog(_ arg: String) -> String {
+    return debugLog(arg)
+}
+
+private func debugLog<T>(_ arg: T) -> T {
+    #if DEBUG
+        print(arg)
+    #endif
+    return arg
+}
+
+let middleware = Middleware<State>().sideEffect { _, _, action in
+        dlog("Received action: \(action)")
+    }
 
 // The global application store, which is responsible for managing the appliction state.
 let store = Store(
