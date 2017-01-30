@@ -88,9 +88,20 @@ class MasterViewController: UITableViewController {
             
             if let cell = self.tableView.cellForRow(at: indexPath) {
                 self.updateSelectCell(cell)
+            }            
+        }).addDisposableTo(disposeBag)
+        
+        viewModel.selectedCellStatus.drive(onNext: { [unowned self] info in
+            self.latestHostUnlockStatus = info
+            if let selectedCell = self.selectedCell {
+                if let seletedCellIndex = self.tableView.indexPath(for: selectedCell) {
+                    self.tableView.reloadRows(at: [seletedCellIndex], with: .none)
+                }
             }
-            
-            self.wakeUpAndRequireTouchID()
+        }).addDisposableTo(disposeBag)
+        
+        viewModel.needsUnlock.subscribe(onNext: { [unowned self] _ in
+            self.requireTouchID()
         }).addDisposableTo(disposeBag)
     }
     

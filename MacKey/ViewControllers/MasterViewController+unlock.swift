@@ -17,7 +17,7 @@ extension MasterViewController {
     }
     
     func wakeUpAndRequireTouchID() {
-        if let macHost = store.observable.value.latestHost {
+        if let macHost = store.observable.value.hostsState.latestHost {
             let cmd = "wake"
             setDetailLabel("Connecting...")
             DispatchQueue.global().async(execute: {
@@ -54,7 +54,7 @@ extension MasterViewController {
         }
     }
     
-    private func requireTouchID() {
+    func requireTouchID() {
         TouchIDUtils.runTouchID { (result) in
             self.handleTouchIDResult(result)
         }
@@ -62,7 +62,7 @@ extension MasterViewController {
     
     private func unlockHostAndConfigureView() {
         // Update the user interface for the detail item.
-        if let macHost = store.observable.value.latestHost {
+        if let macHost = store.observable.value.hostsState.latestHost {
             let cmd = "unlock"
             setDetailLabel("Unlocking...")
             

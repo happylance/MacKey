@@ -32,4 +32,7 @@ extension HostsState {
         return allHosts.keys.sorted()
     }
     
+    var latestHost: HostInfo? {
+        return (latestHostAlias != "") ? allHosts[latestHostAlias] : nil
+    }
 }

@@ -17,11 +17,8 @@ extension State {
         return hostsState.allHosts
     }
     
+
     var latestHostAlias: String {
         return hostsState.latestHostAlias
-    }
-    
-    var latestHost: HostInfo? {
-        return (latestHostAlias != "") ? allHosts[latestHostAlias] : nil
     }
 }

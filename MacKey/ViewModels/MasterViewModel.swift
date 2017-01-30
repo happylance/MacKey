@@ -14,6 +14,9 @@ import RxCocoa
 class MasterViewModel {
     let stateDiff: Driver<(HostsState, HostsState)>
     let selectedIndex: Driver<(IndexPath, HostsState)>
+    let wakeUpResonse: Observable<WakeUpResponse>
+    let needsUnlock: Observable<Bool>
+    let selectedCellStatus: Driver<String>
     
     init(itemSelected: Driver<IndexPath>) {
         let storeState = store.observable.asDriver()
@@ -26,6 +29,40 @@ class MasterViewModel {
         }
 
         selectedIndex = itemSelected.withLatestFrom(storeState) { ($0, $1.hostsState) }
+        
+        wakeUpResonse = selectedIndex.asObservable()
+            .map { (indexPath, hostsState) in
+                let alias = hostsState.sortedHostAliases[indexPath.row]
+                return hostsState.allHosts[alias]! }
+            .debug("wakeUpResonse")
+            .filter { $0 != nil }.map { $0! }
+            .flatMapLatest { MacUnlockService().wakeUp(host: $0) }
+            .observeOn(MainScheduler.instance)
+            .shareReplay(1)
+  
+        needsUnlock = wakeUpResonse
+            .filter {
+                switch $0 {
+                case .connectedAndNeedsUnlock: return true
+                default: return false
+                }
+            }
+            .map { _ in true }
+        
+        selectedCellStatus = wakeUpResonse
+            .map {
+                switch $0 {
+                case .connecting:
+                    return "Connecting..."
+                case .connectedAndNeedsUnlock:
+                    return ""
+                case let .connectedWithInfo(info):
+                    return info
+                case let .connectionError(error):
+                    return error
+                }
+            }
+            .asDriver(onErrorJustReturn: "")
     }
 }
     

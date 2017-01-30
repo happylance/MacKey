@@ -11,6 +11,7 @@ import SimpleTouch
 import Result
 import ReactiveReSwift
 import RxSwift
+import NMSSH
 
 let middleware = Middleware<State>().sideEffect { _, _, action in
     print("Received action:")
@@ -37,7 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let navigationController = self.window!.rootViewController as? UINavigationController
         viewController = navigationController?.topViewController as? MasterViewController
-
+        
+        NMSSHLogger.shared().logLevel = .error
         DispatchQueue.main.async(execute: {
             self.viewController?.wakeUpAndRequireTouchID()
         });
