@@ -6,9 +6,12 @@
 //  Copyright © 2017 Liu Liang. All rights reserved.
 //
 
+import Foundation
+
 struct HostsState {
     var allHosts: Hosts
     var editingHostAlias: String?
+    var latestConnectionTime: TimeInterval?
     var latestHostAlias: String
 }
 

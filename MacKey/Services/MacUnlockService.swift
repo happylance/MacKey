@@ -21,7 +21,6 @@ class MacUnlockService {
     func wakeUp(host: HostInfo) -> Observable<WakeUpResponse> {
         let cmd = host.getDetailCommand("wake")
         return SSHService().executeSshCommand(cmd, host: host)
-            .debug("SSHService")
             .map { $0 == "" ? .connectedAndNeedsUnlock : .connectedWithInfo(info: $0) }
             .catchError { error in
                 guard let error = error as? SSHSessionError else {

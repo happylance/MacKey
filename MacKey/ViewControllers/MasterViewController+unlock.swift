@@ -16,35 +16,6 @@ extension MasterViewController {
         setDetailLabel("")
     }
     
-    func wakeUpAndRequireTouchID() {
-        if let macHost = store.observable.value.hostsState.latestHost {
-            let cmd = "wake"
-            setDetailLabel("Connecting...")
-            DispatchQueue.global().async(execute: {
-                let result = macHost.executeCmd(cmd)
-                DispatchQueue.main.async(execute: {
-                    let latestHostAlias = store.observable.value.latestHostAlias
-                    if macHost.alias != latestHostAlias {
-                        print("Ignore the result of '\(cmd)' for '\(macHost.alias)' because the latest host now is '\(latestHostAlias)'")
-                        return
-                    }
-                    
-                    switch result {
-                    case .success:
-                        if result.value == "" {
-                            self.setDetailLabel("Connected")
-                            self.requireTouchID()
-                        } else {
-                            self.setDetailLabel(result.value!)
-                        }
-                    case .failure:
-                        self.setDetailLabel(result.error?.localizedDescription ?? "")
-                    }
-                })
-            })
-        }
-    }
-    
     private func handleTouchIDResult(_ result: Result<Bool, TouchIDError>) {
         switch(result) {
         case .success:

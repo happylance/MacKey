@@ -40,9 +40,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         viewController = navigationController?.topViewController as? MasterViewController
         
         NMSSHLogger.shared().logLevel = .error
-        DispatchQueue.main.async(execute: {
-            self.viewController?.wakeUpAndRequireTouchID()
-        });
+        
+        DispatchQueue.main.async {
+            store.dispatch(DidFinishLaunching())
+        }
         return true
     }
 
@@ -60,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
         
-        self.viewController?.wakeUpAndRequireTouchID()
+        store.dispatch(WillEnterForeground())
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {

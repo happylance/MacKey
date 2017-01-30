@@ -30,12 +30,11 @@ class MasterViewModel {
 
         selectedIndex = itemSelected.withLatestFrom(storeState) { ($0, $1.hostsState) }
         
-        wakeUpResonse = selectedIndex.asObservable()
-            .map { (indexPath, hostsState) in
-                let alias = hostsState.sortedHostAliases[indexPath.row]
-                return hostsState.allHosts[alias]! }
-            .debug("wakeUpResonse")
-            .filter { $0 != nil }.map { $0! }
+        wakeUpResonse = store.observable.asObservable()
+            .map { $0.hostsState }
+            .distinctUntilChanged { $0.latestConnectionTime == $1.latestConnectionTime }
+            .filter { $0.latestConnectionTime != nil && $0.allHosts.keys.contains($0.latestHostAlias) }
+            .map { $0.allHosts[$0.latestHostAlias]! }
             .flatMapLatest { MacUnlockService().wakeUp(host: $0) }
             .observeOn(MainScheduler.instance)
             .shareReplay(1)

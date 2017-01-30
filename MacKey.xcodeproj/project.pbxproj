@@ -36,6 +36,9 @@
 		40A645A71E3D71F300CB62B1 /* MasterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645A61E3D71F300CB62B1 /* MasterViewModel.swift */; };
 		40A645AA1E3E6EF000CB62B1 /* MacUnlockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645A91E3E6EF000CB62B1 /* MacUnlockService.swift */; };
 		40A645AC1E3E721400CB62B1 /* SSHService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645AB1E3E721400CB62B1 /* SSHService.swift */; };
+		40A645AE1E3ECBB800CB62B1 /* WillEnterForeground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645AD1E3ECBB800CB62B1 /* WillEnterForeground.swift */; };
+		40A645B01E3ECBE100CB62B1 /* DidEnterBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645AF1E3ECBE100CB62B1 /* DidEnterBackground.swift */; };
+		40A645B21E3ECC2900CB62B1 /* DidFinishLaunching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645B11E3ECC2900CB62B1 /* DidFinishLaunching.swift */; };
 		40A8B65E1E33FE1F00C71EE7 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A8B65D1E33FE1F00C71EE7 /* RxSwift.framework */; };
 		40A8B6651E34132600C71EE7 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A8B6641E34132600C71EE7 /* RxCocoa.framework */; };
 		40A8B6671E34295900C71EE7 /* EditHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8B6661E34295900C71EE7 /* EditHost.swift */; };
@@ -145,6 +148,9 @@
 		40A645A61E3D71F300CB62B1 /* MasterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterViewModel.swift; path = ViewModels/MasterViewModel.swift; sourceTree = "<group>"; };
 		40A645A91E3E6EF000CB62B1 /* MacUnlockService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacUnlockService.swift; path = Services/MacUnlockService.swift; sourceTree = "<group>"; };
 		40A645AB1E3E721400CB62B1 /* SSHService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSHService.swift; path = Services/SSHService.swift; sourceTree = "<group>"; };
+		40A645AD1E3ECBB800CB62B1 /* WillEnterForeground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WillEnterForeground.swift; path = Actions/WillEnterForeground.swift; sourceTree = "<group>"; };
+		40A645AF1E3ECBE100CB62B1 /* DidEnterBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DidEnterBackground.swift; path = Actions/DidEnterBackground.swift; sourceTree = "<group>"; };
+		40A645B11E3ECC2900CB62B1 /* DidFinishLaunching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DidFinishLaunching.swift; path = Actions/DidFinishLaunching.swift; sourceTree = "<group>"; };
 		40A8B65D1E33FE1F00C71EE7 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		40A8B6621E340E1E00C71EE7 /* MasterViewController+Routes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MasterViewController+Routes.swift"; path = "Routes/MasterViewController+Routes.swift"; sourceTree = "<group>"; };
 		40A8B6641E34132600C71EE7 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
@@ -236,10 +242,13 @@
 			children = (
 				408507D51E2ADC6800C2E0D1 /* AddHost.swift */,
 				40A8B66A1E342D3300C71EE7 /* CancelHostDetails.swift */,
+				40A645AF1E3ECBE100CB62B1 /* DidEnterBackground.swift */,
+				40A645B11E3ECC2900CB62B1 /* DidFinishLaunching.swift */,
 				40A8B6661E34295900C71EE7 /* EditHost.swift */,
 				408507D71E2ADD0E00C2E0D1 /* RemoveHost.swift */,
 				408507DF1E2BEB7000C2E0D1 /* SelectHost.swift */,
 				408507DB1E2B147A00C2E0D1 /* UpdateHost.swift */,
+				40A645AD1E3ECBB800CB62B1 /* WillEnterForeground.swift */,
 			);
 			name = Actions;
 			sourceTree = "<group>";
@@ -620,6 +629,7 @@
 			files = (
 				408507EA1E2C16BC00C2E0D1 /* MasterViewController+unlock.swift in Sources */,
 				40BD24F11E330BFE004C8BD8 /* HostDetailsViewController.swift in Sources */,
+				40A645AE1E3ECBB800CB62B1 /* WillEnterForeground.swift in Sources */,
 				4012638E1CE77D2D00FAE75C /* BinarySearch.swift in Sources */,
 				4012639F1CE79F6400FAE75C /* MacHost.swift in Sources */,
 				408507CD1E2ACFFE00C2E0D1 /* MasterViewController.swift in Sources */,
@@ -638,9 +648,11 @@
 				40A8B6671E34295900C71EE7 /* EditHost.swift in Sources */,
 				403692841E35A17200571EB5 /* ReSwiftRxBridge.swift in Sources */,
 				40A645AA1E3E6EF000CB62B1 /* MacUnlockService.swift in Sources */,
+				40A645B21E3ECC2900CB62B1 /* DidFinishLaunching.swift in Sources */,
 				401263A91CE8B04800FAE75C /* TouchIDUtils.swift in Sources */,
 				40A645A71E3D71F300CB62B1 /* MasterViewModel.swift in Sources */,
 				408507DA1E2B0AEC00C2E0D1 /* HostsState.swift in Sources */,
+				40A645B01E3ECBE100CB62B1 /* DidEnterBackground.swift in Sources */,
 				408507E01E2BEB7000C2E0D1 /* SelectHost.swift in Sources */,
 				408507D41E2ADA8900C2E0D1 /* MacHostsInfoService.swift in Sources */,
 				40C4AB161CE758F400ED92C5 /* AppDelegate.swift in Sources */,
