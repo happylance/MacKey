@@ -10,15 +10,17 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-enum WakeUpResponse {
+enum UnlockStatus {
     case connecting
     case connectedAndNeedsUnlock
     case connectedWithInfo(info: String)
     case connectionError(error: String)
+    case touchIDError(error: String)
+    case unlocking
 }
 
 class MacUnlockService {
-    func wakeUp(host: HostInfo) -> Observable<WakeUpResponse> {
+    func wakeUp(host: HostInfo) -> Observable<(HostInfo, UnlockStatus)> {
         let cmd = host.getDetailCommand("wake")
         return SSHService().executeSshCommand(cmd, host: host)
             .map { $0 == "" ? .connectedAndNeedsUnlock : .connectedWithInfo(info: $0) }
@@ -33,5 +35,38 @@ class MacUnlockService {
                 }
             }
             .startWith(.connecting)
+            .map { (host, $0) }
+    }
+    
+    func runTouchID(host: HostInfo) -> Observable<(HostInfo, UnlockStatus)> {
+        return Observable.create { observer in
+            TouchIDUtils.runTouchID { (result) in
+                switch(result) {
+                case .success:
+                    observer.onNext((host, .unlocking))
+                case .failure:
+                    let status = UnlockStatus.connectionError(error: result.error!.localizedDescription)
+                    observer.onNext((host, status))
+                }
+                observer.onCompleted()
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func unlock(host: HostInfo) -> Observable<UnlockStatus> {
+        let cmd = host.getDetailCommand("unlock")
+        return SSHService().executeSshCommand(cmd, host: host)
+            .map { .connectedWithInfo(info: $0) }
+            .catchError { error in
+                guard let error = error as? SSHSessionError else {
+                    return Observable.just(.connectionError(error: ""))
+                }
+                switch error {
+                case let .failedWithResponse(response):
+                    return Observable.just(.connectedWithInfo(info: response))
+                default: return Observable.just(.connectionError(error: error.debugDescription))
+                }
+            }
     }
 }

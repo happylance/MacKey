@@ -14,9 +14,7 @@ import RxCocoa
 class MasterViewModel {
     let stateDiff: Driver<(HostsState, HostsState)>
     let selectedIndex: Driver<(IndexPath, HostsState)>
-    let wakeUpResonse: Observable<WakeUpResponse>
-    let needsUnlock: Observable<Bool>
-    let selectedCellStatus: Driver<String>
+    let selectedCellStatusUpdate: Driver<String>
     
     init(itemSelected: Driver<IndexPath>) {
         let storeState = store.observable.asDriver()
@@ -30,34 +28,42 @@ class MasterViewModel {
 
         selectedIndex = itemSelected.withLatestFrom(storeState) { ($0, $1.hostsState) }
         
-        wakeUpResonse = store.observable.asObservable()
+        selectedCellStatusUpdate = store.observable.asObservable()
             .map { $0.hostsState }
             .distinctUntilChanged { $0.latestConnectionTime == $1.latestConnectionTime }
             .filter { $0.latestConnectionTime != nil && $0.allHosts.keys.contains($0.latestHostAlias) }
             .map { $0.allHosts[$0.latestHostAlias]! }
             .flatMapLatest { MacUnlockService().wakeUp(host: $0) }
             .observeOn(MainScheduler.instance)
-            .shareReplay(1)
-  
-        needsUnlock = wakeUpResonse
-            .filter {
-                switch $0 {
-                case .connectedAndNeedsUnlock: return true
-                default: return false
+            .flatMapLatest { (host, status) -> Observable<(HostInfo, UnlockStatus)> in
+                switch status {
+                case .connectedAndNeedsUnlock:
+                    return MacUnlockService().runTouchID(host: host).startWith((host, status))
+                default:
+                    return Observable.just((host, status))
                 }
             }
-            .map { _ in true }
-        
-        selectedCellStatus = wakeUpResonse
+            .flatMapLatest { (host, status) -> Observable<UnlockStatus> in
+                switch status {
+                case .unlocking:
+                    return MacUnlockService().unlock(host: host).startWith(status)
+                default:
+                    return Observable.just(status)
+                }
+            }
             .map {
                 switch $0 {
                 case .connecting:
                     return "Connecting..."
                 case .connectedAndNeedsUnlock:
-                    return ""
+                    return "Require touch ID"
                 case let .connectedWithInfo(info):
                     return info
                 case let .connectionError(error):
+                    return error
+                case .unlocking:
+                    return "Unlocking..."
+                case let .touchIDError(error):
                     return error
                 }
             }

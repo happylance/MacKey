@@ -91,7 +91,7 @@ class MasterViewController: UITableViewController {
             }            
         }).addDisposableTo(disposeBag)
         
-        viewModel.selectedCellStatus.drive(onNext: { [unowned self] info in
+        viewModel.selectedCellStatusUpdate.drive(onNext: { [unowned self] info in
             self.latestHostUnlockStatus = info
             if let selectedCell = self.selectedCell {
                 if let seletedCellIndex = self.tableView.indexPath(for: selectedCell) {
@@ -100,9 +100,19 @@ class MasterViewController: UITableViewController {
             }
         }).addDisposableTo(disposeBag)
         
-        viewModel.needsUnlock.subscribe(onNext: { [unowned self] _ in
-            self.requireTouchID()
-        }).addDisposableTo(disposeBag)
+    }
+    
+    func clearUnlockStatus() {
+        setDetailLabel("")
+    }
+    
+    private func setDetailLabel(_ string: String) {
+        latestHostUnlockStatus = string
+        if let selectedCell = self.selectedCell {
+            if let seletedCellIndex = self.tableView.indexPath(for: selectedCell) {
+                self.tableView.reloadRows(at: [seletedCellIndex], with: .none)
+            }
+        }
     }
     
     fileprivate func editCell(_ cell: UITableViewCell?) {

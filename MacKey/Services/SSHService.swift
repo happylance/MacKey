@@ -46,7 +46,7 @@ class SSHService {
         return Observable.create { observer in
             DispatchQueue.global(qos: .userInitiated).async {
                 guard let session = NMSSHSession(host:host.host, andUsername:host.user) else {
-                    observer.on(.error(SSHSessionError.failedToCreateSession))
+                    observer.onError(SSHSessionError.failedToCreateSession)
                     return
                 }
                 
@@ -56,11 +56,11 @@ class SSHService {
                         return host.password
                     })
                     if !session.isAuthorized {
-                        observer.on(.error(SSHSessionError.authenticationFailed))
+                        observer.onError(SSHSessionError.authenticationFailed)
                         return
                     }
                 } else {
-                    observer.on(.error(SSHSessionError.connectionFailed))
+                    observer.onError(SSHSessionError.connectionFailed)
                     return
                 }
                 
@@ -68,20 +68,20 @@ class SSHService {
                 let logLevel = NMSSHLogger.shared().logLevel
                 NMSSHLogger.shared().logLevel = .error
                 guard let response = session.channel.execute(command, error:&error, timeout:10) else {
-                    observer.on(.error(SSHSessionError.noResponse))
+                    observer.onError(SSHSessionError.noResponse)
                     return
                 }
                 NMSSHLogger.shared().logLevel = logLevel
                 if let error = error {
                     if response.characters.count > 0 {
-                        observer.on(.error(SSHSessionError.failedWithResponse(response: response)))
+                        observer.onError(SSHSessionError.failedWithResponse(response: response))
                         return
                     }
-                    observer.on(.error(SSHSessionError.failedWithError(error: error)))
+                    observer.onError(SSHSessionError.failedWithError(error: error))
                     return
                 }
-                observer.on(.next(response))
-                observer.on(.completed)
+                observer.onNext(response)
+                observer.onCompleted()
             }
             return Disposables.create()
         }

@@ -15,13 +15,6 @@ let checkStatusCommand = "echo 'd=$(/usr/bin/python -c \"import Quartz; print Qu
 
 
 extension HostInfo {
-    @discardableResult func executeCmd(_ cmd: String) -> Result<String, NSError> {
-        if cmd == "unlock" || cmd == "wake" {
-            let command = getDetailCommand(cmd)
-            return SshUtils.executeSshCmdWithPassword(command, host: host, username: user, password: password)
-        }
-        return .failure(NSError(domain:"MacKey", code: 121, userInfo: [NSLocalizedDescriptionKey : "This command is not supported."]))
-    }
     
     func getDetailCommand(_ cmd: String) -> String {
         switch cmd {
