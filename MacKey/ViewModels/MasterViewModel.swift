@@ -33,12 +33,12 @@ class MasterViewModel {
             .distinctUntilChanged { $0.latestConnectionTime == $1.latestConnectionTime }
             .filter { $0.latestConnectionTime != nil && $0.allHosts.keys.contains($0.latestHostAlias) }
             .map { $0.allHosts[$0.latestHostAlias]! }
-            .flatMapLatest { MacUnlock.wakeUp(host: $0) }
+            .flatMapLatest { host in MacUnlockService.wakeUp(host: host).map { (host, $0) } }
             .observeOn(MainScheduler.instance)
             .flatMapLatest { (host, status) -> Observable<(HostInfo, UnlockStatus)> in
                 switch status {
                 case .connectedAndNeedsUnlock:
-                    return MacUnlock.runTouchID().startWith(status).map { (host, $0) }
+                    return MacUnlockService.runTouchID().startWith(status).map { (host, $0) }
                 default:
                     return Observable.just((host, status))
                 }
@@ -46,7 +46,7 @@ class MasterViewModel {
             .flatMapLatest { (host, status) -> Observable<UnlockStatus> in
                 switch status {
                 case .unlocking:
-                    return MacUnlock.unlock(host: host).startWith(status)
+                    return MacUnlockService.unlock(host: host).startWith(status)
                 default:
                     return Observable.just(status)
                 }

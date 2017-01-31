@@ -32,7 +32,7 @@
 		40A645921E3C359700CB62B1 /* MasterViewController+Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8B6621E340E1E00C71EE7 /* MasterViewController+Routes.swift */; };
 		40A645A51E3D64E100CB62B1 /* HostDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645A41E3D64E100CB62B1 /* HostDetailsViewModel.swift */; };
 		40A645A71E3D71F300CB62B1 /* MasterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645A61E3D71F300CB62B1 /* MasterViewModel.swift */; };
-		40A645AA1E3E6EF000CB62B1 /* MacUnlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645A91E3E6EF000CB62B1 /* MacUnlock.swift */; };
+		40A645AA1E3E6EF000CB62B1 /* MacUnlockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645A91E3E6EF000CB62B1 /* MacUnlockService.swift */; };
 		40A645AC1E3E721400CB62B1 /* SSHService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645AB1E3E721400CB62B1 /* SSHService.swift */; };
 		40A645AE1E3ECBB800CB62B1 /* WillEnterForeground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645AD1E3ECBB800CB62B1 /* WillEnterForeground.swift */; };
 		40A645B01E3ECBE100CB62B1 /* DidEnterBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645AF1E3ECBE100CB62B1 /* DidEnterBackground.swift */; };
@@ -142,7 +142,7 @@
 		408508061E2C495200C2E0D1 /* LatestHostAliasServivce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LatestHostAliasServivce.swift; path = Services/LatestHostAliasServivce.swift; sourceTree = "<group>"; };
 		40A645A41E3D64E100CB62B1 /* HostDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostDetailsViewModel.swift; path = ViewModels/HostDetailsViewModel.swift; sourceTree = "<group>"; };
 		40A645A61E3D71F300CB62B1 /* MasterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterViewModel.swift; path = ViewModels/MasterViewModel.swift; sourceTree = "<group>"; };
-		40A645A91E3E6EF000CB62B1 /* MacUnlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacUnlock.swift; path = Services/MacUnlock.swift; sourceTree = "<group>"; };
+		40A645A91E3E6EF000CB62B1 /* MacUnlockService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacUnlockService.swift; path = Services/MacUnlockService.swift; sourceTree = "<group>"; };
 		40A645AB1E3E721400CB62B1 /* SSHService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSHService.swift; path = Services/SSHService.swift; sourceTree = "<group>"; };
 		40A645AD1E3ECBB800CB62B1 /* WillEnterForeground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WillEnterForeground.swift; path = Actions/WillEnterForeground.swift; sourceTree = "<group>"; };
 		40A645AF1E3ECBE100CB62B1 /* DidEnterBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DidEnterBackground.swift; path = Actions/DidEnterBackground.swift; sourceTree = "<group>"; };
@@ -280,7 +280,7 @@
 			children = (
 				408508061E2C495200C2E0D1 /* LatestHostAliasServivce.swift */,
 				408507D31E2ADA8900C2E0D1 /* MacHostsInfoService.swift */,
-				40A645A91E3E6EF000CB62B1 /* MacUnlock.swift */,
+				40A645A91E3E6EF000CB62B1 /* MacUnlockService.swift */,
 				40A645AB1E3E721400CB62B1 /* SSHService.swift */,
 			);
 			name = Services;
@@ -639,7 +639,7 @@
 				408507DE1E2BB9AB00C2E0D1 /* HostInfo.swift in Sources */,
 				40A8B6671E34295900C71EE7 /* EditHost.swift in Sources */,
 				403692841E35A17200571EB5 /* ReSwiftRxBridge.swift in Sources */,
-				40A645AA1E3E6EF000CB62B1 /* MacUnlock.swift in Sources */,
+				40A645AA1E3E6EF000CB62B1 /* MacUnlockService.swift in Sources */,
 				40A645B21E3ECC2900CB62B1 /* DidFinishLaunching.swift in Sources */,
 				401263A91CE8B04800FAE75C /* TouchIDUtils.swift in Sources */,
 				40A645A71E3D71F300CB62B1 /* MasterViewModel.swift in Sources */,
