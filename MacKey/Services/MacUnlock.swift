@@ -19,8 +19,8 @@ enum UnlockStatus {
     case unlocking
 }
 
-class MacUnlockService {
-    func wakeUp(host: HostInfo) -> Observable<(HostInfo, UnlockStatus)> {
+class MacUnlock {
+    static func wakeUp(host: HostInfo) -> Observable<(HostInfo, UnlockStatus)> {
         let cmd = host.getDetailCommand("wake")
         return SSHService().executeSshCommand(cmd, host: host)
             .map { $0 == "" ? .connectedAndNeedsUnlock : .connectedWithInfo(info: $0) }
@@ -38,15 +38,15 @@ class MacUnlockService {
             .map { (host, $0) }
     }
     
-    func runTouchID(host: HostInfo) -> Observable<(HostInfo, UnlockStatus)> {
+    static func runTouchID() -> Observable<UnlockStatus> {
         return Observable.create { observer in
             TouchIDUtils.runTouchID { (result) in
                 switch(result) {
                 case .success:
-                    observer.onNext((host, .unlocking))
+                    observer.onNext(.unlocking)
                 case .failure:
                     let status = UnlockStatus.connectionError(error: result.error!.localizedDescription)
-                    observer.onNext((host, status))
+                    observer.onNext(status)
                 }
                 observer.onCompleted()
             }
@@ -54,7 +54,7 @@ class MacUnlockService {
         }
     }
     
-    func unlock(host: HostInfo) -> Observable<UnlockStatus> {
+    static func unlock(host: HostInfo) -> Observable<UnlockStatus> {
         let cmd = host.getDetailCommand("unlock")
         return SSHService().executeSshCommand(cmd, host: host)
             .map { .connectedWithInfo(info: $0) }
