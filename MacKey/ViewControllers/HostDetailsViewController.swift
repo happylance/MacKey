@@ -43,8 +43,8 @@ class HostDetailsViewController: UITableViewController {
         
         validationOutlet.text = "Alias is already taken."
         
-        viewModel.aliasAvailable.drive(validationOutlet.rx.isHidden).addDisposableTo(disposeBag)
-        viewModel.saveEnabled.drive(saveOutlet.rx.isEnabled).addDisposableTo(disposeBag)
+        viewModel.aliasAvailable.drive(validationOutlet.rx.isHidden).disposed(by: disposeBag)
+        viewModel.saveEnabled.drive(saveOutlet.rx.isEnabled).disposed(by: disposeBag)
         
         saveOutlet.rx.tap
             .subscribe(onNext: { [unowned self] in
@@ -55,7 +55,7 @@ class HostDetailsViewController: UITableViewController {
                     }
                 }
             } )
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
  
         cancelOutlet.rx.tap
             .subscribe(onNext: {[unowned self] in
@@ -63,7 +63,7 @@ class HostDetailsViewController: UITableViewController {
                     store.dispatch(CancelHostDetails())
                 }
             })
-            .addDisposableTo(disposeBag)
+            .disposed(by: disposeBag)
     }
     
     private func saveHostAction() -> Action? {

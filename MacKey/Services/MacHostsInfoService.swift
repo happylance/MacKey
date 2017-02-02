@@ -57,6 +57,6 @@ extension MacHostsInfoService {
                 }
                 let data = NSKeyedArchiver.archivedData(withRootObject:legacyMacHosts)
                 KeychainWrapper.standard.set(data, forKey: hostsKey)
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
     }
 }

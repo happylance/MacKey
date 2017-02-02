@@ -21,7 +21,7 @@ class LatestHostAliasService : NSObject {
                 UserDefaults.standard.set($0, forKey: latestHostAliasKey)
                 UserDefaults.standard.synchronize()
             })
-        .addDisposableTo(disposeBag)
+        .disposed(by: disposeBag)
     }
     
     static var alias: String {

@@ -32,19 +32,19 @@ class MasterViewController: UITableViewController {
         let editButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
         editButtonItem.rx.tap.subscribe(onNext: { [unowned self] in
             self.editCell(self.selectedCell)
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
         self.navigationItem.leftBarButtonItem = editButtonItem
         
         let infoButton = UIButton(type: .infoLight)
         infoButton.rx.tap.subscribe(onNext: {
             UIApplication.shared.openURL(URL(string: readMeURL)!)
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
         let infoItem = UIBarButtonItem(customView: infoButton)
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
         addButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.showHostDetaisViewController(animated: true)
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
         self.navigationItem.rightBarButtonItems = [addButton, infoItem]
                 
         // Hide empty rows
@@ -75,7 +75,7 @@ class MasterViewController: UITableViewController {
             if newHost == nil && removedHost == nil {
                 self.tableView.reloadData()
             }
-            }).addDisposableTo(disposeBag)
+            }).disposed(by: disposeBag)
         
         viewModel.selectedIndex.drive(onNext: { [unowned self] (indexPath, hostsState) in
             self.tableView.deselectRow(at: indexPath, animated: true)
@@ -89,7 +89,7 @@ class MasterViewController: UITableViewController {
             if let cell = self.tableView.cellForRow(at: indexPath) {
                 self.updateSelectCell(cell)
             }            
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
         
         viewModel.selectedCellStatusUpdate.drive(onNext: { [unowned self] info in
             self.latestHostUnlockStatus = info
@@ -98,7 +98,7 @@ class MasterViewController: UITableViewController {
                     self.tableView.reloadRows(at: [seletedCellIndex], with: .none)
                 }
             }
-        }).addDisposableTo(disposeBag)
+        }).disposed(by: disposeBag)
         
     }
     
