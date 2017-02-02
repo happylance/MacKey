@@ -6,8 +6,6 @@
 //  Copyright © 2016 Liu Liang. All rights reserved.
 //
 
-import Foundation
-
 // From http://stackoverflow.com/questions/31904396/swift-binary-search-for-standard-array/33674192#33674192
 extension Collection {
     /// Finds such index N that predicate is true for all elements up to

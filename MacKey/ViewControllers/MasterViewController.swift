@@ -8,7 +8,6 @@
 
 import UIKit
 import SimpleTouch
-import Result
 import ReactiveReSwift
 import RxSwift
 import RxCocoa

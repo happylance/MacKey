@@ -7,11 +7,8 @@
 //
 
 import UIKit
-import SimpleTouch
-import Result
 import ReactiveReSwift
 import RxSwift
-import NMSSH
 
 @discardableResult func dlog<T>(_ arg: T) -> T {
     return debugLog(arg)
@@ -50,9 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         let navigationController = self.window!.rootViewController as? UINavigationController
         viewController = navigationController?.topViewController as? MasterViewController
-        
-        NMSSHLogger.shared().logLevel = .error
-        
+                
         DispatchQueue.main.async {
             store.dispatch(DidFinishLaunching())
         }

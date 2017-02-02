@@ -6,7 +6,6 @@
 //  Copyright © 2017 Liu Liang. All rights reserved.
 //
 
-import Foundation
 import NMSSH
 import RxSwift
 
@@ -45,6 +44,7 @@ class SSHService {
     func executeSshCommand(_ command: String, host: HostInfo) -> Observable<String> {
         return Observable.create { observer in
             DispatchQueue.global(qos: .userInitiated).async {
+                NMSSHLogger.shared().logLevel = .error
                 guard let session = NMSSHSession(host:host.host, andUsername:host.user) else {
                     observer.onError(SSHSessionError.failedToCreateSession)
                     return

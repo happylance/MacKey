@@ -1,5 +1,4 @@
 github "NMSSH/NMSSH"
-github "antitypical/Result"
 github "jrendel/SwiftKeychainWrapper"
 github "simple-machines/simple-touch" "master"
 github "ReactiveX/RxSwift" ~> 3.0

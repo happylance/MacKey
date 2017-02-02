@@ -6,9 +6,6 @@
 //  Copyright © 2016 Liu Liang. All rights reserved.
 //
 
-import Foundation
-import Result
-
 let wakeCommand = "echo 'caffeinate -u -t 1 & d=$(/usr/bin/python -c \"import Quartz; print Quartz.CGSessionCopyCurrentDictionary()\"); echo \"$d\" | grep -q \"OnConsoleKey = 0\" && { echo \"Needs to unlock manually\"; exit 1; }; echo \"$d\" | grep -q \"ScreenIsLocked = 1\" || { echo \"Mac is already unlocked\"; exit 1; }' | sh"
 
 let checkStatusCommand = "echo 'd=$(/usr/bin/python -c \"import Quartz; print Quartz.CGSessionCopyCurrentDictionary()\"); echo \"$d\" | grep -q \"ScreenIsLocked = 1\" && { echo \"Failed to unlock Mac\"; exit 1; } || { echo \"Mac is unlocked\"; exit 0; }' | sh"

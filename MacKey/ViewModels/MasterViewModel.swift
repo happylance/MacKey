@@ -6,7 +6,6 @@
 //  Copyright © 2017 Liu Liang. All rights reserved.
 //
 
-import Foundation
 import ReactiveReSwift
 import RxSwift
 import RxCocoa
@@ -59,12 +58,10 @@ class MasterViewModel {
                     return "Require touch ID"
                 case let .connectedWithInfo(info):
                     return info
-                case let .connectionError(error):
+                case let .error(error):
                     return error
                 case .unlocking:
                     return "Unlocking..."
-                case let .touchIDError(error):
-                    return error
                 }
             }
             .asDriver(onErrorJustReturn: "")

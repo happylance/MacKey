@@ -1,6 +1,5 @@
 github "NMSSH/NMSSH" "2.2.6"
 github "ReSwift/ReactiveReSwift" "3.0.3"
-github "antitypical/Result" "3.1.0"
 github "ReactiveX/RxSwift" "3.2.0"
 github "jrendel/SwiftKeychainWrapper" "3.0.1"
 github "simple-machines/simple-touch" "20aa9386c485847ff121441298f9481308f3cfb1"

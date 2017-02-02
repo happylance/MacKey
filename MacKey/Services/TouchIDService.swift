@@ -6,45 +6,18 @@
 //  Copyright © 2016 Liu Liang. All rights reserved.
 //
 
-import Foundation
 import SimpleTouch
-import Result
+import RxSwift
 
-class TouchIDUtils {
-    static func checkTouchIDSupport(_ handler:@escaping (Result<Bool, TouchIDError>)->()) {
-        switch SimpleTouch.hardwareSupportsTouchID {
-        case .success:
-            print("Hardware supports Touch ID")
-        case .error(let error):
-            handler(.failure(error))
-            return
-        }
-        
-        switch SimpleTouch.isTouchIDEnabled {
-        case .success:
-            print("Can evaluate Touch ID")
-        case .error(let error):
-            handler(.failure(error))
-            return
-        }
-        
-        runTouchID { (result: Result<Bool, TouchIDError>) in
-            handler(result)
-        }
-    }
+class TouchIDService {
     
-    static func runTouchID(_ handler:@escaping (Result<Bool, TouchIDError>)->()) {
-        let callback: TouchIDPresenterCallback = { response in
-            switch response {
-            case .success:
-                print("Touch ID evaluated successfully")
-                handler(.success(true))
-            case .error(let error):
-                 handler(.failure(error))
+    static func runTouchID() -> Observable<TouchIDResponse> {
+        return Observable.create { observer in
+            SimpleTouch.presentTouchID(touchIDRequestMessage(), fallbackTitle: "") { response in
+                observer.onNext(response)
             }
+            return Disposables.create()
         }
-        
-        SimpleTouch.presentTouchID(touchIDRequestMessage(), fallbackTitle: "", callback: callback)
     }
     
     static func touchIDRequestMessage() -> String {

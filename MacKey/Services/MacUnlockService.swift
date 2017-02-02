@@ -6,16 +6,15 @@
 //  Copyright © 2017 Liu Liang. All rights reserved.
 //
 
-import Foundation
 import RxSwift
 import RxCocoa
+import SimpleTouch
 
 enum UnlockStatus {
     case connecting
     case connectedAndNeedsUnlock
     case connectedWithInfo(info: String)
-    case connectionError(error: String)
-    case touchIDError(error: String)
+    case error(error: String)
     case unlocking
 }
 
@@ -26,31 +25,25 @@ class MacUnlockService {
             .map { $0 == "" ? .connectedAndNeedsUnlock : .connectedWithInfo(info: $0) }
             .catchError { error in
                 guard let error = error as? SSHSessionError else {
-                    return Observable.just(.connectionError(error: ""))
+                    return Observable.just(.error(error: ""))
                 }
                 switch error {
                 case let .failedWithResponse(response):
                     return Observable.just(.connectedWithInfo(info: response))
-                default: return Observable.just(.connectionError(error: error.debugDescription))
+                default: return Observable.just(.error(error: error.debugDescription))
                 }
             }
             .startWith(.connecting)
     }
     
     static func runTouchID() -> Observable<UnlockStatus> {
-        return Observable.create { observer in
-            TouchIDUtils.runTouchID { (result) in
-                switch(result) {
-                case .success:
-                    observer.onNext(.unlocking)
-                case .failure(let error):
-                    let errorMessage = TouchIDUtils.getErrorMessage(error)
-                    let status = UnlockStatus.connectionError(error: errorMessage)
-                    observer.onNext(status)
-                }
-                observer.onCompleted()
+        return TouchIDService.runTouchID().map { (result: TouchIDResponse) in
+            switch(result) {
+            case .success:
+                return .unlocking
+            case .error(let error):
+                return UnlockStatus.error(error: TouchIDService.getErrorMessage(error))
             }
-            return Disposables.create()
         }
     }
     
@@ -60,12 +53,12 @@ class MacUnlockService {
             .map { .connectedWithInfo(info: $0) }
             .catchError { error in
                 guard let error = error as? SSHSessionError else {
-                    return Observable.just(.connectionError(error: ""))
+                    return Observable.just(.error(error: ""))
                 }
                 switch error {
                 case let .failedWithResponse(response):
                     return Observable.just(.connectedWithInfo(info: response))
-                default: return Observable.just(.connectionError(error: error.debugDescription))
+                default: return Observable.just(.error(error: error.debugDescription))
                 }
             }
     }
