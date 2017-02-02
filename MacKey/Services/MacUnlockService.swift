@@ -43,8 +43,9 @@ class MacUnlockService {
                 switch(result) {
                 case .success:
                     observer.onNext(.unlocking)
-                case .failure:
-                    let status = UnlockStatus.connectionError(error: result.error!.localizedDescription)
+                case .failure(let error):
+                    let errorMessage = TouchIDUtils.getErrorMessage(error)
+                    let status = UnlockStatus.connectionError(error: errorMessage)
                     observer.onNext(status)
                 }
                 observer.onCompleted()
