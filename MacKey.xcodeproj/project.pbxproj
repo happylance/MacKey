@@ -11,7 +11,6 @@
 		401263831CE770DD00FAE75C /* NMSSH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4012637F1CE770DD00FAE75C /* NMSSH.framework */; };
 		401263851CE770DD00FAE75C /* SimpleTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401263811CE770DD00FAE75C /* SimpleTouch.framework */; };
 		401263861CE770DD00FAE75C /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401263821CE770DD00FAE75C /* SwiftKeychainWrapper.framework */; };
-		4012638E1CE77D2D00FAE75C /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263891CE77D2D00FAE75C /* BinarySearch.swift */; };
 		4012639F1CE79F6400FAE75C /* MacHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4012639E1CE79F6400FAE75C /* MacHost.swift */; };
 		401263A31CE7BD3C00FAE75C /* HostInfo+SSH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263A21CE7BD3C00FAE75C /* HostInfo+SSH.swift */; };
 		403692841E35A17200571EB5 /* ReSwiftRxBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403692831E35A17200571EB5 /* ReSwiftRxBridge.swift */; };
@@ -120,7 +119,6 @@
 		4012637F1CE770DD00FAE75C /* NMSSH.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NMSSH.framework; path = Carthage/Build/iOS/NMSSH.framework; sourceTree = "<group>"; };
 		401263811CE770DD00FAE75C /* SimpleTouch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SimpleTouch.framework; path = Carthage/Build/iOS/SimpleTouch.framework; sourceTree = "<group>"; };
 		401263821CE770DD00FAE75C /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftKeychainWrapper.framework; path = Carthage/Build/iOS/SwiftKeychainWrapper.framework; sourceTree = "<group>"; };
-		401263891CE77D2D00FAE75C /* BinarySearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BinarySearch.swift; path = Utils/BinarySearch.swift; sourceTree = "<group>"; };
 		4012639E1CE79F6400FAE75C /* MacHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacHost.swift; path = Models/MacHost.swift; sourceTree = "<group>"; };
 		401263A21CE7BD3C00FAE75C /* HostInfo+SSH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "HostInfo+SSH.swift"; path = "Models/HostInfo+SSH.swift"; sourceTree = "<group>"; };
 		403692641E3595CF00571EB5 /* ReactiveReSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveReSwift.xcodeproj; path = Carthage/Checkouts/ReactiveReSwift/ReactiveReSwift.xcodeproj; sourceTree = "<group>"; };
@@ -196,14 +194,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		401263881CE77D2000FAE75C /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				401263891CE77D2D00FAE75C /* BinarySearch.swift */,
-			);
-			name = Utils;
-			sourceTree = "<group>";
-		};
 		4012639B1CE79EF300FAE75C /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,7 +338,6 @@
 				408507D21E2ADA2F00C2E0D1 /* Services */,
 				408507C81E2ACFA300C2E0D1 /* State */,
 				40BD24EB1E32F937004C8BD8 /* Storyboards */,
-				401263881CE77D2000FAE75C /* Utils */,
 				408507CB1E2ACFD300C2E0D1 /* ViewControllers */,
 				40A6459C1E3D64B700CB62B1 /* ViewModels */,
 			);
@@ -618,7 +607,6 @@
 			files = (
 				40BD24F11E330BFE004C8BD8 /* HostDetailsViewController.swift in Sources */,
 				40A645AE1E3ECBB800CB62B1 /* WillEnterForeground.swift in Sources */,
-				4012638E1CE77D2D00FAE75C /* BinarySearch.swift in Sources */,
 				4012639F1CE79F6400FAE75C /* MacHost.swift in Sources */,
 				408507CD1E2ACFFE00C2E0D1 /* MasterViewController.swift in Sources */,
 				40A645A51E3D64E100CB62B1 /* HostDetailsViewModel.swift in Sources */,
