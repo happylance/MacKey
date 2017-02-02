@@ -11,7 +11,6 @@
 		401263831CE770DD00FAE75C /* NMSSH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4012637F1CE770DD00FAE75C /* NMSSH.framework */; };
 		401263861CE770DD00FAE75C /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401263821CE770DD00FAE75C /* SwiftKeychainWrapper.framework */; };
 		4012639F1CE79F6400FAE75C /* MacHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4012639E1CE79F6400FAE75C /* MacHost.swift */; };
-		401263A31CE7BD3C00FAE75C /* HostInfo+SSH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263A21CE7BD3C00FAE75C /* HostInfo+SSH.swift */; };
 		403692841E35A17200571EB5 /* ReSwiftRxBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403692831E35A17200571EB5 /* ReSwiftRxBridge.swift */; };
 		403692861E35A1B300571EB5 /* ReactiveReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 403692851E35A1B300571EB5 /* ReactiveReSwift.framework */; };
 		408507CA1E2ACFCA00C2E0D1 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507C91E2ACFCA00C2E0D1 /* State.swift */; };
@@ -118,7 +117,6 @@
 		4012637F1CE770DD00FAE75C /* NMSSH.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NMSSH.framework; path = Carthage/Build/iOS/NMSSH.framework; sourceTree = "<group>"; };
 		401263821CE770DD00FAE75C /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftKeychainWrapper.framework; path = Carthage/Build/iOS/SwiftKeychainWrapper.framework; sourceTree = "<group>"; };
 		4012639E1CE79F6400FAE75C /* MacHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacHost.swift; path = Models/MacHost.swift; sourceTree = "<group>"; };
-		401263A21CE7BD3C00FAE75C /* HostInfo+SSH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "HostInfo+SSH.swift"; path = "Models/HostInfo+SSH.swift"; sourceTree = "<group>"; };
 		403692641E3595CF00571EB5 /* ReactiveReSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveReSwift.xcodeproj; path = Carthage/Checkouts/ReactiveReSwift/ReactiveReSwift.xcodeproj; sourceTree = "<group>"; };
 		403692831E35A17200571EB5 /* ReSwiftRxBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReSwiftRxBridge.swift; sourceTree = "<group>"; };
 		403692851E35A1B300571EB5 /* ReactiveReSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveReSwift.framework; path = Carthage/Build/iOS/ReactiveReSwift.framework; sourceTree = "<group>"; };
@@ -195,7 +193,6 @@
 			isa = PBXGroup;
 			children = (
 				408507DD1E2BB9AB00C2E0D1 /* HostInfo.swift */,
-				401263A21CE7BD3C00FAE75C /* HostInfo+SSH.swift */,
 				4012639E1CE79F6400FAE75C /* MacHost.swift */,
 			);
 			name = Models;
@@ -605,7 +602,6 @@
 				4012639F1CE79F6400FAE75C /* MacHost.swift in Sources */,
 				408507CD1E2ACFFE00C2E0D1 /* MasterViewController.swift in Sources */,
 				40A645A51E3D64E100CB62B1 /* HostDetailsViewModel.swift in Sources */,
-				401263A31CE7BD3C00FAE75C /* HostInfo+SSH.swift in Sources */,
 				40A8B66B1E342D3300C71EE7 /* CancelHostDetails.swift in Sources */,
 				40A645921E3C359700CB62B1 /* MasterViewController+Routes.swift in Sources */,
 				408507DC1E2B147A00C2E0D1 /* UpdateHost.swift in Sources */,

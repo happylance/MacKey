@@ -18,8 +18,9 @@ enum UnlockStatus {
 }
 
 class MacUnlockService {
+    
     static func wakeUp(_ host: HostInfo) -> Observable<UnlockStatus> {
-        let cmd = host.getDetailCommand("wake")
+        let cmd = getDetailCommand("wake", for: host)
         return SSHService().executeSshCommand(cmd, host: host)
             .map { $0 == "" ? .connectedAndNeedsUnlock : .connectedWithInfo(info: $0) }
             .catchError { error in
@@ -42,7 +43,7 @@ class MacUnlockService {
     }
     
     static func unlock(_ host: HostInfo) -> Observable<UnlockStatus> {
-        let cmd = host.getDetailCommand("unlock")
+        let cmd = getDetailCommand("unlock", for: host)
         return SSHService().executeSshCommand(cmd, host: host)
             .map { .connectedWithInfo(info: $0) }
             .catchError { error in
@@ -56,4 +57,24 @@ class MacUnlockService {
                 }
             }
     }
+    
+    private static let wakeCommand = "echo 'caffeinate -u -t 1 & d=$(/usr/bin/python -c \"import Quartz; print Quartz.CGSessionCopyCurrentDictionary()\"); echo \"$d\" | grep -q \"OnConsoleKey = 0\" && { echo \"Needs to unlock manually\"; exit 1; }; echo \"$d\" | grep -q \"ScreenIsLocked = 1\" || { echo \"Mac is already unlocked\"; exit 1; }' | sh"
+    
+    private static let checkStatusCommand = "echo 'd=$(/usr/bin/python -c \"import Quartz; print Quartz.CGSessionCopyCurrentDictionary()\"); echo \"$d\" | grep -q \"ScreenIsLocked = 1\" && { echo \"Failed to unlock Mac\"; exit 1; } || { echo \"Mac is unlocked\"; exit 0; }' | sh"
+    
+    private static func getDetailCommand(_ cmd: String, for host: HostInfo) -> String {
+        switch cmd {
+        case "unlock":
+            return wakeCommand + " && " + getUnlockCommand(for: host) + " && " + checkStatusCommand
+        case "wake":
+            return wakeCommand
+        default:
+            return cmd
+        }
+    }
+    
+    private static func getUnlockCommand(for host: HostInfo) -> String {
+        return "echo 'osascript -e '\"'\"'tell application \"System Events\"'\"'\"' -e '\"'\"'key code 123'\"'\"' -e '\"'\"'delay 0.1'\"'\"' -e '\"'\"'keystroke \"\(host.password)\"'\"'\"' -e '\"'\"'delay 0.5'\"'\"' -e '\"'\"'keystroke return'\"'\"' -e '\"'\"'delay 0.1'\"'\"' -e '\"'\"'end tell'\"'\"'' | sh"
+    }
+
 }
