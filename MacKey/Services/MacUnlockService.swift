@@ -8,7 +8,6 @@
 
 import RxSwift
 import RxCocoa
-import SimpleTouch
 
 enum UnlockStatus {
     case connecting
@@ -19,7 +18,7 @@ enum UnlockStatus {
 }
 
 class MacUnlockService {
-    static func wakeUp(host: HostInfo) -> Observable<UnlockStatus> {
+    static func wakeUp(_ host: HostInfo) -> Observable<UnlockStatus> {
         let cmd = host.getDetailCommand("wake")
         return SSHService().executeSshCommand(cmd, host: host)
             .map { $0 == "" ? .connectedAndNeedsUnlock : .connectedWithInfo(info: $0) }
@@ -36,18 +35,13 @@ class MacUnlockService {
             .startWith(.connecting)
     }
     
-    static func runTouchID() -> Observable<UnlockStatus> {
-        return TouchIDService.runTouchID().map { (result: TouchIDResponse) in
-            switch(result) {
-            case .success:
-                return .unlocking
-            case .error(let error):
-                return UnlockStatus.error(error: TouchIDService.getErrorMessage(error))
-            }
+    static func runTouchID(for host: HostInfo) -> Observable<UnlockStatus> {
+        return TouchIDService.runTouchID(for: host).map { (success, error) in
+            return success ? .unlocking : UnlockStatus.error(error: TouchIDService.getErrorMessage(error))
         }
     }
     
-    static func unlock(host: HostInfo) -> Observable<UnlockStatus> {
+    static func unlock(_ host: HostInfo) -> Observable<UnlockStatus> {
         let cmd = host.getDetailCommand("unlock")
         return SSHService().executeSshCommand(cmd, host: host)
             .map { .connectedWithInfo(info: $0) }

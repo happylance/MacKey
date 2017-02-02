@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		400E708C1E42CCCC00B5477B /* TouchIDService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400E708B1E42CCCC00B5477B /* TouchIDService.swift */; };
 		401263831CE770DD00FAE75C /* NMSSH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4012637F1CE770DD00FAE75C /* NMSSH.framework */; };
-		401263851CE770DD00FAE75C /* SimpleTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401263811CE770DD00FAE75C /* SimpleTouch.framework */; };
 		401263861CE770DD00FAE75C /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401263821CE770DD00FAE75C /* SwiftKeychainWrapper.framework */; };
 		4012639F1CE79F6400FAE75C /* MacHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4012639E1CE79F6400FAE75C /* MacHost.swift */; };
 		401263A31CE7BD3C00FAE75C /* HostInfo+SSH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263A21CE7BD3C00FAE75C /* HostInfo+SSH.swift */; };
@@ -117,7 +116,6 @@
 /* Begin PBXFileReference section */
 		400E708B1E42CCCC00B5477B /* TouchIDService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchIDService.swift; path = Services/TouchIDService.swift; sourceTree = "<group>"; };
 		4012637F1CE770DD00FAE75C /* NMSSH.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NMSSH.framework; path = Carthage/Build/iOS/NMSSH.framework; sourceTree = "<group>"; };
-		401263811CE770DD00FAE75C /* SimpleTouch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SimpleTouch.framework; path = Carthage/Build/iOS/SimpleTouch.framework; sourceTree = "<group>"; };
 		401263821CE770DD00FAE75C /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftKeychainWrapper.framework; path = Carthage/Build/iOS/SwiftKeychainWrapper.framework; sourceTree = "<group>"; };
 		4012639E1CE79F6400FAE75C /* MacHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacHost.swift; path = Models/MacHost.swift; sourceTree = "<group>"; };
 		401263A21CE7BD3C00FAE75C /* HostInfo+SSH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "HostInfo+SSH.swift"; path = "Models/HostInfo+SSH.swift"; sourceTree = "<group>"; };
@@ -169,7 +167,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				401263831CE770DD00FAE75C /* NMSSH.framework in Frameworks */,
-				401263851CE770DD00FAE75C /* SimpleTouch.framework in Frameworks */,
 				401263861CE770DD00FAE75C /* SwiftKeychainWrapper.framework in Frameworks */,
 				403692861E35A1B300571EB5 /* ReactiveReSwift.framework in Frameworks */,
 				40A8B6651E34132600C71EE7 /* RxCocoa.framework in Frameworks */,
@@ -306,7 +303,6 @@
 				403692851E35A1B300571EB5 /* ReactiveReSwift.framework */,
 				40A8B6641E34132600C71EE7 /* RxCocoa.framework */,
 				40A8B65D1E33FE1F00C71EE7 /* RxSwift.framework */,
-				401263811CE770DD00FAE75C /* SimpleTouch.framework */,
 				401263821CE770DD00FAE75C /* SwiftKeychainWrapper.framework */,
 				40C4AB141CE758F400ED92C5 /* MacKey */,
 				40C4AB2B1CE758F400ED92C5 /* MacKeyTests */,
@@ -573,7 +569,6 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/NMSSH.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftKeychainWrapper.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SimpleTouch.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ReactiveReSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",

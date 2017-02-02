@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SimpleTouch
 import ReactiveReSwift
 import RxSwift
 import RxCocoa

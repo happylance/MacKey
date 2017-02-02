@@ -6,31 +6,30 @@
 //  Copyright © 2016 Liu Liang. All rights reserved.
 //
 
-import SimpleTouch
+import LocalAuthentication
 import RxSwift
 
 class TouchIDService {
     
-    static func runTouchID() -> Observable<TouchIDResponse> {
+    static func runTouchID(for host: HostInfo) -> Observable<(Bool, Error?)> {
         return Observable.create { observer in
-            SimpleTouch.presentTouchID(touchIDRequestMessage(), fallbackTitle: "") { response in
-                observer.onNext(response)
+            let context = LAContext()
+            context.localizedFallbackTitle = ""
+            let reason = "Authentication required to unlock '\(host.alias)'"
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
+                                   localizedReason: reason) { success, error in
+                observer.onNext((success, error))
+                observer.onCompleted()
             }
             return Disposables.create()
         }
     }
     
-    static func touchIDRequestMessage() -> String {
-        let latestHostAlias = store.observable.value.latestHostAlias
-        if latestHostAlias.characters.count > 0 {
-            return "Authentication required to unlock '\(latestHostAlias)'"
-        } else {
-            return "Authentication required to proceed"
+    static func getErrorMessage(_ error: Error?) -> String {
+        guard let error = error as? LAError else {
+            return "Touch ID error"
         }
-    }
-    
-    static func getErrorMessage(_ error: TouchIDError) -> String {
-        switch error {
+        switch error.code {
         case .appCancel:
             return "App cancelled authentication"
         case .authenticationFailed:
@@ -47,10 +46,6 @@ class TouchIDService {
             return "Touch ID is not available on this device"
         case .touchIDNotEnrolled:
             return "User has not enrolled for Touch ID"
-        case .undeterminedState:
-            return "Undetermined error. If you can get this message to display I'd love to know how."
-        case .unknownError(let error):
-            return "Unknown error. If you can get this message to display I'd love to know how. Error description: \(error.localizedDescription)"
         case .userCancel:
             return "User cancelled authentication"
         case .userFallback:
