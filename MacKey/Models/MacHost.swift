@@ -8,6 +8,11 @@
 
 import Foundation
 
+fileprivate let aliasKey = "alias"
+fileprivate let hostKey = "host"
+fileprivate let userKey = "user"
+fileprivate let passwordKey = "password"
+
 class MacHost: NSObject, NSCoding {
     var alias: String = ""
     var host: String = ""
@@ -28,21 +33,30 @@ class MacHost: NSObject, NSCoding {
         self.password = password
     }
     
+    init(hostInfo: HostInfo) {
+        self.alias = hostInfo.alias
+        self.host = hostInfo.host
+        self.user = hostInfo.user
+        self.password = hostInfo.password
+    }
+    
     required convenience init?(coder aDecoder: NSCoder) {
-        let alias = aDecoder.decodeObject(forKey: Constants.alias) as! String
-        let host = aDecoder.decodeObject(forKey: Constants.host) as! String
-        let user = aDecoder.decodeObject(forKey: Constants.user) as! String
-        let password = aDecoder.decodeObject(forKey: Constants.password) as! String
+        let alias = aDecoder.decodeObject(forKey: aliasKey) as! String
+        let host = aDecoder.decodeObject(forKey: hostKey) as! String
+        let user = aDecoder.decodeObject(forKey: userKey) as! String
+        let password = aDecoder.decodeObject(forKey: passwordKey) as! String
         
         self.init(alias: alias, host: host, user: user, password: password)
     }
     
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(self.alias, forKey: Constants.alias)
-        aCoder.encode(self.host, forKey: Constants.host)
-        aCoder.encode(self.user, forKey: Constants.user)
-        aCoder.encode(self.password, forKey: Constants.password)
+        aCoder.encode(self.alias, forKey: aliasKey)
+        aCoder.encode(self.host, forKey: hostKey)
+        aCoder.encode(self.user, forKey: userKey)
+        aCoder.encode(self.password, forKey: passwordKey)
     }
     
-    
+    func hostInfo() -> HostInfo {
+        return HostInfo(alias: alias, host: host, user: user, password: password)
+    }
 }

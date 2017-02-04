@@ -7,20 +7,39 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		400E708C1E42CCCC00B5477B /* TouchIDService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400E708B1E42CCCC00B5477B /* TouchIDService.swift */; };
 		401263831CE770DD00FAE75C /* NMSSH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4012637F1CE770DD00FAE75C /* NMSSH.framework */; };
-		401263841CE770DD00FAE75C /* Result.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401263801CE770DD00FAE75C /* Result.framework */; };
-		401263851CE770DD00FAE75C /* SimpleTouch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401263811CE770DD00FAE75C /* SimpleTouch.framework */; };
 		401263861CE770DD00FAE75C /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401263821CE770DD00FAE75C /* SwiftKeychainWrapper.framework */; };
-		4012638E1CE77D2D00FAE75C /* BinarySearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263891CE77D2D00FAE75C /* BinarySearch.swift */; };
-		401263911CE77D2D00FAE75C /* SshUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4012638C1CE77D2D00FAE75C /* SshUtils.swift */; };
-		401263981CE77E3B00FAE75C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263971CE77E3B00FAE75C /* Constants.swift */; };
 		4012639F1CE79F6400FAE75C /* MacHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4012639E1CE79F6400FAE75C /* MacHost.swift */; };
-		401263A11CE79F7A00FAE75C /* MacHost+RequireInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263A01CE79F7A00FAE75C /* MacHost+RequireInfo.swift */; };
-		401263A31CE7BD3C00FAE75C /* MacHost+SSH.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263A21CE7BD3C00FAE75C /* MacHost+SSH.swift */; };
-		401263A71CE7C9A300FAE75C /* MacHostsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263A61CE7C9A300FAE75C /* MacHostsManager.swift */; };
-		401263A91CE8B04800FAE75C /* TouchIDUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 401263A81CE8B04800FAE75C /* TouchIDUtils.swift */; };
+		403692841E35A17200571EB5 /* ReSwiftRxBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403692831E35A17200571EB5 /* ReSwiftRxBridge.swift */; };
+		403692861E35A1B300571EB5 /* ReactiveReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 403692851E35A1B300571EB5 /* ReactiveReSwift.framework */; };
+		408507CA1E2ACFCA00C2E0D1 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507C91E2ACFCA00C2E0D1 /* State.swift */; };
+		408507CD1E2ACFFE00C2E0D1 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507CC1E2ACFFE00C2E0D1 /* MasterViewController.swift */; };
+		408507CF1E2AD05200C2E0D1 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507CE1E2AD05200C2E0D1 /* AppReducer.swift */; };
+		408507D11E2AD9C200C2E0D1 /* HostsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507D01E2AD9C200C2E0D1 /* HostsReducer.swift */; };
+		408507D41E2ADA8900C2E0D1 /* MacHostsInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507D31E2ADA8900C2E0D1 /* MacHostsInfoService.swift */; };
+		408507D61E2ADC6800C2E0D1 /* AddHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507D51E2ADC6800C2E0D1 /* AddHost.swift */; };
+		408507D81E2ADD0E00C2E0D1 /* RemoveHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507D71E2ADD0E00C2E0D1 /* RemoveHost.swift */; };
+		408507DA1E2B0AEC00C2E0D1 /* HostsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507D91E2B0AEC00C2E0D1 /* HostsState.swift */; };
+		408507DC1E2B147A00C2E0D1 /* UpdateHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507DB1E2B147A00C2E0D1 /* UpdateHost.swift */; };
+		408507DE1E2BB9AB00C2E0D1 /* HostInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507DD1E2BB9AB00C2E0D1 /* HostInfo.swift */; };
+		408507E01E2BEB7000C2E0D1 /* SelectHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507DF1E2BEB7000C2E0D1 /* SelectHost.swift */; };
+		408508071E2C495200C2E0D1 /* LatestHostAliasServivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408508061E2C495200C2E0D1 /* LatestHostAliasServivce.swift */; };
+		40A645921E3C359700CB62B1 /* MasterViewController+Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8B6621E340E1E00C71EE7 /* MasterViewController+Routes.swift */; };
+		40A645A51E3D64E100CB62B1 /* HostDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645A41E3D64E100CB62B1 /* HostDetailsViewModel.swift */; };
+		40A645A71E3D71F300CB62B1 /* MasterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645A61E3D71F300CB62B1 /* MasterViewModel.swift */; };
+		40A645AA1E3E6EF000CB62B1 /* MacUnlockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645A91E3E6EF000CB62B1 /* MacUnlockService.swift */; };
+		40A645AC1E3E721400CB62B1 /* SSHService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645AB1E3E721400CB62B1 /* SSHService.swift */; };
+		40A645AE1E3ECBB800CB62B1 /* WillEnterForeground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645AD1E3ECBB800CB62B1 /* WillEnterForeground.swift */; };
+		40A645B01E3ECBE100CB62B1 /* DidEnterBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645AF1E3ECBE100CB62B1 /* DidEnterBackground.swift */; };
+		40A645B21E3ECC2900CB62B1 /* DidFinishLaunching.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645B11E3ECC2900CB62B1 /* DidFinishLaunching.swift */; };
+		40A8B65E1E33FE1F00C71EE7 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A8B65D1E33FE1F00C71EE7 /* RxSwift.framework */; };
+		40A8B6651E34132600C71EE7 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A8B6641E34132600C71EE7 /* RxCocoa.framework */; };
+		40A8B6671E34295900C71EE7 /* EditHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8B6661E34295900C71EE7 /* EditHost.swift */; };
+		40A8B66B1E342D3300C71EE7 /* CancelHostDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8B66A1E342D3300C71EE7 /* CancelHostDetails.swift */; };
+		40BD24ED1E330388004C8BD8 /* HostDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40BD24EC1E330388004C8BD8 /* HostDetails.storyboard */; };
+		40BD24F11E330BFE004C8BD8 /* HostDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BD24F01E330BFE004C8BD8 /* HostDetailsViewController.swift */; };
 		40C4AB161CE758F400ED92C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB151CE758F400ED92C5 /* AppDelegate.swift */; };
-		40C4AB181CE758F400ED92C5 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB171CE758F400ED92C5 /* MasterViewController.swift */; };
 		40C4AB1D1CE758F400ED92C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40C4AB1B1CE758F400ED92C5 /* Main.storyboard */; };
 		40C4AB1F1CE758F400ED92C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40C4AB1E1CE758F400ED92C5 /* Assets.xcassets */; };
 		40C4AB2D1CE758F400ED92C5 /* MacKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB2C1CE758F400ED92C5 /* MacKeyTests.swift */; };
@@ -28,6 +47,55 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		4036926E1E3595D000571EB5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 403692641E3595CF00571EB5 /* ReactiveReSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 625E66831C1FF97E0027C288;
+			remoteInfo = "ReactiveReSwift-iOS";
+		};
+		403692701E3595D000571EB5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 403692641E3595CF00571EB5 /* ReactiveReSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 625E669A1C1FFA3C0027C288;
+			remoteInfo = "ReactiveReSwift-iOSTests";
+		};
+		403692721E3595D000571EB5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 403692641E3595CF00571EB5 /* ReactiveReSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25DBCF7B1C30C4AA00D63A58;
+			remoteInfo = "ReactiveReSwift-macOS";
+		};
+		403692741E3595D000571EB5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 403692641E3595CF00571EB5 /* ReactiveReSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25DBCF871C30C4DB00D63A58;
+			remoteInfo = "ReactiveReSwift-macOSTests";
+		};
+		403692761E3595D000571EB5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 403692641E3595CF00571EB5 /* ReactiveReSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25DBCF4E1C30C18D00D63A58;
+			remoteInfo = "ReactiveReSwift-tvOS";
+		};
+		403692781E3595D000571EB5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 403692641E3595CF00571EB5 /* ReactiveReSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25DBCF641C30C1AC00D63A58;
+			remoteInfo = "ReactiveReSwift-tvOSTests";
+		};
+		4036927A1E3595D000571EB5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 403692641E3595CF00571EB5 /* ReactiveReSwift.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 25DBCF371C30BF2B00D63A58;
+			remoteInfo = "ReactiveReSwift-watchOS";
+		};
 		40C4AB291CE758F400ED92C5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 40C4AB0A1CE758F300ED92C5 /* Project object */;
@@ -45,21 +113,41 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		400E708B1E42CCCC00B5477B /* TouchIDService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchIDService.swift; path = Services/TouchIDService.swift; sourceTree = "<group>"; };
 		4012637F1CE770DD00FAE75C /* NMSSH.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NMSSH.framework; path = Carthage/Build/iOS/NMSSH.framework; sourceTree = "<group>"; };
-		401263801CE770DD00FAE75C /* Result.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Result.framework; path = Carthage/Build/iOS/Result.framework; sourceTree = "<group>"; };
-		401263811CE770DD00FAE75C /* SimpleTouch.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SimpleTouch.framework; path = Carthage/Build/iOS/SimpleTouch.framework; sourceTree = "<group>"; };
 		401263821CE770DD00FAE75C /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftKeychainWrapper.framework; path = Carthage/Build/iOS/SwiftKeychainWrapper.framework; sourceTree = "<group>"; };
-		401263891CE77D2D00FAE75C /* BinarySearch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BinarySearch.swift; path = Utils/BinarySearch.swift; sourceTree = "<group>"; };
-		4012638C1CE77D2D00FAE75C /* SshUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SshUtils.swift; path = Utils/SshUtils.swift; sourceTree = "<group>"; };
-		401263971CE77E3B00FAE75C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		4012639E1CE79F6400FAE75C /* MacHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacHost.swift; path = Models/MacHost.swift; sourceTree = "<group>"; };
-		401263A01CE79F7A00FAE75C /* MacHost+RequireInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MacHost+RequireInfo.swift"; path = "Models/MacHost+RequireInfo.swift"; sourceTree = "<group>"; };
-		401263A21CE7BD3C00FAE75C /* MacHost+SSH.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MacHost+SSH.swift"; path = "Models/MacHost+SSH.swift"; sourceTree = "<group>"; };
-		401263A61CE7C9A300FAE75C /* MacHostsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MacHostsManager.swift; sourceTree = "<group>"; };
-		401263A81CE8B04800FAE75C /* TouchIDUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchIDUtils.swift; path = Utils/TouchIDUtils.swift; sourceTree = "<group>"; };
+		403692641E3595CF00571EB5 /* ReactiveReSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveReSwift.xcodeproj; path = Carthage/Checkouts/ReactiveReSwift/ReactiveReSwift.xcodeproj; sourceTree = "<group>"; };
+		403692831E35A17200571EB5 /* ReSwiftRxBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReSwiftRxBridge.swift; sourceTree = "<group>"; };
+		403692851E35A1B300571EB5 /* ReactiveReSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveReSwift.framework; path = Carthage/Build/iOS/ReactiveReSwift.framework; sourceTree = "<group>"; };
+		408507C91E2ACFCA00C2E0D1 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = State.swift; path = State/State.swift; sourceTree = "<group>"; };
+		408507CC1E2ACFFE00C2E0D1 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterViewController.swift; path = ViewControllers/MasterViewController.swift; sourceTree = "<group>"; };
+		408507CE1E2AD05200C2E0D1 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppReducer.swift; path = Reducers/AppReducer.swift; sourceTree = "<group>"; };
+		408507D01E2AD9C200C2E0D1 /* HostsReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostsReducer.swift; path = Reducers/HostsReducer.swift; sourceTree = "<group>"; };
+		408507D31E2ADA8900C2E0D1 /* MacHostsInfoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacHostsInfoService.swift; path = Services/MacHostsInfoService.swift; sourceTree = "<group>"; };
+		408507D51E2ADC6800C2E0D1 /* AddHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddHost.swift; path = Actions/AddHost.swift; sourceTree = "<group>"; };
+		408507D71E2ADD0E00C2E0D1 /* RemoveHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoveHost.swift; path = Actions/RemoveHost.swift; sourceTree = "<group>"; };
+		408507D91E2B0AEC00C2E0D1 /* HostsState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostsState.swift; path = State/HostsState.swift; sourceTree = "<group>"; };
+		408507DB1E2B147A00C2E0D1 /* UpdateHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpdateHost.swift; path = Actions/UpdateHost.swift; sourceTree = "<group>"; };
+		408507DD1E2BB9AB00C2E0D1 /* HostInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostInfo.swift; path = Models/HostInfo.swift; sourceTree = "<group>"; };
+		408507DF1E2BEB7000C2E0D1 /* SelectHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectHost.swift; path = Actions/SelectHost.swift; sourceTree = "<group>"; };
+		408508061E2C495200C2E0D1 /* LatestHostAliasServivce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LatestHostAliasServivce.swift; path = Services/LatestHostAliasServivce.swift; sourceTree = "<group>"; };
+		40A645A41E3D64E100CB62B1 /* HostDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostDetailsViewModel.swift; path = ViewModels/HostDetailsViewModel.swift; sourceTree = "<group>"; };
+		40A645A61E3D71F300CB62B1 /* MasterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterViewModel.swift; path = ViewModels/MasterViewModel.swift; sourceTree = "<group>"; };
+		40A645A91E3E6EF000CB62B1 /* MacUnlockService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacUnlockService.swift; path = Services/MacUnlockService.swift; sourceTree = "<group>"; };
+		40A645AB1E3E721400CB62B1 /* SSHService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSHService.swift; path = Services/SSHService.swift; sourceTree = "<group>"; };
+		40A645AD1E3ECBB800CB62B1 /* WillEnterForeground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WillEnterForeground.swift; path = Actions/WillEnterForeground.swift; sourceTree = "<group>"; };
+		40A645AF1E3ECBE100CB62B1 /* DidEnterBackground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DidEnterBackground.swift; path = Actions/DidEnterBackground.swift; sourceTree = "<group>"; };
+		40A645B11E3ECC2900CB62B1 /* DidFinishLaunching.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DidFinishLaunching.swift; path = Actions/DidFinishLaunching.swift; sourceTree = "<group>"; };
+		40A8B65D1E33FE1F00C71EE7 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		40A8B6621E340E1E00C71EE7 /* MasterViewController+Routes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MasterViewController+Routes.swift"; path = "Routes/MasterViewController+Routes.swift"; sourceTree = "<group>"; };
+		40A8B6641E34132600C71EE7 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
+		40A8B6661E34295900C71EE7 /* EditHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditHost.swift; path = Actions/EditHost.swift; sourceTree = "<group>"; };
+		40A8B66A1E342D3300C71EE7 /* CancelHostDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CancelHostDetails.swift; path = Actions/CancelHostDetails.swift; sourceTree = "<group>"; };
+		40BD24EC1E330388004C8BD8 /* HostDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HostDetails.storyboard; path = Storyboards/HostDetails.storyboard; sourceTree = "<group>"; };
+		40BD24F01E330BFE004C8BD8 /* HostDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostDetailsViewController.swift; path = ViewControllers/HostDetailsViewController.swift; sourceTree = "<group>"; };
 		40C4AB121CE758F400ED92C5 /* MacKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40C4AB151CE758F400ED92C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		40C4AB171CE758F400ED92C5 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		40C4AB1C1CE758F400ED92C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		40C4AB1E1CE758F400ED92C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40C4AB231CE758F400ED92C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,10 +164,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				401263861CE770DD00FAE75C /* SwiftKeychainWrapper.framework in Frameworks */,
 				401263831CE770DD00FAE75C /* NMSSH.framework in Frameworks */,
-				401263851CE770DD00FAE75C /* SimpleTouch.framework in Frameworks */,
-				401263841CE770DD00FAE75C /* Result.framework in Frameworks */,
+				401263861CE770DD00FAE75C /* SwiftKeychainWrapper.framework in Frameworks */,
+				403692861E35A1B300571EB5 /* ReactiveReSwift.framework in Frameworks */,
+				40A8B6651E34132600C71EE7 /* RxCocoa.framework in Frameworks */,
+				40A8B65E1E33FE1F00C71EE7 /* RxSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,32 +189,117 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		401263881CE77D2000FAE75C /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-				401263891CE77D2D00FAE75C /* BinarySearch.swift */,
-				4012638C1CE77D2D00FAE75C /* SshUtils.swift */,
-				401263A81CE8B04800FAE75C /* TouchIDUtils.swift */,
-			);
-			name = Utils;
-			sourceTree = "<group>";
-		};
 		4012639B1CE79EF300FAE75C /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				408507DD1E2BB9AB00C2E0D1 /* HostInfo.swift */,
 				4012639E1CE79F6400FAE75C /* MacHost.swift */,
-				401263A01CE79F7A00FAE75C /* MacHost+RequireInfo.swift */,
-				401263A21CE7BD3C00FAE75C /* MacHost+SSH.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		403692651E3595CF00571EB5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4036926F1E3595D000571EB5 /* ReactiveReSwift.framework */,
+				403692711E3595D000571EB5 /* ReactiveReSwift-iOSTests.xctest */,
+				403692731E3595D000571EB5 /* ReactiveReSwift.framework */,
+				403692751E3595D000571EB5 /* ReactiveReSwift-macOSTests.xctest */,
+				403692771E3595D000571EB5 /* ReactiveReSwift.framework */,
+				403692791E3595D000571EB5 /* ReactiveReSwift-tvOSTests.xctest */,
+				4036927B1E3595D000571EB5 /* ReactiveReSwift.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		408507761E2AC52F00C2E0D1 /* Actions */ = {
+			isa = PBXGroup;
+			children = (
+				408507D51E2ADC6800C2E0D1 /* AddHost.swift */,
+				40A8B66A1E342D3300C71EE7 /* CancelHostDetails.swift */,
+				40A645AF1E3ECBE100CB62B1 /* DidEnterBackground.swift */,
+				40A645B11E3ECC2900CB62B1 /* DidFinishLaunching.swift */,
+				40A8B6661E34295900C71EE7 /* EditHost.swift */,
+				408507D71E2ADD0E00C2E0D1 /* RemoveHost.swift */,
+				408507DF1E2BEB7000C2E0D1 /* SelectHost.swift */,
+				408507DB1E2B147A00C2E0D1 /* UpdateHost.swift */,
+				40A645AD1E3ECBB800CB62B1 /* WillEnterForeground.swift */,
+			);
+			name = Actions;
+			sourceTree = "<group>";
+		};
+		408507C71E2ACF4600C2E0D1 /* Reducers */ = {
+			isa = PBXGroup;
+			children = (
+				408507CE1E2AD05200C2E0D1 /* AppReducer.swift */,
+				408507D01E2AD9C200C2E0D1 /* HostsReducer.swift */,
+			);
+			name = Reducers;
+			sourceTree = "<group>";
+		};
+		408507C81E2ACFA300C2E0D1 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				408507C91E2ACFCA00C2E0D1 /* State.swift */,
+				408507D91E2B0AEC00C2E0D1 /* HostsState.swift */,
+			);
+			name = State;
+			sourceTree = "<group>";
+		};
+		408507CB1E2ACFD300C2E0D1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				40BD24F01E330BFE004C8BD8 /* HostDetailsViewController.swift */,
+				408507CC1E2ACFFE00C2E0D1 /* MasterViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		408507D21E2ADA2F00C2E0D1 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				408508061E2C495200C2E0D1 /* LatestHostAliasServivce.swift */,
+				408507D31E2ADA8900C2E0D1 /* MacHostsInfoService.swift */,
+				40A645A91E3E6EF000CB62B1 /* MacUnlockService.swift */,
+				40A645AB1E3E721400CB62B1 /* SSHService.swift */,
+				400E708B1E42CCCC00B5477B /* TouchIDService.swift */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		40A6459C1E3D64B700CB62B1 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				40A645A41E3D64E100CB62B1 /* HostDetailsViewModel.swift */,
+				40A645A61E3D71F300CB62B1 /* MasterViewModel.swift */,
+			);
+			name = ViewModels;
+			sourceTree = "<group>";
+		};
+		40A8B65F1E340C1500C71EE7 /* Routes */ = {
+			isa = PBXGroup;
+			children = (
+				40A8B6621E340E1E00C71EE7 /* MasterViewController+Routes.swift */,
+			);
+			name = Routes;
+			sourceTree = "<group>";
+		};
+		40BD24EB1E32F937004C8BD8 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				40BD24EC1E330388004C8BD8 /* HostDetails.storyboard */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 		40C4AB091CE758F300ED92C5 = {
 			isa = PBXGroup;
 			children = (
+				403692641E3595CF00571EB5 /* ReactiveReSwift.xcodeproj */,
 				4012637F1CE770DD00FAE75C /* NMSSH.framework */,
-				401263801CE770DD00FAE75C /* Result.framework */,
-				401263811CE770DD00FAE75C /* SimpleTouch.framework */,
+				403692851E35A1B300571EB5 /* ReactiveReSwift.framework */,
+				40A8B6641E34132600C71EE7 /* RxCocoa.framework */,
+				40A8B65D1E33FE1F00C71EE7 /* RxSwift.framework */,
 				401263821CE770DD00FAE75C /* SwiftKeychainWrapper.framework */,
 				40C4AB141CE758F400ED92C5 /* MacKey */,
 				40C4AB2B1CE758F400ED92C5 /* MacKeyTests */,
@@ -147,13 +321,18 @@
 		40C4AB141CE758F400ED92C5 /* MacKey */ = {
 			isa = PBXGroup;
 			children = (
-				4012639B1CE79EF300FAE75C /* Models */,
-				401263881CE77D2000FAE75C /* Utils */,
-				40C4AB451CE7592300ED92C5 /* Resources */,
 				40C4AB151CE758F400ED92C5 /* AppDelegate.swift */,
-				401263971CE77E3B00FAE75C /* Constants.swift */,
-				401263A61CE7C9A300FAE75C /* MacHostsManager.swift */,
-				40C4AB171CE758F400ED92C5 /* MasterViewController.swift */,
+				403692831E35A17200571EB5 /* ReSwiftRxBridge.swift */,
+				408507761E2AC52F00C2E0D1 /* Actions */,
+				4012639B1CE79EF300FAE75C /* Models */,
+				408507C71E2ACF4600C2E0D1 /* Reducers */,
+				40C4AB451CE7592300ED92C5 /* Resources */,
+				40A8B65F1E340C1500C71EE7 /* Routes */,
+				408507D21E2ADA2F00C2E0D1 /* Services */,
+				408507C81E2ACFA300C2E0D1 /* State */,
+				40BD24EB1E32F937004C8BD8 /* Storyboards */,
+				408507CB1E2ACFD300C2E0D1 /* ViewControllers */,
+				40A6459C1E3D64B700CB62B1 /* ViewModels */,
 			);
 			path = MacKey;
 			sourceTree = "<group>";
@@ -251,7 +430,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Liu Liang";
 				TargetAttributes = {
 					40C4AB111CE758F400ED92C5 = {
@@ -284,6 +463,12 @@
 			mainGroup = 40C4AB091CE758F300ED92C5;
 			productRefGroup = 40C4AB131CE758F400ED92C5 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 403692651E3595CF00571EB5 /* Products */;
+					ProjectRef = 403692641E3595CF00571EB5 /* ReactiveReSwift.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				40C4AB111CE758F400ED92C5 /* MacKey */,
@@ -293,11 +478,64 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		4036926F1E3595D000571EB5 /* ReactiveReSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ReactiveReSwift.framework;
+			remoteRef = 4036926E1E3595D000571EB5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		403692711E3595D000571EB5 /* ReactiveReSwift-iOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "ReactiveReSwift-iOSTests.xctest";
+			remoteRef = 403692701E3595D000571EB5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		403692731E3595D000571EB5 /* ReactiveReSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ReactiveReSwift.framework;
+			remoteRef = 403692721E3595D000571EB5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		403692751E3595D000571EB5 /* ReactiveReSwift-macOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "ReactiveReSwift-macOSTests.xctest";
+			remoteRef = 403692741E3595D000571EB5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		403692771E3595D000571EB5 /* ReactiveReSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ReactiveReSwift.framework;
+			remoteRef = 403692761E3595D000571EB5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		403692791E3595D000571EB5 /* ReactiveReSwift-tvOSTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "ReactiveReSwift-tvOSTests.xctest";
+			remoteRef = 403692781E3595D000571EB5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4036927B1E3595D000571EB5 /* ReactiveReSwift.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = ReactiveReSwift.framework;
+			remoteRef = 4036927A1E3595D000571EB5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		40C4AB101CE758F400ED92C5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40BD24ED1E330388004C8BD8 /* HostDetails.storyboard in Resources */,
 				40C4AB1F1CE758F400ED92C5 /* Assets.xcassets in Resources */,
 				40C4AB1D1CE758F400ED92C5 /* Main.storyboard in Resources */,
 			);
@@ -327,9 +565,10 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/NMSSH.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Result.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftKeychainWrapper.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SimpleTouch.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ReactiveReSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 			);
 			outputPaths = (
 			);
@@ -358,16 +597,33 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4012638E1CE77D2D00FAE75C /* BinarySearch.swift in Sources */,
+				40BD24F11E330BFE004C8BD8 /* HostDetailsViewController.swift in Sources */,
+				40A645AE1E3ECBB800CB62B1 /* WillEnterForeground.swift in Sources */,
 				4012639F1CE79F6400FAE75C /* MacHost.swift in Sources */,
-				401263A71CE7C9A300FAE75C /* MacHostsManager.swift in Sources */,
-				401263A31CE7BD3C00FAE75C /* MacHost+SSH.swift in Sources */,
-				40C4AB181CE758F400ED92C5 /* MasterViewController.swift in Sources */,
-				401263911CE77D2D00FAE75C /* SshUtils.swift in Sources */,
-				401263A91CE8B04800FAE75C /* TouchIDUtils.swift in Sources */,
+				408507CD1E2ACFFE00C2E0D1 /* MasterViewController.swift in Sources */,
+				40A645A51E3D64E100CB62B1 /* HostDetailsViewModel.swift in Sources */,
+				40A8B66B1E342D3300C71EE7 /* CancelHostDetails.swift in Sources */,
+				40A645921E3C359700CB62B1 /* MasterViewController+Routes.swift in Sources */,
+				408507DC1E2B147A00C2E0D1 /* UpdateHost.swift in Sources */,
+				408507CF1E2AD05200C2E0D1 /* AppReducer.swift in Sources */,
+				408507D81E2ADD0E00C2E0D1 /* RemoveHost.swift in Sources */,
+				400E708C1E42CCCC00B5477B /* TouchIDService.swift in Sources */,
+				408507CA1E2ACFCA00C2E0D1 /* State.swift in Sources */,
+				40A645AC1E3E721400CB62B1 /* SSHService.swift in Sources */,
+				408508071E2C495200C2E0D1 /* LatestHostAliasServivce.swift in Sources */,
+				408507DE1E2BB9AB00C2E0D1 /* HostInfo.swift in Sources */,
+				40A8B6671E34295900C71EE7 /* EditHost.swift in Sources */,
+				403692841E35A17200571EB5 /* ReSwiftRxBridge.swift in Sources */,
+				40A645AA1E3E6EF000CB62B1 /* MacUnlockService.swift in Sources */,
+				40A645B21E3ECC2900CB62B1 /* DidFinishLaunching.swift in Sources */,
+				40A645A71E3D71F300CB62B1 /* MasterViewModel.swift in Sources */,
+				408507DA1E2B0AEC00C2E0D1 /* HostsState.swift in Sources */,
+				40A645B01E3ECBE100CB62B1 /* DidEnterBackground.swift in Sources */,
+				408507E01E2BEB7000C2E0D1 /* SelectHost.swift in Sources */,
+				408507D41E2ADA8900C2E0D1 /* MacHostsInfoService.swift in Sources */,
 				40C4AB161CE758F400ED92C5 /* AppDelegate.swift in Sources */,
-				401263A11CE79F7A00FAE75C /* MacHost+RequireInfo.swift in Sources */,
-				401263981CE77E3B00FAE75C /* Constants.swift in Sources */,
+				408507D61E2ADC6800C2E0D1 /* AddHost.swift in Sources */,
+				408507D11E2AD9C200C2E0D1 /* HostsReducer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -428,8 +684,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -473,8 +731,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -493,6 +753,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -512,6 +773,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nlprliu.MacKey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				"SWIFT_ACTIVE_COMPILATION_CONDITIONS[arch=*]" = DEBUG;
 				SWIFT_VERSION = 3.0;
 				VALID_ARCHS = arm64;
 			};
