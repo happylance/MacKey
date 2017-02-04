@@ -249,8 +249,8 @@
 		408507CB1E2ACFD300C2E0D1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				408507CC1E2ACFFE00C2E0D1 /* MasterViewController.swift */,
 				40BD24F01E330BFE004C8BD8 /* HostDetailsViewController.swift */,
+				408507CC1E2ACFFE00C2E0D1 /* MasterViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";

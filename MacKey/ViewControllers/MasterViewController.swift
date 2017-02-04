@@ -89,18 +89,12 @@ class MasterViewController: UITableViewController {
         }).disposed(by: disposeBag)
         
         viewModel.selectedCellStatusUpdate.drive(onNext: { [unowned self] info in
-            self.latestHostUnlockStatus = info
-            if let selectedCell = self.selectedCell {
-                if let seletedCellIndex = self.tableView.indexPath(for: selectedCell) {
-                    self.tableView.reloadRows(at: [seletedCellIndex], with: .none)
-                }
-            }
+            self.setDetailLabel(info)
         }).disposed(by: disposeBag)
         
-    }
-    
-    func clearUnlockStatus() {
-        setDetailLabel("")
+        viewModel.didEnterBackground.drive(onNext: { [unowned self] _ in
+            self.setDetailLabel("")
+        }).disposed(by: disposeBag)
     }
     
     private func setDetailLabel(_ string: String) {

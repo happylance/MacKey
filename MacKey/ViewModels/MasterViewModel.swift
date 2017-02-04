@@ -11,12 +11,18 @@ import RxSwift
 import RxCocoa
 
 class MasterViewModel {
+    let didEnterBackground: Driver<Bool>
     let stateDiff: Driver<(HostsState, HostsState)>
     let selectedIndex: Driver<(IndexPath, HostsState)>
     let selectedCellStatusUpdate: Driver<String>
     
     init(itemSelected: Driver<IndexPath>) {
         let storeState = store.observable.asDriver()
+        
+        didEnterBackground = storeState.map { $0.isAppInBackground }
+            .distinctUntilChanged()
+            .filter { $0 }        
+        
         let hostsState = storeState.map { $0.hostsState }
             .distinctUntilChanged { $0.allHosts == $1.allHosts }
         
