@@ -58,6 +58,23 @@ class MacUnlockService {
             }
     }
     
+    static func sleep(_ host: HostInfo) -> Observable<UnlockStatus> {
+        let cmd = getDetailCommand("sleep", for: host)
+        return SSHService().executeSshCommand(cmd, host: host)
+            .map { .connectedWithInfo(info: $0) }
+            .catchError { error in
+                guard let error = error as? SSHSessionError else {
+                    return Observable.just(.error(error: ""))
+                }
+                switch error {
+                case let .failedWithResponse(response):
+                    return Observable.just(.connectedWithInfo(info: response))
+                default: return Observable.just(.error(error: error.debugDescription))
+                }
+            }
+            .startWith(.connecting)
+    }
+    
     private static let wakeCommand = "echo 'caffeinate -u -t 1 & d=$(/usr/bin/python -c \"import Quartz; print Quartz.CGSessionCopyCurrentDictionary()\"); echo \"$d\" | grep -q \"OnConsoleKey = 0\" && { echo \"Needs to unlock manually\"; exit 1; }; echo \"$d\" | grep -q \"ScreenIsLocked = 1\" || { echo \"Mac is already unlocked\"; exit 1; }' | sh"
     
     private static let checkStatusCommand = "echo 'd=$(/usr/bin/python -c \"import Quartz; print Quartz.CGSessionCopyCurrentDictionary()\"); echo \"$d\" | grep -q \"ScreenIsLocked = 1\" && { echo \"Failed to unlock Mac\"; exit 1; } || { echo \"Mac is unlocked\"; exit 0; }' | sh"
@@ -68,6 +85,8 @@ class MacUnlockService {
             return wakeCommand + " && " + getUnlockCommand(for: host) + " && " + checkStatusCommand
         case "wake":
             return wakeCommand
+        case "sleep":
+            return "osascript -e 'tell application \"Finder\" to sleep'"
         default:
             return cmd
         }

@@ -15,10 +15,11 @@ let readMeURL = "https://github.com/happylance/MacKey/blob/master/README.md"
 
 class MasterViewController: UITableViewController {
 
-    var selectedCell: UITableViewCell? = nil
+    var selectedCell: HostListViewCell? = nil
     var latestHostUnlockStatus: String? = nil
+    let sleepButtonTapped: BehaviorSubject<String> = BehaviorSubject(value: "")
     
-    private let disposeBag = DisposeBag()
+    fileprivate let disposeBag = DisposeBag()
     
     fileprivate var latestState: State {
         return store.observable.value
@@ -48,7 +49,10 @@ class MasterViewController: UITableViewController {
         // Hide empty rows
         tableView.tableFooterView = UIView()
         
-        let viewModel = MasterViewModel(itemSelected: tableView.rx.itemSelected.asDriver())
+        let viewModel = MasterViewModel(
+            itemSelected: tableView.rx.itemSelected.asDriver(),
+            sleepButtonTapped: sleepButtonTapped.asDriver(onErrorJustReturn:"")
+            )
 
         viewModel.stateDiff.drive(onNext: { [unowned self] (prevState: HostsState, state: HostsState) -> () in
             let newHost = HostsState.newHostAfter(prevState.allHosts, in: state.allHosts)
@@ -81,9 +85,8 @@ class MasterViewController: UITableViewController {
             store.dispatch(SelectHost(host: host))
             
             self.latestHostUnlockStatus = ""
-            self.selectedCell?.detailTextLabel?.text = ""
             
-            if let cell = self.tableView.cellForRow(at: indexPath) {
+            if let cell = self.tableView.cellForRow(at: indexPath) as? HostListViewCell {
                 self.updateSelectCell(cell)
             }            
         }).disposed(by: disposeBag)
@@ -118,10 +121,11 @@ class MasterViewController: UITableViewController {
         showHostDetaisViewController(animated: true)
     }
     
-    fileprivate func updateSelectCell(_ newSelectedCell: UITableViewCell) {
+    fileprivate func updateSelectCell(_ newSelectedCell: HostListViewCell) {
         if newSelectedCell != selectedCell {
             selectedCell?.accessoryType = .none
-            selectedCell?.detailTextLabel?.text = ""
+            selectedCell?.hostStatusOutlet?.text = ""
+            selectedCell?.sleepButtonOutlet?.isHidden = true
             selectedCell = newSelectedCell
             newSelectedCell.accessoryType = .checkmark
         }
@@ -137,16 +141,26 @@ extension MasterViewController  { // UITableViewDataSource
         return latestState.allHosts.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> HostListViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "HostListViewCell", for: indexPath) as? HostListViewCell else {
+            fatalError("Could not create HostListViewCell")
+        }
         
-        let object = latestState.hostsState.sortedHostAliases[indexPath.row]
-        cell.textLabel!.text = object
-        if object == latestState.latestHostAlias {
+        let alias = latestState.hostsState.sortedHostAliases[indexPath.row]
+        cell.hostNameOutlet!.text = alias
+        
+        cell.sleepButtonOutlet.rx.tap.subscribe(onNext:{ [unowned self] in
+            self.sleepButtonTapped.onNext(alias)
+        })
+        .disposed(by: disposeBag)
+        
+        if alias == latestState.latestHostAlias {
             updateSelectCell(cell)
-            cell.detailTextLabel?.text = latestHostUnlockStatus
+            cell.hostStatusOutlet?.text = latestHostUnlockStatus
+            cell.sleepButtonOutlet.isHidden = !(latestHostUnlockStatus?.contains("unlocked") ?? false)
         } else {
-            cell.detailTextLabel?.text = ""
+            cell.hostStatusOutlet?.text = ""
+            cell.sleepButtonOutlet.isHidden = true
         }
         return cell
     }
