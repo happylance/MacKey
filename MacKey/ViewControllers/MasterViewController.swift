@@ -39,21 +39,11 @@ class MasterViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = editButtonItem
         
         self.editCell.subscribe(onNext: { [unowned self] in
-            let hostAlias = $0.hostNameOutlet?.text
-            if let alias = hostAlias {
-                store.dispatch(EditHost(alias: alias))
-                self.showHostDetaisViewController(animated: true)
-            }
+            self.editCell($0)
         }).disposed(by: disposeBag)
         
-        self.deleteCell.subscribe(onNext: {
-            if let hostAlias = $0.hostNameOutlet?.text,
-                let host = store.observable.value.allHosts[hostAlias] {
-                store.dispatch(RemoveHost(host: host))
-                if let indexPathToRemove = self.tableView.indexPath(for: $0) {
-                    self.tableView.deleteRows(at: [indexPathToRemove], with: .fade)
-                }
-            }
+        self.deleteCell.subscribe(onNext: {[unowned self] in
+            self.deleteCell($0)
         }).disposed(by: disposeBag)
         
         let infoButton = UIButton(type: .infoLight)
@@ -64,7 +54,7 @@ class MasterViewController: UITableViewController {
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
         addButton.rx.tap.subscribe(onNext: { [unowned self] in
-            self.showHostDetaisViewController(animated: true)
+            self.showHostDetailsViewController(animated: true)
         }).disposed(by: disposeBag)
         self.navigationItem.rightBarButtonItems = [addButton, infoItem]
                 
@@ -95,8 +85,6 @@ class MasterViewController: UITableViewController {
             guard let host = hostsState.allHosts[alias] else { return }
             store.dispatch(SelectHost(host: host))
             
-            self.latestHostUnlockStatus = ""
-            
             if let cell = self.tableView.cellForRow(at: indexPath) as? HostListViewCell {
                 self.reloadCells([cell, self.selectedCell])
             }            
@@ -122,6 +110,23 @@ class MasterViewController: UITableViewController {
             .reduce([HostListViewCell]()) { $0.contains($1) ? $0 : $0 + [$1] } // Remove duplicates
             .flatMap { self.tableView.indexPath(for: $0) }
         self.tableView.reloadRows(at: indexPathsToReload, with: .none)
+    }
+    
+    private func deleteCell(_ cell:HostListViewCell) {
+        if let hostAlias = cell.hostNameOutlet?.text,
+            let host = store.observable.value.allHosts[hostAlias] {
+            store.dispatch(RemoveHost(host: host))
+            if let indexPathToRemove = self.tableView.indexPath(for: cell) {
+                self.tableView.deleteRows(at: [indexPathToRemove], with: .fade)
+            }
+        }
+    }
+    
+    private func editCell(_ cell:HostListViewCell) {
+        if let alias = cell.hostNameOutlet?.text {
+            store.dispatch(EditHost(alias: alias))
+            self.showHostDetailsViewController(animated: true)
+        }
     }
 }
 

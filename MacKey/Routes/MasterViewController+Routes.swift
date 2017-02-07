@@ -17,12 +17,12 @@ let hostDetailsNavigationControllerIdentifier = "HostDetailsNavigationController
 
 
 extension MasterViewController {
-    public func showHostDetaisViewController(animated: Bool,
+    public func showHostDetailsViewController(animated: Bool,
                                              completionHandler: (()->())? = nil)  {
-        let hostDetaisViewController = hostDetailsStoryboard
+        let hostDetailsViewController = hostDetailsStoryboard
             .instantiateViewController(withIdentifier: hostDetailsControllerIdentifier)
         
-        let navController = UINavigationController(rootViewController: hostDetaisViewController)
+        let navController = UINavigationController(rootViewController: hostDetailsViewController)
         let isForNewHost = (store.observable.value.hostsState.editingHostAlias == nil)
         navController.navigationBar.topItem?.title = isForNewHost ? "New host" : "Edit host"
         
