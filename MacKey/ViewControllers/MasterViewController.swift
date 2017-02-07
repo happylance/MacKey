@@ -17,7 +17,9 @@ class MasterViewController: UITableViewController {
 
     var selectedCell: HostListViewCell? = nil
     var latestHostUnlockStatus: String? = nil
-    let sleepButtonTapped: BehaviorSubject<String> = BehaviorSubject(value: "")
+    let sleepButtonTapped: PublishSubject<String> = PublishSubject()
+    let editCell: PublishSubject<HostListViewCell> = PublishSubject()
+    let deleteCell: PublishSubject<HostListViewCell> = PublishSubject()
     
     fileprivate let disposeBag = DisposeBag()
     
@@ -30,9 +32,29 @@ class MasterViewController: UITableViewController {
         // Do any additional setup after loading the view, typically from a nib.
         let editButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
         editButtonItem.rx.tap.subscribe(onNext: { [unowned self] in
-            self.editCell(self.selectedCell)
+            if let selectedCell = self.selectedCell {
+                self.editCell.onNext(selectedCell)
+            }
         }).disposed(by: disposeBag)
         self.navigationItem.leftBarButtonItem = editButtonItem
+        
+        self.editCell.subscribe(onNext: { [unowned self] in
+            let hostAlias = $0.hostNameOutlet?.text
+            if let alias = hostAlias {
+                store.dispatch(EditHost(alias: alias))
+                self.showHostDetaisViewController(animated: true)
+            }
+        }).disposed(by: disposeBag)
+        
+        self.deleteCell.subscribe(onNext: {
+            if let hostAlias = $0.hostNameOutlet?.text,
+                let host = store.observable.value.allHosts[hostAlias] {
+                store.dispatch(RemoveHost(host: host))
+                if let indexPathToRemove = self.tableView.indexPath(for: $0) {
+                    self.tableView.deleteRows(at: [indexPathToRemove], with: .fade)
+                }
+            }
+        }).disposed(by: disposeBag)
         
         let infoButton = UIButton(type: .infoLight)
         infoButton.rx.tap.subscribe(onNext: {
@@ -61,18 +83,7 @@ class MasterViewController: UITableViewController {
                 self.tableView.insertRows(at: [indexPath], with: .automatic)
             }
             let removedHost = HostsState.removedHostFrom(prevState.allHosts, in: state.allHosts)
-            if let removedHost = removedHost {
-                var indexPathToRemove: IndexPath? = nil
-                self.tableView.visibleCells.forEach { cell in
-                    if let hostAlias = cell.textLabel?.text, hostAlias == removedHost.alias {
-                        indexPathToRemove = self.tableView.indexPath(for: cell)
-                    }
-                }
-                
-                if let indexPath = indexPathToRemove {
-                    self.tableView.deleteRows(at: [indexPath], with: .fade)
-                }
-            }
+        
             if newHost == nil && removedHost == nil {
                 self.tableView.reloadData()
             }
@@ -87,7 +98,7 @@ class MasterViewController: UITableViewController {
             self.latestHostUnlockStatus = ""
             
             if let cell = self.tableView.cellForRow(at: indexPath) as? HostListViewCell {
-                self.updateSelectCell(cell)
+                self.reloadCells([cell, self.selectedCell])
             }            
         }).disposed(by: disposeBag)
         
@@ -102,33 +113,15 @@ class MasterViewController: UITableViewController {
     
     private func setDetailLabel(_ string: String) {
         latestHostUnlockStatus = string
-        if let selectedCell = self.selectedCell {
-            if let seletedCellIndex = self.tableView.indexPath(for: selectedCell) {
-                self.tableView.reloadRows(at: [seletedCellIndex], with: .none)
-            }
-        }
+        self.reloadCells([self.selectedCell])
     }
     
-    fileprivate func editCell(_ cell: UITableViewCell?) {
-        guard let cell = cell else { return }
-        let hostAlias = cell.textLabel?.text
-        guard let alias = hostAlias else {
-            print("hostAlias is nil")
-            return
-        }
-        
-        store.dispatch(EditHost(alias: alias))
-        showHostDetaisViewController(animated: true)
-    }
-    
-    fileprivate func updateSelectCell(_ newSelectedCell: HostListViewCell) {
-        if newSelectedCell != selectedCell {
-            selectedCell?.accessoryType = .none
-            selectedCell?.hostStatusOutlet?.text = ""
-            selectedCell?.sleepButtonOutlet?.isHidden = true
-            selectedCell = newSelectedCell
-            newSelectedCell.accessoryType = .checkmark
-        }
+    private func reloadCells(_ cells: [HostListViewCell?]) {
+        let indexPathsToReload = cells
+            .flatMap { $0 }
+            .reduce([HostListViewCell]()) { $0.contains($1) ? $0 : $0 + [$1] } // Remove duplicates
+            .flatMap { self.tableView.indexPath(for: $0) }
+        self.tableView.reloadRows(at: indexPathsToReload, with: .none)
     }
 }
 
@@ -155,12 +148,14 @@ extension MasterViewController  { // UITableViewDataSource
         .disposed(by: disposeBag)
         
         if alias == latestState.latestHostAlias {
-            updateSelectCell(cell)
             cell.hostStatusOutlet?.text = latestHostUnlockStatus
             cell.sleepButtonOutlet.isHidden = !(latestHostUnlockStatus?.contains("unlocked") ?? false)
+            cell.accessoryType = .checkmark
+            self.selectedCell = cell
         } else {
             cell.hostStatusOutlet?.text = ""
             cell.sleepButtonOutlet.isHidden = true
+            cell.accessoryType = .none
         }
         return cell
     }
@@ -171,17 +166,15 @@ extension MasterViewController { // UITableViewDelegate
         
         let editRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: "Edit", handler:{action, indexpath in
             tableView.setEditing(false, animated: true)
-            self.editCell(tableView.cellForRow(at: indexPath))
+            if let cell = tableView.cellForRow(at: indexPath) as? HostListViewCell {
+                self.editCell.onNext(cell)
+            }
         });
         
         let deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Delete", handler:{action, indexpath in
-            let cell = tableView.cellForRow(at: indexPath)
-            guard let hostAlias = cell?.textLabel?.text else {
-                print("hostAlias is nil")
-                return
+            if let cell = tableView.cellForRow(at: indexPath) as? HostListViewCell {
+                self.deleteCell.onNext(cell)
             }
-            guard let host = store.observable.value.allHosts[hostAlias] else { return }
-            store.dispatch(RemoveHost(host: host))
         });
         
         return [deleteRowAction, editRowAction]
