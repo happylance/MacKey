@@ -38,12 +38,21 @@ class MasterViewController: UITableViewController {
         }).disposed(by: disposeBag)
         self.navigationItem.leftBarButtonItem = editButtonItem
         
-        self.editCell$.subscribe(onNext: { [unowned self] in
-            self.editCell($0)
+        self.editCell$.subscribe(onNext: { [unowned self] cell in
+            if let alias = cell.hostNameOutlet?.text {
+                store.dispatch(EditHost(alias: alias))
+                self.showHostDetailsViewController(animated: true)
+            }
         }).disposed(by: disposeBag)
         
-        self.deleteCell$.subscribe(onNext: {[unowned self] in
-            self.deleteCell($0)
+        self.deleteCell$.subscribe(onNext: {[unowned self] cell in
+            if let hostAlias = cell.hostNameOutlet?.text,
+                let host = store.observable.value.allHosts[hostAlias] {
+                store.dispatch(RemoveHost(host: host))
+                if let indexPathToRemove = self.tableView.indexPath(for: cell) {
+                    self.tableView.deleteRows(at: [indexPathToRemove], with: .fade)
+                }
+            }
         }).disposed(by: disposeBag)
         
         let infoButton = UIButton(type: .infoLight)
@@ -91,17 +100,9 @@ class MasterViewController: UITableViewController {
         }).disposed(by: disposeBag)
         
         viewModel.selectedCellStatusUpdate$.drive(onNext: { [unowned self] info in
-            self.setDetailLabel(info)
+            self.latestHostUnlockStatus = info
+            self.reloadCells([self.selectedCell])
         }).disposed(by: disposeBag)
-        
-        viewModel.didEnterBackground$.drive(onNext: { [unowned self] _ in
-            self.setDetailLabel("")
-        }).disposed(by: disposeBag)
-    }
-    
-    private func setDetailLabel(_ string: String) {
-        latestHostUnlockStatus = string
-        self.reloadCells([self.selectedCell])
     }
     
     private func reloadCells(_ cells: [HostListViewCell?]) {
@@ -110,23 +111,6 @@ class MasterViewController: UITableViewController {
             .reduce([HostListViewCell]()) { $0.contains($1) ? $0 : $0 + [$1] } // Remove duplicates
             .flatMap { self.tableView.indexPath(for: $0) }
         self.tableView.reloadRows(at: indexPathsToReload, with: .none)
-    }
-    
-    private func deleteCell(_ cell:HostListViewCell) {
-        if let hostAlias = cell.hostNameOutlet?.text,
-            let host = store.observable.value.allHosts[hostAlias] {
-            store.dispatch(RemoveHost(host: host))
-            if let indexPathToRemove = self.tableView.indexPath(for: cell) {
-                self.tableView.deleteRows(at: [indexPathToRemove], with: .fade)
-            }
-        }
-    }
-    
-    private func editCell(_ cell:HostListViewCell) {
-        if let alias = cell.hostNameOutlet?.text {
-            store.dispatch(EditHost(alias: alias))
-            self.showHostDetailsViewController(animated: true)
-        }
     }
 }
 

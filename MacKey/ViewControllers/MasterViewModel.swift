@@ -11,7 +11,6 @@ import RxSwift
 import RxCocoa
 
 class MasterViewModel {
-    let didEnterBackground$: Driver<Bool>
     let stateDiff$: Driver<(HostsState, HostsState)>
     let selectedIndex$: Driver<(IndexPath, HostsState)>
     let selectedCellStatusUpdate$: Driver<String>
@@ -19,10 +18,6 @@ class MasterViewModel {
     init(itemSelected$: Driver<IndexPath>,
          sleepButtonTapped$: Driver<String>) {
         let storeState$ = store.observable.asDriver()
-        
-        didEnterBackground$ = storeState$.map { $0.isAppInBackground }
-            .distinctUntilChanged()
-            .filter { $0 }        
         
         let hostsState$ = storeState$.map { $0.hostsState }
             .distinctUntilChanged { $0.allHosts == $1.allHosts }
@@ -67,7 +62,7 @@ class MasterViewModel {
             .filter { $0 != nil }.map { $0! }
             .flatMapLatest { MacUnlockService.sleep($0) }
         
-        selectedCellStatusUpdate$ = Observable.of(unlockStatus$, sleepStatus$)
+        let connectionStatus$ = Observable.of(unlockStatus$, sleepStatus$)
             .merge()
             .map {
                 switch $0 {
@@ -84,6 +79,14 @@ class MasterViewModel {
                 }
             }
             .asDriver(onErrorJustReturn: "")
+        
+        let statusWhenEnterBackground$ = storeState$.map { $0.isAppInBackground }
+            .distinctUntilChanged()
+            .filter { $0 }
+            .map { _ in "" }
+        
+        selectedCellStatusUpdate$ = Driver.of(connectionStatus$, statusWhenEnterBackground$)
+            .merge()
     }
 }
     
