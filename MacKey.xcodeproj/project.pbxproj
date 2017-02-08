@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		400E708C1E42CCCC00B5477B /* TouchIDService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400E708B1E42CCCC00B5477B /* TouchIDService.swift */; };
 		400E70981E46CD2100B5477B /* HostListViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400E70971E46CD2100B5477B /* HostListViewCell.swift */; };
+		400E709B1E4AA10200B5477B /* HostDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400E70991E4AA10200B5477B /* HostDetailsViewModel.swift */; };
+		400E709C1E4AA10200B5477B /* MasterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400E709A1E4AA10200B5477B /* MasterViewModel.swift */; };
 		401263831CE770DD00FAE75C /* NMSSH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4012637F1CE770DD00FAE75C /* NMSSH.framework */; };
 		401263861CE770DD00FAE75C /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 401263821CE770DD00FAE75C /* SwiftKeychainWrapper.framework */; };
 		4012639F1CE79F6400FAE75C /* MacHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4012639E1CE79F6400FAE75C /* MacHost.swift */; };
@@ -27,8 +29,6 @@
 		408507E01E2BEB7000C2E0D1 /* SelectHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507DF1E2BEB7000C2E0D1 /* SelectHost.swift */; };
 		408508071E2C495200C2E0D1 /* LatestHostAliasServivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408508061E2C495200C2E0D1 /* LatestHostAliasServivce.swift */; };
 		40A645921E3C359700CB62B1 /* MasterViewController+Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8B6621E340E1E00C71EE7 /* MasterViewController+Routes.swift */; };
-		40A645A51E3D64E100CB62B1 /* HostDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645A41E3D64E100CB62B1 /* HostDetailsViewModel.swift */; };
-		40A645A71E3D71F300CB62B1 /* MasterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645A61E3D71F300CB62B1 /* MasterViewModel.swift */; };
 		40A645AA1E3E6EF000CB62B1 /* MacUnlockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645A91E3E6EF000CB62B1 /* MacUnlockService.swift */; };
 		40A645AC1E3E721400CB62B1 /* SSHService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645AB1E3E721400CB62B1 /* SSHService.swift */; };
 		40A645AE1E3ECBB800CB62B1 /* WillEnterForeground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645AD1E3ECBB800CB62B1 /* WillEnterForeground.swift */; };
@@ -116,6 +116,8 @@
 /* Begin PBXFileReference section */
 		400E708B1E42CCCC00B5477B /* TouchIDService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchIDService.swift; path = Services/TouchIDService.swift; sourceTree = "<group>"; };
 		400E70971E46CD2100B5477B /* HostListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostListViewCell.swift; sourceTree = "<group>"; };
+		400E70991E4AA10200B5477B /* HostDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostDetailsViewModel.swift; path = ViewControllers/HostDetailsViewModel.swift; sourceTree = "<group>"; };
+		400E709A1E4AA10200B5477B /* MasterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterViewModel.swift; path = ViewControllers/MasterViewModel.swift; sourceTree = "<group>"; };
 		4012637F1CE770DD00FAE75C /* NMSSH.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NMSSH.framework; path = Carthage/Build/iOS/NMSSH.framework; sourceTree = "<group>"; };
 		401263821CE770DD00FAE75C /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftKeychainWrapper.framework; path = Carthage/Build/iOS/SwiftKeychainWrapper.framework; sourceTree = "<group>"; };
 		4012639E1CE79F6400FAE75C /* MacHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacHost.swift; path = Models/MacHost.swift; sourceTree = "<group>"; };
@@ -134,8 +136,6 @@
 		408507DD1E2BB9AB00C2E0D1 /* HostInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostInfo.swift; path = Models/HostInfo.swift; sourceTree = "<group>"; };
 		408507DF1E2BEB7000C2E0D1 /* SelectHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectHost.swift; path = Actions/SelectHost.swift; sourceTree = "<group>"; };
 		408508061E2C495200C2E0D1 /* LatestHostAliasServivce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LatestHostAliasServivce.swift; path = Services/LatestHostAliasServivce.swift; sourceTree = "<group>"; };
-		40A645A41E3D64E100CB62B1 /* HostDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostDetailsViewModel.swift; path = ViewModels/HostDetailsViewModel.swift; sourceTree = "<group>"; };
-		40A645A61E3D71F300CB62B1 /* MasterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterViewModel.swift; path = ViewModels/MasterViewModel.swift; sourceTree = "<group>"; };
 		40A645A91E3E6EF000CB62B1 /* MacUnlockService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacUnlockService.swift; path = Services/MacUnlockService.swift; sourceTree = "<group>"; };
 		40A645AB1E3E721400CB62B1 /* SSHService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSHService.swift; path = Services/SSHService.swift; sourceTree = "<group>"; };
 		40A645AD1E3ECBB800CB62B1 /* WillEnterForeground.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WillEnterForeground.swift; path = Actions/WillEnterForeground.swift; sourceTree = "<group>"; };
@@ -260,7 +260,9 @@
 			isa = PBXGroup;
 			children = (
 				40BD24F01E330BFE004C8BD8 /* HostDetailsViewController.swift */,
+				400E70991E4AA10200B5477B /* HostDetailsViewModel.swift */,
 				408507CC1E2ACFFE00C2E0D1 /* MasterViewController.swift */,
+				400E709A1E4AA10200B5477B /* MasterViewModel.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -275,15 +277,6 @@
 				400E708B1E42CCCC00B5477B /* TouchIDService.swift */,
 			);
 			name = Services;
-			sourceTree = "<group>";
-		};
-		40A6459C1E3D64B700CB62B1 /* ViewModels */ = {
-			isa = PBXGroup;
-			children = (
-				40A645A41E3D64E100CB62B1 /* HostDetailsViewModel.swift */,
-				40A645A61E3D71F300CB62B1 /* MasterViewModel.swift */,
-			);
-			name = ViewModels;
 			sourceTree = "<group>";
 		};
 		40A8B65F1E340C1500C71EE7 /* Routes */ = {
@@ -342,7 +335,6 @@
 				408507C81E2ACFA300C2E0D1 /* State */,
 				40BD24EB1E32F937004C8BD8 /* Storyboards */,
 				408507CB1E2ACFD300C2E0D1 /* ViewControllers */,
-				40A6459C1E3D64B700CB62B1 /* ViewModels */,
 				400E708F1E46CCE900B5477B /* Views */,
 			);
 			path = MacKey;
@@ -608,11 +600,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				400E709C1E4AA10200B5477B /* MasterViewModel.swift in Sources */,
 				40BD24F11E330BFE004C8BD8 /* HostDetailsViewController.swift in Sources */,
 				40A645AE1E3ECBB800CB62B1 /* WillEnterForeground.swift in Sources */,
 				4012639F1CE79F6400FAE75C /* MacHost.swift in Sources */,
 				408507CD1E2ACFFE00C2E0D1 /* MasterViewController.swift in Sources */,
-				40A645A51E3D64E100CB62B1 /* HostDetailsViewModel.swift in Sources */,
 				40A8B66B1E342D3300C71EE7 /* CancelHostDetails.swift in Sources */,
 				40A645921E3C359700CB62B1 /* MasterViewController+Routes.swift in Sources */,
 				408507DC1E2B147A00C2E0D1 /* UpdateHost.swift in Sources */,
@@ -628,10 +620,10 @@
 				403692841E35A17200571EB5 /* ReSwiftRxBridge.swift in Sources */,
 				40A645AA1E3E6EF000CB62B1 /* MacUnlockService.swift in Sources */,
 				40A645B21E3ECC2900CB62B1 /* DidFinishLaunching.swift in Sources */,
-				40A645A71E3D71F300CB62B1 /* MasterViewModel.swift in Sources */,
 				408507DA1E2B0AEC00C2E0D1 /* HostsState.swift in Sources */,
 				40A645B01E3ECBE100CB62B1 /* DidEnterBackground.swift in Sources */,
 				408507E01E2BEB7000C2E0D1 /* SelectHost.swift in Sources */,
+				400E709B1E4AA10200B5477B /* HostDetailsViewModel.swift in Sources */,
 				408507D41E2ADA8900C2E0D1 /* MacHostsInfoService.swift in Sources */,
 				40C4AB161CE758F400ED92C5 /* AppDelegate.swift in Sources */,
 				408507D61E2ADC6800C2E0D1 /* AddHost.swift in Sources */,

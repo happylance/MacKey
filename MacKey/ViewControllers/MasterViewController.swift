@@ -17,9 +17,9 @@ class MasterViewController: UITableViewController {
 
     var selectedCell: HostListViewCell? = nil
     var latestHostUnlockStatus: String? = nil
-    let sleepButtonTapped: PublishSubject<String> = PublishSubject()
-    let editCell: PublishSubject<HostListViewCell> = PublishSubject()
-    let deleteCell: PublishSubject<HostListViewCell> = PublishSubject()
+    let sleepButtonTapped$: PublishSubject<String> = PublishSubject()
+    let editCell$: PublishSubject<HostListViewCell> = PublishSubject()
+    let deleteCell$: PublishSubject<HostListViewCell> = PublishSubject()
     
     fileprivate let disposeBag = DisposeBag()
     
@@ -33,16 +33,16 @@ class MasterViewController: UITableViewController {
         let editButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
         editButtonItem.rx.tap.subscribe(onNext: { [unowned self] in
             if let selectedCell = self.selectedCell {
-                self.editCell.onNext(selectedCell)
+                self.editCell$.onNext(selectedCell)
             }
         }).disposed(by: disposeBag)
         self.navigationItem.leftBarButtonItem = editButtonItem
         
-        self.editCell.subscribe(onNext: { [unowned self] in
+        self.editCell$.subscribe(onNext: { [unowned self] in
             self.editCell($0)
         }).disposed(by: disposeBag)
         
-        self.deleteCell.subscribe(onNext: {[unowned self] in
+        self.deleteCell$.subscribe(onNext: {[unowned self] in
             self.deleteCell($0)
         }).disposed(by: disposeBag)
         
@@ -62,11 +62,11 @@ class MasterViewController: UITableViewController {
         tableView.tableFooterView = UIView()
         
         let viewModel = MasterViewModel(
-            itemSelected: tableView.rx.itemSelected.asDriver(),
-            sleepButtonTapped: sleepButtonTapped.asDriver(onErrorJustReturn:"")
+            itemSelected$: tableView.rx.itemSelected.asDriver(),
+            sleepButtonTapped$: sleepButtonTapped$.asDriver(onErrorJustReturn:"")
             )
 
-        viewModel.stateDiff.drive(onNext: { [unowned self] (prevState: HostsState, state: HostsState) -> () in
+        viewModel.stateDiff$.drive(onNext: { [unowned self] (prevState: HostsState, state: HostsState) -> () in
             let newHost = HostsState.newHostAfter(prevState.allHosts, in: state.allHosts)
             if let newHost = newHost, let index = state.sortedHostAliases.index(of: newHost.alias) {
                 let indexPath = IndexPath(row: index, section: 0)
@@ -79,7 +79,7 @@ class MasterViewController: UITableViewController {
             }
             }).disposed(by: disposeBag)
         
-        viewModel.selectedIndex.drive(onNext: { [unowned self] (indexPath, hostsState) in
+        viewModel.selectedIndex$.drive(onNext: { [unowned self] (indexPath, hostsState) in
             self.tableView.deselectRow(at: indexPath, animated: true)
             let alias = hostsState.sortedHostAliases[indexPath.row]
             guard let host = hostsState.allHosts[alias] else { return }
@@ -90,11 +90,11 @@ class MasterViewController: UITableViewController {
             }            
         }).disposed(by: disposeBag)
         
-        viewModel.selectedCellStatusUpdate.drive(onNext: { [unowned self] info in
+        viewModel.selectedCellStatusUpdate$.drive(onNext: { [unowned self] info in
             self.setDetailLabel(info)
         }).disposed(by: disposeBag)
         
-        viewModel.didEnterBackground.drive(onNext: { [unowned self] _ in
+        viewModel.didEnterBackground$.drive(onNext: { [unowned self] _ in
             self.setDetailLabel("")
         }).disposed(by: disposeBag)
     }
@@ -148,7 +148,7 @@ extension MasterViewController  { // UITableViewDataSource
         cell.hostNameOutlet!.text = alias
         
         cell.sleepButtonOutlet.rx.tap.subscribe(onNext:{ [unowned self] in
-            self.sleepButtonTapped.onNext(alias)
+            self.sleepButtonTapped$.onNext(alias)
         })
         .disposed(by: disposeBag)
         
@@ -172,13 +172,13 @@ extension MasterViewController { // UITableViewDelegate
         let editRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: "Edit", handler:{action, indexpath in
             tableView.setEditing(false, animated: true)
             if let cell = tableView.cellForRow(at: indexPath) as? HostListViewCell {
-                self.editCell.onNext(cell)
+                self.editCell$.onNext(cell)
             }
         });
         
         let deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Delete", handler:{action, indexpath in
             if let cell = tableView.cellForRow(at: indexPath) as? HostListViewCell {
-                self.deleteCell.onNext(cell)
+                self.deleteCell$.onNext(cell)
             }
         });
         

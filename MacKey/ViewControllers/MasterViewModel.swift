@@ -11,30 +11,30 @@ import RxSwift
 import RxCocoa
 
 class MasterViewModel {
-    let didEnterBackground: Driver<Bool>
-    let stateDiff: Driver<(HostsState, HostsState)>
-    let selectedIndex: Driver<(IndexPath, HostsState)>
-    let selectedCellStatusUpdate: Driver<String>
+    let didEnterBackground$: Driver<Bool>
+    let stateDiff$: Driver<(HostsState, HostsState)>
+    let selectedIndex$: Driver<(IndexPath, HostsState)>
+    let selectedCellStatusUpdate$: Driver<String>
     
-    init(itemSelected: Driver<IndexPath>,
-         sleepButtonTapped: Driver<String>) {
-        let storeState = store.observable.asDriver()
+    init(itemSelected$: Driver<IndexPath>,
+         sleepButtonTapped$: Driver<String>) {
+        let storeState$ = store.observable.asDriver()
         
-        didEnterBackground = storeState.map { $0.isAppInBackground }
+        didEnterBackground$ = storeState$.map { $0.isAppInBackground }
             .distinctUntilChanged()
             .filter { $0 }        
         
-        let hostsState = storeState.map { $0.hostsState }
+        let hostsState$ = storeState$.map { $0.hostsState }
             .distinctUntilChanged { $0.allHosts == $1.allHosts }
         
-        stateDiff = Driver.zip([hostsState, hostsState.skip(1)]) {
+        stateDiff$ = Driver.zip([hostsState$, hostsState$.skip(1)]) {
             (stateArray) -> (HostsState, HostsState) in
             return (stateArray[0], stateArray[1])
         }
 
-        selectedIndex = itemSelected.withLatestFrom(storeState) { ($0, $1.hostsState) }
+        selectedIndex$ = itemSelected$.withLatestFrom(storeState$) { ($0, $1.hostsState) }
         
-        let unlockStatus = store
+        let unlockStatus$ = store
             .observable.asObservable()
             .map { $0.hostsState }
             .distinctUntilChanged { $0.latestConnectionTime == $1.latestConnectionTime }
@@ -60,14 +60,14 @@ class MasterViewModel {
                 }
             }
         
-        let sleepStatus = sleepButtonTapped
+        let sleepStatus$ = sleepButtonTapped$
             .filter { $0 != "" }
-            .withLatestFrom(storeState) { $1.hostsState.allHosts[$0] }
+            .withLatestFrom(storeState$) { $1.hostsState.allHosts[$0] }
             .asObservable()
             .filter { $0 != nil }.map { $0! }
             .flatMapLatest { MacUnlockService.sleep($0) }
         
-        selectedCellStatusUpdate = Observable.of(unlockStatus, sleepStatus)
+        selectedCellStatusUpdate$ = Observable.of(unlockStatus$, sleepStatus$)
             .merge()
             .map {
                 switch $0 {

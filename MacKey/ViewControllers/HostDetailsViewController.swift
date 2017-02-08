@@ -30,10 +30,10 @@ class HostDetailsViewController: UITableViewController {
         
         let viewModel = HostDetailsViewModel(
             input: (
-                alias: aliasOutlet.rx.text.orEmpty.asDriver(),
-                host: hostOutlet.rx.text.orEmpty.asDriver(),
-                username: usernameOutlet.rx.text.orEmpty.asDriver(),
-                password: passwordOutlet.rx.text.orEmpty.asDriver()
+                alias$: aliasOutlet.rx.text.orEmpty.asDriver(),
+                host$: hostOutlet.rx.text.orEmpty.asDriver(),
+                username$: usernameOutlet.rx.text.orEmpty.asDriver(),
+                password$: passwordOutlet.rx.text.orEmpty.asDriver()
             )
         )
         aliasOutlet?.text = viewModel.initialValues.alias
@@ -43,8 +43,8 @@ class HostDetailsViewController: UITableViewController {
         
         validationOutlet.text = "Alias is already taken."
         
-        viewModel.aliasAvailable.drive(validationOutlet.rx.isHidden).disposed(by: disposeBag)
-        viewModel.saveEnabled.drive(saveOutlet.rx.isEnabled).disposed(by: disposeBag)
+        viewModel.aliasAvailable$.drive(validationOutlet.rx.isHidden).disposed(by: disposeBag)
+        viewModel.saveEnabled$.drive(saveOutlet.rx.isEnabled).disposed(by: disposeBag)
         
         saveOutlet.rx.tap
             .subscribe(onNext: { [unowned self] in
