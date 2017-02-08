@@ -10,7 +10,6 @@ import ReactiveReSwift
 
 struct State : StateType {
     var hostsState: HostsState = HostsReducer.initialHostsState()
-    var isAppInBackground: Bool = false
 }
 
 extension State {

@@ -32,10 +32,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        store.dispatch(DidEnterBackground())
-    }
-
     func applicationWillEnterForeground(_ application: UIApplication) {
         store.dispatch(WillEnterForeground())
     }

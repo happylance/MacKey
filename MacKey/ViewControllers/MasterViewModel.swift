@@ -80,10 +80,10 @@ class MasterViewModel {
             }
             .asDriver(onErrorJustReturn: "")
         
-        let statusWhenEnterBackground$ = storeState$.map { $0.isAppInBackground }
-            .distinctUntilChanged()
-            .filter { $0 }
+        let statusWhenEnterBackground$: Driver<String> = NotificationCenter.default.rx
+            .notification(.UIApplicationDidEnterBackground)
             .map { _ in "" }
+            .asDriver(onErrorJustReturn: "")
         
         selectedCellStatusUpdate$ = Driver.of(connectionStatus$, statusWhenEnterBackground$)
             .merge()

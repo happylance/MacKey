@@ -10,16 +10,6 @@ import ReactiveReSwift
 
 let AppReducer = Reducer<State> { action, state in
     return State(
-        hostsState: dlog(HostsReducer.handleAction(action, state:state.hostsState)),
-        isAppInBackground: isAppInBackgroundReducer(action, state.isAppInBackground)
+        hostsState: dlog(HostsReducer.handleAction(action, state:state.hostsState))
     )
-}
-
-private func isAppInBackgroundReducer(_ action:Action, _ state: Bool) -> Bool {
-    switch action {
-    case is DidEnterBackground: return true
-    case is DidFinishLaunching: return false
-    case is WillEnterForeground: return false
-    default: return state
-    }
 }
