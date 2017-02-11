@@ -20,7 +20,7 @@
                         <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="HostListViewCell" rowHeight="80" id="WCw-Qf-5nD" customClass="HostListViewCell" customModule="MacKey" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="56" width="375" height="80"/>
+                                <rect key="frame" x="0.0" y="55.5" width="375" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WCw-Qf-5nD" id="37f-cq-3Eg">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
@@ -52,7 +52,7 @@
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
-                                    <outlet property="hostNameOutlet" destination="Jwo-bv-Uan" id="md3-nM-txZ"/>
+                                    <outlet property="hostAliasOutlet" destination="Jwo-bv-Uan" id="OSL-iB-wGk"/>
                                     <outlet property="hostStatusOutlet" destination="6Ct-Jq-igf" id="tEG-Id-Phb"/>
                                     <outlet property="sleepButtonOutlet" destination="La7-n5-Npa" id="a5J-VW-bDE"/>
                                 </connections>

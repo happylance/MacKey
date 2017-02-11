@@ -9,7 +9,7 @@
 import UIKit
 
 class HostListViewCell: UITableViewCell {
-    @IBOutlet weak var hostNameOutlet: UILabel!
+    @IBOutlet weak var hostAliasOutlet: UILabel!
     @IBOutlet weak var hostStatusOutlet: UILabel!
     @IBOutlet weak var sleepButtonOutlet: UIButton!
 }

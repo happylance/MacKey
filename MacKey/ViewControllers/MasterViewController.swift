@@ -15,10 +15,9 @@ let readMeURL = "https://github.com/happylance/MacKey/blob/master/README.md"
 
 class MasterViewController: UITableViewController {
 
-    var selectedCell: HostListViewCell? = nil
     var latestHostUnlockStatus: String? = nil
     let sleepButtonTapped$: PublishSubject<String> = PublishSubject()
-    let editCell$: PublishSubject<HostListViewCell> = PublishSubject()
+    let editCell$: PublishSubject<String> = PublishSubject()
     let deleteCell$: PublishSubject<HostListViewCell> = PublishSubject()
     
     fileprivate let disposeBag = DisposeBag()
@@ -38,7 +37,7 @@ class MasterViewController: UITableViewController {
     
     private func setUpDeleteAction() {
         self.deleteCell$.subscribe(onNext: {[unowned self] cell in
-            if let hostAlias = cell.hostNameOutlet?.text,
+            if let hostAlias = cell.hostAliasOutlet?.text,
                 let host = store.hostsState.allHosts[hostAlias] {
                 store.dispatch(RemoveHost(host: host))
                 if let indexPathToRemove = self.tableView.indexPath(for: cell) {
@@ -51,20 +50,19 @@ class MasterViewController: UITableViewController {
     private func setUpEditAction() {
         let editButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
         editButtonItem.rx.tap.subscribe(onNext: { [unowned self] in
-            if let selectedCell = self.selectedCell {
-                self.editCell$.onNext(selectedCell)
+            let selectedAlias = store.hostsState.latestHostAlias
+            if selectedAlias.characters.count > 0 {
+                self.editCell$.onNext(selectedAlias)
             }
         }).disposed(by: disposeBag)
         self.navigationItem.leftBarButtonItem = editButtonItem
         
         self.editCell$
-            .flatMapFirst { cell -> Observable<(HostInfo, EditHostState)> in
-                if let alias = cell.hostNameOutlet?.text {
-                    if let oldHost = store.hostsState.allHosts[alias],
-                        let hostDetailVC = self.showHostDetailsViewController(animated: true, forNewHost: false) {
-                        hostDetailVC.oldHost = oldHost
-                        return hostDetailVC.getEditHostState().map { (oldHost, $0) }
-                    }
+            .flatMapFirst { alias -> Observable<(HostInfo, EditHostState)> in
+                if let oldHost = store.hostsState.allHosts[alias],
+                    let hostDetailVC = self.showHostDetailsViewController(animated: true, forNewHost: false) {
+                    hostDetailVC.oldHost = oldHost
+                    return hostDetailVC.getEditHostState().map { (oldHost, $0) }
                 }
                 return Observable.empty()
             }
@@ -90,16 +88,16 @@ class MasterViewController: UITableViewController {
             self.tableView.deselectRow(at: indexPath, animated: true)
             let alias = hostsState.sortedHostAliases[indexPath.row]
             guard let host = hostsState.allHosts[alias] else { return }
+            let previousSelectedAlias = store.hostsState.latestHostAlias
             store.dispatch(SelectHost(host: host))
             
-            if let cell = self.tableView.cellForRow(at: indexPath) as? HostListViewCell {
-                self.reloadCells([cell, self.selectedCell])
-            }
+            self.reloadCells([alias, previousSelectedAlias])
+            
         }).disposed(by: disposeBag)
         
         viewModel.selectedCellStatusUpdate$.drive(onNext: { [unowned self] info in
             self.latestHostUnlockStatus = info
-            self.reloadCells([self.selectedCell])
+            self.reloadCells([store.hostsState.latestHostAlias])
         }).disposed(by: disposeBag)
     }
     
@@ -137,11 +135,12 @@ class MasterViewController: UITableViewController {
         return UIBarButtonItem(customView: infoButton)
     }
     
-    private func reloadCells(_ cells: [HostListViewCell?]) {
-        let indexPathsToReload = cells
-            .flatMap { $0 }
-            .reduce([HostListViewCell]()) { $0.contains($1) ? $0 : $0 + [$1] } // Remove duplicates
-            .flatMap { self.tableView.indexPath(for: $0) }
+    private func reloadCells(_ aliases: [String]) {
+        let indexPathsToReload = aliases
+            .filter { $0.characters.count > 0 }
+            .flatMap { store.hostsState.sortedHostAliases.index(of: $0) }
+            .reduce([Int]()) { $0.contains($1) ? $0 : $0 + [$1] } // Remove duplicates
+            .map { IndexPath(row: $0, section: 0) }
         self.tableView.reloadRows(at: indexPathsToReload, with: .none)
     }
 }
@@ -161,7 +160,7 @@ extension MasterViewController  { // UITableViewDataSource
         }
         
         let alias = store.hostsState.sortedHostAliases[indexPath.row]
-        cell.hostNameOutlet!.text = alias
+        cell.hostAliasOutlet?.text = alias
         
         cell.sleepButtonOutlet.rx.tap.subscribe(onNext:{ [unowned self] in
             self.sleepButtonTapped$.onNext(alias)
@@ -172,7 +171,6 @@ extension MasterViewController  { // UITableViewDataSource
             cell.hostStatusOutlet?.text = latestHostUnlockStatus
             cell.sleepButtonOutlet.isHidden = !(latestHostUnlockStatus?.contains("unlocked") ?? false)
             cell.accessoryType = .checkmark
-            self.selectedCell = cell
         } else {
             cell.hostStatusOutlet?.text = ""
             cell.sleepButtonOutlet.isHidden = true
@@ -188,7 +186,7 @@ extension MasterViewController { // UITableViewDelegate
         let editRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: "Edit", handler:{action, indexpath in
             tableView.setEditing(false, animated: true)
             if let cell = tableView.cellForRow(at: indexPath) as? HostListViewCell {
-                self.editCell$.onNext(cell)
+                self.editCell$.onNext(cell.hostAliasOutlet.text ?? "")
             }
         });
         
