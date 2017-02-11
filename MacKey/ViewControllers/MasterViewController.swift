@@ -53,6 +53,7 @@ class MasterViewController: UITableViewController {
                 switch editHostState {
                 case let .saved(newHost):
                     store.dispatch(UpdateHost(oldHost: oldHost, newHost: newHost))
+                    self.tableView.reloadData()
                 default: break
                 }
                 self.dismiss(animated: true)
@@ -83,11 +84,14 @@ class MasterViewController: UITableViewController {
                 }
                 return Observable.empty()
             }
-            .subscribe(onNext: { editHostState in
+            .subscribe(onNext: { [unowned self] editHostState in
                 self.dismiss(animated: true) {
                     switch editHostState {
                     case let .saved(newHost):
                         store.dispatch(AddHost(host: newHost))
+                        let index = self.latestState.hostsState.sortedHostAliases.index(of: newHost.alias) ?? 0
+                        let indexPath = IndexPath(row: index, section: 0)
+                        self.tableView.insertRows(at: [indexPath], with: .automatic)
                     default:
                         break
                     }
@@ -104,19 +108,6 @@ class MasterViewController: UITableViewController {
             itemSelected$: tableView.rx.itemSelected.asDriver(),
             sleepButtonTapped$: sleepButtonTapped$.asDriver(onErrorJustReturn:"")
             )
-
-        viewModel.stateDiff$.drive(onNext: { [unowned self] (prevState: HostsState, state: HostsState) -> () in
-            let newHost = HostsState.newHostAfter(prevState.allHosts, in: state.allHosts)
-            if let newHost = newHost, let index = state.sortedHostAliases.index(of: newHost.alias) {
-                let indexPath = IndexPath(row: index, section: 0)
-                self.tableView.insertRows(at: [indexPath], with: .automatic)
-            }
-            let removedHost = HostsState.removedHostFrom(prevState.allHosts, in: state.allHosts)
-        
-            if newHost == nil && removedHost == nil {
-                self.tableView.reloadData()
-            }
-            }).disposed(by: disposeBag)
         
         viewModel.selectedIndex$.drive(onNext: { [unowned self] (indexPath, hostsState) in
             self.tableView.deselectRow(at: indexPath, animated: true)

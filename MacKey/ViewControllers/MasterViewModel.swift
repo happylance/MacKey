@@ -11,7 +11,6 @@ import RxSwift
 import RxCocoa
 
 class MasterViewModel {
-    let stateDiff$: Driver<(HostsState, HostsState)>
     let selectedIndex$: Driver<(IndexPath, HostsState)>
     let selectedCellStatusUpdate$: Driver<String>
     
@@ -19,14 +18,6 @@ class MasterViewModel {
          sleepButtonTapped$: Driver<String>) {
         let storeState$ = store.observable.asDriver()
         
-        let hostsState$ = storeState$.map { $0.hostsState }
-            .distinctUntilChanged { $0.allHosts == $1.allHosts }
-        
-        stateDiff$ = Driver.zip([hostsState$, hostsState$.skip(1)]) {
-            (stateArray) -> (HostsState, HostsState) in
-            return (stateArray[0], stateArray[1])
-        }
-
         selectedIndex$ = itemSelected$.withLatestFrom(storeState$) { ($0, $1.hostsState) }
         
         let enterForeground$: Observable<Void> = NotificationCenter

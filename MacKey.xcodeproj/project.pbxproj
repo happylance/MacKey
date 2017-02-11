@@ -33,7 +33,6 @@
 		40A645AC1E3E721400CB62B1 /* SSHService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645AB1E3E721400CB62B1 /* SSHService.swift */; };
 		40A8B65E1E33FE1F00C71EE7 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A8B65D1E33FE1F00C71EE7 /* RxSwift.framework */; };
 		40A8B6651E34132600C71EE7 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A8B6641E34132600C71EE7 /* RxCocoa.framework */; };
-		40A8B66B1E342D3300C71EE7 /* CancelHostDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8B66A1E342D3300C71EE7 /* CancelHostDetails.swift */; };
 		40BD24ED1E330388004C8BD8 /* HostDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40BD24EC1E330388004C8BD8 /* HostDetails.storyboard */; };
 		40BD24F11E330BFE004C8BD8 /* HostDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BD24F01E330BFE004C8BD8 /* HostDetailsViewController.swift */; };
 		40C4AB161CE758F400ED92C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB151CE758F400ED92C5 /* AppDelegate.swift */; };
@@ -137,7 +136,6 @@
 		40A8B65D1E33FE1F00C71EE7 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		40A8B6621E340E1E00C71EE7 /* MasterViewController+Routes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MasterViewController+Routes.swift"; path = "Routes/MasterViewController+Routes.swift"; sourceTree = "<group>"; };
 		40A8B6641E34132600C71EE7 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
-		40A8B66A1E342D3300C71EE7 /* CancelHostDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CancelHostDetails.swift; path = Actions/CancelHostDetails.swift; sourceTree = "<group>"; };
 		40BD24EC1E330388004C8BD8 /* HostDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HostDetails.storyboard; path = Storyboards/HostDetails.storyboard; sourceTree = "<group>"; };
 		40BD24F01E330BFE004C8BD8 /* HostDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostDetailsViewController.swift; path = ViewControllers/HostDetailsViewController.swift; sourceTree = "<group>"; };
 		40C4AB121CE758F400ED92C5 /* MacKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -218,7 +216,6 @@
 			isa = PBXGroup;
 			children = (
 				408507D51E2ADC6800C2E0D1 /* AddHost.swift */,
-				40A8B66A1E342D3300C71EE7 /* CancelHostDetails.swift */,
 				408507D71E2ADD0E00C2E0D1 /* RemoveHost.swift */,
 				408507DF1E2BEB7000C2E0D1 /* SelectHost.swift */,
 				408507DB1E2B147A00C2E0D1 /* UpdateHost.swift */,
@@ -592,7 +589,6 @@
 				40BD24F11E330BFE004C8BD8 /* HostDetailsViewController.swift in Sources */,
 				4012639F1CE79F6400FAE75C /* MacHost.swift in Sources */,
 				408507CD1E2ACFFE00C2E0D1 /* MasterViewController.swift in Sources */,
-				40A8B66B1E342D3300C71EE7 /* CancelHostDetails.swift in Sources */,
 				40A645921E3C359700CB62B1 /* MasterViewController+Routes.swift in Sources */,
 				408507DC1E2B147A00C2E0D1 /* UpdateHost.swift in Sources */,
 				408507CF1E2AD05200C2E0D1 /* AppReducer.swift in Sources */,

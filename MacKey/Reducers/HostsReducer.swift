@@ -54,11 +54,10 @@ struct HostsReducer {
         case let action as UpdateHost:
             let newHost = action.newHost
             let oldHost = action.oldHost
-            if newHost.alias != oldHost.alias, state.allHosts.keys.contains(newHost.alias) {
-                // Do not update state if newHost.alias is already used for other hosts.
-                return state.latestHostAlias
+            if state.latestHostAlias == oldHost.alias {
+                return newHost.alias
             }
-            return newHost.alias
+            return state.latestHostAlias
         default:
             return state.latestHostAlias
         }
