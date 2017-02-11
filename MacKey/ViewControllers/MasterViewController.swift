@@ -22,11 +22,7 @@ class MasterViewController: UITableViewController {
     let deleteCell$: PublishSubject<HostListViewCell> = PublishSubject()
     
     fileprivate let disposeBag = DisposeBag()
-    
-    fileprivate var latestState: State {
-        return store.observable.value
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,7 +39,7 @@ class MasterViewController: UITableViewController {
     private func setUpDeleteAction() {
         self.deleteCell$.subscribe(onNext: {[unowned self] cell in
             if let hostAlias = cell.hostNameOutlet?.text,
-                let host = store.observable.value.allHosts[hostAlias] {
+                let host = store.hostsState.allHosts[hostAlias] {
                 store.dispatch(RemoveHost(host: host))
                 if let indexPathToRemove = self.tableView.indexPath(for: cell) {
                     self.tableView.deleteRows(at: [indexPathToRemove], with: .fade)
@@ -121,7 +117,7 @@ class MasterViewController: UITableViewController {
                     switch editHostState {
                     case let .saved(newHost):
                         store.dispatch(AddHost(host: newHost))
-                        let index = self.latestState.hostsState.sortedHostAliases.index(of: newHost.alias) ?? 0
+                        let index = store.hostsState.sortedHostAliases.index(of: newHost.alias) ?? 0
                         let indexPath = IndexPath(row: index, section: 0)
                         self.tableView.insertRows(at: [indexPath], with: .automatic)
                     default:
@@ -156,7 +152,7 @@ extension MasterViewController  { // UITableViewDataSource
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return latestState.allHosts.count
+        return store.hostsState.allHosts.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> HostListViewCell {
@@ -164,7 +160,7 @@ extension MasterViewController  { // UITableViewDataSource
             fatalError("Could not create HostListViewCell")
         }
         
-        let alias = latestState.hostsState.sortedHostAliases[indexPath.row]
+        let alias = store.hostsState.sortedHostAliases[indexPath.row]
         cell.hostNameOutlet!.text = alias
         
         cell.sleepButtonOutlet.rx.tap.subscribe(onNext:{ [unowned self] in
@@ -172,7 +168,7 @@ extension MasterViewController  { // UITableViewDataSource
         })
         .disposed(by: disposeBag)
         
-        if alias == latestState.latestHostAlias {
+        if alias == store.hostsState.latestHostAlias {
             cell.hostStatusOutlet?.text = latestHostUnlockStatus
             cell.sleepButtonOutlet.isHidden = !(latestHostUnlockStatus?.contains("unlocked") ?? false)
             cell.accessoryType = .checkmark

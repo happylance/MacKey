@@ -11,14 +11,3 @@ import ReactiveReSwift
 struct State : StateType {
     var hostsState: HostsState = HostsReducer.initialHostsState()
 }
-
-extension State {
-    var allHosts: Hosts {
-        return hostsState.allHosts
-    }
-    
-
-    var latestHostAlias: String {
-        return hostsState.latestHostAlias
-    }
-}
