@@ -16,6 +16,8 @@
 		4012639F1CE79F6400FAE75C /* MacHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4012639E1CE79F6400FAE75C /* MacHost.swift */; };
 		403692841E35A17200571EB5 /* ReSwiftRxBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403692831E35A17200571EB5 /* ReSwiftRxBridge.swift */; };
 		403692861E35A1B300571EB5 /* ReactiveReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 403692851E35A1B300571EB5 /* ReactiveReSwift.framework */; };
+		404E057A1E4FC3AF002F8A95 /* HostsReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404E05791E4FC3AF002F8A95 /* HostsReducerTests.swift */; };
+		404E057B1E4FC6C4002F8A95 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A8B6641E34132600C71EE7 /* RxCocoa.framework */; };
 		408507CA1E2ACFCA00C2E0D1 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507C91E2ACFCA00C2E0D1 /* State.swift */; };
 		408507CD1E2ACFFE00C2E0D1 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507CC1E2ACFFE00C2E0D1 /* MasterViewController.swift */; };
 		408507CF1E2AD05200C2E0D1 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507CE1E2AD05200C2E0D1 /* AppReducer.swift */; };
@@ -119,6 +121,7 @@
 		403692641E3595CF00571EB5 /* ReactiveReSwift.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactiveReSwift.xcodeproj; path = Carthage/Checkouts/ReactiveReSwift/ReactiveReSwift.xcodeproj; sourceTree = "<group>"; };
 		403692831E35A17200571EB5 /* ReSwiftRxBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReSwiftRxBridge.swift; sourceTree = "<group>"; };
 		403692851E35A1B300571EB5 /* ReactiveReSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveReSwift.framework; path = Carthage/Build/iOS/ReactiveReSwift.framework; sourceTree = "<group>"; };
+		404E05791E4FC3AF002F8A95 /* HostsReducerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostsReducerTests.swift; sourceTree = "<group>"; };
 		408507C91E2ACFCA00C2E0D1 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = State.swift; path = State/State.swift; sourceTree = "<group>"; };
 		408507CC1E2ACFFE00C2E0D1 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterViewController.swift; path = ViewControllers/MasterViewController.swift; sourceTree = "<group>"; };
 		408507CE1E2AD05200C2E0D1 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppReducer.swift; path = Reducers/AppReducer.swift; sourceTree = "<group>"; };
@@ -168,6 +171,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				404E057B1E4FC6C4002F8A95 /* RxCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -328,6 +332,7 @@
 		40C4AB2B1CE758F400ED92C5 /* MacKeyTests */ = {
 			isa = PBXGroup;
 			children = (
+				404E05791E4FC3AF002F8A95 /* HostsReducerTests.swift */,
 				40C4AB2C1CE758F400ED92C5 /* MacKeyTests.swift */,
 				40C4AB2E1CE758F400ED92C5 /* Info.plist */,
 			);
@@ -615,6 +620,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				404E057A1E4FC3AF002F8A95 /* HostsReducerTests.swift in Sources */,
 				40C4AB2D1CE758F400ED92C5 /* MacKeyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -787,6 +793,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MacKeyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Lance.MacKeyTests;
@@ -800,6 +810,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MacKeyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Lance.MacKeyTests;
