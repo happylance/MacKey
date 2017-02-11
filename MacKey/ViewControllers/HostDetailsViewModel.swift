@@ -23,8 +23,9 @@ class HostDetailsViewModel {
         )) {
         
         let initialAlias = input.initialHost.alias
-        aliasAvailable$ = input.alias$.map {
-            $0 == initialAlias || store.isAliasAvailable($0) }
+        aliasAvailable$ = input.alias$
+            .withLatestFrom(store.observable.asDriver()) {
+                $0 == initialAlias || !$1.hostsState.allHosts.keys.contains($0) }
         
         let aliasValid$ = input.alias$
             .withLatestFrom(aliasAvailable$) { alias, aliasAvailable in
@@ -59,9 +60,5 @@ class HostDetailsViewModel {
 extension Store {
     var hostsState : HostsState {
         return store.observable.value.hostsState
-    }
-    
-    fileprivate func isAliasAvailable(_ alias: String) -> Bool {
-        return !hostsState.allHosts.keys.contains(alias)
     }
 }

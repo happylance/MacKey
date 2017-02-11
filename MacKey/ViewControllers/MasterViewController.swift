@@ -15,10 +15,10 @@ let readMeURL = "https://github.com/happylance/MacKey/blob/master/README.md"
 
 class MasterViewController: UITableViewController {
 
-    var latestHostUnlockStatus: String? = nil
-    let sleepButtonTapped$: PublishSubject<String> = PublishSubject()
-    let editCell$: PublishSubject<String> = PublishSubject()
-    let deleteCell$: PublishSubject<HostListViewCell> = PublishSubject()
+    fileprivate var latestHostUnlockStatus: String? = nil
+    fileprivate let sleepButtonTapped$: PublishSubject<String> = PublishSubject()
+    fileprivate let editCell$: PublishSubject<String> = PublishSubject()
+    fileprivate let deleteCell$: PublishSubject<HostListViewCell> = PublishSubject()
     
     fileprivate let disposeBag = DisposeBag()
 
@@ -36,9 +36,11 @@ class MasterViewController: UITableViewController {
     }
     
     private func setUpDeleteAction() {
-        self.deleteCell$.subscribe(onNext: {[unowned self] cell in
+        self.deleteCell$
+            .withLatestFrom(store.observable.asObservable()) { ($0, $1.hostsState.allHosts) }
+            .subscribe(onNext: {[unowned self] (cell, allHosts) in
             if let hostAlias = cell.hostAliasOutlet?.text,
-                let host = store.hostsState.allHosts[hostAlias] {
+                let host = allHosts[hostAlias] {
                 store.dispatch(RemoveHost(host: host))
                 if let indexPathToRemove = self.tableView.indexPath(for: cell) {
                     self.tableView.deleteRows(at: [indexPathToRemove], with: .fade)
@@ -49,8 +51,10 @@ class MasterViewController: UITableViewController {
     
     private func setUpEditAction() {
         let editButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
-        editButtonItem.rx.tap.subscribe(onNext: { [unowned self] in
-            let selectedAlias = store.hostsState.latestHostAlias
+        editButtonItem.rx.tap
+            .withLatestFrom(store.observable.asObservable()) { ($0, $1.hostsState.latestHostAlias) }
+            .subscribe(onNext: { [unowned self] (_, latestHostAlias) in
+            let selectedAlias = latestHostAlias
             if selectedAlias.characters.count > 0 {
                 self.editCell$.onNext(selectedAlias)
             }
@@ -58,8 +62,9 @@ class MasterViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = editButtonItem
         
         self.editCell$
-            .flatMapFirst { alias -> Observable<(HostInfo, EditHostState)> in
-                if let oldHost = store.hostsState.allHosts[alias],
+            .withLatestFrom(store.observable.asObservable()) { ($0, $1.hostsState.allHosts) }
+            .flatMapFirst { (alias, allHosts) -> Observable<(HostInfo, EditHostState)> in
+                if let oldHost = allHosts[alias],
                     let hostDetailVC = self.showHostDetailsViewController(animated: true, forNewHost: false) {
                     hostDetailVC.oldHost = oldHost
                     return hostDetailVC.getEditHostState().map { (oldHost, $0) }
@@ -84,20 +89,23 @@ class MasterViewController: UITableViewController {
             sleepButtonTapped$: sleepButtonTapped$.asDriver(onErrorJustReturn:"")
         )
         
-        viewModel.selectedIndex$.drive(onNext: { [unowned self] (indexPath, hostsState) in
+        viewModel.selectedIndex$
+            .drive(onNext: { [unowned self] (indexPath, hostsState) in
             self.tableView.deselectRow(at: indexPath, animated: true)
             let alias = hostsState.sortedHostAliases[indexPath.row]
             guard let host = hostsState.allHosts[alias] else { return }
-            let previousSelectedAlias = store.hostsState.latestHostAlias
+            let previousSelectedAlias = hostsState.latestHostAlias
             store.dispatch(SelectHost(host: host))
             
             self.reloadCells([alias, previousSelectedAlias])
             
         }).disposed(by: disposeBag)
         
-        viewModel.selectedCellStatusUpdate$.drive(onNext: { [unowned self] info in
+        viewModel.selectedCellStatusUpdate$
+            .withLatestFrom(store.observable.asDriver()) { ($0, $1.hostsState.latestHostAlias) }
+            .drive(onNext: { [unowned self] (info, latestHostAlias) in
             self.latestHostUnlockStatus = info
-            self.reloadCells([store.hostsState.latestHostAlias])
+            self.reloadCells([latestHostAlias])
         }).disposed(by: disposeBag)
     }
     
@@ -110,12 +118,13 @@ class MasterViewController: UITableViewController {
                 }
                 return Observable.empty()
             }
-            .subscribe(onNext: { [unowned self] editHostState in
+            .withLatestFrom(store.observable.asObservable()) { ($0, $1.hostsState) }
+            .subscribe(onNext: { [unowned self] (editHostState, hostsState) in
                 self.dismiss(animated: true) {
                     switch editHostState {
                     case let .saved(newHost):
                         store.dispatch(AddHost(host: newHost))
-                        let index = store.hostsState.sortedHostAliases.index(of: newHost.alias) ?? 0
+                        let index = hostsState.sortedHostAliases.index(of: newHost.alias) ?? 0
                         let indexPath = IndexPath(row: index, section: 0)
                         self.tableView.insertRows(at: [indexPath], with: .automatic)
                     default:
