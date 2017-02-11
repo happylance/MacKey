@@ -29,12 +29,19 @@ class MasterViewModel {
 
         selectedIndex$ = itemSelected$.withLatestFrom(storeState$) { ($0, $1.hostsState) }
         
-        let unlockStatus$ = store
-            .observable.asObservable()
+        let enterForeground$: Observable<Void> = NotificationCenter
+            .default.rx.notification(.UIApplicationWillEnterForeground)
+            .map { _ in }
+        
+        let startConnection$ = Observable
+            .of(Observable.just(), // for didFinishLaunching
+                enterForeground$,
+                itemSelected$.asObservable().map { _ in })
+            .merge()
+        
+        let unlockStatus$ = startConnection$.withLatestFrom(store.observable.asObservable())
             .map { $0.hostsState }
-            .distinctUntilChanged { $0.latestConnectionTime == $1.latestConnectionTime }
-            .filter { $0.latestConnectionTime != nil
-                && $0.allHosts.keys.contains($0.latestHostAlias) }
+            .filter { $0.allHosts.keys.contains($0.latestHostAlias) }
             .map { $0.allHosts[$0.latestHostAlias]! }
             .flatMapLatest { host in MacUnlockService.wakeUp(host).map { (host, $0) } }
             .observeOn(MainScheduler.instance)

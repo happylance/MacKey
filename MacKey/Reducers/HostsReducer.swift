@@ -14,7 +14,6 @@ struct HostsReducer {
         return HostsState(
             allHosts: allHostsReducer(action, state: state),
             editingHostAlias: editingHostAliasReducer(action, state: state),
-            latestConnectionTime: latestConnectionTimeReducer(action, state: state),
             latestHostAlias: latestHostAliasReducer(action, state: state)
         )
     }
@@ -23,7 +22,6 @@ struct HostsReducer {
         return HostsState(
             allHosts: MacHostsInfoService().macHostsInfo(),
             editingHostAlias: nil,
-            latestConnectionTime: nil,
             latestHostAlias: LatestHostAliasService.alias
         )
     }
@@ -64,19 +62,6 @@ struct HostsReducer {
         }
         
         return state.editingHostAlias
-    }
-    
-    private static func latestConnectionTimeReducer(_ action: Action, state: HostsState) -> TimeInterval? {
-        switch action {
-        case _ as SelectHost:
-            return now()
-        case _ as DidFinishLaunching:
-            return now()
-        case _ as WillEnterForeground:
-            return now()
-        default:
-            return state.latestConnectionTime
-        }
     }
     
     private static func latestHostAliasReducer(_ action: Action, state: HostsState) -> String {

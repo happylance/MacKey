@@ -11,7 +11,6 @@ import Foundation
 struct HostsState {
     var allHosts: Hosts
     var editingHostAlias: String?
-    var latestConnectionTime: TimeInterval?
     var latestHostAlias: String
 }
 

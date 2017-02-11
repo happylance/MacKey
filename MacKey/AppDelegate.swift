@@ -26,14 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        DispatchQueue.main.async {
-            store.dispatch(DidFinishLaunching())
-        }
         return true
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        store.dispatch(WillEnterForeground())
     }
 }
 
