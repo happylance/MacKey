@@ -13,7 +13,6 @@ struct HostsReducer {
         let state = state ?? initialHostsState()
         return HostsState(
             allHosts: allHostsReducer(action, state: state),
-            editingHostAlias: editingHostAliasReducer(action, state: state),
             latestHostAlias: latestHostAliasReducer(action, state: state)
         )
     }
@@ -21,7 +20,6 @@ struct HostsReducer {
     static func initialHostsState() -> HostsState {
         return HostsState(
             allHosts: MacHostsInfoService().macHostsInfo(),
-            editingHostAlias: nil,
             latestHostAlias: LatestHostAliasService.alias
         )
     }
@@ -47,21 +45,6 @@ struct HostsReducer {
         }
         
         return hosts
-    }
-    
-    private static func editingHostAliasReducer(_ action: Action, state: HostsState) -> String? {
-        switch action {
-        case let action as EditHost:
-            return action.alias
-        case _ as CancelHostDetails:
-            return nil
-        case _ as UpdateHost:
-            return nil
-        default:
-            break
-        }
-        
-        return state.editingHostAlias
     }
     
     private static func latestHostAliasReducer(_ action: Action, state: HostsState) -> String {

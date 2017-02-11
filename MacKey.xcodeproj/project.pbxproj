@@ -33,7 +33,6 @@
 		40A645AC1E3E721400CB62B1 /* SSHService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645AB1E3E721400CB62B1 /* SSHService.swift */; };
 		40A8B65E1E33FE1F00C71EE7 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A8B65D1E33FE1F00C71EE7 /* RxSwift.framework */; };
 		40A8B6651E34132600C71EE7 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A8B6641E34132600C71EE7 /* RxCocoa.framework */; };
-		40A8B6671E34295900C71EE7 /* EditHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8B6661E34295900C71EE7 /* EditHost.swift */; };
 		40A8B66B1E342D3300C71EE7 /* CancelHostDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8B66A1E342D3300C71EE7 /* CancelHostDetails.swift */; };
 		40BD24ED1E330388004C8BD8 /* HostDetails.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40BD24EC1E330388004C8BD8 /* HostDetails.storyboard */; };
 		40BD24F11E330BFE004C8BD8 /* HostDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BD24F01E330BFE004C8BD8 /* HostDetailsViewController.swift */; };
@@ -138,7 +137,6 @@
 		40A8B65D1E33FE1F00C71EE7 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
 		40A8B6621E340E1E00C71EE7 /* MasterViewController+Routes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "MasterViewController+Routes.swift"; path = "Routes/MasterViewController+Routes.swift"; sourceTree = "<group>"; };
 		40A8B6641E34132600C71EE7 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
-		40A8B6661E34295900C71EE7 /* EditHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EditHost.swift; path = Actions/EditHost.swift; sourceTree = "<group>"; };
 		40A8B66A1E342D3300C71EE7 /* CancelHostDetails.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CancelHostDetails.swift; path = Actions/CancelHostDetails.swift; sourceTree = "<group>"; };
 		40BD24EC1E330388004C8BD8 /* HostDetails.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = HostDetails.storyboard; path = Storyboards/HostDetails.storyboard; sourceTree = "<group>"; };
 		40BD24F01E330BFE004C8BD8 /* HostDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostDetailsViewController.swift; path = ViewControllers/HostDetailsViewController.swift; sourceTree = "<group>"; };
@@ -221,7 +219,6 @@
 			children = (
 				408507D51E2ADC6800C2E0D1 /* AddHost.swift */,
 				40A8B66A1E342D3300C71EE7 /* CancelHostDetails.swift */,
-				40A8B6661E34295900C71EE7 /* EditHost.swift */,
 				408507D71E2ADD0E00C2E0D1 /* RemoveHost.swift */,
 				408507DF1E2BEB7000C2E0D1 /* SelectHost.swift */,
 				408507DB1E2B147A00C2E0D1 /* UpdateHost.swift */,
@@ -606,7 +603,6 @@
 				40A645AC1E3E721400CB62B1 /* SSHService.swift in Sources */,
 				408508071E2C495200C2E0D1 /* LatestHostAliasServivce.swift in Sources */,
 				408507DE1E2BB9AB00C2E0D1 /* HostInfo.swift in Sources */,
-				40A8B6671E34295900C71EE7 /* EditHost.swift in Sources */,
 				403692841E35A17200571EB5 /* ReSwiftRxBridge.swift in Sources */,
 				40A645AA1E3E6EF000CB62B1 /* MacUnlockService.swift in Sources */,
 				408507DA1E2B0AEC00C2E0D1 /* HostsState.swift in Sources */,

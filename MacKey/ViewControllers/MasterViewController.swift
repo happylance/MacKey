@@ -38,12 +38,26 @@ class MasterViewController: UITableViewController {
         }).disposed(by: disposeBag)
         self.navigationItem.leftBarButtonItem = editButtonItem
         
-        self.editCell$.subscribe(onNext: { [unowned self] cell in
-            if let alias = cell.hostNameOutlet?.text {
-                store.dispatch(EditHost(alias: alias))
-                self.showHostDetailsViewController(animated: true)
+        self.editCell$
+            .flatMapFirst { cell -> Observable<(HostInfo, EditHostState)> in
+                if let alias = cell.hostNameOutlet?.text {
+                    if let oldHost = store.hostsState.allHosts[alias],
+                        let hostDetailVC = self.showHostDetailsViewController(animated: true, forNewHost: false) {
+                        hostDetailVC.oldHost = oldHost
+                        return hostDetailVC.getEditHostState().map { (oldHost, $0) }
+                    }
+                }
+                return Observable.empty()
             }
-        }).disposed(by: disposeBag)
+            .subscribe(onNext: { (oldHost, editHostState) in
+                switch editHostState {
+                case let .saved(newHost):
+                    store.dispatch(UpdateHost(oldHost: oldHost, newHost: newHost))
+                default: break
+                }
+                self.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)
         
         self.deleteCell$.subscribe(onNext: {[unowned self] cell in
             if let hostAlias = cell.hostNameOutlet?.text,
@@ -62,9 +76,25 @@ class MasterViewController: UITableViewController {
         let infoItem = UIBarButtonItem(customView: infoButton)
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
-        addButton.rx.tap.subscribe(onNext: { [unowned self] in
-            self.showHostDetailsViewController(animated: true)
-        }).disposed(by: disposeBag)
+        addButton.rx.tap
+            .flatMapFirst { _ -> Observable<EditHostState> in
+                if let hostDetailVC = self.showHostDetailsViewController(animated: true, forNewHost: true) {
+                    return hostDetailVC.getEditHostState()
+                }
+                return Observable.empty()
+            }
+            .subscribe(onNext: { editHostState in
+                self.dismiss(animated: true) {
+                    switch editHostState {
+                    case let .saved(newHost):
+                        store.dispatch(AddHost(host: newHost))
+                    default:
+                        break
+                    }
+                }
+            })
+            .disposed(by: disposeBag)
+        
         self.navigationItem.rightBarButtonItems = [addButton, infoItem]
                 
         // Hide empty rows

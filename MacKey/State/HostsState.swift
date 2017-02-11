@@ -10,7 +10,6 @@ import Foundation
 
 struct HostsState {
     var allHosts: Hosts
-    var editingHostAlias: String?
     var latestHostAlias: String
 }
 

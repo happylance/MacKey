@@ -11,6 +11,11 @@ import RxSwift
 import RxCocoa
 import ReactiveReSwift
 
+enum EditHostState {
+    case saved(HostInfo)
+    case cancelled
+}
+
 class HostDetailsViewController: UITableViewController {
     @IBOutlet weak var aliasOutlet: UITextField!
     @IBOutlet weak var validationOutlet: UILabel!
@@ -20,7 +25,14 @@ class HostDetailsViewController: UITableViewController {
     @IBOutlet weak var saveOutlet: UIBarButtonItem!
     @IBOutlet weak var cancelOutlet: UIBarButtonItem!
     
-    var disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
+    
+    var oldHost = HostInfo()
+    private let editHostState$: PublishSubject<EditHostState> = PublishSubject()
+    
+    func getEditHostState() -> Observable<EditHostState> {
+        return editHostState$.asObservable()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,13 +45,14 @@ class HostDetailsViewController: UITableViewController {
                 alias$: aliasOutlet.rx.text.orEmpty.asDriver(),
                 host$: hostOutlet.rx.text.orEmpty.asDriver(),
                 username$: usernameOutlet.rx.text.orEmpty.asDriver(),
-                password$: passwordOutlet.rx.text.orEmpty.asDriver()
+                password$: passwordOutlet.rx.text.orEmpty.asDriver(),
+                initialHost: oldHost
             )
         )
-        aliasOutlet?.text = viewModel.initialValues.alias
-        hostOutlet?.text = viewModel.initialValues.host
-        usernameOutlet?.text = viewModel.initialValues.username
-        passwordOutlet?.text = viewModel.initialValues.password
+        aliasOutlet?.text = oldHost.alias
+        hostOutlet?.text = oldHost.host
+        usernameOutlet?.text = oldHost.user
+        passwordOutlet?.text = oldHost.password
         
         validationOutlet.text = "Alias is already taken."
         
@@ -48,41 +61,21 @@ class HostDetailsViewController: UITableViewController {
         
         saveOutlet.rx.tap
             .subscribe(onNext: { [unowned self] in
-                let action = self.saveHostAction()
-                self.dismiss(animated: true) {
-                    if let action = action {
-                        store.dispatch(action)
-                    }
-                }
+                guard let alias = self.aliasOutlet.text,
+                    let host = self.hostOutlet.text,
+                    let user = self.usernameOutlet.text,
+                    let password = self.passwordOutlet.text else { return }
+                let newHost = HostInfo(alias: alias, host: host, user: user, password: password)
+                self.editHostState$.onNext(.saved(newHost))
+                self.editHostState$.onCompleted()
             } )
             .disposed(by: disposeBag)
  
         cancelOutlet.rx.tap
             .subscribe(onNext: {[unowned self] in
-                self.dismiss(animated: true) {
-                    store.dispatch(CancelHostDetails())
-                }
+                self.editHostState$.onNext(.cancelled)
+                self.editHostState$.onCompleted()
             })
             .disposed(by: disposeBag)
-    }
-    
-    private func saveHostAction() -> Action? {
-        guard let alias = aliasOutlet.text,
-            let host = hostOutlet.text,
-            let user = usernameOutlet.text,
-            let password = passwordOutlet.text else { return nil }
-        let newHost = HostInfo(alias: alias, host: host, user: user, password: password)
-        
-        if let editingHostAlias = store.hostsState.editingHostAlias {
-            guard let oldHost = store.hostsState.allHosts[editingHostAlias] else {
-                print("host is nil for \(editingHostAlias)")
-                return nil
-            }
-            
-            store.dispatch(UpdateHost(oldHost: oldHost, newHost: newHost))
-            return nil
-        } else {
-            return AddHost(host: newHost)
-        }
     }
 }
