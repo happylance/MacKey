@@ -29,7 +29,30 @@ class MasterViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        setUpDeleteAction()
+        setUpEditAction()
+        setUpSelectAction()
+        
+        self.navigationItem.rightBarButtonItems = [getAddButtonItem(), getInfoButtonItem()]
+                
+        // Hide empty rows
+        tableView.tableFooterView = UIView()
+    }
+    
+    private func setUpDeleteAction() {
+        self.deleteCell$.subscribe(onNext: {[unowned self] cell in
+            if let hostAlias = cell.hostNameOutlet?.text,
+                let host = store.observable.value.allHosts[hostAlias] {
+                store.dispatch(RemoveHost(host: host))
+                if let indexPathToRemove = self.tableView.indexPath(for: cell) {
+                    self.tableView.deleteRows(at: [indexPathToRemove], with: .fade)
+                }
+            }
+        }).disposed(by: disposeBag)
+    }
+    
+    private func setUpEditAction() {
         let editButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
         editButtonItem.rx.tap.subscribe(onNext: { [unowned self] in
             if let selectedCell = self.selectedCell {
@@ -59,23 +82,32 @@ class MasterViewController: UITableViewController {
                 self.dismiss(animated: true)
             })
             .disposed(by: disposeBag)
+    }
+    
+    private func setUpSelectAction() {
+        let viewModel = MasterViewModel(
+            itemSelected$: tableView.rx.itemSelected.asDriver(),
+            sleepButtonTapped$: sleepButtonTapped$.asDriver(onErrorJustReturn:"")
+        )
         
-        self.deleteCell$.subscribe(onNext: {[unowned self] cell in
-            if let hostAlias = cell.hostNameOutlet?.text,
-                let host = store.observable.value.allHosts[hostAlias] {
-                store.dispatch(RemoveHost(host: host))
-                if let indexPathToRemove = self.tableView.indexPath(for: cell) {
-                    self.tableView.deleteRows(at: [indexPathToRemove], with: .fade)
-                }
+        viewModel.selectedIndex$.drive(onNext: { [unowned self] (indexPath, hostsState) in
+            self.tableView.deselectRow(at: indexPath, animated: true)
+            let alias = hostsState.sortedHostAliases[indexPath.row]
+            guard let host = hostsState.allHosts[alias] else { return }
+            store.dispatch(SelectHost(host: host))
+            
+            if let cell = self.tableView.cellForRow(at: indexPath) as? HostListViewCell {
+                self.reloadCells([cell, self.selectedCell])
             }
         }).disposed(by: disposeBag)
         
-        let infoButton = UIButton(type: .infoLight)
-        infoButton.rx.tap.subscribe(onNext: {
-            UIApplication.shared.openURL(URL(string: readMeURL)!)
+        viewModel.selectedCellStatusUpdate$.drive(onNext: { [unowned self] info in
+            self.latestHostUnlockStatus = info
+            self.reloadCells([self.selectedCell])
         }).disposed(by: disposeBag)
-        let infoItem = UIBarButtonItem(customView: infoButton)
-        
+    }
+    
+    private func getAddButtonItem() -> UIBarButtonItem {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
         addButton.rx.tap
             .flatMapFirst { _ -> Observable<EditHostState> in
@@ -98,32 +130,15 @@ class MasterViewController: UITableViewController {
                 }
             })
             .disposed(by: disposeBag)
-        
-        self.navigationItem.rightBarButtonItems = [addButton, infoItem]
-                
-        // Hide empty rows
-        tableView.tableFooterView = UIView()
-        
-        let viewModel = MasterViewModel(
-            itemSelected$: tableView.rx.itemSelected.asDriver(),
-            sleepButtonTapped$: sleepButtonTapped$.asDriver(onErrorJustReturn:"")
-            )
-        
-        viewModel.selectedIndex$.drive(onNext: { [unowned self] (indexPath, hostsState) in
-            self.tableView.deselectRow(at: indexPath, animated: true)
-            let alias = hostsState.sortedHostAliases[indexPath.row]
-            guard let host = hostsState.allHosts[alias] else { return }
-            store.dispatch(SelectHost(host: host))
-            
-            if let cell = self.tableView.cellForRow(at: indexPath) as? HostListViewCell {
-                self.reloadCells([cell, self.selectedCell])
-            }            
+        return addButton
+    }
+    
+    private func getInfoButtonItem() -> UIBarButtonItem {
+        let infoButton = UIButton(type: .infoLight)
+        infoButton.rx.tap.subscribe(onNext: {
+            UIApplication.shared.openURL(URL(string: readMeURL)!)
         }).disposed(by: disposeBag)
-        
-        viewModel.selectedCellStatusUpdate$.drive(onNext: { [unowned self] info in
-            self.latestHostUnlockStatus = info
-            self.reloadCells([self.selectedCell])
-        }).disposed(by: disposeBag)
+        return UIBarButtonItem(customView: infoButton)
     }
     
     private func reloadCells(_ cells: [HostListViewCell?]) {
