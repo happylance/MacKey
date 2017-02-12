@@ -18,39 +18,72 @@ class MasterViewController: UITableViewController {
     fileprivate var latestHostUnlockStatus: String? = nil
     fileprivate let sleepButtonTapped$: PublishSubject<String> = PublishSubject()
     fileprivate let editCell$: PublishSubject<String> = PublishSubject()
-    fileprivate let deleteCell$: PublishSubject<HostListViewCell> = PublishSubject()
+    fileprivate let deleteCell$: PublishSubject<String> = PublishSubject()
     
     fileprivate let disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setUpDeleteAction()
-        setUpEditAction()
-        setUpSelectAction()
+        let viewModel = MasterViewModel(
+            itemSelected$: tableView.rx.itemSelected.asDriver(),
+            sleepButtonTapped$: sleepButtonTapped$.asDriver(onErrorJustReturn:"")
+        )
         
+        setUpSelectAction(viewModel: viewModel)
+        
+        self.navigationItem.leftBarButtonItems = [getEditButtonItem(viewModel: viewModel),
+                                                  getDeleteButtonItem(viewModel: viewModel)]
         self.navigationItem.rightBarButtonItems = [getAddButtonItem(), getInfoButtonItem()]
                 
         // Hide empty rows
         tableView.tableFooterView = UIView()
     }
     
-    private func setUpDeleteAction() {
-        self.deleteCell$
-            .withLatestFrom(store.observable.asObservable()) { ($0, $1.hostsState.allHosts) }
-            .subscribe(onNext: {[unowned self] (cell, allHosts) in
-            if let hostAlias = cell.hostAliasOutlet?.text,
-                let host = allHosts[hostAlias] {
-                store.dispatch(RemoveHost(host: host))
-                if let indexPathToRemove = self.tableView.indexPath(for: cell) {
-                    self.tableView.deleteRows(at: [indexPathToRemove], with: .fade)
+    private func getDeleteButtonItem(viewModel: MasterViewModel) -> UIBarButtonItem {
+        let deleteButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: nil, action: nil)
+        let defaultColor = deleteButtonItem.tintColor
+        viewModel.hasSelectedCell$
+            .do(onNext: { deleteButtonItem.tintColor = $0 ? defaultColor : UIColor.gray })
+            .drive(deleteButtonItem.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        deleteButtonItem.rx.tap
+            .withLatestFrom(store.observable.asObservable()) { ($0, $1.hostsState.latestHostAlias) }
+            .subscribe(onNext: { [unowned self] (_, latestHostAlias) in
+                let selectedAlias = latestHostAlias
+                if selectedAlias.characters.count > 0 {
+                    self.deleteCell$.onNext(selectedAlias)
                 }
+            }).disposed(by: disposeBag)
+        
+        self.deleteCell$
+            .withLatestFrom(store.observable.asObservable()) { ($0, $1.hostsState) }
+            .subscribe(onNext: {[unowned self] (alias, hostsState) in
+            if let host = hostsState.allHosts[alias],
+                let index = hostsState.sortedHostAliases.index(of: alias) {
+                let message = "Are you sure that you want to delete \"\(alias): \(host.user)@\(host.host)\""
+                let alertView = UIAlertController(title: "Delete \"\(alias)\"", message: message, preferredStyle: .alert)
+                alertView.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
+                    store.dispatch(RemoveHost(host: host))
+                    let indexPathToRemove = IndexPath(row: index, section: 0)
+                    self.tableView.deleteRows(at: [indexPathToRemove], with: .fade)
+                })
+                alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in })
+                self.present(alertView, animated: true, completion: nil)
             }
         }).disposed(by: disposeBag)
+        return deleteButtonItem
     }
     
-    private func setUpEditAction() {
+    private func getEditButtonItem(viewModel: MasterViewModel) -> UIBarButtonItem {
         let editButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
+        let defaultColor = editButtonItem.tintColor
+        viewModel.hasSelectedCell$
+            .do(onNext: { editButtonItem.tintColor = $0 ? defaultColor : UIColor.gray })
+            .drive(editButtonItem.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
         editButtonItem.rx.tap
             .withLatestFrom(store.observable.asObservable()) { ($0, $1.hostsState.latestHostAlias) }
             .subscribe(onNext: { [unowned self] (_, latestHostAlias) in
@@ -59,7 +92,6 @@ class MasterViewController: UITableViewController {
                 self.editCell$.onNext(selectedAlias)
             }
         }).disposed(by: disposeBag)
-        self.navigationItem.leftBarButtonItem = editButtonItem
         
         self.editCell$
             .withLatestFrom(store.observable.asObservable()) { ($0, $1.hostsState.allHosts) }
@@ -81,14 +113,10 @@ class MasterViewController: UITableViewController {
                 self.dismiss(animated: true)
             })
             .disposed(by: disposeBag)
+        return editButtonItem
     }
     
-    private func setUpSelectAction() {
-        let viewModel = MasterViewModel(
-            itemSelected$: tableView.rx.itemSelected.asDriver(),
-            sleepButtonTapped$: sleepButtonTapped$.asDriver(onErrorJustReturn:"")
-        )
-        
+    private func setUpSelectAction(viewModel: MasterViewModel) {
         viewModel.selectedIndex$
             .drive(onNext: { [unowned self] (indexPath, hostsState) in
             self.tableView.deselectRow(at: indexPath, animated: true)
@@ -118,19 +146,26 @@ class MasterViewController: UITableViewController {
                 }
                 return Observable.empty()
             }
-            .withLatestFrom(store.observable.asObservable()) { ($0, $1.hostsState) }
-            .subscribe(onNext: { [unowned self] (editHostState, hostsState) in
-                self.dismiss(animated: true) {
-                    switch editHostState {
-                    case let .saved(newHost):
-                        store.dispatch(AddHost(host: newHost))
-                        let index = hostsState.sortedHostAliases.index(of: newHost.alias) ?? 0
-                        let indexPath = IndexPath(row: index, section: 0)
-                        self.tableView.insertRows(at: [indexPath], with: .automatic)
-                    default:
-                        break
+            .flatMapFirst { editHostState -> Observable<HostInfo> in
+                return Observable.create { observer in
+                    self.dismiss(animated: true) {
+                        switch editHostState {
+                        case let .saved(newHost):
+                            store.dispatch(AddHost(host: newHost))
+                            observer.onNext(newHost)
+                        default:
+                            break
+                        }
+                        observer.onCompleted()
                     }
+                    return Disposables.create()
                 }
+            }
+            .withLatestFrom(store.observable.asObservable()) { ($0, $1.hostsState) }
+            .subscribe(onNext: { [unowned self] (newHost, hostsState) in
+                let index = hostsState.sortedHostAliases.index(of: newHost.alias) ?? 0
+                let indexPath = IndexPath(row: index, section: 0)
+                self.tableView.insertRows(at: [indexPath], with: .automatic)
             })
             .disposed(by: disposeBag)
         return addButton
@@ -201,7 +236,7 @@ extension MasterViewController { // UITableViewDelegate
         
         let deleteRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.default, title: "Delete", handler:{action, indexpath in
             if let cell = tableView.cellForRow(at: indexPath) as? HostListViewCell {
-                self.deleteCell$.onNext(cell)
+                self.deleteCell$.onNext(cell.hostAliasOutlet.text ?? "")
             }
         });
         

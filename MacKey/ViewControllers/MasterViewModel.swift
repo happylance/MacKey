@@ -11,12 +11,17 @@ import RxSwift
 import RxCocoa
 
 class MasterViewModel {
+    let hasSelectedCell$: Driver<Bool>
     let selectedIndex$: Driver<(IndexPath, HostsState)>
     let selectedCellStatusUpdate$: Driver<String>
     
     init(itemSelected$: Driver<IndexPath>,
          sleepButtonTapped$: Driver<String>) {
         let storeState$ = store.observable.asDriver()
+        
+        hasSelectedCell$ = storeState$
+            .map { $0.hostsState.latestHostAlias.characters.count > 0 }
+            .distinctUntilChanged()
         
         selectedIndex$ = itemSelected$.withLatestFrom(storeState$) { ($0, $1.hostsState) }
         

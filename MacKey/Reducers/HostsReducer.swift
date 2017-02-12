@@ -51,6 +51,8 @@ struct HostsReducer {
         switch action {
         case let action as SelectHost:
             return action.host.alias
+        case let action as RemoveHost:
+            return state.latestHostAlias == action.host.alias ? "" : state.latestHostAlias
         case let action as UpdateHost:
             let newHost = action.newHost
             let oldHost = action.oldHost

@@ -32,6 +32,7 @@ class HostsReducerTests: XCTestCase {
         
         XCTAssertEqual(newState.allHosts.count, 1)
         XCTAssertEqual(newState.allHosts["h1"], nil)
+        XCTAssertEqual(newState.latestHostAlias, "")
     }
     
     func testSelectHost() {
