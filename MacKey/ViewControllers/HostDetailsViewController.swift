@@ -24,6 +24,7 @@ class HostDetailsViewController: UITableViewController {
     @IBOutlet weak var passwordOutlet: UITextField!
     @IBOutlet weak var saveOutlet: UIBarButtonItem!
     @IBOutlet weak var cancelOutlet: UIBarButtonItem!
+    @IBOutlet weak var requireTouchIDOutlet: UISwitch!
     
     private var disposeBag = DisposeBag()
     
@@ -46,6 +47,7 @@ class HostDetailsViewController: UITableViewController {
                 host$: hostOutlet.rx.text.orEmpty.asDriver(),
                 username$: usernameOutlet.rx.text.orEmpty.asDriver(),
                 password$: passwordOutlet.rx.text.orEmpty.asDriver(),
+                requireTouchID$: requireTouchIDOutlet.rx.isOn.asDriver(),
                 initialHost: oldHost
             )
         )
@@ -53,6 +55,7 @@ class HostDetailsViewController: UITableViewController {
         hostOutlet?.text = oldHost.host
         usernameOutlet?.text = oldHost.user
         passwordOutlet?.text = oldHost.password
+        requireTouchIDOutlet?.isOn = oldHost.requireTouchID
         
         validationOutlet.text = "Alias is already taken."
         
@@ -65,7 +68,12 @@ class HostDetailsViewController: UITableViewController {
                     let host = self.hostOutlet.text,
                     let user = self.usernameOutlet.text,
                     let password = self.passwordOutlet.text else { return }
-                let newHost = HostInfo(alias: alias, host: host, user: user, password: password)
+                let requireTouchID = self.requireTouchIDOutlet.isOn
+                let newHost = HostInfo(alias: alias,
+                                       host: host,
+                                       user: user,
+                                       password: password,
+                                       requireTouchID: requireTouchID)
                 self.editHostState$.onNext(.saved(newHost))
                 self.editHostState$.onCompleted()
             } )

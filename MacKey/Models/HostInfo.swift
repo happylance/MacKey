@@ -7,13 +7,14 @@
 //
 
 struct HostInfo: CustomStringConvertible {
-    var alias: String = ""
-    var host: String = ""
-    var user: String = ""
-    var password: String = ""
+    var alias = ""
+    var host = ""
+    var user = ""
+    var password = ""
+    var requireTouchID = true
     
     var description: String {
-        return "(\(alias),\(host),\(user))"
+        return "(\(alias),\(host),\(user),\(requireTouchID))"
     }
 }
 
@@ -22,7 +23,8 @@ extension HostInfo: Equatable {
         let areEqual = (lhs.alias == rhs.alias &&
             lhs.host == rhs.host &&
             lhs.user == rhs.user &&
-            lhs.password == rhs.password)
+            lhs.password == rhs.password &&
+            lhs.requireTouchID == rhs.requireTouchID)
         
         return areEqual
     }

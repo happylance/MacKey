@@ -19,6 +19,7 @@ class HostDetailsViewModel {
         host$: Driver<String>,
         username$: Driver<String>,
         password$: Driver<String>,
+        requireTouchID$: Driver<Bool>,
         initialHost: HostInfo
         )) {
         
@@ -39,13 +40,15 @@ class HostDetailsViewModel {
         let hostChanged$ = input.host$.map { $0 != input.initialHost.host }
         let usernameChanged$ = input.username$.map { $0 != input.initialHost.user }
         let passwordChanged$ = input.password$.map { $0 != input.initialHost.password }
+        let requireTouchIDChanged$ = input.requireTouchID$.map { $0 != input.initialHost.requireTouchID }
         
         let isAnyFieldChanged$ = Driver
             .combineLatest(aliasChanged$,
                            hostChanged$,
                            usernameChanged$,
-                           passwordChanged$){
-                            $0 || $1 || $2 || $3 }
+                           passwordChanged$,
+                           requireTouchIDChanged$){
+                            $0 || $1 || $2 || $3 || $4 }
         
         saveEnabled$ = Driver
             .combineLatest(aliasValid$,

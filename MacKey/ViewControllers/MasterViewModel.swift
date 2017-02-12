@@ -44,9 +44,13 @@ class MasterViewModel {
             .flatMapLatest { (host, status) -> Observable<(HostInfo, UnlockStatus)> in
                 switch status {
                 case .connectedAndNeedsUnlock:
-                    return MacUnlockService.runTouchID(for: host).startWith(status).map { (host, $0) }
+                    if host.requireTouchID {
+                        return MacUnlockService.runTouchID(for: host).startWith(status).map { (host, $0) }
+                    } else {
+                        return .just((host, .unlocking))
+                    }
                 default:
-                    return Observable.just((host, status))
+                    return .just((host, status))
                 }
             }
             .flatMapLatest { (host, status) -> Observable<UnlockStatus> in

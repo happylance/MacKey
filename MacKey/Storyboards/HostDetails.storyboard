@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -117,6 +118,31 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="514-hx-TPC">
+                                        <rect key="frame" x="0.0" y="240" width="320" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="right" tableViewCell="514-hx-TPC" id="Rj9-wS-ABy">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="59.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Require Touch ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tRO-yc-N1f">
+                                                    <rect key="frame" x="11" y="16" width="167" height="27"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tMh-Yg-2iL">
+                                                    <rect key="frame" x="247" y="14" width="51" height="31"/>
+                                                </switch>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="tRO-yc-N1f" firstAttribute="leading" secondItem="Rj9-wS-ABy" secondAttribute="leadingMargin" constant="3" id="0fq-CX-nor"/>
+                                                <constraint firstItem="tMh-Yg-2iL" firstAttribute="centerY" secondItem="Rj9-wS-ABy" secondAttribute="centerY" id="8Q5-Jm-dXf"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="tMh-Yg-2iL" secondAttribute="trailing" constant="16" id="w1u-AO-dEN"/>
+                                                <constraint firstItem="tRO-yc-N1f" firstAttribute="centerY" secondItem="Rj9-wS-ABy" secondAttribute="centerY" id="z4U-dw-RzS"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                         </sections>
@@ -135,6 +161,7 @@
                         <outlet property="cancelOutlet" destination="KMp-MC-vrJ" id="lJe-3D-AFz"/>
                         <outlet property="hostOutlet" destination="EiG-p5-IZH" id="kIu-aX-8sI"/>
                         <outlet property="passwordOutlet" destination="wYz-uM-9CW" id="yzc-wH-e0D"/>
+                        <outlet property="requireTouchIDOutlet" destination="tMh-Yg-2iL" id="AV0-ER-tma"/>
                         <outlet property="saveOutlet" destination="ZCt-uO-2zx" id="v93-gn-JQV"/>
                         <outlet property="usernameOutlet" destination="Waa-hP-rpn" id="jja-b1-MyF"/>
                         <outlet property="validationOutlet" destination="L9h-qa-NHY" id="aH4-gI-joS"/>
