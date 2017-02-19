@@ -29,7 +29,7 @@ class HostDetailsViewController: UITableViewController {
     private var disposeBag = DisposeBag()
     
     var oldHost = HostInfo()
-    private let editHostState$: PublishSubject<EditHostState> = PublishSubject()
+    private let editHostState$ = PublishSubject<EditHostState>()
     
     func getEditHostState() -> Observable<EditHostState> {
         return editHostState$.asObservable()
@@ -42,15 +42,16 @@ class HostDetailsViewController: UITableViewController {
         passwordOutlet.isSecureTextEntry = true
         
         let viewModel = HostDetailsViewModel(
-            input: (
-                alias$: aliasOutlet.rx.text.orEmpty.asDriver(),
-                host$: hostOutlet.rx.text.orEmpty.asDriver(),
-                username$: usernameOutlet.rx.text.orEmpty.asDriver(),
-                password$: passwordOutlet.rx.text.orEmpty.asDriver(),
-                requireTouchID$: requireTouchIDOutlet.rx.isOn.asDriver(),
-                initialHost: oldHost
-            )
+            alias$: aliasOutlet.rx.text.orEmpty.asDriver(),
+            host$: hostOutlet.rx.text.orEmpty.asDriver(),
+            username$: usernameOutlet.rx.text.orEmpty.asDriver(),
+            password$: passwordOutlet.rx.text.orEmpty.asDriver(),
+            requireTouchID$: requireTouchIDOutlet.rx.isOn.asDriver(),
+            cancelOutlet$: cancelOutlet.rx.tap.asDriver(),
+            saveOutlet$: saveOutlet.rx.tap.asDriver(),
+            initialHost: oldHost
         )
+        
         aliasOutlet?.text = oldHost.alias
         hostOutlet?.text = oldHost.host
         usernameOutlet?.text = oldHost.user
@@ -61,29 +62,6 @@ class HostDetailsViewController: UITableViewController {
         
         viewModel.aliasAvailable$.drive(validationOutlet.rx.isHidden).disposed(by: disposeBag)
         viewModel.saveEnabled$.drive(saveOutlet.rx.isEnabled).disposed(by: disposeBag)
-        
-        saveOutlet.rx.tap
-            .subscribe(onNext: { [unowned self] in
-                guard let alias = self.aliasOutlet.text,
-                    let host = self.hostOutlet.text,
-                    let user = self.usernameOutlet.text,
-                    let password = self.passwordOutlet.text else { return }
-                let requireTouchID = self.requireTouchIDOutlet.isOn
-                let newHost = HostInfo(alias: alias,
-                                       host: host,
-                                       user: user,
-                                       password: password,
-                                       requireTouchID: requireTouchID)
-                self.editHostState$.onNext(.saved(newHost))
-                self.editHostState$.onCompleted()
-            } )
-            .disposed(by: disposeBag)
- 
-        cancelOutlet.rx.tap
-            .subscribe(onNext: {[unowned self] in
-                self.editHostState$.onNext(.cancelled)
-                self.editHostState$.onCompleted()
-            })
-            .disposed(by: disposeBag)
+        viewModel.editHostState$.bindTo(editHostState$).disposed(by: disposeBag)
     }
 }

@@ -12,35 +12,38 @@ import RxCocoa
 
 class HostDetailsViewModel {
     let aliasAvailable$: Driver<Bool>
+    let editHostState$: Observable<EditHostState>
+    let newHost$: Driver<HostInfo>
     let saveEnabled$: Driver<Bool>
     
-    init(input: (
-        alias$: Driver<String>,
+    init(alias$: Driver<String>,
         host$: Driver<String>,
         username$: Driver<String>,
         password$: Driver<String>,
         requireTouchID$: Driver<Bool>,
+        cancelOutlet$: Driver<Void>,
+        saveOutlet$: Driver<Void>,
         initialHost: HostInfo
-        )) {
+        ) {
         
-        let initialAlias = input.initialHost.alias
-        aliasAvailable$ = input.alias$
+        let initialAlias = initialHost.alias
+        aliasAvailable$ = alias$
             .withLatestFrom(store.observable.asDriver()) {
                 $0 == initialAlias || !$1.hostsState.allHosts.keys.contains($0) }
         
-        let aliasValid$ = input.alias$
+        let aliasValid$ = alias$
             .withLatestFrom(aliasAvailable$) { alias, aliasAvailable in
                 alias.characters.count > 0 && aliasAvailable }
         
-        let hostValid$ = input.host$.map { $0.characters.count > 0 }
-        let usernameValid$ = input.username$.map { $0.characters.count > 0 }
-        let passwordValid$ = input.password$.map { $0.characters.count > 0 }
+        let hostValid$ = host$.map { $0.characters.count > 0 }
+        let usernameValid$ = username$.map { $0.characters.count > 0 }
+        let passwordValid$ = password$.map { $0.characters.count > 0 }
         
-        let aliasChanged$ = input.alias$.map { $0 != input.initialHost.alias }
-        let hostChanged$ = input.host$.map { $0 != input.initialHost.host }
-        let usernameChanged$ = input.username$.map { $0 != input.initialHost.user }
-        let passwordChanged$ = input.password$.map { $0 != input.initialHost.password }
-        let requireTouchIDChanged$ = input.requireTouchID$.map { $0 != input.initialHost.requireTouchID }
+        let aliasChanged$ = alias$.map { $0 != initialHost.alias }
+        let hostChanged$ = host$.map { $0 != initialHost.host }
+        let usernameChanged$ = username$.map { $0 != initialHost.user }
+        let passwordChanged$ = password$.map { $0 != initialHost.password }
+        let requireTouchIDChanged$ = requireTouchID$.map { $0 != initialHost.requireTouchID }
         
         let isAnyFieldChanged$ = Driver
             .combineLatest(aliasChanged$,
@@ -51,12 +54,17 @@ class HostDetailsViewModel {
                             $0 || $1 || $2 || $3 || $4 }
         
         saveEnabled$ = Driver
-            .combineLatest(aliasValid$,
-                           hostValid$,
-                           usernameValid$,
-                           passwordValid$,
-                           isAnyFieldChanged$){
+            .combineLatest(aliasValid$, hostValid$, usernameValid$, passwordValid$, isAnyFieldChanged$){
                             $0 && $1 && $2 && $3 && $4 }
+        
+        newHost$ = Driver.combineLatest(alias$, host$, username$, password$, requireTouchID$) {
+            HostInfo(alias: $0, host: $1, user: $2, password: $3, requireTouchID: $4) }
+        
+        editHostState$ = Observable
+            .of(cancelOutlet$.map {_ in .cancelled },
+                saveOutlet$.withLatestFrom(newHost$).map { .saved($0) })
+            .merge()
+            .take(1)
     }
 }
 
