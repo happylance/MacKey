@@ -3,7 +3,7 @@
 MacKey is an iOS app which can be used to unlock Mac using touch ID and SSH connection.
 
 ## Prerequisites
-1. This app will only work on an iOS device with Touch ID enabled.
+1. This app will only work when iOS device and Mac are within the same WiFi network.
 2. On Mac, `Remote Login` needs to be enabled in `System Preferences` -> `Sharing`.
 
 ## Setup
