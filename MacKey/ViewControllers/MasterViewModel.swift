@@ -45,7 +45,7 @@ class MasterViewModel {
                 switch status {
                 case .connectedAndNeedsUnlock:
                     if host.requireTouchID {
-                        return MacUnlockService.runTouchID(for: host).startWith(status).map { (host, $0) }
+                        return MacUnlockService.runTouchID(for: host).map { (host, $0) }
                     } else {
                         return .just((host, .unlocking))
                     }
@@ -53,14 +53,25 @@ class MasterViewModel {
                     return .just((host, status))
                 }
             }
-            .flatMapLatest { (host, status) -> Observable<UnlockStatus> in
+            .flatMapLatest { (host, status) -> Observable<(HostInfo, UnlockStatus)> in
                 switch status {
                 case .unlocking:
-                    return MacUnlockService.unlock(host).startWith(status)
+                    return MacUnlockService.unlock(host).map { (host, $0) }
                 default:
-                    return Observable.just(status)
+                    return Observable.just((host, status))
                 }
             }
+            .flatMapLatest { (host, status) -> Observable<UnlockStatus> in
+                switch status {
+                case .connectedWithInfo(let info):
+                    if info.contains("Failed") {
+                        return MacUnlockService.checkStatus(host)
+                    }
+                default:
+                    break
+                }
+                return Observable.just(status)
+        }
         
         let sleepStatus$ = sleepButtonTapped$
             .filter { $0 != "" }

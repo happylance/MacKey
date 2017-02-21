@@ -9,8 +9,7 @@
 import ReactiveReSwift
 
 struct HostsReducer {
-    static func handleAction(_ action: Action, state: HostsState?) -> HostsState {
-        let state = state ?? initialHostsState()
+    static func handleAction(_ action: Action, state: HostsState) -> HostsState {
         return HostsState(
             allHosts: allHostsReducer(action, state: state),
             latestHostAlias: latestHostAliasReducer(action, state: state)
@@ -20,7 +19,7 @@ struct HostsReducer {
     static func initialHostsState() -> HostsState {
         return HostsState(
             allHosts: MacHostsInfoService().macHostsInfo(),
-            latestHostAlias: LatestHostAliasService.alias
+            latestHostAlias: UserDefaultsServivce.latestHostAlias
         )
     }
     

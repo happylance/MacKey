@@ -9,6 +9,7 @@
 import UIKit
 import ReactiveReSwift
 import RxSwift
+import SwiftyStoreKit
 
 let middleware = Middleware<State>().sideEffect { _, _, action in
         dlog("Received action: \(action)")
@@ -26,6 +27,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        SwiftyStoreKit.completeTransactions(atomically: true) { products in
+            
+            for product in products {
+                
+                if product.transaction.transactionState == .purchased || product.transaction.transactionState == .restored {
+                    
+                    if product.needsFinishTransaction {
+                        SwiftyStoreKit.finishTransaction(product.transaction)
+                    }
+                    dlog("purchased: \(product)")
+                    store.dispatch(Upgrade(productID: product.productId))
+                }
+            }
+        }
         return true
     }
 }

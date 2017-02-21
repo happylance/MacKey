@@ -8,12 +8,11 @@
 
 import UIKit
 
-let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
 let hostDetailsStoryboard = UIStoryboard(name: "HostDetails", bundle: nil)
+let upgradeStoryboard = UIStoryboard(name: "Upgrade", bundle: nil)
 
-let mainViewControllerIdentifier = "MainViewController"
 let hostDetailsControllerIdentifier = "HostDetailsViewController"
-let hostDetailsNavigationControllerIdentifier = "HostDetailsNavigationController"
+let upgradeControllerIdentifier = "UpgradeViewController"
 
 
 extension MasterViewController {
@@ -27,6 +26,22 @@ extension MasterViewController {
         present(navController, animated: animated, completion: nil)
         
         return hostDetailsViewController as? HostDetailsViewController
+    }
+}
+
+extension UIViewController {
+    @discardableResult
+    func showUpgradeViewController(animated: Bool, forProductType:ProductType) -> UpgradeViewController?  {
+        guard let upgradeViewController = upgradeStoryboard
+            .instantiateViewController(withIdentifier: upgradeControllerIdentifier) as? UpgradeViewController else {
+                return nil
+        }
+        
+        upgradeViewController.setProductType(forProductType)
+        let navController = UINavigationController(rootViewController: upgradeViewController)
+        present(navController, animated: animated, completion: nil)
+        
+        return upgradeViewController
     }
 }
 

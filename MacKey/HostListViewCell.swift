@@ -7,9 +7,16 @@
 //
 
 import UIKit
+import RxSwift
 
 class HostListViewCell: UITableViewCell {
     @IBOutlet weak var hostAliasOutlet: UILabel!
     @IBOutlet weak var hostStatusOutlet: UILabel!
     @IBOutlet weak var sleepButtonOutlet: UIButton!
+    
+    var disposeBag = DisposeBag()
+    
+    override func prepareForReuse() {
+        disposeBag = DisposeBag()
+    }
 }

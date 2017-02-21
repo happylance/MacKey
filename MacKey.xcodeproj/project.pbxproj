@@ -18,6 +18,11 @@
 		403692861E35A1B300571EB5 /* ReactiveReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 403692851E35A1B300571EB5 /* ReactiveReSwift.framework */; };
 		404E057A1E4FC3AF002F8A95 /* HostsReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404E05791E4FC3AF002F8A95 /* HostsReducerTests.swift */; };
 		404E057B1E4FC6C4002F8A95 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A8B6641E34132600C71EE7 /* RxCocoa.framework */; };
+		408150571E5A65F1005AD37B /* Upgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408150561E5A65F1005AD37B /* Upgrade.swift */; };
+		408150601E5A6931005AD37B /* UpgradeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4081505F1E5A6931005AD37B /* UpgradeService.swift */; };
+		408150621E5A6CE5005AD37B /* Upgrade.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 408150611E5A6CE5005AD37B /* Upgrade.storyboard */; };
+		408150641E5A7988005AD37B /* UpgradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408150631E5A7988005AD37B /* UpgradeViewController.swift */; };
+		408150661E5A8B79005AD37B /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 408150651E5A8B79005AD37B /* SwiftyStoreKit.framework */; };
 		408507CA1E2ACFCA00C2E0D1 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507C91E2ACFCA00C2E0D1 /* State.swift */; };
 		408507CD1E2ACFFE00C2E0D1 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507CC1E2ACFFE00C2E0D1 /* MasterViewController.swift */; };
 		408507CF1E2AD05200C2E0D1 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507CE1E2AD05200C2E0D1 /* AppReducer.swift */; };
@@ -29,7 +34,7 @@
 		408507DC1E2B147A00C2E0D1 /* UpdateHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507DB1E2B147A00C2E0D1 /* UpdateHost.swift */; };
 		408507DE1E2BB9AB00C2E0D1 /* HostInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507DD1E2BB9AB00C2E0D1 /* HostInfo.swift */; };
 		408507E01E2BEB7000C2E0D1 /* SelectHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507DF1E2BEB7000C2E0D1 /* SelectHost.swift */; };
-		408508071E2C495200C2E0D1 /* LatestHostAliasServivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408508061E2C495200C2E0D1 /* LatestHostAliasServivce.swift */; };
+		408508071E2C495200C2E0D1 /* UserDefaultsServivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408508061E2C495200C2E0D1 /* UserDefaultsServivce.swift */; };
 		40A645921E3C359700CB62B1 /* MasterViewController+Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8B6621E340E1E00C71EE7 /* MasterViewController+Routes.swift */; };
 		40A645AA1E3E6EF000CB62B1 /* MacUnlockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645A91E3E6EF000CB62B1 /* MacUnlockService.swift */; };
 		40A645AC1E3E721400CB62B1 /* SSHService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645AB1E3E721400CB62B1 /* SSHService.swift */; };
@@ -122,6 +127,11 @@
 		403692831E35A17200571EB5 /* ReSwiftRxBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReSwiftRxBridge.swift; sourceTree = "<group>"; };
 		403692851E35A1B300571EB5 /* ReactiveReSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveReSwift.framework; path = Carthage/Build/iOS/ReactiveReSwift.framework; sourceTree = "<group>"; };
 		404E05791E4FC3AF002F8A95 /* HostsReducerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostsReducerTests.swift; sourceTree = "<group>"; };
+		408150561E5A65F1005AD37B /* Upgrade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Upgrade.swift; path = Actions/Upgrade.swift; sourceTree = "<group>"; };
+		4081505F1E5A6931005AD37B /* UpgradeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpgradeService.swift; path = Services/UpgradeService.swift; sourceTree = "<group>"; };
+		408150611E5A6CE5005AD37B /* Upgrade.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Upgrade.storyboard; path = Storyboards/Upgrade.storyboard; sourceTree = "<group>"; };
+		408150631E5A7988005AD37B /* UpgradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpgradeViewController.swift; path = ViewControllers/UpgradeViewController.swift; sourceTree = "<group>"; };
+		408150651E5A8B79005AD37B /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = Carthage/Build/iOS/SwiftyStoreKit.framework; sourceTree = "<group>"; };
 		408507C91E2ACFCA00C2E0D1 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = State.swift; path = State/State.swift; sourceTree = "<group>"; };
 		408507CC1E2ACFFE00C2E0D1 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterViewController.swift; path = ViewControllers/MasterViewController.swift; sourceTree = "<group>"; };
 		408507CE1E2AD05200C2E0D1 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppReducer.swift; path = Reducers/AppReducer.swift; sourceTree = "<group>"; };
@@ -133,7 +143,7 @@
 		408507DB1E2B147A00C2E0D1 /* UpdateHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpdateHost.swift; path = Actions/UpdateHost.swift; sourceTree = "<group>"; };
 		408507DD1E2BB9AB00C2E0D1 /* HostInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostInfo.swift; path = Models/HostInfo.swift; sourceTree = "<group>"; };
 		408507DF1E2BEB7000C2E0D1 /* SelectHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectHost.swift; path = Actions/SelectHost.swift; sourceTree = "<group>"; };
-		408508061E2C495200C2E0D1 /* LatestHostAliasServivce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LatestHostAliasServivce.swift; path = Services/LatestHostAliasServivce.swift; sourceTree = "<group>"; };
+		408508061E2C495200C2E0D1 /* UserDefaultsServivce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaultsServivce.swift; path = Services/UserDefaultsServivce.swift; sourceTree = "<group>"; };
 		40A645A91E3E6EF000CB62B1 /* MacUnlockService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacUnlockService.swift; path = Services/MacUnlockService.swift; sourceTree = "<group>"; };
 		40A645AB1E3E721400CB62B1 /* SSHService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSHService.swift; path = Services/SSHService.swift; sourceTree = "<group>"; };
 		40A8B65D1E33FE1F00C71EE7 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
@@ -162,6 +172,7 @@
 				401263831CE770DD00FAE75C /* NMSSH.framework in Frameworks */,
 				401263861CE770DD00FAE75C /* SwiftKeychainWrapper.framework in Frameworks */,
 				403692861E35A1B300571EB5 /* ReactiveReSwift.framework in Frameworks */,
+				408150661E5A8B79005AD37B /* SwiftyStoreKit.framework in Frameworks */,
 				40A8B6651E34132600C71EE7 /* RxCocoa.framework in Frameworks */,
 				40A8B65E1E33FE1F00C71EE7 /* RxSwift.framework in Frameworks */,
 			);
@@ -223,6 +234,7 @@
 				408507D71E2ADD0E00C2E0D1 /* RemoveHost.swift */,
 				408507DF1E2BEB7000C2E0D1 /* SelectHost.swift */,
 				408507DB1E2B147A00C2E0D1 /* UpdateHost.swift */,
+				408150561E5A65F1005AD37B /* Upgrade.swift */,
 			);
 			name = Actions;
 			sourceTree = "<group>";
@@ -252,6 +264,7 @@
 				400E70991E4AA10200B5477B /* HostDetailsViewModel.swift */,
 				408507CC1E2ACFFE00C2E0D1 /* MasterViewController.swift */,
 				400E709A1E4AA10200B5477B /* MasterViewModel.swift */,
+				408150631E5A7988005AD37B /* UpgradeViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -259,11 +272,12 @@
 		408507D21E2ADA2F00C2E0D1 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				408508061E2C495200C2E0D1 /* LatestHostAliasServivce.swift */,
 				408507D31E2ADA8900C2E0D1 /* MacHostsInfoService.swift */,
 				40A645A91E3E6EF000CB62B1 /* MacUnlockService.swift */,
 				40A645AB1E3E721400CB62B1 /* SSHService.swift */,
 				400E708B1E42CCCC00B5477B /* TouchIDService.swift */,
+				4081505F1E5A6931005AD37B /* UpgradeService.swift */,
+				408508061E2C495200C2E0D1 /* UserDefaultsServivce.swift */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -280,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				40BD24EC1E330388004C8BD8 /* HostDetails.storyboard */,
+				408150611E5A6CE5005AD37B /* Upgrade.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -292,6 +307,7 @@
 				403692851E35A1B300571EB5 /* ReactiveReSwift.framework */,
 				40A8B6641E34132600C71EE7 /* RxCocoa.framework */,
 				40A8B65D1E33FE1F00C71EE7 /* RxSwift.framework */,
+				408150651E5A8B79005AD37B /* SwiftyStoreKit.framework */,
 				401263821CE770DD00FAE75C /* SwiftKeychainWrapper.framework */,
 				40C4AB141CE758F400ED92C5 /* MacKey */,
 				40C4AB2B1CE758F400ED92C5 /* MacKeyTests */,
@@ -529,6 +545,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				40BD24ED1E330388004C8BD8 /* HostDetails.storyboard in Resources */,
+				408150621E5A6CE5005AD37B /* Upgrade.storyboard in Resources */,
 				40C4AB1F1CE758F400ED92C5 /* Assets.xcassets in Resources */,
 				40C4AB1D1CE758F400ED92C5 /* Main.storyboard in Resources */,
 			);
@@ -562,6 +579,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/ReactiveReSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyStoreKit.framework",
 			);
 			outputPaths = (
 			);
@@ -597,12 +615,14 @@
 				40A645921E3C359700CB62B1 /* MasterViewController+Routes.swift in Sources */,
 				408507DC1E2B147A00C2E0D1 /* UpdateHost.swift in Sources */,
 				408507CF1E2AD05200C2E0D1 /* AppReducer.swift in Sources */,
+				408150571E5A65F1005AD37B /* Upgrade.swift in Sources */,
 				400E70981E46CD2100B5477B /* HostListViewCell.swift in Sources */,
 				408507D81E2ADD0E00C2E0D1 /* RemoveHost.swift in Sources */,
 				400E708C1E42CCCC00B5477B /* TouchIDService.swift in Sources */,
 				408507CA1E2ACFCA00C2E0D1 /* State.swift in Sources */,
+				408150601E5A6931005AD37B /* UpgradeService.swift in Sources */,
 				40A645AC1E3E721400CB62B1 /* SSHService.swift in Sources */,
-				408508071E2C495200C2E0D1 /* LatestHostAliasServivce.swift in Sources */,
+				408508071E2C495200C2E0D1 /* UserDefaultsServivce.swift in Sources */,
 				408507DE1E2BB9AB00C2E0D1 /* HostInfo.swift in Sources */,
 				403692841E35A17200571EB5 /* ReSwiftRxBridge.swift in Sources */,
 				40A645AA1E3E6EF000CB62B1 /* MacUnlockService.swift in Sources */,
@@ -611,6 +631,7 @@
 				400E709B1E4AA10200B5477B /* HostDetailsViewModel.swift in Sources */,
 				408507D41E2ADA8900C2E0D1 /* MacHostsInfoService.swift in Sources */,
 				40C4AB161CE758F400ED92C5 /* AppDelegate.swift in Sources */,
+				408150641E5A7988005AD37B /* UpgradeViewController.swift in Sources */,
 				408507D61E2ADC6800C2E0D1 /* AddHost.swift in Sources */,
 				408507D11E2AD9C200C2E0D1 /* HostsReducer.swift in Sources */,
 			);

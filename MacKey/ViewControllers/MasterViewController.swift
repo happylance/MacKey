@@ -206,11 +206,6 @@ extension MasterViewController  { // UITableViewDataSource
         let alias = store.hostsState.sortedHostAliases[indexPath.row]
         cell.hostAliasOutlet?.text = alias
         
-        cell.sleepButtonOutlet.rx.tap.subscribe(onNext:{ [unowned self] in
-            self.sleepButtonTapped$.onNext(alias)
-        })
-        .disposed(by: disposeBag)
-        
         if alias == store.hostsState.latestHostAlias {
             cell.hostStatusOutlet?.text = latestHostUnlockStatus
             cell.sleepButtonOutlet.isHidden = !(latestHostUnlockStatus?.contains("unlocked") ?? false)
@@ -220,6 +215,24 @@ extension MasterViewController  { // UITableViewDataSource
             cell.sleepButtonOutlet.isHidden = true
             cell.accessoryType = .none
         }
+        
+        cell.sleepButtonOutlet.rx.tap
+            .flatMapFirst { _ -> Observable<String> in
+                if (store.observable.value.supportSleepMode) {
+                    return Observable.just(alias)
+                } else if let upgradeViewController = self.showUpgradeViewController(
+                    animated: true, forProductType: .sleepMode) {
+                    return upgradeViewController.getPurchaseState$()
+                        .filter { $0 == .purchased }
+                        .map {_ in alias }
+                }
+                return Observable.empty()
+            }
+            .subscribe(onNext:{ [unowned self] alias in
+                self.sleepButtonTapped$.onNext(alias)
+            })
+            .disposed(by: cell.disposeBag)
+        
         return cell
     }
 }
