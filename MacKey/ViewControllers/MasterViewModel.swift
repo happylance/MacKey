@@ -15,15 +15,15 @@ class MasterViewModel {
     let selectedIndex$: Driver<(IndexPath, HostsState)>
     let selectedCellStatusUpdate$: Driver<String>
     
-    init(itemSelected$: Driver<IndexPath>,
-         sleepButtonTapped$: Driver<String>) {
+    init(unlockRequest$: Driver<IndexPath>,
+         sleepRequest$: Driver<String>) {
         let storeState$ = store.observable.asDriver()
         
         hasSelectedCell$ = storeState$
             .map { $0.hostsState.latestHostAlias.characters.count > 0 }
             .distinctUntilChanged()
         
-        selectedIndex$ = itemSelected$.withLatestFrom(storeState$) { ($0, $1.hostsState) }
+        selectedIndex$ = unlockRequest$.withLatestFrom(storeState$) { ($0, $1.hostsState) }
         
         let enterForeground$: Observable<Void> = NotificationCenter
             .default.rx.notification(.UIApplicationWillEnterForeground)
@@ -32,7 +32,7 @@ class MasterViewModel {
         let startConnection$ = Observable
             .of(Observable.just(), // for didFinishLaunching
                 enterForeground$,
-                itemSelected$.asObservable().map { _ in })
+                unlockRequest$.asObservable().map { _ in })
             .merge()
         
         let unlockStatus$ = startConnection$.withLatestFrom(store.observable.asObservable())
@@ -73,7 +73,7 @@ class MasterViewModel {
                 return Observable.just(status)
         }
         
-        let sleepStatus$ = sleepButtonTapped$
+        let sleepStatus$ = sleepRequest$
             .filter { $0 != "" }
             .withLatestFrom(storeState$) { $1.hostsState.allHosts[$0] }
             .asObservable()

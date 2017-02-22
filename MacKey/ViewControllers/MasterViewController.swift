@@ -13,10 +13,15 @@ import RxCocoa
 
 let readMeURL = "https://github.com/happylance/MacKey/blob/master/README.md"
 
-class MasterViewController: UITableViewController {
+class MasterViewController: UIViewController {
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var sleepButtonOutlet: UIBarButtonItem!
+    @IBOutlet weak var unlockButtonOutlet: UIBarButtonItem!
 
     fileprivate var latestHostUnlockStatus: String? = nil
-    fileprivate let sleepButtonTapped$: PublishSubject<String> = PublishSubject()
+    fileprivate let sleepRequest$ = Variable("")
+    fileprivate let unlockRequest$ = Variable(IndexPath(row:0, section:0))
+    
     fileprivate let editCell$: PublishSubject<String> = PublishSubject()
     fileprivate let deleteCell$: PublishSubject<String> = PublishSubject()
     
@@ -26,15 +31,20 @@ class MasterViewController: UITableViewController {
         super.viewDidLoad()
         
         let viewModel = MasterViewModel(
-            itemSelected$: tableView.rx.itemSelected.asDriver(),
-            sleepButtonTapped$: sleepButtonTapped$.asDriver(onErrorJustReturn:"")
+            unlockRequest$: unlockRequest$.asDriver().skip(1),
+            sleepRequest$: sleepRequest$.asDriver().skip(1)
         )
         
-        setUpSelectAction(viewModel: viewModel)
+        setUpUnlockAction(viewModel: viewModel)
+        setUpSleepAction(viewModel: viewModel)
         
-        self.navigationItem.leftBarButtonItems = [getEditButtonItem(viewModel: viewModel),
+        navigationItem.leftBarButtonItems = [getEditButtonItem(viewModel: viewModel),
                                                   getDeleteButtonItem(viewModel: viewModel)]
-        self.navigationItem.rightBarButtonItems = [getAddButtonItem(), getInfoButtonItem()]
+        navigationItem.rightBarButtonItems = [getAddButtonItem(), getInfoButtonItem()]
+        
+        navigationController?.setToolbarHidden(false, animated: true)
+        
+        tableView.dataSource = self
                 
         // Hide empty rows
         tableView.tableFooterView = UIView()
@@ -116,7 +126,33 @@ class MasterViewController: UITableViewController {
         return editButtonItem
     }
     
-    private func setUpSelectAction(viewModel: MasterViewModel) {
+    private func setUpSleepAction(viewModel: MasterViewModel) {
+        let defaultColor = sleepButtonOutlet.tintColor
+        viewModel.selectedCellStatusUpdate$
+            .map { $0.contains("unlocked") }
+            .startWith(false)
+            .do(onNext: {[unowned self] in self.sleepButtonOutlet.tintColor = $0 ? defaultColor : UIColor.gray })
+            .drive(sleepButtonOutlet.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        sleepButtonOutlet.rx.tap
+            .withLatestFrom(store.observable.asObservable()) { $1.hostsState.latestHostAlias }
+            .flatMapFirst { alias -> Observable<String> in
+                if (store.observable.value.supportSleepMode) {
+                    return Observable.just(alias)
+                } else if let upgradeViewController = self.showUpgradeViewController(
+                    animated: true, forProductType: .sleepMode) {
+                    return upgradeViewController.getPurchaseState$()
+                        .filter { $0 == .purchased }
+                        .map {_ in alias }
+                }
+                return Observable.empty()
+            }
+            .bindTo(sleepRequest$)
+            .disposed(by: disposeBag)
+    }
+    
+    private func setUpUnlockAction(viewModel: MasterViewModel) {
         viewModel.selectedIndex$
             .drive(onNext: { [unowned self] (indexPath, hostsState) in
             self.tableView.deselectRow(at: indexPath, animated: true)
@@ -135,6 +171,21 @@ class MasterViewController: UITableViewController {
             self.latestHostUnlockStatus = info
             self.reloadCells([latestHostAlias])
         }).disposed(by: disposeBag)
+        
+        let defaultColor = unlockButtonOutlet.tintColor
+        viewModel.hasSelectedCell$
+            .do(onNext: {[unowned self] in self.unlockButtonOutlet.tintColor = $0 ? defaultColor : UIColor.gray })
+            .drive(unlockButtonOutlet.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        tableView.rx.itemSelected.bindTo(unlockRequest$).disposed(by: disposeBag)
+        unlockButtonOutlet.rx.tap
+            .withLatestFrom(store.observable.asObservable()) { $1.hostsState }
+            .map { $0.sortedHostAliases.index(of: $0.latestHostAlias) }
+            .filter { $0 != nil }.map { $0! }
+            .map { IndexPath(row: $0, section: 0) }
+            .bindTo(unlockRequest$)
+            .disposed(by: disposeBag)
     }
     
     private func getAddButtonItem() -> UIBarButtonItem {
@@ -189,16 +240,16 @@ class MasterViewController: UITableViewController {
     }
 }
 
-extension MasterViewController  { // UITableViewDataSource
-    override func numberOfSections(in tableView: UITableView) -> Int {
+extension MasterViewController: UITableViewDataSource  {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return store.hostsState.allHosts.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> HostListViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "HostListViewCell", for: indexPath) as? HostListViewCell else {
             fatalError("Could not create HostListViewCell")
         }
@@ -208,37 +259,18 @@ extension MasterViewController  { // UITableViewDataSource
         
         if alias == store.hostsState.latestHostAlias {
             cell.hostStatusOutlet?.text = latestHostUnlockStatus
-            cell.sleepButtonOutlet.isHidden = !(latestHostUnlockStatus?.contains("unlocked") ?? false)
             cell.accessoryType = .checkmark
         } else {
             cell.hostStatusOutlet?.text = ""
-            cell.sleepButtonOutlet.isHidden = true
             cell.accessoryType = .none
         }
-        
-        cell.sleepButtonOutlet.rx.tap
-            .flatMapFirst { _ -> Observable<String> in
-                if (store.observable.value.supportSleepMode) {
-                    return Observable.just(alias)
-                } else if let upgradeViewController = self.showUpgradeViewController(
-                    animated: true, forProductType: .sleepMode) {
-                    return upgradeViewController.getPurchaseState$()
-                        .filter { $0 == .purchased }
-                        .map {_ in alias }
-                }
-                return Observable.empty()
-            }
-            .subscribe(onNext:{ [unowned self] alias in
-                self.sleepButtonTapped$.onNext(alias)
-            })
-            .disposed(by: cell.disposeBag)
         
         return cell
     }
 }
 
-extension MasterViewController { // UITableViewDelegate
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+extension MasterViewController : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         let editRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: "Edit", handler:{action, indexpath in
             tableView.setEditing(false, animated: true)
