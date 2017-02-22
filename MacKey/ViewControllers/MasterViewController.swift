@@ -39,7 +39,7 @@ class MasterViewController: UIViewController {
         setUpSleepAction(viewModel: viewModel)
         
         navigationItem.leftBarButtonItems = [getEditButtonItem(viewModel: viewModel),
-                                                  getDeleteButtonItem(viewModel: viewModel)]
+                                             getDeleteButtonItem(viewModel: viewModel)]
         navigationItem.rightBarButtonItems = [getAddButtonItem(), getInfoButtonItem()]
         
         navigationController?.setToolbarHidden(false, animated: true)
