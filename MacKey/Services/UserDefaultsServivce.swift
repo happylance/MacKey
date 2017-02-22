@@ -42,19 +42,19 @@ class UserDefaultsServivce : NSObject {
             .disposed(by: disposeBag)
     }
     
-    static var supportSkippingTouchID: Bool {
+    var supportSkippingTouchID: Bool {
         get {
             return UserDefaults.standard.bool(forKey: supportSkippingTouchIDKey)
         }
     }
     
-    static var supportSleepMode: Bool {
+    var supportSleepMode: Bool {
         get {
             return UserDefaults.standard.bool(forKey: supportSleepModeKey)
         }
     }
     
-    static var latestHostAlias: String {
+    var latestHostAlias: String {
         get {
             return UserDefaults.standard.string(forKey: latestHostAliasKey) ?? ""
         }
