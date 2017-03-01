@@ -1,0 +1,48 @@
+/*
+  Localizable.strings
+  MacKey
+
+  Created by Liu Liang on 23/02/2017.
+  Copyright © 2017 Liu Liang. All rights reserved.
+*/
+"Are you sure that you want to delete \"%@\"" = "Are you sure that you want to delete \"%@\"";
+"Alias is already taken" = "Alias is already taken";
+"App cancelled authentication" = "App cancelled authentication";
+"Authentication failed" = "Authentication failed";
+"Authentication required to unlock '%@'" = "Authentication required to unlock '%@'";
+"Cancel" = "Cancel";
+"Connecting..." = "Connecting...";
+"Connection failed" = "Connection failed";
+"Could not retrieve product info" = "Could not retrieve product info";
+"Delete" = "Delete";
+"Edit" = "Edit";
+"Edit host" = "Edit host";
+"Error" = "Error";
+"Failed to create NMSSHSession" = "Failed to create NMSSHSession";
+"Failed to unlock Mac" = "Failed to unlock Mac";
+"Invalid authentication context" = "Invalid authentication context";
+"Invalid product ID: %@" = "Invalid product ID: %@";
+"Invalid product identifier: %@" = "Invalid product identifier: %@";
+"Mac is already unlocked" = "Mac is already unlocked";
+"Mac is unlocked" = "Mac is unlocked";
+"Needs to unlock manually" = "Needs to unlock manually";
+"New host" = "New host";
+"Nothing to restore" = "Nothing to restore";
+"OK" = "OK";
+"Payment not allowed" = "Payment not allowed";
+"Purchase Failed" = "Purchase Failed";
+"Require touch ID" = "Require touch ID";
+"Response is nil" = "Response is nil";
+"Restore Unsuccessful" = "Restore Unsuccessful";
+"SSH request failed with error: `%@`" = "SSH request failed with error: `%@`";
+"System cancelled authetication" = "System cancelled authetication";
+"Touch ID error" = "Touch ID error";
+"Touch ID is not available on this device" = "Touch ID is not available on this device";
+"Unlocking..." = "Unlocking...";
+"Unknown error has occurred" = "Unknown error has occurred";
+"User cancelled authentication" = "User cancelled authentication";
+"User has not enrolled for Touch ID" = "User has not enrolled for Touch ID";
+"User is locked out of Touch ID" = "User is locked out of Touch ID";
+"User opted for fallback authentication" = "User opted for fallback authentication";
+"User's passcode not set" = "User's passcode not set";
+"You purchased another product but not this one" = "You purchased another product but not this one";

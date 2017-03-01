@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Localize_Swift
 import RxSwift
 import RxCocoa
 import ReactiveReSwift
@@ -47,7 +48,7 @@ class HostDetailsViewController: UITableViewController {
         passwordOutlet?.text = oldHost.password
         requireTouchIDOutlet.isOn = oldHost.requireTouchID
         
-        validationOutlet.text = "Alias is already taken."
+        validationOutlet.text = "Alias is already taken".localized()
         
         let requireTouchID$ = Variable(requireTouchIDOutlet.isOn)
         

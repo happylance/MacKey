@@ -1,0 +1,30 @@
+
+/* Class = "UINavigationItem"; title = "New host"; ObjectID = "1AY-Ug-OAS"; */
+"1AY-Ug-OAS.title" = "新主机";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "4Xf-11-OnM"; */
+"4Xf-11-OnM.title" = "取消";
+
+/* Class = "UITextField"; placeholder = "Enter host name or IP address"; ObjectID = "EiG-p5-IZH"; */
+"EiG-p5-IZH.placeholder" = "填写主机名或IP地址";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "KMp-MC-vrJ"; */
+"KMp-MC-vrJ.title" = "取消";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "L9h-qa-NHY"; */
+"L9h-qa-NHY.text" = "标签";
+
+/* Class = "UITextField"; placeholder = "Enter username"; ObjectID = "Waa-hP-rpn"; */
+"Waa-hP-rpn.placeholder" = "填写用户名";
+
+/* Class = "UITextField"; placeholder = "Enter alias"; ObjectID = "Y54-Q8-seo"; */
+"Y54-Q8-seo.placeholder" = "填写别名";
+
+/* Class = "UIBarButtonItem"; title = "Save"; ObjectID = "ZCt-uO-2zx"; */
+"ZCt-uO-2zx.title" = "保存";
+
+/* Class = "UILabel"; text = "Require Touch ID"; ObjectID = "tRO-yc-N1f"; */
+"tRO-yc-N1f.text" = "需要Touch ID";
+
+/* Class = "UITextField"; placeholder = "Enter password"; ObjectID = "wYz-uM-9CW"; */
+"wYz-uM-9CW.placeholder" = "填写密码";

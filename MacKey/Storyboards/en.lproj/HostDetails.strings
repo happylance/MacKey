@@ -1,0 +1,30 @@
+
+/* Class = "UINavigationItem"; title = "New host"; ObjectID = "1AY-Ug-OAS"; */
+"1AY-Ug-OAS.title" = "New host";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "4Xf-11-OnM"; */
+"4Xf-11-OnM.title" = "Cancel";
+
+/* Class = "UITextField"; placeholder = "Enter host name or IP address"; ObjectID = "EiG-p5-IZH"; */
+"EiG-p5-IZH.placeholder" = "Enter host name or IP address";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "KMp-MC-vrJ"; */
+"KMp-MC-vrJ.title" = "Cancel";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "L9h-qa-NHY"; */
+"L9h-qa-NHY.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "Enter username"; ObjectID = "Waa-hP-rpn"; */
+"Waa-hP-rpn.placeholder" = "Enter username";
+
+/* Class = "UITextField"; placeholder = "Enter alias"; ObjectID = "Y54-Q8-seo"; */
+"Y54-Q8-seo.placeholder" = "Enter alias";
+
+/* Class = "UIBarButtonItem"; title = "Save"; ObjectID = "ZCt-uO-2zx"; */
+"ZCt-uO-2zx.title" = "Save";
+
+/* Class = "UILabel"; text = "Require Touch ID"; ObjectID = "tRO-yc-N1f"; */
+"tRO-yc-N1f.text" = "Require Touch ID";
+
+/* Class = "UITextField"; placeholder = "Enter password"; ObjectID = "wYz-uM-9CW"; */
+"wYz-uM-9CW.placeholder" = "Enter password";

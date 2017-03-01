@@ -168,8 +168,8 @@ class UpgradeViewController: UIViewController{
     }
     
     private func alertWithTitle(_ title: String, message: String) {
-        let alertView = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertView.addAction(UIAlertAction(title: "OK", style: .cancel) { _ in
+        let alertView = UIAlertController(title: title.localized(), message: message.localized(), preferredStyle: .alert)
+        alertView.addAction(UIAlertAction(title: "OK".localized(), style: .cancel) { _ in
         })
         self.present(alertView, animated: true, completion: nil)
     }

@@ -1,0 +1,49 @@
+/* 
+  Localizable.strings
+  MacKey
+
+  Created by Liu Liang on 23/02/2017.
+  Copyright © 2017 Liu Liang. All rights reserved.
+*/
+
+"Are you sure that you want to delete \"%@\"" = "确定要删除\"%@\"吗";
+"Alias is already taken" = "已用";
+"App cancelled authentication" = "App取消了授权";
+"Authentication failed" = "授权失败";
+"Authentication required to unlock '%@'" = "解锁'%@'需要授权";
+"Cancel" = "取消";
+"Connecting..." = "连接中...";
+"Connection failed" = "连接失败";
+"Could not retrieve product info" = "无法获得产品信息";
+"Delete" = "删除";
+"Edit" = "修改";
+"Edit host" = "修改主机信息";
+"Error" = "错误";
+"Failed to create NMSSHSession" = "创建NMSSHSession失败";
+"Failed to unlock Mac" = "解锁Mac失败";
+"Invalid authentication context" = "授权无效";
+"Invalid product ID: %@" = "无效的产品号: %@";
+"Invalid product identifier: %@" = "无效的产品号: %@";
+"Mac is already unlocked" = "Mac没有锁定";
+"Mac is unlocked" = "Mac已解锁";
+"Needs to unlock manually" = "需要手动解锁";
+"New host" = "新主机";
+"Nothing to restore" = "无可恢复";
+"OK" = "好";
+"Payment not allowed" = "没允许购买";
+"Purchase Failed" = "购买失败";
+"Require touch ID" = "需要touch ID";
+"Response is nil" = "空返回";
+"Restore Unsuccessful" = "恢复成功";
+"SSH request failed with error: `%@`" = "SSH请求出错: `%@`";
+"System cancelled authetication" = "系统取消了授权";
+"Touch ID error" = "Touch ID错误";
+"Touch ID is not available on this device" = "本机不支持Touch ID";
+"Unlocking..." = "解锁中...";
+"Unknown error has occurred" = "发生了未知错误";
+"User cancelled authentication" = "用户取消了授权";
+"User has not enrolled for Touch ID" = "用户没有注册Touch ID";
+"User is locked out of Touch ID" = "用户被锁在Touch ID外面了";
+"User opted for fallback authentication" = "用户倾向于后备的身份验证";
+"User's passcode not set" = "用户没设密码";
+"You purchased another product but not this one" = "您买了另一件产品，但没买这件";

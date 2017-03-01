@@ -18,7 +18,7 @@ class MasterViewController: UIViewController {
     @IBOutlet weak var sleepButtonOutlet: UIBarButtonItem!
     @IBOutlet weak var unlockButtonOutlet: UIBarButtonItem!
 
-    fileprivate var latestHostUnlockStatus: String? = nil
+    fileprivate var latestHostUnlockStatus = ""
     fileprivate let sleepRequest$ = Variable("")
     fileprivate let unlockRequest$ = Variable(IndexPath(row:0, section:0))
     
@@ -258,7 +258,7 @@ extension MasterViewController: UITableViewDataSource  {
         cell.hostAliasOutlet?.text = alias
         
         if alias == store.hostsState.latestHostAlias {
-            cell.hostStatusOutlet?.text = latestHostUnlockStatus
+            cell.hostStatusOutlet?.text = latestHostUnlockStatus.localized()
             cell.accessoryType = .checkmark
         } else {
             cell.hostStatusOutlet?.text = ""
@@ -272,7 +272,7 @@ extension MasterViewController: UITableViewDataSource  {
 extension MasterViewController : UITableViewDelegate {
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        let editRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: "Edit", handler:{action, indexpath in
+        let editRowAction = UITableViewRowAction(style: UITableViewRowActionStyle.normal, title: "Edit".localized(), handler:{action, indexpath in
             tableView.setEditing(false, animated: true)
             if let cell = tableView.cellForRow(at: indexPath) as? HostListViewCell {
                 self.editCell$.onNext(cell.hostAliasOutlet.text ?? "")

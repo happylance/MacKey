@@ -1,0 +1,15 @@
+
+/* Class = "UILabel"; text = "Allow users to skip touch ID verification by turning off 'Require Touch ID' option."; ObjectID = "F6i-Zz-svn"; */
+"F6i-Zz-svn.text" = "允许用户绕过touch ID验证";
+
+/* Class = "UIButton"; normalTitle = "Restore Purchase"; ObjectID = "Y86-zq-vG6"; */
+"Y86-zq-vG6.normalTitle" = "恢复购买";
+
+/* Class = "UIBarButtonItem"; title = "Cancel"; ObjectID = "byR-7k-9vk"; */
+"byR-7k-9vk.title" = "取消";
+
+/* Class = "UIButton"; normalTitle = "$0.99"; ObjectID = "vT0-Y7-mfg"; */
+"vT0-Y7-mfg.normalTitle" = "$0.99";
+
+/* Class = "UINavigationItem"; title = "Purchase"; ObjectID = "zRC-p0-p44"; */
+"zRC-p0-p44.title" = "购买";

@@ -1,0 +1,18 @@
+
+/* Class = "UILabel"; text = "Status"; ObjectID = "6Ct-Jq-igf"; */
+"6Ct-Jq-igf.text" = "状态";
+
+/* Class = "UITableViewController"; title = "Master"; ObjectID = "7bK-jq-Zjz"; */
+"7bK-jq-Zjz.title" = "主要";
+
+/* Class = "UILabel"; text = "Host"; ObjectID = "Jwo-bv-Uan"; */
+"Jwo-bv-Uan.text" = "主机";
+
+/* Class = "UIBarButtonItem"; title = "Unlock"; ObjectID = "Kjq-gk-XsP"; */
+"Kjq-gk-XsP.title" = "解锁";
+
+/* Class = "UINavigationItem"; title = "Mac Key"; ObjectID = "Zdf-7t-Un8"; */
+"Zdf-7t-Un8.title" = "Mac钥匙";
+
+/* Class = "UIBarButtonItem"; title = "Sleep"; ObjectID = "hHo-cH-bFj"; */
+"hHo-cH-bFj.title" = "睡眠";

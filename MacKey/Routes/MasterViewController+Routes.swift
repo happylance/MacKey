@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Localize_Swift
 
 let hostDetailsStoryboard = UIStoryboard(name: "HostDetails", bundle: nil)
 let upgradeStoryboard = UIStoryboard(name: "Upgrade", bundle: nil)
@@ -21,7 +22,7 @@ extension MasterViewController {
             .instantiateViewController(withIdentifier: hostDetailsControllerIdentifier)
         
         let navController = UINavigationController(rootViewController: hostDetailsViewController)
-        navController.navigationBar.topItem?.title = forNewHost ? "New host" : "Edit host"
+        navController.navigationBar.topItem?.title = (forNewHost ? "New host" : "Edit host").localized()
         
         present(navController, animated: animated, completion: nil)
         

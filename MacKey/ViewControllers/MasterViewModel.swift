@@ -105,6 +105,7 @@ class MasterViewModel {
         
         selectedCellStatusUpdate$ = Driver.of(connectionStatus$, statusWhenEnterBackground$)
             .merge()
+            .map { $0.replacingOccurrences(of: "\n", with: "") }
     }
 }
     

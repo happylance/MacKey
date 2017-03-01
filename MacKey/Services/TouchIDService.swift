@@ -37,7 +37,7 @@ class TouchIDService {
         case .invalidContext:
             return "Invalid authentication context"
         case .passcodeNotSet:
-            return "Users passcode not set"
+            return "User's passcode not set"
         case .systemCancel:
             return "System cancelled authetication"
         case .touchIDLockout:
@@ -49,7 +49,7 @@ class TouchIDService {
         case .userCancel:
             return "User cancelled authentication"
         case .userFallback:
-            return "User opted for fallback authetication"
+            return "User opted for fallback authentication"
         }
     }
 }
