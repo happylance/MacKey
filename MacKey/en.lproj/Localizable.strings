@@ -6,7 +6,9 @@
   Copyright © 2017 Liu Liang. All rights reserved.
 */
 
-"Are you sure that you want to delete \"%@\"" = "Are you sure that you want to delete \"%@\"";
+" > System Preferences > Sharing > RemoteLogin" = " > System Preferences > Sharing > RemoteLogin";
+"Alias" = "Alias";
+"Are you sure that you want to delete '%@'" = "Are you sure that you want to delete '%@'";
 "Alias is already taken" = "Alias is already taken";
 "App cancelled authentication" = "App cancelled authentication";
 "Authentication failed" = "Authentication failed";
@@ -16,11 +18,15 @@
 "Connection failed" = "Connection failed";
 "Could not retrieve product info" = "Could not retrieve product info";
 "Delete" = "Delete";
+"Delete '%@'" = "Delete '%@'";
 "Edit" = "Edit";
 "Edit host" = "Edit host";
 "Error" = "Error";
 "Failed to create NMSSHSession" = "Failed to create NMSSHSession";
 "Failed to unlock Mac" = "Failed to unlock Mac";
+"Help" = "Help";
+"HelpText" = "Tap the + button. Input the following information.\n1. Alias: This can be any string which you would like to name your mac.\n2. Host name or IP address: You can get it  from your Mac by going to %@.\n3. Username: This is the username of your account for your mac.\n4. Password: This is the password of your account for your mac.\n\nIf connection is failed, please check the following conditions.\n1. Please make sure your Mac and your iOS device are within the same WiFi network.\n2. Please make sure remote login is enabled on your Mac by going to %@.\n3. Please make sure the IP address, username and password for your Mac are correct.";
+"Host name or IP address" = "Host name or IP address";
 "Invalid authentication context" = "Invalid authentication context";
 "Invalid product ID: %@" = "Invalid product ID: %@";
 "Invalid product identifier: %@" = "Invalid product identifier: %@";
@@ -30,6 +36,7 @@
 "New host" = "New host";
 "Nothing to restore" = "Nothing to restore";
 "OK" = "OK";
+"Password" = "Password";
 "Payment not allowed" = "Payment not allowed";
 "Purchase Failed" = "Purchase Failed";
 "Require touch ID" = "Require touch ID";
@@ -39,6 +46,7 @@
 "System cancelled authetication" = "System cancelled authetication";
 "Touch ID error" = "Touch ID error";
 "Touch ID is not available on this device" = "Touch ID is not available on this device";
+"unlocked" = "unlocked";
 "Unlocking..." = "Unlocking...";
 "Unknown error has occurred" = "Unknown error has occurred";
 "User cancelled authentication" = "User cancelled authentication";
@@ -46,4 +54,5 @@
 "User is locked out of Touch ID" = "User is locked out of Touch ID";
 "User opted for fallback authentication" = "User opted for fallback authentication";
 "User's passcode not set" = "User's passcode not set";
+"Username" = "Username";
 "You purchased another product but not this one" = "You purchased another product but not this one";

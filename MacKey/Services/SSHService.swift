@@ -29,7 +29,7 @@ extension SSHSessionError: CustomDebugStringConvertible {
         case .failedToCreateSession:
             return "Failed to create NMSSHSession"
         case let .failedWithError(error):
-            return "SSH request failed with error: `\(error.description)`"
+            return String(format:"SSH request failed with error: `%@`".localized(), error.description)
         case let .failedWithResponse(response):
             return "SSH request failed with response: `\(response)`"
         case .noResponse:

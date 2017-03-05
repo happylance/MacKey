@@ -20,6 +20,8 @@
 		403692841E35A17200571EB5 /* ReSwiftRxBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403692831E35A17200571EB5 /* ReSwiftRxBridge.swift */; };
 		403692861E35A1B300571EB5 /* ReactiveReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 403692851E35A1B300571EB5 /* ReactiveReSwift.framework */; };
 		404B99541E666C0E009312F3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4007F09C1E5FD7D400463D8D /* Localizable.strings */; };
+		404B99591E67A631009312F3 /* Help.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 404B99571E67A631009312F3 /* Help.storyboard */; };
+		404B995B1E67AB63009312F3 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B995A1E67AB63009312F3 /* HelpViewController.swift */; };
 		404E057A1E4FC3AF002F8A95 /* HostsReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404E05791E4FC3AF002F8A95 /* HostsReducerTests.swift */; };
 		404E057B1E4FC6C4002F8A95 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40A8B6641E34132600C71EE7 /* RxCocoa.framework */; };
 		408150571E5A65F1005AD37B /* Upgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408150561E5A65F1005AD37B /* Upgrade.swift */; };
@@ -140,6 +142,10 @@
 		404B99521E666393009312F3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Upgrade.strings"; sourceTree = "<group>"; };
 		404B99551E666CFF009312F3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		404B99561E666D01009312F3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		404B99581E67A631009312F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Storyboards/Base.lproj/Help.storyboard; sourceTree = "<group>"; };
+		404B995A1E67AB63009312F3 /* HelpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HelpViewController.swift; path = ViewControllers/HelpViewController.swift; sourceTree = "<group>"; };
+		404B995D1E67B9C5009312F3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = Storyboards/en.lproj/Help.strings; sourceTree = "<group>"; };
+		404B995F1E67B9C6009312F3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "Storyboards/zh-Hans.lproj/Help.strings"; sourceTree = "<group>"; };
 		404E05791E4FC3AF002F8A95 /* HostsReducerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostsReducerTests.swift; sourceTree = "<group>"; };
 		408150561E5A65F1005AD37B /* Upgrade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Upgrade.swift; path = Actions/Upgrade.swift; sourceTree = "<group>"; };
 		4081505F1E5A6931005AD37B /* UpgradeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpgradeService.swift; path = Services/UpgradeService.swift; sourceTree = "<group>"; };
@@ -273,6 +279,7 @@
 		408507CB1E2ACFD300C2E0D1 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				404B995A1E67AB63009312F3 /* HelpViewController.swift */,
 				40BD24F01E330BFE004C8BD8 /* HostDetailsViewController.swift */,
 				400E70991E4AA10200B5477B /* HostDetailsViewModel.swift */,
 				408507CC1E2ACFFE00C2E0D1 /* MasterViewController.swift */,
@@ -308,6 +315,7 @@
 			children = (
 				4007F0941E5FD6FA00463D8D /* HostDetails.storyboard */,
 				4007F0971E5FD71500463D8D /* Upgrade.storyboard */,
+				404B99571E67A631009312F3 /* Help.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -561,6 +569,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				404B99541E666C0E009312F3 /* Localizable.strings in Resources */,
+				404B99591E67A631009312F3 /* Help.storyboard in Resources */,
 				4007F0921E5FD6FA00463D8D /* HostDetails.storyboard in Resources */,
 				4007F0951E5FD71500463D8D /* Upgrade.storyboard in Resources */,
 				40C4AB1F1CE758F400ED92C5 /* Assets.xcassets in Resources */,
@@ -639,6 +648,7 @@
 				400E708C1E42CCCC00B5477B /* TouchIDService.swift in Sources */,
 				408507CA1E2ACFCA00C2E0D1 /* State.swift in Sources */,
 				408150601E5A6931005AD37B /* UpgradeService.swift in Sources */,
+				404B995B1E67AB63009312F3 /* HelpViewController.swift in Sources */,
 				40A645AC1E3E721400CB62B1 /* SSHService.swift in Sources */,
 				408508071E2C495200C2E0D1 /* UserDefaultsServivce.swift in Sources */,
 				408507DE1E2BB9AB00C2E0D1 /* HostInfo.swift in Sources */,
@@ -718,6 +728,16 @@
 				404B99561E666D01009312F3 /* zh-Hans */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		404B99571E67A631009312F3 /* Help.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				404B99581E67A631009312F3 /* Base */,
+				404B995D1E67B9C5009312F3 /* en */,
+				404B995F1E67B9C6009312F3 /* zh-Hans */,
+			);
+			name = Help.storyboard;
 			sourceTree = "<group>";
 		};
 		40C4AB1B1CE758F400ED92C5 /* Main.storyboard */ = {

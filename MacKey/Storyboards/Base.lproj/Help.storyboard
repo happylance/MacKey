@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Help-->
+        <scene sceneID="jwQ-zf-biz">
+            <objects>
+                <viewController storyboardIdentifier="HelpViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="weS-vQ-Af8" customClass="HelpViewController" customModule="MacKey" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Z4o-Bw-qyI"/>
+                        <viewControllerLayoutGuide type="bottom" id="pbz-xI-Hu5"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xOb-bN-RG7">
+                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.5" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="0dj-xU-EXD">
+                                <rect key="frame" x="20" y="0.0" width="374" height="672"/>
+                                <subviews>
+                                    <textView multipleTouchEnabled="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" minimumZoomScale="0.5" maximumZoomScale="2" bouncesZoom="NO" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fPB-aB-23J">
+                                        <rect key="frame" x="0.0" y="0.0" width="394" height="147"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <attributedString key="attributedText">
+                                            <fragment>
+                                                <mutableString key="content">Tap on "+" button. Input the following information.
+
+1. Alias: This can be any string which you would like to use as an alias of your mac.
+2. Host: This can be the IP address or machine name of your mac. You can get it from SystemPreferences -&gt; Sharing -&gt; RemoteLogin on your Mac. You can find the IP address or machine name under 'Computers on your local network can access your computer at:'.
+3. Username: This is the username of your account for your mac.
+4. Password: This is the password of your account for your mac.
+
+If connection is failed, please check the following conditions.
+1. Please make sure your Mac and your iOS device are within the same WiFi network. 
+2. Please make sure remote login is enabled in SystemPreferences-&gt;Sharing on your Mac. 
+</mutableString>
+                                                <attributes>
+                                                    <font key="NSFont" size="10" name=".AppleSystemUIFont"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="3. Please make sure the IP address, username and password for your Mac are correct.">
+                                                <attributes>
+                                                    <font key="NSFont" size="10" name=".AppleSystemUIFont"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                        </attributedString>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="fPB-aB-23J" firstAttribute="top" secondItem="0dj-xU-EXD" secondAttribute="top" id="7gD-46-cS5"/>
+                                    <constraint firstAttribute="bottom" secondItem="fPB-aB-23J" secondAttribute="bottom" id="V6V-oz-adr"/>
+                                    <constraint firstAttribute="trailing" secondItem="fPB-aB-23J" secondAttribute="trailing" constant="-20" id="rut-G0-6kf"/>
+                                    <constraint firstItem="fPB-aB-23J" firstAttribute="leading" secondItem="0dj-xU-EXD" secondAttribute="leading" id="xBv-36-Bk0"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="0dj-xU-EXD" firstAttribute="top" secondItem="Z4o-Bw-qyI" secondAttribute="bottom" id="2fh-MF-0va"/>
+                            <constraint firstItem="pbz-xI-Hu5" firstAttribute="top" secondItem="0dj-xU-EXD" secondAttribute="bottom" id="FwD-N5-z25"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="0dj-xU-EXD" secondAttribute="trailing" id="LFp-Xb-i5T"/>
+                            <constraint firstItem="0dj-xU-EXD" firstAttribute="leading" secondItem="xOb-bN-RG7" secondAttribute="leadingMargin" id="QDI-Dm-epT"/>
+                            <constraint firstAttribute="trailing" secondItem="fPB-aB-23J" secondAttribute="trailing" id="xso-h2-hM1"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <navigationItem key="navigationItem" title="Help" id="sz2-ye-69Z">
+                        <barButtonItem key="leftBarButtonItem" title="Close" id="Mnz-7J-BCM"/>
+                    </navigationItem>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="closeOutlet" destination="Mnz-7J-BCM" id="kLe-gs-mIR"/>
+                        <outlet property="textViewOutlet" destination="fPB-aB-23J" id="OJq-nb-SYD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D0N-RK-4H2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1066.6666666666667" y="144.29347826086956"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="6O9-H4-Adf">
+            <objects>
+                <navigationController storyboardIdentifier="HelpNavigationVC" automaticallyAdjustsScrollViewInsets="NO" id="XhY-ed-vhc" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="8yN-Wx-84z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="weS-vQ-Af8" kind="relationship" relationship="rootViewController" id="jax-wO-kFc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D4E-T0-A9e" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="128.80000000000001" y="146.17691154422789"/>
+        </scene>
+    </scenes>
+</document>

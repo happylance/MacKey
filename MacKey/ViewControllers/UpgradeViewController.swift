@@ -77,7 +77,9 @@ class UpgradeViewController: UIViewController{
                     self.purchaseOutlet.setTitle(priceString, for: .normal)
                 }
                 else if let invalidProductId = result.invalidProductIDs.first {
-                    return self.alertWithTitle("Could not retrieve product info", message: "Invalid product identifier: \(invalidProductId)")
+                    return self.alertWithTitle(
+                        "Could not retrieve product info",
+                        message: String(format:"Invalid product identifier: %@".localized(), invalidProductId))
                 }
                 else {
                     dlog("Error: \(result.error)")
@@ -108,7 +110,7 @@ class UpgradeViewController: UIViewController{
                         case .failed(let err):
                             return (err as NSError).localizedDescription
                         case .invalidProductId(let pid):
-                            return "Invalid product ID: \(pid)"
+                            return String(format:"Invalid product ID: %@".localized(), pid)
                         case .paymentNotAllowed:
                             return "Payment not allowed"
                         }

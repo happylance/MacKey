@@ -15,9 +15,10 @@ class TouchIDService {
         return Observable.create { observer in
             let context = LAContext()
             context.localizedFallbackTitle = ""
-            let reason = "Authentication required to unlock '\(host.alias)'"
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
-                                   localizedReason: reason) { success, error in
+            context.evaluatePolicy(
+                .deviceOwnerAuthenticationWithBiometrics,
+                localizedReason: String(format:"Authentication required to unlock '%@'".localized(), host.alias))
+            { success, error in
                 observer.onNext((success, error))
                 observer.onCompleted()
             }

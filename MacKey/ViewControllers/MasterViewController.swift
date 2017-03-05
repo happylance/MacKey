@@ -11,8 +11,6 @@ import ReactiveReSwift
 import RxSwift
 import RxCocoa
 
-let readMeURL = "https://github.com/happylance/MacKey/blob/master/README.md"
-
 class MasterViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var sleepButtonOutlet: UIBarButtonItem!
@@ -72,14 +70,15 @@ class MasterViewController: UIViewController {
             .subscribe(onNext: {[unowned self] (alias, hostsState) in
             if let host = hostsState.allHosts[alias],
                 let index = hostsState.sortedHostAliases.index(of: alias) {
-                let message = "Are you sure that you want to delete \"\(alias): \(host.user)@\(host.host)\""
-                let alertView = UIAlertController(title: "Delete \"\(alias)\"", message: message, preferredStyle: .alert)
-                alertView.addAction(UIAlertAction(title: "Delete", style: .destructive) { _ in
+                let alertView = UIAlertController(title: String(format:"Delete \"%@\"".localized(), "\(alias)"),
+                    message: String(format:"Are you sure that you want to delete \"%@\"".localized(), "\(alias): \(host.user)@\(host.host)"),
+                    preferredStyle: .alert)
+                alertView.addAction(UIAlertAction(title: "Delete".localized(), style: .destructive) { _ in
                     store.dispatch(RemoveHost(host: host))
                     let indexPathToRemove = IndexPath(row: index, section: 0)
                     self.tableView.deleteRows(at: [indexPathToRemove], with: .fade)
                 })
-                alertView.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in })
+                alertView.addAction(UIAlertAction(title: "Cancel".localized(), style: .cancel) { _ in })
                 self.present(alertView, animated: true, completion: nil)
             }
         }).disposed(by: disposeBag)
@@ -223,11 +222,11 @@ class MasterViewController: UIViewController {
     }
     
     private func getInfoButtonItem() -> UIBarButtonItem {
-        let infoButton = UIButton(type: .infoLight)
-        infoButton.rx.tap.subscribe(onNext: {
-            UIApplication.shared.openURL(URL(string: readMeURL)!)
+        let infoButton = UIBarButtonItem(title: "Help".localized(), style: .plain, target: nil, action: nil)
+        infoButton.rx.tap.subscribe(onNext: { [unowned self] in
+            self.showHelpViewController(animated: true)
         }).disposed(by: disposeBag)
-        return UIBarButtonItem(customView: infoButton)
+        return infoButton
     }
     
     private func reloadCells(_ aliases: [String]) {

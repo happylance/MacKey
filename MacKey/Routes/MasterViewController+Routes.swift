@@ -9,12 +9,13 @@
 import UIKit
 import Localize_Swift
 
+let helpStoryboard = UIStoryboard(name: "Help", bundle: nil)
 let hostDetailsStoryboard = UIStoryboard(name: "HostDetails", bundle: nil)
 let upgradeStoryboard = UIStoryboard(name: "Upgrade", bundle: nil)
 
+let helpControllerIdentifier = "HelpViewController"
 let hostDetailsControllerIdentifier = "HostDetailsViewController"
 let upgradeControllerIdentifier = "UpgradeViewController"
-
 
 extension MasterViewController {
     public func showHostDetailsViewController(animated: Bool, forNewHost:Bool) -> HostDetailsViewController?  {
@@ -27,6 +28,19 @@ extension MasterViewController {
         present(navController, animated: animated, completion: nil)
         
         return hostDetailsViewController as? HostDetailsViewController
+    }
+    
+    @discardableResult
+    public func showHelpViewController(animated: Bool) -> UIViewController?  {
+        let helpViewController = helpStoryboard
+            .instantiateViewController(withIdentifier: helpControllerIdentifier)
+        
+        let navController = UINavigationController(rootViewController: helpViewController)
+        navController.view.backgroundColor = UIColor.white
+        
+        present(navController, animated: animated, completion: nil)
+        
+        return helpViewController
     }
 }
 

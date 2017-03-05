@@ -6,7 +6,9 @@
   Copyright © 2017 Liu Liang. All rights reserved.
 */
 
-"Are you sure that you want to delete \"%@\"" = "确定要删除\"%@\"吗";
+" > System Preferences > Sharing > RemoteLogin" = " > 系统偏好设置 > 共享 > 远程登录";
+"Alias" = "别名";
+"Are you sure that you want to delete '%@'" = "确定要删除'%@'吗";
 "Alias is already taken" = "已用";
 "App cancelled authentication" = "App取消了授权";
 "Authentication failed" = "授权失败";
@@ -15,21 +17,26 @@
 "Connecting..." = "连接中...";
 "Connection failed" = "连接失败";
 "Could not retrieve product info" = "无法获得产品信息";
+"Delete '%@'" = "删除'%@'";
 "Delete" = "删除";
 "Edit" = "修改";
 "Edit host" = "修改主机信息";
 "Error" = "错误";
 "Failed to create NMSSHSession" = "创建NMSSHSession失败";
 "Failed to unlock Mac" = "解锁Mac失败";
+"Help" = "帮助";
+"HelpText" = "点按 + 按钮，输入下列信息：\n1. 别名: 为您的Mac随意取一个名字。\n2. 主机名或IP地址: 可在您的Mac上打开%@，就可以看到主机名或IP地址了。\n3. 用户名: 您登录Mac需要用到的用户名。\n4. 密码: 您登录Mac需要用到的密码。\n\n如果连接失败，请检查以下情况：\n1. 请确认您的Mac和iOS设备处于同一WiFi网络。\n2. 请在Mac上确认开启%@。\n3. 请检查IP地址、用户名和密码是否正确。";
+"Host name or IP address" = "主机名或IP地址";
 "Invalid authentication context" = "授权无效";
 "Invalid product ID: %@" = "无效的产品号: %@";
 "Invalid product identifier: %@" = "无效的产品号: %@";
-"Mac is already unlocked" = "Mac没有锁定";
+"Mac is already unlocked" = "Mac已解锁";
 "Mac is unlocked" = "Mac已解锁";
 "Needs to unlock manually" = "需要手动解锁";
 "New host" = "新主机";
 "Nothing to restore" = "无可恢复";
 "OK" = "好";
+"Password" = "密码";
 "Payment not allowed" = "没允许购买";
 "Purchase Failed" = "购买失败";
 "Require touch ID" = "需要touch ID";
@@ -39,6 +46,7 @@
 "System cancelled authetication" = "系统取消了授权";
 "Touch ID error" = "Touch ID错误";
 "Touch ID is not available on this device" = "本机不支持Touch ID";
+"unlocked" = "解锁";
 "Unlocking..." = "解锁中...";
 "Unknown error has occurred" = "发生了未知错误";
 "User cancelled authentication" = "用户取消了授权";
@@ -46,4 +54,5 @@
 "User is locked out of Touch ID" = "用户被锁在Touch ID外面了";
 "User opted for fallback authentication" = "用户倾向于后备的身份验证";
 "User's passcode not set" = "用户没设密码";
+"Username" = "用户名";
 "You purchased another product but not this one" = "您买了另一件产品，但没买这件";
