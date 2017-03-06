@@ -48,7 +48,7 @@
 "Purchase Failed" = "购买失败";
 "Require touch ID" = "需要touch ID";
 "Response is nil" = "空返回";
-"Restore Unsuccessful" = "恢复成功";
+"Restore Unsuccessful" = "恢复失败";
 "Save" = "保存";
 "SSH request failed with error: `%@`" = "SSH请求出错: `%@`";
 "System cancelled authetication" = "系统取消了身份验证";
