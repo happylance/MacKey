@@ -32,10 +32,10 @@
                                                     <rect key="frame" x="11" y="16" width="298" height="27"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words"/>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no"/>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L9h-qa-NHY">
-                                                    <rect key="frame" x="11" y="16.5" width="298" height="26.5"/>
+                                                    <rect key="frame" x="11" y="16" width="298" height="27"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                     <color key="textColor" red="1" green="0.1231041502" blue="0.14533249979999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
@@ -60,7 +60,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter host name or IP address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EiG-p5-IZH">
-                                                    <rect key="frame" x="11" y="16.5" width="298" height="27"/>
+                                                    <rect key="frame" x="11" y="16" width="298" height="27"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no"/>

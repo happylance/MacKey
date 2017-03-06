@@ -6,13 +6,15 @@
   Copyright © 2017 Liu Liang. All rights reserved.
 */
 " > System Preferences > Sharing > RemoteLogin" = " > System Preferences > Sharing > RemoteLogin";
+"Add" = "Add";
 "Alias" = "Alias";
-"Are you sure that you want to delete '%@'" = "Are you sure that you want to delete '%@'";
+"Are you sure that you want to delete '%@'?" = "Are you sure that you want to delete '%@'?";
 "Alias is already taken" = "Alias is already taken";
 "App cancelled authentication" = "App cancelled authentication";
 "Authentication failed" = "Authentication failed";
 "Authentication required to unlock '%@'" = "Authentication required to unlock '%@'";
 "Cancel" = "Cancel";
+"Close" = "Close";
 "Connecting..." = "Connecting...";
 "Connection failed" = "Connection failed";
 "Could not retrieve product info" = "Could not retrieve product info";
@@ -20,6 +22,10 @@
 "Delete '%@'" = "Delete '%@'";
 "Edit" = "Edit";
 "Edit host" = "Edit host";
+"Enter alias" = "Enter alias";
+"Enter host name or IP address" = "Enter host name or IP address";
+"Enter password" = "Enter password";
+"Enter username" = "Enter username";
 "Error" = "Error";
 "Failed to create NMSSHSession" = "Failed to create NMSSHSession";
 "Failed to unlock Mac" = "Failed to unlock Mac";
@@ -31,6 +37,7 @@
 "Invalid product identifier: %@" = "Invalid product identifier: %@";
 "Mac is already unlocked" = "Mac is already unlocked";
 "Mac is unlocked" = "Mac is unlocked";
+"Mac Key" = "Mac Key";
 "Needs to unlock manually" = "Needs to unlock manually";
 "New host" = "New host";
 "Nothing to restore" = "Nothing to restore";
@@ -41,6 +48,7 @@
 "Require touch ID" = "Require touch ID";
 "Response is nil" = "Response is nil";
 "Restore Unsuccessful" = "Restore Unsuccessful";
+"Save" = "Save";
 "SSH request failed with error: `%@`" = "SSH request failed with error: `%@`";
 "System cancelled authetication" = "System cancelled authetication";
 "Touch ID error" = "Touch ID error";

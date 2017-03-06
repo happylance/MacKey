@@ -70,8 +70,8 @@ class MasterViewController: UIViewController {
             .subscribe(onNext: {[unowned self] (alias, hostsState) in
             if let host = hostsState.allHosts[alias],
                 let index = hostsState.sortedHostAliases.index(of: alias) {
-                let alertView = UIAlertController(title: String(format:"Delete \"%@\"".localized(), "\(alias)"),
-                    message: String(format:"Are you sure that you want to delete \"%@\"".localized(), "\(alias): \(host.user)@\(host.host)"),
+                let alertView = UIAlertController(title: String(format:"Delete '%@'".localized(), alias),
+                    message: String(format:"Are you sure that you want to delete '%@'?".localized(), "\(alias): \(host.user)@\(host.host)"),
                     preferredStyle: .alert)
                 alertView.addAction(UIAlertAction(title: "Delete".localized(), style: .destructive) { _ in
                     store.dispatch(RemoveHost(host: host))

@@ -29,11 +29,20 @@ private func convertError(_ error: Error) -> Observable<UnlockStatus> {
     }
 }
 
+struct Config {
+    static let sshService: SSHService = UITesting() ?
+        MockSSHService() : SSHService()
+}
+
+private func UITesting() -> Bool {
+    return ProcessInfo.processInfo.arguments.contains("UI-TESTING")
+}
+
 class MacUnlockService {
     
     static func wakeUp(_ host: HostInfo) -> Observable<UnlockStatus> {
         let cmd = getDetailCommand("wake", for: host)
-        return SSHService().executeSshCommand(cmd, host: host)
+        return Config.sshService.executeSshCommand(cmd, host: host)
             .map { $0 == "" ? .connectedAndNeedsUnlock : .connectedWithInfo(info: $0) }
             .catchError { convertError($0) }
             .startWith(.connecting)
@@ -61,7 +70,7 @@ class MacUnlockService {
     
     static private func execCommand(_ command: String, host: HostInfo) -> Observable<UnlockStatus> {
         let detailCommand = getDetailCommand(command, for: host)
-        return SSHService().executeSshCommand(detailCommand, host: host)
+        return Config.sshService.executeSshCommand(detailCommand, host: host)
             .map { .connectedWithInfo(info: dlog($0)) }
             .catchError { convertError($0) }
     }

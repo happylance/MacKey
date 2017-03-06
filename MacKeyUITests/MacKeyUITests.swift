@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import Localize_Swift
 
 class MacKeyUITests: XCTestCase {
         
@@ -17,8 +18,6 @@ class MacKeyUITests: XCTestCase {
         
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
-        XCUIApplication().launch()
 
         // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
@@ -29,8 +28,60 @@ class MacKeyUITests: XCTestCase {
     }
     
     func testExample() {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        // UI tests must launch the application that they test. Doing this in setup will make sure it happens for each test method.
+        let app = XCUIApplication()
+        setupSnapshot(app)
+        UserDefaults.standard.set(deviceLanguage, forKey: "LCLCurrentLanguageKey")
+        app.launchArguments += ["UI-TESTING"]
+        app.launchEnvironment["wake"] = "Mac is unlocked"
+        app.launch()
+        
+        let alias = "Home"
+        let dStaticText = app.tables.staticTexts[alias]
+        if dStaticText.exists {
+            dStaticText.tap()
+            app.navigationBars["Mac Key".l()].buttons["Delete".l()].tap()
+            app.alerts[String(format:"Delete '%@'".l(), alias)]
+                .buttons["Delete".l()].tap()
+        }
+        
+        let macKeyNavigationBar = app.navigationBars["Mac Key".l()]
+        macKeyNavigationBar.buttons["Help".l()].tap()
+        snapshot("1Help")
+        app.navigationBars["Help".l()].buttons["Close".l()].tap()
+        
+        macKeyNavigationBar.buttons["Add".l()].tap()
+        snapshot("2hostDetails")
+        
+        let tablesQuery = XCUIApplication().tables
+        
+        [("Enter alias", alias),
+         ("Enter host name or IP address", "192.168.1.194"),
+         ("Enter username", "tester")]
+            .forEach {
+                let textField = tablesQuery.textFields[$0.0.l()]
+                textField.tap()
+                textField.typeText($0.1)
+        }
+        
+        let passwordTextField = tablesQuery.secureTextFields["Enter password".l()]
+        passwordTextField.tap()
+        passwordTextField.typeText("123456")
+        snapshot("3hostDetailsFilled")
+        
+        app.navigationBars["New host".l()].buttons["Save".l()].tap()
+        
+        app.tables.staticTexts[alias].tap()
+        snapshot("4Unlock")
+        app.navigationBars["Mac Key".l()].buttons["Delete".l()].tap()
+        snapshot("5Delete")
+        app.alerts[String(format:"Delete '%@'".l(), alias)]
+            .buttons["Delete".l()].tap()
     }
-    
+}
+
+extension String {
+    func l() -> String {
+        return self.localized(in: Bundle(for: MacKeyUITests.self))
+    }
 }
