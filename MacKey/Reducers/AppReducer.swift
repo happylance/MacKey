@@ -8,7 +8,7 @@
 
 import ReactiveReSwift
 
-let AppReducer = Reducer<State> { action, state in
+let AppReducer : Reducer<State> = { action, state in
     var (supportSkippingTouchID, supportSleepMode) = { () -> (Bool, Bool) in 
         switch action {
         case let action as Upgrade:

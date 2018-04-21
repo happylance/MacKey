@@ -51,6 +51,8 @@ class TouchIDService {
             return "User cancelled authentication"
         case .userFallback:
             return "User opted for fallback authentication"
+        case .notInteractive:
+            return "Not interactive."
         }
     }
 }

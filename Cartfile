@@ -2,5 +2,5 @@ github "marmelroy/Localize-Swift"
 github "bizz84/SwiftyStoreKit"
 github "NMSSH/NMSSH"
 github "jrendel/SwiftKeychainWrapper"
-github "ReactiveX/RxSwift" ~> 3.0
-github "ReSwift/ReactiveReSwift" ~> 3.0
+github "ReactiveX/RxSwift"
+github "ReSwift/ReactiveReSwift"

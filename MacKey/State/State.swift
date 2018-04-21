@@ -8,7 +8,7 @@
 
 import ReactiveReSwift
 
-struct State : StateType {
+struct State {
     var hostsState = HostsReducer.initialHostsState()
     var supportSkippingTouchID = UserDefaultsServivce().supportSkippingTouchID
     var supportSleepMode = UserDefaultsServivce().supportSleepMode

@@ -106,13 +106,13 @@ class UpgradeViewController: UIViewController{
                 case .error(let error):
                     dlog("Purchase Failed: \(error)")
                     self.alertWithTitle("Purchase Failed", message: {
-                        switch error {
-                        case .failed(let err):
-                            return (err as NSError).localizedDescription
-                        case .invalidProductId(let pid):
-                            return String(format:"Invalid product ID: %@".localized(), pid)
+                        switch(error.code) {
+                        case .storeProductNotAvailable:
+                            return String(format:"Store product not available")
                         case .paymentNotAllowed:
                             return "Payment not allowed"
+                        default:
+                            return error._nsError.localizedDescription
                         }
                     }())
                 }
@@ -125,19 +125,19 @@ class UpgradeViewController: UIViewController{
             .withLatestFrom(productType$.asObservable()) { ($0, productID(by: $1)) }
             .subscribe(onNext: { [unowned self] (results, productId) in
                 self.activityIndicatorOutlet.isHidden = true
-                if results.restoreFailedProducts.count > 0 {
-                    dlog("Restore Failed: \(results.restoreFailedProducts)")
+                if results.restoreFailedPurchases.count > 0 {
+                    dlog("Restore Failed: \(results.restoreFailedPurchases)")
                     let message = { () -> String in 
-                        if let error = results.restoreFailedProducts.first?.0 as? NSError {
+                        if let error = results.restoreFailedPurchases.first?.0 as? NSError {
                             return error.localizedDescription
                         }
                         return ""
                     }()
                     self.alertWithTitle("Restore Unsuccessful", message: message)
                 }
-                else if results.restoredProducts.count > 0 {
-                    dlog("Restore Success: \(results.restoredProducts)")
-                    if (results.restoredProducts.contains { $0.productId == productId }) {
+                else if results.restoredPurchases.count > 0 {
+                    dlog("Restore Success: \(results.restoredPurchases)")
+                    if (results.restoredPurchases.contains { $0.productId == productId }) {
                         store.dispatch(Upgrade(productID: productId))
                         self.purchaseState$.onNext(.purchased)
                         self.purchaseState$.onCompleted()
