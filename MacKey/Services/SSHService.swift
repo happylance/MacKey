@@ -73,7 +73,7 @@ class SSHService {
                 }
                 NMSSHLogger.shared().logLevel = logLevel
                 if let error = error {
-                    if response.characters.count > 0 {
+                    if response.count > 0 {
                         observer.onError(SSHSessionError.failedWithResponse(response: response))
                         return
                     }

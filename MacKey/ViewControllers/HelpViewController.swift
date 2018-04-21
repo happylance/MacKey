@@ -26,9 +26,9 @@ class HelpViewController: UIViewController {
             let remoteLoginStr = " > System Preferences > Sharing > RemoteLogin".localized()
             let helpText = String(format: "HelpText".localized(), remoteLoginStr, remoteLoginStr)
             let attrStr = NSMutableAttributedString(string:helpText,
-                                                    attributes:[NSFontAttributeName: UIFont.preferredFont(forTextStyle: .body)])
-            attrStr.setAttributes([NSForegroundColorAttributeName:self.view.tintColor ?? UIColor.blue,
-                                       NSFontAttributeName: UIFont.preferredFont(forTextStyle: .title1)],
+                                                    attributes:[.font: UIFont.preferredFont(forTextStyle: .body)])
+            attrStr.setAttributes([.foregroundColor:self.view.tintColor ?? UIColor.blue,
+                                       .font: UIFont.preferredFont(forTextStyle: .title1)],
                                       range: (helpText as NSString).range(of: "+"))
             
             
@@ -42,13 +42,13 @@ class HelpViewController: UIViewController {
             
             helpText.ranges(of: remoteLoginStr)
                 .forEach {
-                    attrStr.setAttributes([NSFontAttributeName: boldFont],range:$0)
+                    attrStr.setAttributes([.font: boldFont],range:$0)
             }
             
             ["Alias", "Host name or IP address", "Username", "Password"]
                 .map { $0.localized() }
                 .forEach {
-                    attrStr.setAttributes([NSFontAttributeName: boldFont],
+                    attrStr.setAttributes([.font: boldFont],
                                           range:(helpText as NSString).range(of: $0))
             }
             
@@ -61,12 +61,12 @@ extension String {
     func ranges(of subString: String) -> [NSRange] {
         var ranges = [NSRange]()
         
-        var range: NSRange = NSMakeRange(0, self.characters.count)
+        var range: NSRange = NSMakeRange(0, self.count)
         while (range.location != NSNotFound) {
             range = (self as NSString).range(of: subString, options: .caseInsensitive, range: range)
             if (range.location != NSNotFound) {
                 ranges.append(range)
-                range = NSRange(location: range.location + range.length, length: self.characters.count - (range.location + range.length))
+                range = NSRange(location: range.location + range.length, length: self.count - (range.location + range.length))
             }
         }
         return ranges

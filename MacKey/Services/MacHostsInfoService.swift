@@ -12,9 +12,10 @@ import RxSwift
 
 fileprivate let hostsKey = "Hosts"
 private let disposeBag = DisposeBag()
-class MacHostsInfoService : NSObject {
-    static fileprivate let subscriber = MacHostsInfoService()
-    override class func initialize() { DispatchQueue.main.async(execute: { subscribe() }) }
+class MacHostsInfoService : NSObject {    
+    static func register() {
+        subscribe()
+    }
     
     func macHostsInfo() -> Hosts {
         let hostsData = KeychainWrapper.standard.object(forKey:hostsKey)

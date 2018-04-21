@@ -128,7 +128,7 @@ class UpgradeViewController: UIViewController{
                 if results.restoreFailedPurchases.count > 0 {
                     dlog("Restore Failed: \(results.restoreFailedPurchases)")
                     let message = { () -> String in 
-                        if let error = results.restoreFailedPurchases.first?.0 as? NSError {
+                        if let error = results.restoreFailedPurchases.first?.0._nsError {
                             return error.localizedDescription
                         }
                         return ""

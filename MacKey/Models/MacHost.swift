@@ -25,7 +25,7 @@ class MacHost: NSObject, NSCoding {
     }
     
     init?(alias: String, host: String, user: String, password: String, requireTouchID: Bool) {
-        if alias.characters.count == 0 {
+        if alias.count == 0 {
             return nil
         }
         

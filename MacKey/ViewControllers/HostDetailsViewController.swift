@@ -88,6 +88,6 @@ class HostDetailsViewController: UITableViewController {
         
         viewModel.aliasAvailable$.drive(validationOutlet.rx.isHidden).disposed(by: disposeBag)
         viewModel.saveEnabled$.drive(saveOutlet.rx.isEnabled).disposed(by: disposeBag)
-        viewModel.editHostState$.bindTo(editHostState$).disposed(by: disposeBag)
+        viewModel.editHostState$.bind(to: editHostState$).disposed(by: disposeBag)
     }
 }

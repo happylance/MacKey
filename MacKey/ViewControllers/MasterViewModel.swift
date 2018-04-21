@@ -20,7 +20,7 @@ class MasterViewModel {
         let storeState$ = store.observable.asDriver()
         
         hasSelectedCell$ = storeState$
-            .map { $0.hostsState.latestHostAlias.characters.count > 0 }
+            .map { $0.hostsState.latestHostAlias.count > 0 }
             .distinctUntilChanged()
         
         selectedIndex$ = unlockRequest$.withLatestFrom(storeState$) { ($0, $1.hostsState) }
@@ -30,7 +30,7 @@ class MasterViewModel {
             .map { _ in }
         
         let startConnection$ = Observable
-            .of(Observable.just(), // for didFinishLaunching
+            .of(Observable.just(()), // for didFinishLaunching
                 enterForeground$,
                 unlockRequest$.asObservable().map { _ in })
             .merge()

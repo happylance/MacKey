@@ -33,11 +33,11 @@ class HostDetailsViewModel {
         
         let aliasValid$ = alias$
             .withLatestFrom(aliasAvailable$) { alias, aliasAvailable in
-                alias.characters.count > 0 && aliasAvailable }
+                alias.count > 0 && aliasAvailable }
         
-        let hostValid$ = host$.map { $0.characters.count > 0 }
-        let usernameValid$ = username$.map { $0.characters.count > 0 }
-        let passwordValid$ = password$.map { $0.characters.count > 0 }
+        let hostValid$ = host$.map { $0.count > 0 }
+        let usernameValid$ = username$.map { $0.count > 0 }
+        let passwordValid$ = password$.map { $0.count > 0 }
         
         let aliasChanged$ = alias$.map { $0 != initialHost.alias }
         let hostChanged$ = host$.map { $0 != initialHost.host }

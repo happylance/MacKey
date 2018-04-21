@@ -14,8 +14,10 @@ private let supportSkippingTouchIDKey = "supportSkippingTouchID"
 private let latestHostAliasKey = "latestHostAlias"
 private let disposeBag = DisposeBag()
 class UserDefaultsServivce : NSObject {
-    static private let subscriber = UserDefaultsServivce()
-    override class func initialize() { DispatchQueue.main.async(execute: { subscribe() }) }
+    static func register() {
+        subscribe()
+    }
+    
     private class func subscribe() {
         store.observable.asObservable().map { $0.hostsState.latestHostAlias }
             .distinctUntilChanged().skip(1)

@@ -60,7 +60,7 @@ class MasterViewController: UIViewController {
             .withLatestFrom(store.observable.asObservable()) { ($0, $1.hostsState.latestHostAlias) }
             .subscribe(onNext: { [unowned self] (_, latestHostAlias) in
                 let selectedAlias = latestHostAlias
-                if selectedAlias.characters.count > 0 {
+                if selectedAlias.count > 0 {
                     self.deleteCell$.onNext(selectedAlias)
                 }
             }).disposed(by: disposeBag)
@@ -97,7 +97,7 @@ class MasterViewController: UIViewController {
             .withLatestFrom(store.observable.asObservable()) { ($0, $1.hostsState.latestHostAlias) }
             .subscribe(onNext: { [unowned self] (_, latestHostAlias) in
             let selectedAlias = latestHostAlias
-            if selectedAlias.characters.count > 0 {
+            if selectedAlias.count > 0 {
                 self.editCell$.onNext(selectedAlias)
             }
         }).disposed(by: disposeBag)
@@ -147,7 +147,7 @@ class MasterViewController: UIViewController {
                 }
                 return Observable.empty()
             }
-            .bindTo(sleepRequest$)
+            .bind(to: sleepRequest$)
             .disposed(by: disposeBag)
     }
     
@@ -177,13 +177,13 @@ class MasterViewController: UIViewController {
             .drive(unlockButtonOutlet.rx.isEnabled)
             .disposed(by: disposeBag)
         
-        tableView.rx.itemSelected.bindTo(unlockRequest$).disposed(by: disposeBag)
+        tableView.rx.itemSelected.bind(to: unlockRequest$).disposed(by: disposeBag)
         unlockButtonOutlet.rx.tap
             .withLatestFrom(store.observable.asObservable()) { $1.hostsState }
             .map { $0.sortedHostAliases.index(of: $0.latestHostAlias) }
             .filter { $0 != nil }.map { $0! }
             .map { IndexPath(row: $0, section: 0) }
-            .bindTo(unlockRequest$)
+            .bind(to: unlockRequest$)
             .disposed(by: disposeBag)
     }
     
@@ -231,7 +231,7 @@ class MasterViewController: UIViewController {
     
     private func reloadCells(_ aliases: [String]) {
         let indexPathsToReload = aliases
-            .filter { $0.characters.count > 0 }
+            .filter { $0.count > 0 }
             .flatMap { store.hostsState.sortedHostAliases.index(of: $0) }
             .reduce([Int]()) { $0.contains($1) ? $0 : $0 + [$1] } // Remove duplicates
             .map { IndexPath(row: $0, section: 0) }
