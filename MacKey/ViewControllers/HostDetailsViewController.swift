@@ -42,6 +42,9 @@ class HostDetailsViewController: UITableViewController {
         tableView.allowsSelection = false
         passwordOutlet.isSecureTextEntry = true
         
+        saveOutlet.accessibilityIdentifier = "Save"
+        cancelOutlet.accessibilityIdentifier = "Cancel"
+        
         aliasOutlet?.text = oldHost.alias
         hostOutlet?.text = oldHost.host
         usernameOutlet?.text = oldHost.user

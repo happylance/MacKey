@@ -24,6 +24,7 @@ extension MasterViewController {
         
         let navController = UINavigationController(rootViewController: hostDetailsViewController)
         navController.navigationBar.topItem?.title = (forNewHost ? "New host" : "Edit host").localized()
+        navController.navigationBar.accessibilityIdentifier = "Host Editor"
         
         present(navController, animated: animated, completion: nil)
         

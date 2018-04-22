@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +19,7 @@
                         <viewControllerLayoutGuide type="bottom" id="pbz-xI-Hu5"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="xOb-bN-RG7">
-                        <rect key="frame" x="0.0" y="64" width="414" height="672"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="672"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" minimumZoomScale="0.5" maximumZoomScale="2" translatesAutoresizingMaskIntoConstraints="NO" id="0dj-xU-EXD">
@@ -30,7 +30,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <attributedString key="attributedText">
                                             <fragment>
-                                                <mutableString key="content">Tap on "+" button. Input the following information.
+                                                <string key="content">Tap on "+" button. Input the following information.
 
 1. Alias: This can be any string which you would like to use as an alias of your mac.
 2. Host: This can be the IP address or machine name of your mac. You can get it from SystemPreferences -&gt; Sharing -&gt; RemoteLogin on your Mac. You can find the IP address or machine name under 'Computers on your local network can access your computer at:'.
@@ -40,7 +40,7 @@
 If connection is failed, please check the following conditions.
 1. Please make sure your Mac and your iOS device are within the same WiFi network. 
 2. Please make sure remote login is enabled in SystemPreferences-&gt;Sharing on your Mac. 
-</mutableString>
+</string>
                                                 <attributes>
                                                     <font key="NSFont" size="10" name=".AppleSystemUIFont"/>
                                                 </attributes>
@@ -74,7 +74,7 @@ If connection is failed, please check the following conditions.
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Help" id="sz2-ye-69Z">
-                        <barButtonItem key="leftBarButtonItem" title="Close" id="Mnz-7J-BCM"/>
+                        <barButtonItem key="leftBarButtonItem" title="Close" largeContentSizeImage="CloseButton" id="Mnz-7J-BCM"/>
                     </navigationItem>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -93,7 +93,7 @@ If connection is failed, please check the following conditions.
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="8yN-Wx-84z">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -106,4 +106,7 @@ If connection is failed, please check the following conditions.
             <point key="canvasLocation" x="128.80000000000001" y="146.17691154422789"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="CloseButton" width="16" height="16"/>
+    </resources>
 </document>

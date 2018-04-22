@@ -40,17 +40,17 @@ class MacKeyUITests: XCTestCase {
         let dStaticText = app.tables.staticTexts[alias]
         if dStaticText.exists {
             dStaticText.tap()
-            app.navigationBars["Mac Key".l()].buttons["Delete".l()].tap()
-            app.alerts[String(format:"Delete '%@'".l(), alias)]
-                .buttons["Delete".l()].tap()
+            app.navigationBars["Mac Key"].buttons["Delete"].tap()
+            app.alerts[String(format:"Delete '%@'", alias)]
+                .buttons["Delete"].tap()
         }
         
-        let macKeyNavigationBar = app.navigationBars["Mac Key".l()]
-        macKeyNavigationBar.buttons["Help".l()].tap()
+        let macKeyNavigationBar = app.navigationBars["Mac Key"]
+        macKeyNavigationBar.buttons["HelpButton"].tap()
         snapshot("1Help")
-        app.navigationBars["Help".l()].buttons["Close".l()].tap()
+        app.navigationBars["Help"].buttons["CloseButton"].tap()
         
-        macKeyNavigationBar.buttons["Add".l()].tap()
+        macKeyNavigationBar.buttons["Add"].tap()
         snapshot("2hostDetails")
         
         let tablesQuery = XCUIApplication().tables
@@ -59,29 +59,23 @@ class MacKeyUITests: XCTestCase {
          ("Enter host name or IP address", "192.168.1.194"),
          ("Enter username", "tester")]
             .forEach {
-                let textField = tablesQuery.textFields[$0.0.l()]
+                let textField = tablesQuery.textFields[$0.0]
                 textField.tap()
                 textField.typeText($0.1)
         }
         
-        let passwordTextField = tablesQuery.secureTextFields["Enter password".l()]
+        let passwordTextField = tablesQuery.secureTextFields["Enter password"]
         passwordTextField.tap()
         passwordTextField.typeText("123456")
         snapshot("3hostDetailsFilled")
         
-        app.navigationBars["New host".l()].buttons["Save".l()].tap()
+        app.navigationBars["Host Editor"].buttons["Save"].tap()
         
         app.tables.staticTexts[alias].tap()
         snapshot("4Unlock")
-        app.navigationBars["Mac Key".l()].buttons["Delete".l()].tap()
+        app.navigationBars["Mac Key"].buttons["Delete"].tap()
         snapshot("5Delete")
-        app.alerts[String(format:"Delete '%@'".l(), alias)]
-            .buttons["Delete".l()].tap()
-    }
-}
-
-extension String {
-    func l() -> String {
-        return self.localized(in: Bundle(for: MacKeyUITests.self))
+        app.alerts["Delete"]
+            .buttons["Delete"].tap()
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Localize_Swift
 import RxSwift
 import RxCocoa
 
@@ -16,6 +17,8 @@ class HelpViewController: UIViewController {
     
     private let disposeBag = DisposeBag()
     override func viewDidLoad() {
+        navigationController?.navigationBar.accessibilityIdentifier = "Help"
+        closeOutlet.accessibilityIdentifier = "CloseButton"
         closeOutlet.rx.tap
             .subscribe(onNext: { [unowned self] in
                 self.dismiss(animated: true, completion: nil)

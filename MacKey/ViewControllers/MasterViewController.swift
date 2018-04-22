@@ -46,10 +46,13 @@ class MasterViewController: UIViewController {
                 
         // Hide empty rows
         tableView.tableFooterView = UIView()
+        
+        navigationController?.navigationBar.accessibilityIdentifier = "Mac Key"
     }
     
     private func getDeleteButtonItem(viewModel: MasterViewModel) -> UIBarButtonItem {
         let deleteButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: nil, action: nil)
+        deleteButtonItem.accessibilityIdentifier = "Delete"
         let defaultColor = deleteButtonItem.tintColor
         viewModel.hasSelectedCell$
             .do(onNext: { deleteButtonItem.tintColor = $0 ? defaultColor : UIColor.gray })
@@ -73,13 +76,19 @@ class MasterViewController: UIViewController {
                 let alertView = UIAlertController(title: String(format:"Delete '%@'".localized(), alias),
                     message: String(format:"Are you sure that you want to delete '%@'?".localized(), "\(alias): \(host.user)@\(host.host)"),
                     preferredStyle: .alert)
-                alertView.addAction(UIAlertAction(title: "Delete".localized(), style: .destructive) { _ in
+                let deleteAction = UIAlertAction(title: "Delete".localized(), style: .destructive) { _ in
                     store.dispatch(RemoveHost(host: host))
                     let indexPathToRemove = IndexPath(row: index, section: 0)
                     self.tableView.deleteRows(at: [indexPathToRemove], with: .fade)
-                })
-                alertView.addAction(UIAlertAction(title: "Cancel".localized(), style: .cancel) { _ in })
-                self.present(alertView, animated: true, completion: nil)
+                }
+                let cancelAction = UIAlertAction(title: "Cancel".localized(), style: .cancel) { _ in }
+                alertView.addAction(deleteAction)
+                alertView.addAction(cancelAction)
+                alertView.view.accessibilityIdentifier = "Delete"
+                self.present(alertView, animated: true) {
+                    let deleteButton = deleteAction.value(forKey: "__representer") as? UIView
+                    deleteButton?.accessibilityIdentifier = "Delete"
+                }
             }
         }).disposed(by: disposeBag)
         return deleteButtonItem
@@ -87,6 +96,7 @@ class MasterViewController: UIViewController {
     
     private func getEditButtonItem(viewModel: MasterViewModel) -> UIBarButtonItem {
         let editButtonItem = UIBarButtonItem(barButtonSystemItem: .edit, target: nil, action: nil)
+        editButtonItem.accessibilityIdentifier = "Edit"
         let defaultColor = editButtonItem.tintColor
         viewModel.hasSelectedCell$
             .do(onNext: { editButtonItem.tintColor = $0 ? defaultColor : UIColor.gray })
@@ -189,6 +199,7 @@ class MasterViewController: UIViewController {
     
     private func getAddButtonItem() -> UIBarButtonItem {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
+        addButton.accessibilityIdentifier = "Add"
         addButton.rx.tap
             .flatMapFirst { _ -> Observable<EditHostState> in
                 if let hostDetailVC = self.showHostDetailsViewController(animated: true, forNewHost: true) {
@@ -223,6 +234,7 @@ class MasterViewController: UIViewController {
     
     private func getInfoButtonItem() -> UIBarButtonItem {
         let infoButton = UIBarButtonItem(title: "Help".localized(), style: .plain, target: nil, action: nil)
+        infoButton.accessibilityIdentifier = "HelpButton"
         infoButton.rx.tap.subscribe(onNext: { [unowned self] in
             self.showHelpViewController(animated: true)
         }).disposed(by: disposeBag)
