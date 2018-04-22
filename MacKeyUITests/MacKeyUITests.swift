@@ -41,7 +41,7 @@ class MacKeyUITests: XCTestCase {
         if dStaticText.exists {
             dStaticText.tap()
             app.navigationBars["Mac Key"].buttons["Delete"].tap()
-            app.alerts[String(format:"Delete '%@'", alias)]
+            app.alerts["Delete"]
                 .buttons["Delete"].tap()
         }
         

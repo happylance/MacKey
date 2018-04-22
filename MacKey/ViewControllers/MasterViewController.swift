@@ -17,9 +17,6 @@ class MasterViewController: UIViewController {
     @IBOutlet weak var unlockButtonOutlet: UIBarButtonItem!
 
     fileprivate var latestHostUnlockStatus = ""
-    fileprivate let sleepRequest$ = Variable("")
-    fileprivate let unlockRequest$ = Variable(IndexPath(row:0, section:0))
-    
     fileprivate let editCell$: PublishSubject<String> = PublishSubject()
     fileprivate let deleteCell$: PublishSubject<String> = PublishSubject()
     
@@ -28,10 +25,12 @@ class MasterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let viewModel = MasterViewModel(
-            unlockRequest$: unlockRequest$.asDriver().skip(1),
-            sleepRequest$: sleepRequest$.asDriver().skip(1)
-        )
+        let viewModel = MasterViewModel()
+        store.observable.asObservable()
+            .map { $0.hostsState }
+            .delay(0.1, scheduler: MainScheduler.instance)
+            .bind(to: viewModel.hostsState)
+            .disposed(by: disposeBag)
         
         setUpUnlockAction(viewModel: viewModel)
         setUpSleepAction(viewModel: viewModel)
@@ -56,7 +55,7 @@ class MasterViewController: UIViewController {
         let defaultColor = deleteButtonItem.tintColor
         viewModel.hasSelectedCell$
             .do(onNext: { deleteButtonItem.tintColor = $0 ? defaultColor : UIColor.gray })
-            .drive(deleteButtonItem.rx.isEnabled)
+            .bind(to: deleteButtonItem.rx.isEnabled)
             .disposed(by: disposeBag)
         
         deleteButtonItem.rx.tap
@@ -100,7 +99,7 @@ class MasterViewController: UIViewController {
         let defaultColor = editButtonItem.tintColor
         viewModel.hasSelectedCell$
             .do(onNext: { editButtonItem.tintColor = $0 ? defaultColor : UIColor.gray })
-            .drive(editButtonItem.rx.isEnabled)
+            .bind(to: editButtonItem.rx.isEnabled)
             .disposed(by: disposeBag)
         
         editButtonItem.rx.tap
@@ -141,7 +140,7 @@ class MasterViewController: UIViewController {
             .map { $0.contains("unlocked") }
             .startWith(false)
             .do(onNext: {[unowned self] in self.sleepButtonOutlet.tintColor = $0 ? defaultColor : UIColor.gray })
-            .drive(sleepButtonOutlet.rx.isEnabled)
+            .bind(to: sleepButtonOutlet.rx.isEnabled)
             .disposed(by: disposeBag)
         
         sleepButtonOutlet.rx.tap
@@ -157,13 +156,13 @@ class MasterViewController: UIViewController {
                 }
                 return Observable.empty()
             }
-            .bind(to: sleepRequest$)
+            .bind(to: viewModel.sleepRequests)
             .disposed(by: disposeBag)
     }
     
     private func setUpUnlockAction(viewModel: MasterViewModel) {
         viewModel.selectedIndex$
-            .drive(onNext: { [unowned self] (indexPath, hostsState) in
+            .subscribe(onNext: { [unowned self] (indexPath, hostsState) in
             self.tableView.deselectRow(at: indexPath, animated: true)
             let alias = hostsState.sortedHostAliases[indexPath.row]
             guard let host = hostsState.allHosts[alias] else { return }
@@ -176,7 +175,7 @@ class MasterViewController: UIViewController {
         
         viewModel.selectedCellStatusUpdate$
             .withLatestFrom(store.observable.asDriver()) { ($0, $1.hostsState.latestHostAlias) }
-            .drive(onNext: { [unowned self] (info, latestHostAlias) in
+            .subscribe(onNext: { [unowned self] (info, latestHostAlias) in
             self.latestHostUnlockStatus = info
             self.reloadCells([latestHostAlias])
         }).disposed(by: disposeBag)
@@ -184,16 +183,16 @@ class MasterViewController: UIViewController {
         let defaultColor = unlockButtonOutlet.tintColor
         viewModel.hasSelectedCell$
             .do(onNext: {[unowned self] in self.unlockButtonOutlet.tintColor = $0 ? defaultColor : UIColor.gray })
-            .drive(unlockButtonOutlet.rx.isEnabled)
+            .bind(to: unlockButtonOutlet.rx.isEnabled)
             .disposed(by: disposeBag)
         
-        tableView.rx.itemSelected.bind(to: unlockRequest$).disposed(by: disposeBag)
+        tableView.rx.itemSelected.bind(to: viewModel.unlockRequest).disposed(by: disposeBag)
         unlockButtonOutlet.rx.tap
             .withLatestFrom(store.observable.asObservable()) { $1.hostsState }
             .map { $0.sortedHostAliases.index(of: $0.latestHostAlias) }
             .filter { $0 != nil }.map { $0! }
             .map { IndexPath(row: $0, section: 0) }
-            .bind(to: unlockRequest$)
+            .bind(to: viewModel.unlockRequest)
             .disposed(by: disposeBag)
     }
     

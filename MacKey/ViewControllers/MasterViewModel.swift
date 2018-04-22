@@ -11,19 +11,31 @@ import RxSwift
 import RxCocoa
 
 class MasterViewModel {
-    let hasSelectedCell$: Driver<Bool>
-    let selectedIndex$: Driver<(IndexPath, HostsState)>
-    let selectedCellStatusUpdate$: Driver<String>
+    // - MARK: Inputs
+    let unlockRequest: AnyObserver<IndexPath>
+    let sleepRequests: AnyObserver<String>
+    let hostsState: AnyObserver<HostsState>
     
-    init(unlockRequest$: Driver<IndexPath>,
-         sleepRequest$: Driver<String>) {
-        let storeState$ = store.observable.asDriver()
+    // - MARK: Outputs
+    let hasSelectedCell$: Observable<Bool>
+    let selectedIndex$: Observable<(IndexPath, HostsState)>
+    let selectedCellStatusUpdate$: Observable<String>
+    
+    init() {
+        let _unlockRequest$ = PublishSubject<IndexPath>()
+        unlockRequest = _unlockRequest$.asObserver()
         
-        hasSelectedCell$ = storeState$
-            .map { $0.hostsState.latestHostAlias.count > 0 }
+        let _sleepRequests$ = PublishSubject<String>()
+        sleepRequests = _sleepRequests$.asObserver()
+        
+        let _hostsState$ = PublishSubject<HostsState>()
+        hostsState = _hostsState$.asObserver()
+        
+        hasSelectedCell$ = _hostsState$
+            .map { $0.latestHostAlias.count > 0 }
             .distinctUntilChanged()
         
-        selectedIndex$ = unlockRequest$.withLatestFrom(storeState$) { ($0, $1.hostsState) }
+        selectedIndex$ = _unlockRequest$.withLatestFrom(_hostsState$) { ($0, $1) }
         
         let enterForeground$: Observable<Void> = NotificationCenter
             .default.rx.notification(.UIApplicationWillEnterForeground)
@@ -32,11 +44,10 @@ class MasterViewModel {
         let startConnection$ = Observable
             .of(Observable.just(()), // for didFinishLaunching
                 enterForeground$,
-                unlockRequest$.asObservable().map { _ in })
+                _unlockRequest$.asObservable().map { _ in })
             .merge()
         
-        let unlockStatus$ = startConnection$.withLatestFrom(store.observable.asObservable())
-            .map { $0.hostsState }
+        let unlockStatus$ = startConnection$.withLatestFrom(_hostsState$)
             .filter { $0.allHosts.keys.contains($0.latestHostAlias) }
             .map { $0.allHosts[$0.latestHostAlias]! }
             .flatMapLatest { host in MacUnlockService.wakeUp(host).map { (host, $0) } }
@@ -73,17 +84,17 @@ class MasterViewModel {
                 return Observable.just(status)
         }
         
-        let sleepStatus$ = sleepRequest$
+        let sleepStatus$ = _sleepRequests$
             .filter { $0 != "" }
-            .withLatestFrom(storeState$) { $1.hostsState.allHosts[$0] }
+            .withLatestFrom(_hostsState$) { $1.allHosts[$0] }
             .asObservable()
             .filter { $0 != nil }.map { $0! }
             .flatMapLatest { MacUnlockService.sleep($0) }
         
         let connectionStatus$ = Observable.of(unlockStatus$, sleepStatus$)
             .merge()
-            .map {
-                switch $0 {
+            .map { status -> String in
+                switch status {
                 case .connecting:
                     return "Connecting..."
                 case .connectedAndNeedsUnlock:
@@ -96,14 +107,12 @@ class MasterViewModel {
                     return "Unlocking..."
                 }
             }
-            .asDriver(onErrorJustReturn: "")
         
-        let statusWhenEnterBackground$: Driver<String> = NotificationCenter.default.rx
+        let statusWhenEnterBackground$: Observable<String> = NotificationCenter.default.rx
             .notification(.UIApplicationDidEnterBackground)
             .map { _ in "" }
-            .asDriver(onErrorJustReturn: "")
         
-        selectedCellStatusUpdate$ = Driver.of(connectionStatus$, statusWhenEnterBackground$)
+        selectedCellStatusUpdate$ = Observable.of(connectionStatus$, statusWhenEnterBackground$)
             .merge()
             .map { $0.replacingOccurrences(of: "\n", with: "") }
     }
