@@ -32,6 +32,17 @@ class MasterViewController: UIViewController {
             .bind(to: viewModel.hostsState)
             .disposed(by: disposeBag)
         
+        let notificationMappings: [(NSNotification.Name, AnyObserver<()>)] =
+            [(.UIApplicationWillEnterForeground, viewModel.enterForeground),
+             (.UIApplicationDidEnterBackground, viewModel.enterBackground)]
+        notificationMappings.forEach {
+            NotificationCenter
+                .default.rx.notification($0.0)
+                .map { _ in }
+                .bind(to: $0.1)
+                .disposed(by: disposeBag)
+        }
+        
         setUpUnlockAction(viewModel: viewModel)
         setUpSleepAction(viewModel: viewModel)
         
