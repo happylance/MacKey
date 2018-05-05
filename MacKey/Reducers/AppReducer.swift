@@ -6,9 +6,7 @@
 //  Copyright © 2017 Liu Liang. All rights reserved.
 //
 
-import ReactiveReSwift
-
-let AppReducer : Reducer<State> = { action, state in
+let AppReducer : Store<State>.Reducer = { state, action in
     var (supportSkippingTouchID, supportSleepMode) = { () -> (Bool, Bool) in 
         switch action {
         case let action as Upgrade:

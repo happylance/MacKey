@@ -6,29 +6,28 @@
 //  Copyright © 2017 Liu Liang. All rights reserved.
 //
 
-import ReactiveReSwift
 import RxSwift
 import RxCocoa
 
 class HostDetailsViewModel {
+
+    // - MARK: outputs
     let aliasAvailable$: Driver<Bool>
-    let editHostState$: Observable<EditHostState>
+    let editHostState$: Single<EditHostState>
     let newHost$: Driver<HostInfo>
     let saveEnabled$: Driver<Bool>
     
     init(alias$: Driver<String>,
-        host$: Driver<String>,
-        username$: Driver<String>,
-        password$: Driver<String>,
-        requireTouchID$: Driver<Bool>,
-        cancelOutlet$: Driver<Void>,
-        saveOutlet$: Driver<Void>,
-        initialHost: HostInfo
-        ) {
-        
+         host$: Driver<String>,
+         username$: Driver<String>,
+         password$: Driver<String>,
+         requireTouchID$: Driver<Bool>,
+         cancelTapped$: Driver<Void>,
+         saveTapped$: Driver<Void>,
+         initialHost: HostInfo) {
         let initialAlias = initialHost.alias
         aliasAvailable$ = alias$
-            .withLatestFrom(store.observable.asDriver()) {
+            .withLatestFrom(store.asDriver()) {
                 $0 == initialAlias || !$1.hostsState.allHosts.keys.contains($0) }
         
         let aliasValid$ = alias$
@@ -61,15 +60,16 @@ class HostDetailsViewModel {
             HostInfo(alias: $0, host: $1, user: $2, password: $3, requireTouchID: $4) }
         
         editHostState$ = Observable
-            .of(cancelOutlet$.map {_ in .cancelled },
-                saveOutlet$.withLatestFrom(newHost$).map { .saved($0) })
+            .of(cancelTapped$.map {_ in .cancelled },
+                saveTapped$.withLatestFrom(newHost$).map { .saved($0) })
             .merge()
             .take(1)
+            .asSingle()
     }
 }
 
 extension Store {
     var hostsState : HostsState {
-        return store.observable.value.hostsState
+        return store.value.hostsState
     }
 }

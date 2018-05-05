@@ -6,7 +6,7 @@
 //  Copyright © 2017 Liu Liang. All rights reserved.
 //
 
-import ReactiveReSwift
+import Foundation
 import RxSwift
 
 private let supportSleepModeKey = "supportSleepMode"

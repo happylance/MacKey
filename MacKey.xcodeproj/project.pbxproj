@@ -14,7 +14,6 @@
 		400E709B1E4AA10200B5477B /* HostDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400E70991E4AA10200B5477B /* HostDetailsViewModel.swift */; };
 		400E709C1E4AA10200B5477B /* MasterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400E709A1E4AA10200B5477B /* MasterViewModel.swift */; };
 		4012639F1CE79F6400FAE75C /* MacHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4012639E1CE79F6400FAE75C /* MacHost.swift */; };
-		403692841E35A17200571EB5 /* ReSwiftRxBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 403692831E35A17200571EB5 /* ReSwiftRxBridge.swift */; };
 		404B99541E666C0E009312F3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4007F09C1E5FD7D400463D8D /* Localizable.strings */; };
 		404B99591E67A631009312F3 /* Help.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 404B99571E67A631009312F3 /* Help.storyboard */; };
 		404B995B1E67AB63009312F3 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B995A1E67AB63009312F3 /* HelpViewController.swift */; };
@@ -22,6 +21,7 @@
 		4050E2A31E6CB4920002A398 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4050E2A21E6CB4910002A398 /* SnapshotHelper.swift */; };
 		4050E2BA1E6CC4430002A398 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4007F09C1E5FD7D400463D8D /* Localizable.strings */; };
 		4050E2BF1E6CE6850002A398 /* MockSSHService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4050E2BE1E6CE6850002A398 /* MockSSHService.swift */; };
+		40774C2D209E634F00F3873C /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C2C209E634F00F3873C /* Store.swift */; };
 		408150571E5A65F1005AD37B /* Upgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408150561E5A65F1005AD37B /* Upgrade.swift */; };
 		408150601E5A6931005AD37B /* UpgradeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4081505F1E5A6931005AD37B /* UpgradeService.swift */; };
 		408150641E5A7988005AD37B /* UpgradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408150631E5A7988005AD37B /* UpgradeViewController.swift */; };
@@ -45,10 +45,8 @@
 		40B179E1208D62B300A28DB3 /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B179E0208D62B300A28DB3 /* RxTest.framework */; };
 		40B179E8208D647400A28DB3 /* Localize_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B179E3208D646C00A28DB3 /* Localize_Swift.framework */; };
 		40B179E9208D647700A28DB3 /* NMSSH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B179E4208D646C00A28DB3 /* NMSSH.framework */; };
-		40B179EA208D647B00A28DB3 /* ReactiveReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B179E2208D646C00A28DB3 /* ReactiveReSwift.framework */; };
 		40B179EB208D648600A28DB3 /* Localize_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B179E3208D646C00A28DB3 /* Localize_Swift.framework */; };
 		40B179EC208D648800A28DB3 /* NMSSH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B179E4208D646C00A28DB3 /* NMSSH.framework */; };
-		40B179ED208D648B00A28DB3 /* ReactiveReSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B179E2208D646C00A28DB3 /* ReactiveReSwift.framework */; };
 		40B179F0208D650600A28DB3 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B179EE208D650500A28DB3 /* RxSwift.framework */; };
 		40B179F1208D650600A28DB3 /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B179EE208D650500A28DB3 /* RxSwift.framework */; };
 		40B179F2208D650600A28DB3 /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B179EF208D650600A28DB3 /* RxCocoa.framework */; };
@@ -59,7 +57,6 @@
 		40B179F9208D653600A28DB3 /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B179F5208D653600A28DB3 /* SwiftyStoreKit.framework */; };
 		40B179FB208D673300A28DB3 /* Localize_Swift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40B179E3208D646C00A28DB3 /* Localize_Swift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		40B179FC208D673300A28DB3 /* NMSSH.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40B179E4208D646C00A28DB3 /* NMSSH.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		40B179FD208D673300A28DB3 /* ReactiveReSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40B179E2208D646C00A28DB3 /* ReactiveReSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		40B179FE208D673300A28DB3 /* RxCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40B179EF208D650600A28DB3 /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		40B179FF208D673300A28DB3 /* RxSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40B179EE208D650500A28DB3 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		40B17A00208D673300A28DB3 /* RxTest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40B179E0208D62B300A28DB3 /* RxTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -100,7 +97,6 @@
 			files = (
 				40B179FB208D673300A28DB3 /* Localize_Swift.framework in CopyFiles */,
 				40B179FC208D673300A28DB3 /* NMSSH.framework in CopyFiles */,
-				40B179FD208D673300A28DB3 /* ReactiveReSwift.framework in CopyFiles */,
 				40B179FE208D673300A28DB3 /* RxCocoa.framework in CopyFiles */,
 				40B179FF208D673300A28DB3 /* RxSwift.framework in CopyFiles */,
 				40B17A00208D673300A28DB3 /* RxTest.framework in CopyFiles */,
@@ -123,7 +119,6 @@
 		400E70991E4AA10200B5477B /* HostDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostDetailsViewModel.swift; path = ViewControllers/HostDetailsViewModel.swift; sourceTree = "<group>"; };
 		400E709A1E4AA10200B5477B /* MasterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterViewModel.swift; path = ViewControllers/MasterViewModel.swift; sourceTree = "<group>"; };
 		4012639E1CE79F6400FAE75C /* MacHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacHost.swift; path = Models/MacHost.swift; sourceTree = "<group>"; };
-		403692831E35A17200571EB5 /* ReSwiftRxBridge.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReSwiftRxBridge.swift; sourceTree = "<group>"; };
 		404B99501E666393009312F3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		404B99511E666393009312F3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/HostDetails.strings"; sourceTree = "<group>"; };
 		404B99521E666393009312F3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Upgrade.strings"; sourceTree = "<group>"; };
@@ -136,6 +131,7 @@
 		404E05791E4FC3AF002F8A95 /* HostsReducerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostsReducerTests.swift; sourceTree = "<group>"; };
 		4050E2A21E6CB4910002A398 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		4050E2BE1E6CE6850002A398 /* MockSSHService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockSSHService.swift; path = Services/MockSSHService.swift; sourceTree = "<group>"; };
+		40774C2C209E634F00F3873C /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		408150561E5A65F1005AD37B /* Upgrade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Upgrade.swift; path = Actions/Upgrade.swift; sourceTree = "<group>"; };
 		4081505F1E5A6931005AD37B /* UpgradeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpgradeService.swift; path = Services/UpgradeService.swift; sourceTree = "<group>"; };
 		408150631E5A7988005AD37B /* UpgradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpgradeViewController.swift; path = ViewControllers/UpgradeViewController.swift; sourceTree = "<group>"; };
@@ -157,7 +153,6 @@
 		40B179DB208D598300A28DB3 /* MasterViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewModelTests.swift; sourceTree = "<group>"; };
 		40B179DD208D59DE00A28DB3 /* MacUnlockServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacUnlockServiceMock.swift; sourceTree = "<group>"; };
 		40B179E0208D62B300A28DB3 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = SOURCE_ROOT; };
-		40B179E2208D646C00A28DB3 /* ReactiveReSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ReactiveReSwift.framework; path = Carthage/Build/iOS/ReactiveReSwift.framework; sourceTree = SOURCE_ROOT; };
 		40B179E3208D646C00A28DB3 /* Localize_Swift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Localize_Swift.framework; path = Carthage/Build/iOS/Localize_Swift.framework; sourceTree = SOURCE_ROOT; };
 		40B179E4208D646C00A28DB3 /* NMSSH.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NMSSH.framework; path = Carthage/Build/iOS/NMSSH.framework; sourceTree = SOURCE_ROOT; };
 		40B179EE208D650500A28DB3 /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = SOURCE_ROOT; };
@@ -186,7 +181,6 @@
 			files = (
 				40B179F2208D650600A28DB3 /* RxCocoa.framework in Frameworks */,
 				40B179E8208D647400A28DB3 /* Localize_Swift.framework in Frameworks */,
-				40B179EA208D647B00A28DB3 /* ReactiveReSwift.framework in Frameworks */,
 				40B179F6208D653600A28DB3 /* SwiftKeychainWrapper.framework in Frameworks */,
 				40B179F8208D653600A28DB3 /* SwiftyStoreKit.framework in Frameworks */,
 				40B179F0208D650600A28DB3 /* RxSwift.framework in Frameworks */,
@@ -208,7 +202,6 @@
 			files = (
 				40B179F3208D650600A28DB3 /* RxCocoa.framework in Frameworks */,
 				40B179EB208D648600A28DB3 /* Localize_Swift.framework in Frameworks */,
-				40B179ED208D648B00A28DB3 /* ReactiveReSwift.framework in Frameworks */,
 				40B179F1208D650600A28DB3 /* RxSwift.framework in Frameworks */,
 				40B179F7208D653600A28DB3 /* SwiftKeychainWrapper.framework in Frameworks */,
 				40B179EC208D648800A28DB3 /* NMSSH.framework in Frameworks */,
@@ -234,6 +227,20 @@
 				4012639E1CE79F6400FAE75C /* MacHost.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		40774C2E209E69AC00F3873C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				40B179E3208D646C00A28DB3 /* Localize_Swift.framework */,
+				40B179E4208D646C00A28DB3 /* NMSSH.framework */,
+				40B179EF208D650600A28DB3 /* RxCocoa.framework */,
+				40B179EE208D650500A28DB3 /* RxSwift.framework */,
+				40B179E0208D62B300A28DB3 /* RxTest.framework */,
+				40B179F4208D653600A28DB3 /* SwiftKeychainWrapper.framework */,
+				40B179F5208D653600A28DB3 /* SwiftyStoreKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		408507761E2AC52F00C2E0D1 /* Actions */ = {
@@ -302,21 +309,6 @@
 			name = Routes;
 			sourceTree = "<group>";
 		};
-		40B179DF208D625200A28DB3 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				40B179E3208D646C00A28DB3 /* Localize_Swift.framework */,
-				40B179E4208D646C00A28DB3 /* NMSSH.framework */,
-				40B179E2208D646C00A28DB3 /* ReactiveReSwift.framework */,
-				40B179EF208D650600A28DB3 /* RxCocoa.framework */,
-				40B179EE208D650500A28DB3 /* RxSwift.framework */,
-				40B179E0208D62B300A28DB3 /* RxTest.framework */,
-				40B179F4208D653600A28DB3 /* SwiftKeychainWrapper.framework */,
-				40B179F5208D653600A28DB3 /* SwiftyStoreKit.framework */,
-			);
-			path = Frameworks;
-			sourceTree = "<group>";
-		};
 		40BD24EB1E32F937004C8BD8 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
@@ -330,7 +322,7 @@
 		40C4AB091CE758F300ED92C5 = {
 			isa = PBXGroup;
 			children = (
-				40B179DF208D625200A28DB3 /* Frameworks */,
+				40774C2E209E69AC00F3873C /* Frameworks */,
 				40C4AB141CE758F400ED92C5 /* MacKey */,
 				40C4AB2B1CE758F400ED92C5 /* MacKeyTests */,
 				40C4AB361CE758F500ED92C5 /* MacKeyUITests */,
@@ -352,7 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				40C4AB151CE758F400ED92C5 /* AppDelegate.swift */,
-				403692831E35A17200571EB5 /* ReSwiftRxBridge.swift */,
+				40774C2C209E634F00F3873C /* Store.swift */,
 				408507761E2AC52F00C2E0D1 /* Actions */,
 				4012639B1CE79EF300FAE75C /* Models */,
 				408507C71E2ACF4600C2E0D1 /* Reducers */,
@@ -549,7 +541,6 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/NMSSH.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftKeychainWrapper.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ReactiveReSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyStoreKit.framework",
@@ -600,7 +591,6 @@
 				40A645AC1E3E721400CB62B1 /* SSHService.swift in Sources */,
 				408508071E2C495200C2E0D1 /* UserDefaultsServivce.swift in Sources */,
 				408507DE1E2BB9AB00C2E0D1 /* HostInfo.swift in Sources */,
-				403692841E35A17200571EB5 /* ReSwiftRxBridge.swift in Sources */,
 				40A645AA1E3E6EF000CB62B1 /* MacUnlockService.swift in Sources */,
 				408507DA1E2B0AEC00C2E0D1 /* HostsState.swift in Sources */,
 				408507E01E2BEB7000C2E0D1 /* SelectHost.swift in Sources */,
@@ -609,6 +599,7 @@
 				40C4AB161CE758F400ED92C5 /* AppDelegate.swift in Sources */,
 				408150641E5A7988005AD37B /* UpgradeViewController.swift in Sources */,
 				408507D61E2ADC6800C2E0D1 /* AddHost.swift in Sources */,
+				40774C2D209E634F00F3873C /* Store.swift in Sources */,
 				408507D11E2AD9C200C2E0D1 /* HostsReducer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

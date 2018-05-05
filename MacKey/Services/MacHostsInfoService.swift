@@ -7,7 +7,6 @@
 //
 
 import SwiftKeychainWrapper
-import ReactiveReSwift
 import RxSwift
 
 fileprivate let hostsKey = "Hosts"

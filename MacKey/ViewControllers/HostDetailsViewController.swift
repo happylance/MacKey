@@ -10,7 +10,6 @@ import UIKit
 import Localize_Swift
 import RxSwift
 import RxCocoa
-import ReactiveReSwift
 
 enum EditHostState {
     case saved(HostInfo)
@@ -32,8 +31,8 @@ class HostDetailsViewController: UITableViewController {
     var oldHost = HostInfo()
     private let editHostState$ = PublishSubject<EditHostState>()
     
-    func getEditHostState() -> Observable<EditHostState> {
-        return editHostState$.asObservable()
+    func getEditHostState() -> Single<EditHostState> {
+        return editHostState$.asSingle()
     }
     
     override func viewDidLoad() {
@@ -53,12 +52,12 @@ class HostDetailsViewController: UITableViewController {
         
         validationOutlet.text = "Alias is already taken".localized()
         
-        let requireTouchID$ = Variable(requireTouchIDOutlet.isOn)
+        let requireTouchID$ = BehaviorRelay(value:requireTouchIDOutlet.isOn)
         
         requireTouchIDOutlet.rx.isOn
             .skip(1)
             .flatMapFirst { isOn -> Observable<Bool> in
-                if (isOn || store.observable.value.supportSkippingTouchID) {
+                if (isOn || store.value.supportSkippingTouchID) {
                     return Observable.just(isOn)
                 } else if let upgradeViewController = self.showUpgradeViewController(
                     animated: true, forProductType: .skipTouchID) {
@@ -74,7 +73,7 @@ class HostDetailsViewController: UITableViewController {
                 return Observable.empty()
             }
             .subscribe(onNext:{
-                requireTouchID$.value = $0
+                requireTouchID$.accept($0)
             })
             .disposed(by: disposeBag)
         
@@ -84,13 +83,16 @@ class HostDetailsViewController: UITableViewController {
             username$: usernameOutlet.rx.text.orEmpty.asDriver(),
             password$: passwordOutlet.rx.text.orEmpty.asDriver(),
             requireTouchID$: requireTouchID$.asDriver(),
-            cancelOutlet$: cancelOutlet.rx.tap.asDriver(),
-            saveOutlet$: saveOutlet.rx.tap.asDriver(),
+            cancelTapped$: cancelOutlet.rx.tap.asDriver(),
+            saveTapped$: saveOutlet.rx.tap.asDriver(),
             initialHost: oldHost
         )
         
-        viewModel.aliasAvailable$.drive(validationOutlet.rx.isHidden).disposed(by: disposeBag)
-        viewModel.saveEnabled$.drive(saveOutlet.rx.isEnabled).disposed(by: disposeBag)
-        viewModel.editHostState$.bind(to: editHostState$).disposed(by: disposeBag)
+        [viewModel.aliasAvailable$.drive(validationOutlet.rx.isHidden),
+         viewModel.saveEnabled$.drive(saveOutlet.rx.isEnabled),
+         viewModel.editHostState$.asObservable().bind(to: editHostState$)]
+        .forEach {
+            $0.disposed(by: disposeBag)
+        }
     }
 }

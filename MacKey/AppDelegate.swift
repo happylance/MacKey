@@ -7,19 +7,13 @@
 //
 
 import UIKit
-import ReactiveReSwift
 import RxSwift
 import SwiftyStoreKit
-
-let middleware = Middleware<State>().sideEffect { _, _, action in
-        dlog("Received action: \(action)")
-    }
 
 // The global application store, which is responsible for managing the appliction state.
 let store = Store(
     reducer: AppReducer,
-    observable: Variable(State()),
-    middleware: middleware
+    initialState: State()
 )
 
 @UIApplicationMain

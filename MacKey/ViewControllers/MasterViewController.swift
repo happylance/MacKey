@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import ReactiveReSwift
 import RxSwift
 import RxCocoa
 
@@ -32,7 +31,7 @@ class MasterViewController: UIViewController {
             .bind(to: viewModel.hostsState)
             .disposed(by: disposeBag)
         
-        let notificationMappings: [(NSNotification.Name, AnyObserver<()>)] =
+        let notificationMappings: [(NSNotification.Name, PublishRelay<()>)] =
             [(.UIApplicationWillEnterForeground, viewModel.enterForeground),
              (.UIApplicationDidEnterBackground, viewModel.enterBackground)]
         notificationMappings.forEach {
@@ -124,13 +123,13 @@ class MasterViewController: UIViewController {
         
         self.editCell$
             .withLatestFrom(store.observable.asObservable()) { ($0, $1.hostsState.allHosts) }
-            .flatMapFirst { (alias, allHosts) -> Observable<(HostInfo, EditHostState)> in
+            .flatMapFirst { (alias, allHosts) -> Maybe<(HostInfo, EditHostState)> in
                 if let oldHost = allHosts[alias],
                     let hostDetailVC = self.showHostDetailsViewController(animated: true, forNewHost: false) {
                     hostDetailVC.oldHost = oldHost
-                    return hostDetailVC.getEditHostState().map { (oldHost, $0) }
+                    return hostDetailVC.getEditHostState().map { (oldHost, $0) }.asObservable().asMaybe()
                 }
-                return Observable.empty()
+                return .empty()
             }
             .subscribe(onNext: { (oldHost, editHostState) in
                 switch editHostState {
@@ -157,7 +156,7 @@ class MasterViewController: UIViewController {
         sleepButtonOutlet.rx.tap
             .withLatestFrom(store.observable.asObservable()) { $1.hostsState.latestHostAlias }
             .flatMapFirst { alias -> Observable<String> in
-                if (store.observable.value.supportSleepMode) {
+                if (store.value.supportSleepMode) {
                     return Observable.just(alias)
                 } else if let upgradeViewController = self.showUpgradeViewController(
                     animated: true, forProductType: .sleepMode) {
@@ -185,7 +184,7 @@ class MasterViewController: UIViewController {
         }).disposed(by: disposeBag)
         
         viewModel.selectedCellStatusUpdate$
-            .withLatestFrom(store.observable.asDriver()) { ($0, $1.hostsState.latestHostAlias) }
+            .withLatestFrom(store.asDriver()) { ($0, $1.hostsState.latestHostAlias) }
             .subscribe(onNext: { [unowned self] (info, latestHostAlias) in
             self.latestHostUnlockStatus = info
             self.reloadCells([latestHostAlias])
@@ -211,11 +210,11 @@ class MasterViewController: UIViewController {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
         addButton.accessibilityIdentifier = "Add"
         addButton.rx.tap
-            .flatMapFirst { _ -> Observable<EditHostState> in
+            .flatMapFirst { _ -> Single<EditHostState> in
                 if let hostDetailVC = self.showHostDetailsViewController(animated: true, forNewHost: true) {
                     return hostDetailVC.getEditHostState()
                 }
-                return Observable.empty()
+                return .just(.cancelled)
             }
             .flatMapFirst { editHostState -> Observable<HostInfo> in
                 return Observable.create { observer in

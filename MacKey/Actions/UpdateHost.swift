@@ -6,7 +6,6 @@
 //  Copyright © 2017 Liu Liang. All rights reserved.
 //
 
-import ReactiveReSwift
 
 struct UpdateHost: Action {
     let oldHost: HostInfo

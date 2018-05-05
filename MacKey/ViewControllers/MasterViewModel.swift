@@ -11,11 +11,11 @@ import RxCocoa
 
 class MasterViewModel {
     // - MARK: Inputs
-    let unlockRequest: AnyObserver<IndexPath>
-    let sleepRequests: AnyObserver<String>
-    let hostsState: AnyObserver<HostsState>
-    let enterForeground: AnyObserver<()>
-    let enterBackground: AnyObserver<()>
+    let unlockRequest = PublishRelay<IndexPath>()
+    let sleepRequests = PublishRelay<String>()
+    let hostsState = PublishRelay<HostsState>()
+    let enterForeground = PublishRelay<()>()
+    let enterBackground = PublishRelay<()>()
     
     // - MARK: Outputs
     let hasSelectedCell$: Observable<Bool>
@@ -23,34 +23,20 @@ class MasterViewModel {
     let selectedCellStatusUpdate$: Observable<String>
     
     init(macUnlockService: MacUnlockUseCase = MacUnlockService()) {
-        let _unlockRequest$ = PublishSubject<IndexPath>()
-        unlockRequest = _unlockRequest$.asObserver()
         
-        let _sleepRequests$ = PublishSubject<String>()
-        sleepRequests = _sleepRequests$.asObserver()
-        
-        let _hostsState$ = PublishSubject<HostsState>()
-        hostsState = _hostsState$.asObserver()
-        
-        let _enterForeground$ = PublishSubject<()>()
-        enterForeground = _enterForeground$.asObserver()
-        
-        let _enterBackground$ = PublishSubject<()>()
-        enterBackground = _enterBackground$.asObserver()
-        
-        hasSelectedCell$ = _hostsState$
+        hasSelectedCell$ = hostsState
             .map { $0.latestHostAlias.count > 0 }
             .distinctUntilChanged()
         
-        selectedIndex$ = _unlockRequest$.withLatestFrom(_hostsState$) { ($0, $1) }
+        selectedIndex$ = unlockRequest.withLatestFrom(hostsState) { ($0, $1) }
         
         let startConnection$ = Observable
             .of(Observable.just(()), // for didFinishLaunching
-                _enterForeground$,
-                _unlockRequest$.asObservable().map { _ in })
+                enterForeground.asObservable(),
+                unlockRequest.map { _ in })
             .merge()
         
-        let unlockStatus$ = startConnection$.withLatestFrom(_hostsState$)
+        let unlockStatus$ = startConnection$.withLatestFrom(hostsState)
             .filter { $0.allHosts.keys.contains($0.latestHostAlias) }
             .map { $0.allHosts[$0.latestHostAlias]! }
             .flatMapLatest { host in macUnlockService.wakeUp(host).map { (host, $0) } }
@@ -87,9 +73,9 @@ class MasterViewModel {
                 return Observable.just(status)
         }
         
-        let sleepStatus$ = _sleepRequests$
+        let sleepStatus$ = sleepRequests
             .filter { $0 != "" }
-            .withLatestFrom(_hostsState$) { $1.allHosts[$0] }
+            .withLatestFrom(hostsState) { $1.allHosts[$0] }
             .asObservable()
             .filter { $0 != nil }.map { $0! }
             .flatMapLatest { macUnlockService.sleep($0) }
@@ -111,7 +97,7 @@ class MasterViewModel {
                 }
             }
         
-        let statusWhenEnterBackground$: Observable<String> = _enterBackground$
+        let statusWhenEnterBackground$: Observable<String> = enterBackground
             .map { _ in "" }
         
         selectedCellStatusUpdate$ = Observable.of(connectionStatus$, statusWhenEnterBackground$)

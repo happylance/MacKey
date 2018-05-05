@@ -6,7 +6,7 @@
 //  Copyright © 2017 Liu Liang. All rights reserved.
 //
 
-import ReactiveReSwift
+import Foundation
 
 struct HostsReducer {
     static func handleAction(_ action: Action, state: HostsState) -> HostsState {

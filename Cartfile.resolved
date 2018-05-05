@@ -1,5 +1,4 @@
 github "NMSSH/NMSSH" "2.2.8"
-github "ReSwift/ReactiveReSwift" "4.0.1"
 github "ReactiveX/RxSwift" "4.1.2"
 github "bizz84/SwiftyStoreKit" "0.13.1"
 github "jrendel/SwiftKeychainWrapper" "3.0.1"
