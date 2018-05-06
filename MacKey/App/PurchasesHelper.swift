@@ -28,6 +28,11 @@ class PurchasesHelper {
 
 private extension SKPaymentTransactionState {
     var isPurchasedOrRestored: Bool {
-        return self == .purchased || self == .restored
+        switch self {
+        case .purchased, .restored:
+            return true
+        default:
+            return false
+        }
     }
 }
