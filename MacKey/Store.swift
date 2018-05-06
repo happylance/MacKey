@@ -24,8 +24,9 @@ class Store<S> {
         return state.value
     }
     
+    let actions = PublishRelay<Action>()
+    
     private let state: BehaviorRelay<S>
-    private let actions = PublishRelay<Action>()
     private let disposeBag = DisposeBag()
     
     init(reducer: @escaping Reducer, initialState: S) {

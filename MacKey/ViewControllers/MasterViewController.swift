@@ -253,7 +253,7 @@ class MasterViewController: UIViewController {
     private func reloadCells(_ aliases: [String]) {
         let indexPathsToReload = aliases
             .filter { $0.count > 0 }
-            .flatMap { store.hostsState.sortedHostAliases.index(of: $0) }
+            .compactMap { store.hostsState.sortedHostAliases.index(of: $0) }
             .reduce([Int]()) { $0.contains($1) ? $0 : $0 + [$1] } // Remove duplicates
             .map { IndexPath(row: $0, section: 0) }
         self.tableView.reloadRows(at: indexPathsToReload, with: .none)

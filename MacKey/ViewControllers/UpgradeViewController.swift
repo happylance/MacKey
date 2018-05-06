@@ -82,8 +82,8 @@ class UpgradeViewController: UIViewController{
                         message: String(format:"Invalid product identifier: %@".localized(), invalidProductId))
                 }
                 else {
-                    dlog("Error: \(result.error)")
-                    if let error = result.error as? NSError {
+                    dlog("Error: \(String(describing: result.error))")
+                    if let error = result.error as NSError? {
                         self.alertWithTitle("Error", message: error.localizedDescription)
                     }
                 }

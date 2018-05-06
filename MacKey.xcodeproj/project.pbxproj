@@ -22,6 +22,7 @@
 		4050E2BA1E6CC4430002A398 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4007F09C1E5FD7D400463D8D /* Localizable.strings */; };
 		4050E2BF1E6CE6850002A398 /* MockSSHService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4050E2BE1E6CE6850002A398 /* MockSSHService.swift */; };
 		40774C2D209E634F00F3873C /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C2C209E634F00F3873C /* Store.swift */; };
+		40774C33209E97B300F3873C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C32209E97B300F3873C /* AppCoordinator.swift */; };
 		408150571E5A65F1005AD37B /* Upgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408150561E5A65F1005AD37B /* Upgrade.swift */; };
 		408150601E5A6931005AD37B /* UpgradeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4081505F1E5A6931005AD37B /* UpgradeService.swift */; };
 		408150641E5A7988005AD37B /* UpgradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408150631E5A7988005AD37B /* UpgradeViewController.swift */; };
@@ -132,6 +133,7 @@
 		4050E2A21E6CB4910002A398 /* SnapshotHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SnapshotHelper.swift; path = fastlane/SnapshotHelper.swift; sourceTree = SOURCE_ROOT; };
 		4050E2BE1E6CE6850002A398 /* MockSSHService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockSSHService.swift; path = Services/MockSSHService.swift; sourceTree = "<group>"; };
 		40774C2C209E634F00F3873C /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		40774C32209E97B300F3873C /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		408150561E5A65F1005AD37B /* Upgrade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Upgrade.swift; path = Actions/Upgrade.swift; sourceTree = "<group>"; };
 		4081505F1E5A6931005AD37B /* UpgradeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpgradeService.swift; path = Services/UpgradeService.swift; sourceTree = "<group>"; };
 		408150631E5A7988005AD37B /* UpgradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpgradeViewController.swift; path = ViewControllers/UpgradeViewController.swift; sourceTree = "<group>"; };
@@ -243,6 +245,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		40774C31209E979900F3873C /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				40774C32209E97B300F3873C /* AppCoordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
 		408507761E2AC52F00C2E0D1 /* Actions */ = {
 			isa = PBXGroup;
 			children = (
@@ -343,6 +353,7 @@
 		40C4AB141CE758F400ED92C5 /* MacKey */ = {
 			isa = PBXGroup;
 			children = (
+				40774C31209E979900F3873C /* Coordinators */,
 				40C4AB151CE758F400ED92C5 /* AppDelegate.swift */,
 				40774C2C209E634F00F3873C /* Store.swift */,
 				408507761E2AC52F00C2E0D1 /* Actions */,
@@ -581,6 +592,7 @@
 				40A645921E3C359700CB62B1 /* MasterViewController+Routes.swift in Sources */,
 				408507DC1E2B147A00C2E0D1 /* UpdateHost.swift in Sources */,
 				408507CF1E2AD05200C2E0D1 /* AppReducer.swift in Sources */,
+				40774C33209E97B300F3873C /* AppCoordinator.swift in Sources */,
 				408150571E5A65F1005AD37B /* Upgrade.swift in Sources */,
 				400E70981E46CD2100B5477B /* HostListViewCell.swift in Sources */,
 				408507D81E2ADD0E00C2E0D1 /* RemoveHost.swift in Sources */,
