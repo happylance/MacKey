@@ -23,6 +23,7 @@
 		4050E2BF1E6CE6850002A398 /* MockSSHService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4050E2BE1E6CE6850002A398 /* MockSSHService.swift */; };
 		40774C2D209E634F00F3873C /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C2C209E634F00F3873C /* Store.swift */; };
 		40774C33209E97B300F3873C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C32209E97B300F3873C /* AppCoordinator.swift */; };
+		40774C3D209EA16E00F3873C /* PurchasesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C3C209EA16E00F3873C /* PurchasesHelper.swift */; };
 		408150571E5A65F1005AD37B /* Upgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408150561E5A65F1005AD37B /* Upgrade.swift */; };
 		408150601E5A6931005AD37B /* UpgradeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4081505F1E5A6931005AD37B /* UpgradeService.swift */; };
 		408150641E5A7988005AD37B /* UpgradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408150631E5A7988005AD37B /* UpgradeViewController.swift */; };
@@ -134,6 +135,7 @@
 		4050E2BE1E6CE6850002A398 /* MockSSHService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MockSSHService.swift; path = Services/MockSSHService.swift; sourceTree = "<group>"; };
 		40774C2C209E634F00F3873C /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		40774C32209E97B300F3873C /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		40774C3C209EA16E00F3873C /* PurchasesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesHelper.swift; sourceTree = "<group>"; };
 		408150561E5A65F1005AD37B /* Upgrade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Upgrade.swift; path = Actions/Upgrade.swift; sourceTree = "<group>"; };
 		4081505F1E5A6931005AD37B /* UpgradeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpgradeService.swift; path = Services/UpgradeService.swift; sourceTree = "<group>"; };
 		408150631E5A7988005AD37B /* UpgradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpgradeViewController.swift; path = ViewControllers/UpgradeViewController.swift; sourceTree = "<group>"; };
@@ -248,9 +250,26 @@
 		40774C31209E979900F3873C /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				40774C32209E97B300F3873C /* AppCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		40774C36209EA01400F3873C /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		40774C39209EA0EC00F3873C /* App */ = {
+			isa = PBXGroup;
+			children = (
+				40774C32209E97B300F3873C /* AppCoordinator.swift */,
+				40C4AB151CE758F400ED92C5 /* AppDelegate.swift */,
+				40774C3C209EA16E00F3873C /* PurchasesHelper.swift */,
+				40774C2C209E634F00F3873C /* Store.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 		408507761E2AC52F00C2E0D1 /* Actions */ = {
@@ -353,10 +372,10 @@
 		40C4AB141CE758F400ED92C5 /* MacKey */ = {
 			isa = PBXGroup;
 			children = (
-				40774C31209E979900F3873C /* Coordinators */,
-				40C4AB151CE758F400ED92C5 /* AppDelegate.swift */,
-				40774C2C209E634F00F3873C /* Store.swift */,
+				40774C39209EA0EC00F3873C /* App */,
 				408507761E2AC52F00C2E0D1 /* Actions */,
+				40774C31209E979900F3873C /* Coordinators */,
+				40774C36209EA01400F3873C /* Extensions */,
 				4012639B1CE79EF300FAE75C /* Models */,
 				408507C71E2ACF4600C2E0D1 /* Reducers */,
 				40C4AB451CE7592300ED92C5 /* Resources */,
@@ -601,6 +620,7 @@
 				408150601E5A6931005AD37B /* UpgradeService.swift in Sources */,
 				404B995B1E67AB63009312F3 /* HelpViewController.swift in Sources */,
 				40A645AC1E3E721400CB62B1 /* SSHService.swift in Sources */,
+				40774C3D209EA16E00F3873C /* PurchasesHelper.swift in Sources */,
 				408508071E2C495200C2E0D1 /* UserDefaultsServivce.swift in Sources */,
 				408507DE1E2BB9AB00C2E0D1 /* HostInfo.swift in Sources */,
 				40A645AA1E3E6EF000CB62B1 /* MacUnlockService.swift in Sources */,
