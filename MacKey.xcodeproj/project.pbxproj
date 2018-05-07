@@ -24,6 +24,7 @@
 		40774C2D209E634F00F3873C /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C2C209E634F00F3873C /* Store.swift */; };
 		40774C33209E97B300F3873C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C32209E97B300F3873C /* AppCoordinator.swift */; };
 		40774C3D209EA16E00F3873C /* PurchasesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C3C209EA16E00F3873C /* PurchasesHelper.swift */; };
+		40774C3F209FEAAF00F3873C /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C3E209FEAAF00F3873C /* AppHelper.swift */; };
 		408150571E5A65F1005AD37B /* Upgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408150561E5A65F1005AD37B /* Upgrade.swift */; };
 		408150601E5A6931005AD37B /* UpgradeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4081505F1E5A6931005AD37B /* UpgradeService.swift */; };
 		408150641E5A7988005AD37B /* UpgradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408150631E5A7988005AD37B /* UpgradeViewController.swift */; };
@@ -136,6 +137,7 @@
 		40774C2C209E634F00F3873C /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
 		40774C32209E97B300F3873C /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		40774C3C209EA16E00F3873C /* PurchasesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesHelper.swift; sourceTree = "<group>"; };
+		40774C3E209FEAAF00F3873C /* AppHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
 		408150561E5A65F1005AD37B /* Upgrade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Upgrade.swift; path = Actions/Upgrade.swift; sourceTree = "<group>"; };
 		4081505F1E5A6931005AD37B /* UpgradeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpgradeService.swift; path = Services/UpgradeService.swift; sourceTree = "<group>"; };
 		408150631E5A7988005AD37B /* UpgradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpgradeViewController.swift; path = ViewControllers/UpgradeViewController.swift; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				40C4AB151CE758F400ED92C5 /* AppDelegate.swift */,
 				40774C3C209EA16E00F3873C /* PurchasesHelper.swift */,
 				40774C2C209E634F00F3873C /* Store.swift */,
+				40774C3E209FEAAF00F3873C /* AppHelper.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -619,6 +622,7 @@
 				408507CA1E2ACFCA00C2E0D1 /* State.swift in Sources */,
 				408150601E5A6931005AD37B /* UpgradeService.swift in Sources */,
 				404B995B1E67AB63009312F3 /* HelpViewController.swift in Sources */,
+				40774C3F209FEAAF00F3873C /* AppHelper.swift in Sources */,
 				40A645AC1E3E721400CB62B1 /* SSHService.swift in Sources */,
 				40774C3D209EA16E00F3873C /* PurchasesHelper.swift in Sources */,
 				408508071E2C495200C2E0D1 /* UserDefaultsServivce.swift in Sources */,

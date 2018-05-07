@@ -8,14 +8,20 @@
 
 import Foundation
 import SwiftyStoreKit
+import RxSwift
 
 class AppCoordinator {
+    private let appHelper = AppHelper(state: store.observable)
+    private let disposeBag = DisposeBag()
+    private let userDefaultsService = UserDefaultsServivce()
+    
     init() {
     }
     
     func start() {
         MacHostsInfoService.register()
-        UserDefaultsServivce.register()
+        
+        userDefaultsService.saveWhenChanges(appHelper)
         
         SwiftyStoreKit.completeTransactions(atomically: true) { purchases in
             let productsHelper = PurchasesHelper(purchases)

@@ -8,57 +8,64 @@
 
 import Foundation
 import RxSwift
+import RxCocoa
 
 private let supportSleepModeKey = "supportSleepMode"
 private let supportSkippingTouchIDKey = "supportSkippingTouchID"
 private let latestHostAliasKey = "latestHostAlias"
 private let disposeBag = DisposeBag()
+
+protocol UserDefaultsPersistable {
+    var latestHostAliasKeySkipFirst: Observable<String> { get }
+    var supportSkippingTouchIDSkipFirst: Observable<Bool> { get }
+    var supportSleepModeKeySkipFirst: Observable<Bool> { get }
+}
+
 class UserDefaultsServivce : NSObject {
-    static func register() {
-        subscribe()
+    private let userDefaults: UserDefaults
+    init(userDefaults: UserDefaults = UserDefaults.standard) {
+        self.userDefaults = userDefaults
     }
     
-    private class func subscribe() {
-        store.observable.asObservable().map { $0.hostsState.latestHostAlias }
-            .distinctUntilChanged().skip(1)
-            .subscribe(onNext: {
-                UserDefaults.standard.set($0, forKey: latestHostAliasKey)
-                UserDefaults.standard.synchronize()
-            })
-        .disposed(by: disposeBag)
-        
-        store.observable.asObservable().map { $0.supportSkippingTouchID }
-            .distinctUntilChanged().skip(1)
-            .subscribe(onNext: {
-                UserDefaults.standard.set($0, forKey: supportSkippingTouchIDKey)
-                UserDefaults.standard.synchronize()
-            })
-            .disposed(by: disposeBag)
-        
-        store.observable.asObservable().map { $0.supportSleepMode }
-            .distinctUntilChanged().skip(1)
-            .subscribe(onNext: {
-                UserDefaults.standard.set($0, forKey: supportSleepModeKey)
-                UserDefaults.standard.synchronize()
-            })
-            .disposed(by: disposeBag)
+    func saveWhenChanges(_ persistable: UserDefaultsPersistable) {
+        [persistable.latestHostAliasKeySkipFirst.subscribe(onNext: { [weak self] in
+            self?.latestHostAlias = $0
+        }),
+         persistable.supportSkippingTouchIDSkipFirst.subscribe(onNext: { [weak self] in
+            self?.supportSkippingTouchID = $0
+         }),
+         persistable.supportSleepModeKeySkipFirst.subscribe(onNext: { [weak self] in
+            self?.supportSleepMode = $0
+         })].forEach { $0.disposed(by: disposeBag) }
     }
     
-    var supportSkippingTouchID: Bool {
+    private(set) var supportSkippingTouchID: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: supportSkippingTouchIDKey)
+            return userDefaults.bool(forKey: supportSkippingTouchIDKey)
+        }
+        set {
+            userDefaults.set(newValue, forKey: supportSkippingTouchIDKey)
+            userDefaults.synchronize()
         }
     }
     
-    var supportSleepMode: Bool {
+    private(set) var supportSleepMode: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: supportSleepModeKey)
+            return userDefaults.bool(forKey: supportSleepModeKey)
+        }
+        set {
+            userDefaults.set(newValue, forKey: supportSleepModeKey)
+            userDefaults.synchronize()
         }
     }
     
-    var latestHostAlias: String {
+    private(set) var latestHostAlias: String {
         get {
-            return UserDefaults.standard.string(forKey: latestHostAliasKey) ?? ""
+            return userDefaults.string(forKey: latestHostAliasKey) ?? ""
+        }
+        set {
+            userDefaults.set(newValue, forKey: latestHostAliasKey)
+            userDefaults.synchronize()
         }
     }
 }
