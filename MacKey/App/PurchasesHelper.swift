@@ -21,7 +21,7 @@ class PurchasesHelper {
             .filter { $0.needsFinishTransaction }
             .map { $0.transaction }
         upgrades = purchasedOrRestoredPurchases
-            .map { Upgrade(productID: $0.productId) }
+            .map { Upgrade(productType: $0.productType) }
     }
 }
 

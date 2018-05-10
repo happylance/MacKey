@@ -16,13 +16,6 @@ struct HostsReducer {
         )
     }
     
-    static func initialHostsState() -> HostsState {
-        return HostsState(
-            allHosts: MacHostsInfoService().macHostsInfo(),
-            latestHostAlias: UserDefaultsServivce().latestHostAlias
-        )
-    }
-    
     private static func allHostsReducer(_ action: Action, state: HostsState) -> Hosts {
         var hosts = state.allHosts
         switch action {

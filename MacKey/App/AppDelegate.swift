@@ -9,10 +9,15 @@
 import UIKit
 import RxSwift
 
+private let initialHostsState = HostsState(
+    allHosts: MacHostsInfoService().macHostsInfo(),
+    latestHostAlias: UserDefaultsServivce().latestHostAlias
+)
+
 // The global application store, which is responsible for managing the appliction state.
 let store = Store(
-    reducer: AppReducer,
-    initialState: State()
+    reducer: appReducer,
+    initialState: State(hostsState: initialHostsState, supportSkippingTouchID: UserDefaultsServivce().supportSkippingTouchID, supportSleepMode: UserDefaultsServivce().supportSleepMode)
 )
 
 @UIApplicationMain

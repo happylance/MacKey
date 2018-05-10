@@ -6,18 +6,17 @@
 //  Copyright © 2017 Liu Liang. All rights reserved.
 //
 
-let AppReducer : Store<State>.Reducer = { state, action in
+let appReducer : Reducer<State> = { state, action in
     var (supportSkippingTouchID, supportSleepMode) = { () -> (Bool, Bool) in 
         switch action {
         case let action as Upgrade:
-            guard let productType = UpgradeViewController.productType(by: action.productID) else {
-                return (state.supportSkippingTouchID, state.supportSleepMode)
-            }
-            switch productType {
+            switch action.productType {
             case .sleepMode:
                 return (state.supportSkippingTouchID, true)
             case .skipTouchID:
                 return (true, state.supportSleepMode)
+            case .unknown:
+                return (state.supportSkippingTouchID, state.supportSleepMode)
             }
         default:
             return (state.supportSkippingTouchID, state.supportSleepMode)
@@ -25,7 +24,7 @@ let AppReducer : Store<State>.Reducer = { state, action in
     }()
     
     return State(
-        hostsState: dlog(HostsReducer.handleAction(action, state:state.hostsState)),
+        hostsState: HostsReducer.handleAction(action, state:state.hostsState),
         supportSkippingTouchID: supportSkippingTouchID,
         supportSleepMode: supportSleepMode
     )

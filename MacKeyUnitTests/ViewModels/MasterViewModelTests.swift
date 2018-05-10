@@ -10,14 +10,14 @@ import XCTest
 import RxSwift
 import RxTest
 import RxCocoa
-@testable import MacKey
+@testable import MacKeyUnit
 
 class MasterViewModelTests: XCTestCase {
     var testScheduler: TestScheduler!
     var disposeBag: DisposeBag!
     var macUnlockService: MacUnlockServiceMock!
     var viewModel: MasterViewModel!
-    var stateHelper: HostsStateHelper!
+    var state1 = DataMock.twoHosts
     
     override func setUp() {
         super.setUp()
@@ -26,7 +26,6 @@ class MasterViewModelTests: XCTestCase {
         disposeBag = DisposeBag()
         macUnlockService = MacUnlockServiceMock()
         viewModel = MasterViewModel(macUnlockService: macUnlockService)
-        stateHelper = HostsStateHelper()
     }
     
     func testHasSelectedCell() {
@@ -38,7 +37,7 @@ class MasterViewModelTests: XCTestCase {
     }
     
     func testHasNoSelectedCell() {
-        stateHelper.state1.latestHostAlias = ""
+        state1.latestHostAlias = ""
         setHostsState()
         
         let result = testScheduler.start { self.viewModel.hasSelectedCell$ }
@@ -47,17 +46,17 @@ class MasterViewModelTests: XCTestCase {
     }
     
     func testHasSelectedIndex() {
-        stateHelper.state1.latestHostAlias = ""
+        state1.latestHostAlias = ""
         setHostsState()
         setUnlockRequest()
         
         let result = testScheduler.start { self.viewModel.selectedIndex$ }
         XCTAssertEqual(result.events.count, 1)
-        XCTAssertEqual(result.events[0].value.element!.1.latestHostAlias, stateHelper.state1.latestHostAlias)
+        XCTAssertEqual(result.events[0].value.element!.1.latestHostAlias, state1.latestHostAlias)
     }
     
     func testHasNoSelectedIndex() {
-        stateHelper.state1.latestHostAlias = ""
+        state1.latestHostAlias = ""
         setHostsState()
         
         let result = testScheduler.start { self.viewModel.selectedIndex$ }
@@ -131,7 +130,7 @@ class MasterViewModelTests: XCTestCase {
     }
     
     func setHostsState() {
-        testScheduler.createHotObservable([next(300, stateHelper.state1)])
+        testScheduler.createHotObservable([next(300, state1)])
             .bind(to: viewModel.hostsState)
             .disposed(by: disposeBag)
     }

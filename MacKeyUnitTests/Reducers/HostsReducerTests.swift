@@ -7,11 +7,11 @@
 //
 
 import XCTest
-@testable import MacKey
+@testable import MacKeyUnit
 
 class HostsReducerTests: XCTestCase {
     
-    let initialState = HostsStateHelper().state1
+    let initialState = DataMock.twoHosts
     
     func testAddHost() {
         let newHost = HostInfo(alias: "h3", host: "host3", user: "u3", password: "p3", requireTouchID: true)

@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 import RxTest
-@testable import MacKey
+@testable import MacKeyUnit
 
 class MacUnlockServiceMock: MacUnlockUseCase {
     var wakeUpReturnValue: Observable<UnlockStatus> = .empty()

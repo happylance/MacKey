@@ -13,14 +13,6 @@ private let wakeCommand = "echo 'caffeinate -u -t 1 & d=$(/usr/bin/python -c \"i
 
 private let checkStatusCommand = "echo 'd=$(/usr/bin/python -c \"import Quartz; print Quartz.CGSessionCopyCurrentDictionary()\"); echo \"$d\" | grep -q \"ScreenIsLocked = 1\" && { echo \"Failed to unlock Mac\"; exit 1; } || { echo \"Mac is unlocked\"; exit 0; }' | sh"
 
-enum UnlockStatus {
-    case connecting
-    case connectedAndNeedsUnlock
-    case connectedWithInfo(info: String)
-    case error(error: String)
-    case unlocking
-}
-
 private func convertError(_ error: Error) -> Observable<UnlockStatus> {
     guard let error = error as? SSHSessionError else {
         return Observable.just(.error(error: ""))
@@ -33,28 +25,15 @@ private func convertError(_ error: Error) -> Observable<UnlockStatus> {
     }
 }
 
-struct Config {
-    static let sshService: SSHService = UITesting() ?
-        MockSSHService() : SSHService()
-}
-
-private func UITesting() -> Bool {
-    return ProcessInfo.processInfo.arguments.contains("UI-TESTING")
-}
-
-protocol MacUnlockUseCase {
-    func wakeUp(_ host: HostInfo) -> Observable<UnlockStatus>
-    func runTouchID(for host: HostInfo) -> Observable<UnlockStatus>
-    func unlock(_ host: HostInfo) -> Observable<UnlockStatus>
-    func checkStatus(_ host: HostInfo) -> Observable<UnlockStatus>
-    func sleep(_ host: HostInfo) -> Observable<UnlockStatus>
-}
-
-class MacUnlockService: MacUnlockUseCase {
+class MacUnlockService {
+    let sshService: SSHService
+    init(sshService: SSHService) {
+        self.sshService = sshService
+    }
     
     func wakeUp(_ host: HostInfo) -> Observable<UnlockStatus> {
         let cmd = getDetailCommand("wake", for: host)
-        return Config.sshService.executeSshCommand(cmd, host: host)
+        return sshService.executeSshCommand(cmd, host: host)
             .map { $0 == "" ? .connectedAndNeedsUnlock : .connectedWithInfo(info: $0) }
             .catchError { convertError($0) }
             .startWith(.connecting)
@@ -82,7 +61,7 @@ class MacUnlockService: MacUnlockUseCase {
     
     private func execCommand(_ command: String, host: HostInfo) -> Observable<UnlockStatus> {
         let detailCommand = getDetailCommand(command, for: host)
-        return Config.sshService.executeSshCommand(detailCommand, host: host)
+        return sshService.executeSshCommand(detailCommand, host: host)
             .map { .connectedWithInfo(info: dlog($0)) }
             .catchError { convertError($0) }
     }

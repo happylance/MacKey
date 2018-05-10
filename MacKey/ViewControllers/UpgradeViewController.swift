@@ -11,22 +11,32 @@ import RxSwift
 import RxCocoa
 import SwiftyStoreKit
 
-
-private let sleepModeProductID = "com.nlprliu.MacKey.pro"
-private let skipTouchIDProductID = "com.nlprliu.MacKey.skipTouchID"
-
 private let buttonCornerRadius: CGFloat = 5
 
-enum ProductType {
-    case sleepMode, skipTouchID
+extension ProductIdType {
+    var productType: ProductType {
+        if productId == Config.sleepModeProductID {
+            return .sleepMode
+        } else if productId == Config.skipTouchIDProductID {
+            return .skipTouchID
+        }
+        return .unknown
+    }
 }
 
-private func productID(by type: ProductType) -> String {
-    switch type {
-    case .sleepMode:
-        return sleepModeProductID
-    case .skipTouchID:
-        return skipTouchIDProductID
+extension Purchase: ProductIdType {}
+extension PurchaseDetails: ProductIdType {}
+
+private extension ProductType {
+    var productId: String {
+        switch self {
+        case .sleepMode:
+            return Config.sleepModeProductID
+        case .skipTouchID:
+            return Config.skipTouchIDProductID
+        case .unknown:
+            return ""
+        }
     }
 }
 
@@ -63,7 +73,7 @@ class UpgradeViewController: UIViewController{
             .disposed(by: disposeBag)
         
         productType$.asObservable()
-            .map { productID(by: $0) }
+            .map { $0.productId }
             .do(onNext: { [unowned self] _ in self.activityIndicatorOutlet.isHidden = false })
             .flatMapLatest { UpgradeService.getProductInfo(by: $0) }
             .subscribe(onNext: { [unowned self] result in
@@ -91,7 +101,7 @@ class UpgradeViewController: UIViewController{
             .disposed(by: disposeBag)
         
         purchaseOutlet.rx.tap
-            .withLatestFrom(productType$.asObservable()) { productID(by: $1) }
+            .withLatestFrom(productType$.asObservable()) { $1.productId }
             .do(onNext: { [unowned self] _ in self.activityIndicatorOutlet.isHidden = false })
             .flatMapLatest { UpgradeService.purchase(by: $0) }
             .subscribe(onNext: { [unowned self] result in
@@ -99,7 +109,7 @@ class UpgradeViewController: UIViewController{
                 switch result {
                 case .success(let product):
                     dlog("Purchase Success: \(product.productId)")
-                    store.dispatch(Upgrade(productID: product.productId))
+                    store.dispatch(Upgrade(productType: product.productType))
                     self.purchaseState$.onNext(.purchased)
                     self.purchaseState$.onCompleted()
                     self.dismiss(animated: true, completion: nil)
@@ -122,8 +132,8 @@ class UpgradeViewController: UIViewController{
         restorePurchaseOutlet.rx.tap
             .do(onNext: { [unowned self] _ in self.activityIndicatorOutlet.isHidden = false })
             .flatMapLatest {_ in UpgradeService.restorePurchase() }
-            .withLatestFrom(productType$.asObservable()) { ($0, productID(by: $1)) }
-            .subscribe(onNext: { [unowned self] (results, productId) in
+            .withLatestFrom(productType$.asObservable()) { ($0, $1) }
+            .subscribe(onNext: { [unowned self] (results, productType) in
                 self.activityIndicatorOutlet.isHidden = true
                 if results.restoreFailedPurchases.count > 0 {
                     dlog("Restore Failed: \(results.restoreFailedPurchases)")
@@ -137,8 +147,8 @@ class UpgradeViewController: UIViewController{
                 }
                 else if results.restoredPurchases.count > 0 {
                     dlog("Restore Success: \(results.restoredPurchases)")
-                    if (results.restoredPurchases.contains { $0.productId == productId }) {
-                        store.dispatch(Upgrade(productID: productId))
+                    if (results.restoredPurchases.contains { $0.productId == productType.productId }) {
+                        store.dispatch(Upgrade(productType: productType))
                         self.purchaseState$.onNext(.purchased)
                         self.purchaseState$.onCompleted()
                         self.dismiss(animated: true, completion: nil)
@@ -158,15 +168,6 @@ class UpgradeViewController: UIViewController{
     
     func setProductType(_ type: ProductType) {
         productType$.value = type
-    }
-    
-    static func productType(by id: String) -> ProductType? {
-        if id == sleepModeProductID {
-            return .sleepMode
-        } else if id == skipTouchIDProductID {
-            return .skipTouchID
-        }
-        return nil
     }
     
     private func alertWithTitle(_ title: String, message: String) {

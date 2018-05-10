@@ -9,6 +9,14 @@
 import RxSwift
 import RxCocoa
 
+protocol MacUnlockUseCase {
+    func wakeUp(_ host: HostInfo) -> Observable<UnlockStatus>
+    func runTouchID(for host: HostInfo) -> Observable<UnlockStatus>
+    func unlock(_ host: HostInfo) -> Observable<UnlockStatus>
+    func checkStatus(_ host: HostInfo) -> Observable<UnlockStatus>
+    func sleep(_ host: HostInfo) -> Observable<UnlockStatus>
+}
+
 class MasterViewModel {
     // - MARK: Inputs
     let unlockRequest = PublishRelay<IndexPath>()
@@ -22,7 +30,7 @@ class MasterViewModel {
     let selectedIndex$: Observable<(IndexPath, HostsState)>
     let selectedCellStatusUpdate$: Observable<String>
     
-    init(macUnlockService: MacUnlockUseCase = MacUnlockService()) {
+    init(macUnlockService: MacUnlockUseCase) {
         
         hasSelectedCell$ = hostsState
             .map { $0.latestHostAlias.count > 0 }

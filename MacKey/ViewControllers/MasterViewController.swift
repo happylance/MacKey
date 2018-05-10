@@ -10,6 +10,8 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+extension MacUnlockService: MacUnlockUseCase {}
+    
 class MasterViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var sleepButtonOutlet: UIBarButtonItem!
@@ -24,7 +26,8 @@ class MasterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let viewModel = MasterViewModel()
+        let sshService = Config.forUITesting ? MockSSHService() : SSHService()
+        let viewModel = MasterViewModel(macUnlockService: MacUnlockService(sshService: sshService))
         store.observable.asObservable()
             .map { $0.hostsState }
             .delay(0.1, scheduler: MainScheduler.instance)

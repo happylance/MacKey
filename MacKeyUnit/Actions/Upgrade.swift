@@ -8,5 +8,5 @@
 
 
 struct Upgrade: Action {
-    var productID: String
+    var productType: ProductType
 }

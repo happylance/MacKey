@@ -9,19 +9,19 @@
 import Foundation
 import RxSwift
 
-class AppHelper: UserDefaultsPersistable {
-    let latestHostAliasKeySkipFirst: Observable<String>
+class AppHelper {
+    let latestHostAliasSkipFirst: Observable<String>
     let supportSkippingTouchIDSkipFirst: Observable<Bool>
-    let supportSleepModeKeySkipFirst: Observable<Bool>
+    let supportSleepModeSkipFirst: Observable<Bool>
     
     init(state: Observable<State>) {
-        latestHostAliasKeySkipFirst = state.map { $0.hostsState.latestHostAlias }
+        latestHostAliasSkipFirst = state.map { $0.hostsState.latestHostAlias }
             .distinctUntilChanged().skip(1)
         
         supportSkippingTouchIDSkipFirst = state.map { $0.supportSkippingTouchID }
             .distinctUntilChanged().skip(1)
         
-        supportSleepModeKeySkipFirst = state.map { $0.supportSleepMode }
+        supportSleepModeSkipFirst = state.map { $0.supportSleepMode }
             .distinctUntilChanged().skip(1)
     }
 }

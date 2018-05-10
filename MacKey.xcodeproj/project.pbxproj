@@ -17,7 +17,6 @@
 		404B99541E666C0E009312F3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4007F09C1E5FD7D400463D8D /* Localizable.strings */; };
 		404B99591E67A631009312F3 /* Help.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 404B99571E67A631009312F3 /* Help.storyboard */; };
 		404B995B1E67AB63009312F3 /* HelpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404B995A1E67AB63009312F3 /* HelpViewController.swift */; };
-		404E057A1E4FC3AF002F8A95 /* HostsReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404E05791E4FC3AF002F8A95 /* HostsReducerTests.swift */; };
 		4050E2A31E6CB4920002A398 /* SnapshotHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4050E2A21E6CB4910002A398 /* SnapshotHelper.swift */; };
 		4050E2BA1E6CC4430002A398 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4007F09C1E5FD7D400463D8D /* Localizable.strings */; };
 		4050E2BF1E6CE6850002A398 /* MockSSHService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4050E2BE1E6CE6850002A398 /* MockSSHService.swift */; };
@@ -25,27 +24,58 @@
 		40774C33209E97B300F3873C /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C32209E97B300F3873C /* AppCoordinator.swift */; };
 		40774C3D209EA16E00F3873C /* PurchasesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C3C209EA16E00F3873C /* PurchasesHelper.swift */; };
 		40774C3F209FEAAF00F3873C /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C3E209FEAAF00F3873C /* AppHelper.swift */; };
+		40774C6D20A1261500F3873C /* MacKeyUnit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40774C6420A1261500F3873C /* MacKeyUnit.framework */; };
+		40774C7C20A1265800F3873C /* AppHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C3E209FEAAF00F3873C /* AppHelper.swift */; };
+		40774C7F20A1268500F3873C /* AppHelperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C7E20A1268500F3873C /* AppHelperTests.swift */; };
+		40774C8420A127D900F3873C /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40774C8120A127D800F3873C /* RxCocoa.framework */; };
+		40774C8520A127D900F3873C /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40774C8220A127D800F3873C /* RxSwift.framework */; };
+		40774C8620A127D900F3873C /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40774C8320A127D800F3873C /* RxTest.framework */; };
+		40774C8720A127DF00F3873C /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40774C8320A127D800F3873C /* RxTest.framework */; };
+		40774C9920A12CC300F3873C /* HostInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C9820A12CC300F3873C /* HostInfo.swift */; };
+		40774C9A20A12CC300F3873C /* HostInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C9820A12CC300F3873C /* HostInfo.swift */; };
+		40774C9D20A12D2300F3873C /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C9B20A12D2200F3873C /* State.swift */; };
+		40774C9E20A12D2300F3873C /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C9B20A12D2200F3873C /* State.swift */; };
+		40774C9F20A12D2300F3873C /* HostsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C9C20A12D2200F3873C /* HostsState.swift */; };
+		40774CA020A12D2300F3873C /* HostsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774C9C20A12D2200F3873C /* HostsState.swift */; };
+		40774CA320A2936B00F3873C /* HostsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507D01E2AD9C200C2E0D1 /* HostsReducer.swift */; };
+		40774CA420A2936E00F3873C /* HostsReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404E05791E4FC3AF002F8A95 /* HostsReducerTests.swift */; };
+		40774CA720A293F200F3873C /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CA620A293F200F3873C /* Action.swift */; };
+		40774CA820A293F200F3873C /* Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CA620A293F200F3873C /* Action.swift */; };
+		40774CA920A2943000F3873C /* RemoveHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507D71E2ADD0E00C2E0D1 /* RemoveHost.swift */; };
+		40774CAA20A2943000F3873C /* SelectHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507DF1E2BEB7000C2E0D1 /* SelectHost.swift */; };
+		40774CAB20A2943000F3873C /* AddHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507D51E2ADC6800C2E0D1 /* AddHost.swift */; };
+		40774CAC20A2943000F3873C /* Upgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408150561E5A65F1005AD37B /* Upgrade.swift */; };
+		40774CAD20A2943000F3873C /* UpdateHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507DB1E2B147A00C2E0D1 /* UpdateHost.swift */; };
+		40774CAF20A295DE00F3873C /* MasterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400E709A1E4AA10200B5477B /* MasterViewModel.swift */; };
+		40774CB120A2968200F3873C /* UnlockStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CB020A2968200F3873C /* UnlockStatus.swift */; };
+		40774CB220A2968200F3873C /* UnlockStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CB020A2968200F3873C /* UnlockStatus.swift */; };
+		40774CB820A2978700F3873C /* MasterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B179DB208D598300A28DB3 /* MasterViewModelTests.swift */; };
+		40774CBB20A2980700F3873C /* MacUnlockServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B179DD208D59DE00A28DB3 /* MacUnlockServiceMock.swift */; };
+		40774CBE20A298EF00F3873C /* DataMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CBD20A298EF00F3873C /* DataMock.swift */; };
+		40774CC020A3CEDE00F3873C /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CBF20A3CEDD00F3873C /* Reducer.swift */; };
+		40774CC120A3CEEC00F3873C /* Reducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CBF20A3CEDD00F3873C /* Reducer.swift */; };
+		40774CC220A3CFA500F3873C /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507CE1E2AD05200C2E0D1 /* AppReducer.swift */; };
+		40774CC420A3D1B500F3873C /* ProductType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CC320A3D1B500F3873C /* ProductType.swift */; };
+		40774CC620A3D22B00F3873C /* AppReducerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CC520A3D22B00F3873C /* AppReducerTests.swift */; };
+		40774CC720A3D2B200F3873C /* ProductType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CC320A3D1B500F3873C /* ProductType.swift */; };
+		40774CC920A3D74C00F3873C /* ProductIdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CC820A3D74C00F3873C /* ProductIdType.swift */; };
+		40774CCA20A3D74C00F3873C /* ProductIdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CC820A3D74C00F3873C /* ProductIdType.swift */; };
+		40774CCC20A3D86300F3873C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CCB20A3D86300F3873C /* Config.swift */; };
 		408150571E5A65F1005AD37B /* Upgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408150561E5A65F1005AD37B /* Upgrade.swift */; };
 		408150601E5A6931005AD37B /* UpgradeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4081505F1E5A6931005AD37B /* UpgradeService.swift */; };
 		408150641E5A7988005AD37B /* UpgradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408150631E5A7988005AD37B /* UpgradeViewController.swift */; };
-		408507CA1E2ACFCA00C2E0D1 /* State.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507C91E2ACFCA00C2E0D1 /* State.swift */; };
 		408507CD1E2ACFFE00C2E0D1 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507CC1E2ACFFE00C2E0D1 /* MasterViewController.swift */; };
 		408507CF1E2AD05200C2E0D1 /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507CE1E2AD05200C2E0D1 /* AppReducer.swift */; };
 		408507D11E2AD9C200C2E0D1 /* HostsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507D01E2AD9C200C2E0D1 /* HostsReducer.swift */; };
 		408507D41E2ADA8900C2E0D1 /* MacHostsInfoService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507D31E2ADA8900C2E0D1 /* MacHostsInfoService.swift */; };
 		408507D61E2ADC6800C2E0D1 /* AddHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507D51E2ADC6800C2E0D1 /* AddHost.swift */; };
 		408507D81E2ADD0E00C2E0D1 /* RemoveHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507D71E2ADD0E00C2E0D1 /* RemoveHost.swift */; };
-		408507DA1E2B0AEC00C2E0D1 /* HostsState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507D91E2B0AEC00C2E0D1 /* HostsState.swift */; };
 		408507DC1E2B147A00C2E0D1 /* UpdateHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507DB1E2B147A00C2E0D1 /* UpdateHost.swift */; };
-		408507DE1E2BB9AB00C2E0D1 /* HostInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507DD1E2BB9AB00C2E0D1 /* HostInfo.swift */; };
 		408507E01E2BEB7000C2E0D1 /* SelectHost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408507DF1E2BEB7000C2E0D1 /* SelectHost.swift */; };
 		408508071E2C495200C2E0D1 /* UserDefaultsServivce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408508061E2C495200C2E0D1 /* UserDefaultsServivce.swift */; };
 		40A645921E3C359700CB62B1 /* MasterViewController+Routes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A8B6621E340E1E00C71EE7 /* MasterViewController+Routes.swift */; };
 		40A645AA1E3E6EF000CB62B1 /* MacUnlockService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645A91E3E6EF000CB62B1 /* MacUnlockService.swift */; };
 		40A645AC1E3E721400CB62B1 /* SSHService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A645AB1E3E721400CB62B1 /* SSHService.swift */; };
-		40B179DC208D598300A28DB3 /* MasterViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B179DB208D598300A28DB3 /* MasterViewModelTests.swift */; };
-		40B179DE208D59DE00A28DB3 /* MacUnlockServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B179DD208D59DE00A28DB3 /* MacUnlockServiceMock.swift */; };
-		40B179E1208D62B300A28DB3 /* RxTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B179E0208D62B300A28DB3 /* RxTest.framework */; };
 		40B179E8208D647400A28DB3 /* Localize_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B179E3208D646C00A28DB3 /* Localize_Swift.framework */; };
 		40B179E9208D647700A28DB3 /* NMSSH.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B179E4208D646C00A28DB3 /* NMSSH.framework */; };
 		40B179EB208D648600A28DB3 /* Localize_Swift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B179E3208D646C00A28DB3 /* Localize_Swift.framework */; };
@@ -58,29 +88,20 @@
 		40B179F7208D653600A28DB3 /* SwiftKeychainWrapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B179F4208D653600A28DB3 /* SwiftKeychainWrapper.framework */; };
 		40B179F8208D653600A28DB3 /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B179F5208D653600A28DB3 /* SwiftyStoreKit.framework */; };
 		40B179F9208D653600A28DB3 /* SwiftyStoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 40B179F5208D653600A28DB3 /* SwiftyStoreKit.framework */; };
-		40B179FB208D673300A28DB3 /* Localize_Swift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40B179E3208D646C00A28DB3 /* Localize_Swift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		40B179FC208D673300A28DB3 /* NMSSH.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40B179E4208D646C00A28DB3 /* NMSSH.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		40B179FE208D673300A28DB3 /* RxCocoa.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40B179EF208D650600A28DB3 /* RxCocoa.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		40B179FF208D673300A28DB3 /* RxSwift.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40B179EE208D650500A28DB3 /* RxSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		40B17A00208D673300A28DB3 /* RxTest.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40B179E0208D62B300A28DB3 /* RxTest.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		40B17A01208D673300A28DB3 /* SwiftKeychainWrapper.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40B179F4208D653600A28DB3 /* SwiftKeychainWrapper.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		40B17A02208D673300A28DB3 /* SwiftyStoreKit.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 40B179F5208D653600A28DB3 /* SwiftyStoreKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		40B17A04208D716D00A28DB3 /* HostsStateHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B17A03208D716D00A28DB3 /* HostsStateHelper.swift */; };
 		40BD24F11E330BFE004C8BD8 /* HostDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40BD24F01E330BFE004C8BD8 /* HostDetailsViewController.swift */; };
 		40C4AB161CE758F400ED92C5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB151CE758F400ED92C5 /* AppDelegate.swift */; };
 		40C4AB1D1CE758F400ED92C5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 40C4AB1B1CE758F400ED92C5 /* Main.storyboard */; };
 		40C4AB1F1CE758F400ED92C5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40C4AB1E1CE758F400ED92C5 /* Assets.xcassets */; };
-		40C4AB2D1CE758F400ED92C5 /* MacKeyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB2C1CE758F400ED92C5 /* MacKeyTests.swift */; };
 		40C4AB381CE758F500ED92C5 /* MacKeyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C4AB371CE758F500ED92C5 /* MacKeyUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		40C4AB291CE758F400ED92C5 /* PBXContainerItemProxy */ = {
+		40774C6E20A1261500F3873C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 40C4AB0A1CE758F300ED92C5 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 40C4AB111CE758F400ED92C5;
-			remoteInfo = MacKey;
+			remoteGlobalIDString = 40774C6320A1261500F3873C;
+			remoteInfo = MacKeyUnit;
 		};
 		40C4AB341CE758F500ED92C5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -90,25 +111,6 @@
 			remoteInfo = MacKey;
 		};
 /* End PBXContainerItemProxy section */
-
-/* Begin PBXCopyFilesBuildPhase section */
-		40B179FA208D672100A28DB3 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				40B179FB208D673300A28DB3 /* Localize_Swift.framework in CopyFiles */,
-				40B179FC208D673300A28DB3 /* NMSSH.framework in CopyFiles */,
-				40B179FE208D673300A28DB3 /* RxCocoa.framework in CopyFiles */,
-				40B179FF208D673300A28DB3 /* RxSwift.framework in CopyFiles */,
-				40B17A00208D673300A28DB3 /* RxTest.framework in CopyFiles */,
-				40B17A01208D673300A28DB3 /* SwiftKeychainWrapper.framework in CopyFiles */,
-				40B17A02208D673300A28DB3 /* SwiftyStoreKit.framework in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4007F0911E5FD6C100463D8D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
@@ -120,7 +122,7 @@
 		400E708B1E42CCCC00B5477B /* TouchIDService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchIDService.swift; path = Services/TouchIDService.swift; sourceTree = "<group>"; };
 		400E70971E46CD2100B5477B /* HostListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostListViewCell.swift; sourceTree = "<group>"; };
 		400E70991E4AA10200B5477B /* HostDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostDetailsViewModel.swift; path = ViewControllers/HostDetailsViewModel.swift; sourceTree = "<group>"; };
-		400E709A1E4AA10200B5477B /* MasterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterViewModel.swift; path = ViewControllers/MasterViewModel.swift; sourceTree = "<group>"; };
+		400E709A1E4AA10200B5477B /* MasterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewModel.swift; sourceTree = "<group>"; };
 		4012639E1CE79F6400FAE75C /* MacHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacHost.swift; path = Models/MacHost.swift; sourceTree = "<group>"; };
 		404B99501E666393009312F3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		404B99511E666393009312F3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/HostDetails.strings"; sourceTree = "<group>"; };
@@ -138,20 +140,36 @@
 		40774C32209E97B300F3873C /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		40774C3C209EA16E00F3873C /* PurchasesHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchasesHelper.swift; sourceTree = "<group>"; };
 		40774C3E209FEAAF00F3873C /* AppHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHelper.swift; sourceTree = "<group>"; };
-		408150561E5A65F1005AD37B /* Upgrade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Upgrade.swift; path = Actions/Upgrade.swift; sourceTree = "<group>"; };
+		40774C6420A1261500F3873C /* MacKeyUnit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MacKeyUnit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		40774C6720A1261500F3873C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40774C6C20A1261500F3873C /* MacKeyUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacKeyUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		40774C7320A1261500F3873C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		40774C7E20A1268500F3873C /* AppHelperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHelperTests.swift; sourceTree = "<group>"; };
+		40774C8120A127D800F3873C /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/Mac/RxCocoa.framework; sourceTree = "<group>"; };
+		40774C8220A127D800F3873C /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/Mac/RxSwift.framework; sourceTree = "<group>"; };
+		40774C8320A127D800F3873C /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/Mac/RxTest.framework; sourceTree = "<group>"; };
+		40774C9820A12CC300F3873C /* HostInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostInfo.swift; sourceTree = "<group>"; };
+		40774C9B20A12D2200F3873C /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = State.swift; sourceTree = "<group>"; };
+		40774C9C20A12D2200F3873C /* HostsState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostsState.swift; sourceTree = "<group>"; };
+		40774CA620A293F200F3873C /* Action.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Action.swift; sourceTree = "<group>"; };
+		40774CB020A2968200F3873C /* UnlockStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockStatus.swift; sourceTree = "<group>"; };
+		40774CBD20A298EF00F3873C /* DataMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataMock.swift; sourceTree = "<group>"; };
+		40774CBF20A3CEDD00F3873C /* Reducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reducer.swift; sourceTree = "<group>"; };
+		40774CC320A3D1B500F3873C /* ProductType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductType.swift; sourceTree = "<group>"; };
+		40774CC520A3D22B00F3873C /* AppReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducerTests.swift; sourceTree = "<group>"; };
+		40774CC820A3D74C00F3873C /* ProductIdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductIdType.swift; sourceTree = "<group>"; };
+		40774CCB20A3D86300F3873C /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		408150561E5A65F1005AD37B /* Upgrade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Upgrade.swift; sourceTree = "<group>"; };
 		4081505F1E5A6931005AD37B /* UpgradeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpgradeService.swift; path = Services/UpgradeService.swift; sourceTree = "<group>"; };
 		408150631E5A7988005AD37B /* UpgradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpgradeViewController.swift; path = ViewControllers/UpgradeViewController.swift; sourceTree = "<group>"; };
-		408507C91E2ACFCA00C2E0D1 /* State.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = State.swift; path = State/State.swift; sourceTree = "<group>"; };
 		408507CC1E2ACFFE00C2E0D1 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MasterViewController.swift; path = ViewControllers/MasterViewController.swift; sourceTree = "<group>"; };
-		408507CE1E2AD05200C2E0D1 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppReducer.swift; path = Reducers/AppReducer.swift; sourceTree = "<group>"; };
-		408507D01E2AD9C200C2E0D1 /* HostsReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostsReducer.swift; path = Reducers/HostsReducer.swift; sourceTree = "<group>"; };
+		408507CE1E2AD05200C2E0D1 /* AppReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
+		408507D01E2AD9C200C2E0D1 /* HostsReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostsReducer.swift; sourceTree = "<group>"; };
 		408507D31E2ADA8900C2E0D1 /* MacHostsInfoService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacHostsInfoService.swift; path = Services/MacHostsInfoService.swift; sourceTree = "<group>"; };
-		408507D51E2ADC6800C2E0D1 /* AddHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddHost.swift; path = Actions/AddHost.swift; sourceTree = "<group>"; };
-		408507D71E2ADD0E00C2E0D1 /* RemoveHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RemoveHost.swift; path = Actions/RemoveHost.swift; sourceTree = "<group>"; };
-		408507D91E2B0AEC00C2E0D1 /* HostsState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostsState.swift; path = State/HostsState.swift; sourceTree = "<group>"; };
-		408507DB1E2B147A00C2E0D1 /* UpdateHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpdateHost.swift; path = Actions/UpdateHost.swift; sourceTree = "<group>"; };
-		408507DD1E2BB9AB00C2E0D1 /* HostInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostInfo.swift; path = Models/HostInfo.swift; sourceTree = "<group>"; };
-		408507DF1E2BEB7000C2E0D1 /* SelectHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectHost.swift; path = Actions/SelectHost.swift; sourceTree = "<group>"; };
+		408507D51E2ADC6800C2E0D1 /* AddHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddHost.swift; sourceTree = "<group>"; };
+		408507D71E2ADD0E00C2E0D1 /* RemoveHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RemoveHost.swift; sourceTree = "<group>"; };
+		408507DB1E2B147A00C2E0D1 /* UpdateHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdateHost.swift; sourceTree = "<group>"; };
+		408507DF1E2BEB7000C2E0D1 /* SelectHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectHost.swift; sourceTree = "<group>"; };
 		408508061E2C495200C2E0D1 /* UserDefaultsServivce.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserDefaultsServivce.swift; path = Services/UserDefaultsServivce.swift; sourceTree = "<group>"; };
 		40A645A91E3E6EF000CB62B1 /* MacUnlockService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacUnlockService.swift; path = Services/MacUnlockService.swift; sourceTree = "<group>"; };
 		40A645AB1E3E721400CB62B1 /* SSHService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SSHService.swift; path = Services/SSHService.swift; sourceTree = "<group>"; };
@@ -165,15 +183,12 @@
 		40B179EF208D650600A28DB3 /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = SOURCE_ROOT; };
 		40B179F4208D653600A28DB3 /* SwiftKeychainWrapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftKeychainWrapper.framework; path = Carthage/Build/iOS/SwiftKeychainWrapper.framework; sourceTree = SOURCE_ROOT; };
 		40B179F5208D653600A28DB3 /* SwiftyStoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyStoreKit.framework; path = Carthage/Build/iOS/SwiftyStoreKit.framework; sourceTree = SOURCE_ROOT; };
-		40B17A03208D716D00A28DB3 /* HostsStateHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HostsStateHelper.swift; path = MacKeyTests/HostsStateHelper.swift; sourceTree = SOURCE_ROOT; };
 		40BD24F01E330BFE004C8BD8 /* HostDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostDetailsViewController.swift; path = ViewControllers/HostDetailsViewController.swift; sourceTree = "<group>"; };
 		40C4AB121CE758F400ED92C5 /* MacKey.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MacKey.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40C4AB151CE758F400ED92C5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		40C4AB1C1CE758F400ED92C5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		40C4AB1E1CE758F400ED92C5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		40C4AB231CE758F400ED92C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		40C4AB281CE758F400ED92C5 /* MacKeyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacKeyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		40C4AB2C1CE758F400ED92C5 /* MacKeyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacKeyTests.swift; sourceTree = "<group>"; };
 		40C4AB2E1CE758F400ED92C5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		40C4AB331CE758F500ED92C5 /* MacKeyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MacKeyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		40C4AB371CE758F500ED92C5 /* MacKeyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacKeyUITests.swift; sourceTree = "<group>"; };
@@ -181,6 +196,25 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		40774C6020A1261500F3873C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40774C8520A127D900F3873C /* RxSwift.framework in Frameworks */,
+				40774C8420A127D900F3873C /* RxCocoa.framework in Frameworks */,
+				40774C8620A127D900F3873C /* RxTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40774C6920A1261500F3873C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40774C8720A127DF00F3873C /* RxTest.framework in Frameworks */,
+				40774C6D20A1261500F3873C /* MacKeyUnit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		40C4AB0F1CE758F400ED92C5 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -191,14 +225,6 @@
 				40B179F8208D653600A28DB3 /* SwiftyStoreKit.framework in Frameworks */,
 				40B179F0208D650600A28DB3 /* RxSwift.framework in Frameworks */,
 				40B179E9208D647700A28DB3 /* NMSSH.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		40C4AB251CE758F400ED92C5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				40B179E1208D62B300A28DB3 /* RxTest.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,7 +255,6 @@
 		4012639B1CE79EF300FAE75C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				408507DD1E2BB9AB00C2E0D1 /* HostInfo.swift */,
 				4012639E1CE79F6400FAE75C /* MacHost.swift */,
 			);
 			name = Models;
@@ -238,6 +263,7 @@
 		40774C2E209E69AC00F3873C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				40774C8020A1279F00F3873C /* macOS */,
 				40B179E3208D646C00A28DB3 /* Localize_Swift.framework */,
 				40B179E4208D646C00A28DB3 /* NMSSH.framework */,
 				40B179EF208D650600A28DB3 /* RxCocoa.framework */,
@@ -249,20 +275,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		40774C31209E979900F3873C /* Coordinators */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Coordinators;
-			sourceTree = "<group>";
-		};
-		40774C36209EA01400F3873C /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Extensions;
-			sourceTree = "<group>";
-		};
 		40774C39209EA0EC00F3873C /* App */ = {
 			isa = PBXGroup;
 			children = (
@@ -270,12 +282,95 @@
 				40C4AB151CE758F400ED92C5 /* AppDelegate.swift */,
 				40774C3C209EA16E00F3873C /* PurchasesHelper.swift */,
 				40774C2C209E634F00F3873C /* Store.swift */,
+				40774CCB20A3D86300F3873C /* Config.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		40774C6520A1261500F3873C /* MacKeyUnit */ = {
+			isa = PBXGroup;
+			children = (
+				40774CA520A293D800F3873C /* Actions */,
+				40774C7B20A1264500F3873C /* App */,
+				40774C9120A12C2600F3873C /* Domain */,
+				40774C6720A1261500F3873C /* Info.plist */,
+				40774CA120A2931700F3873C /* Reducers */,
+				40774CAE20A295BF00F3873C /* ViewModels */,
+			);
+			path = MacKeyUnit;
+			sourceTree = "<group>";
+		};
+		40774C7020A1261500F3873C /* MacKeyUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				40774CBC20A298BD00F3873C /* DataMock */,
+				40774CB920A297CE00F3873C /* ServiceMock */,
+				40774CB720A2976F00F3873C /* ViewModels */,
+				40774CA220A2935E00F3873C /* Reducers */,
+				40774C7D20A1266A00F3873C /* App */,
+				40774C7320A1261500F3873C /* Info.plist */,
+			);
+			path = MacKeyUnitTests;
+			sourceTree = "<group>";
+		};
+		40774C7B20A1264500F3873C /* App */ = {
+			isa = PBXGroup;
+			children = (
 				40774C3E209FEAAF00F3873C /* AppHelper.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
 		};
-		408507761E2AC52F00C2E0D1 /* Actions */ = {
+		40774C7D20A1266A00F3873C /* App */ = {
+			isa = PBXGroup;
+			children = (
+				40774C7E20A1268500F3873C /* AppHelperTests.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		40774C8020A1279F00F3873C /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				40774C8120A127D800F3873C /* RxCocoa.framework */,
+				40774C8220A127D800F3873C /* RxSwift.framework */,
+				40774C8320A127D800F3873C /* RxTest.framework */,
+			);
+			name = macOS;
+			sourceTree = "<group>";
+		};
+		40774C9120A12C2600F3873C /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				40774CCD20A3DD1000F3873C /* Enums */,
+				40774C9820A12CC300F3873C /* HostInfo.swift */,
+				40774C9C20A12D2200F3873C /* HostsState.swift */,
+				40774C9B20A12D2200F3873C /* State.swift */,
+				40774CC820A3D74C00F3873C /* ProductIdType.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		40774CA120A2931700F3873C /* Reducers */ = {
+			isa = PBXGroup;
+			children = (
+				408507CE1E2AD05200C2E0D1 /* AppReducer.swift */,
+				408507D01E2AD9C200C2E0D1 /* HostsReducer.swift */,
+				40774CBF20A3CEDD00F3873C /* Reducer.swift */,
+			);
+			path = Reducers;
+			sourceTree = "<group>";
+		};
+		40774CA220A2935E00F3873C /* Reducers */ = {
+			isa = PBXGroup;
+			children = (
+				404E05791E4FC3AF002F8A95 /* HostsReducerTests.swift */,
+				40774CC520A3D22B00F3873C /* AppReducerTests.swift */,
+			);
+			path = Reducers;
+			sourceTree = "<group>";
+		};
+		40774CA520A293D800F3873C /* Actions */ = {
 			isa = PBXGroup;
 			children = (
 				408507D51E2ADC6800C2E0D1 /* AddHost.swift */,
@@ -283,26 +378,50 @@
 				408507DF1E2BEB7000C2E0D1 /* SelectHost.swift */,
 				408507DB1E2B147A00C2E0D1 /* UpdateHost.swift */,
 				408150561E5A65F1005AD37B /* Upgrade.swift */,
+				40774CA620A293F200F3873C /* Action.swift */,
 			);
-			name = Actions;
+			path = Actions;
 			sourceTree = "<group>";
 		};
-		408507C71E2ACF4600C2E0D1 /* Reducers */ = {
+		40774CAE20A295BF00F3873C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				408507CE1E2AD05200C2E0D1 /* AppReducer.swift */,
-				408507D01E2AD9C200C2E0D1 /* HostsReducer.swift */,
+				400E709A1E4AA10200B5477B /* MasterViewModel.swift */,
 			);
-			name = Reducers;
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		408507C81E2ACFA300C2E0D1 /* State */ = {
+		40774CB720A2976F00F3873C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				408507C91E2ACFCA00C2E0D1 /* State.swift */,
-				408507D91E2B0AEC00C2E0D1 /* HostsState.swift */,
+				40B179DB208D598300A28DB3 /* MasterViewModelTests.swift */,
 			);
-			name = State;
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		40774CB920A297CE00F3873C /* ServiceMock */ = {
+			isa = PBXGroup;
+			children = (
+				40B179DD208D59DE00A28DB3 /* MacUnlockServiceMock.swift */,
+			);
+			path = ServiceMock;
+			sourceTree = "<group>";
+		};
+		40774CBC20A298BD00F3873C /* DataMock */ = {
+			isa = PBXGroup;
+			children = (
+				40774CBD20A298EF00F3873C /* DataMock.swift */,
+			);
+			path = DataMock;
+			sourceTree = "<group>";
+		};
+		40774CCD20A3DD1000F3873C /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				40774CB020A2968200F3873C /* UnlockStatus.swift */,
+				40774CC320A3D1B500F3873C /* ProductType.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 		408507CB1E2ACFD300C2E0D1 /* ViewControllers */ = {
@@ -312,8 +431,6 @@
 				40BD24F01E330BFE004C8BD8 /* HostDetailsViewController.swift */,
 				400E70991E4AA10200B5477B /* HostDetailsViewModel.swift */,
 				408507CC1E2ACFFE00C2E0D1 /* MasterViewController.swift */,
-				400E709A1E4AA10200B5477B /* MasterViewModel.swift */,
-				40B17A03208D716D00A28DB3 /* HostsStateHelper.swift */,
 				408150631E5A7988005AD37B /* UpgradeViewController.swift */,
 			);
 			name = ViewControllers;
@@ -358,6 +475,8 @@
 				40C4AB141CE758F400ED92C5 /* MacKey */,
 				40C4AB2B1CE758F400ED92C5 /* MacKeyTests */,
 				40C4AB361CE758F500ED92C5 /* MacKeyUITests */,
+				40774C6520A1261500F3873C /* MacKeyUnit */,
+				40774C7020A1261500F3873C /* MacKeyUnitTests */,
 				40C4AB131CE758F400ED92C5 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -366,8 +485,9 @@
 			isa = PBXGroup;
 			children = (
 				40C4AB121CE758F400ED92C5 /* MacKey.app */,
-				40C4AB281CE758F400ED92C5 /* MacKeyTests.xctest */,
 				40C4AB331CE758F500ED92C5 /* MacKeyUITests.xctest */,
+				40774C6420A1261500F3873C /* MacKeyUnit.framework */,
+				40774C6C20A1261500F3873C /* MacKeyUnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -376,15 +496,10 @@
 			isa = PBXGroup;
 			children = (
 				40774C39209EA0EC00F3873C /* App */,
-				408507761E2AC52F00C2E0D1 /* Actions */,
-				40774C31209E979900F3873C /* Coordinators */,
-				40774C36209EA01400F3873C /* Extensions */,
 				4012639B1CE79EF300FAE75C /* Models */,
-				408507C71E2ACF4600C2E0D1 /* Reducers */,
 				40C4AB451CE7592300ED92C5 /* Resources */,
 				40A8B65F1E340C1500C71EE7 /* Routes */,
 				408507D21E2ADA2F00C2E0D1 /* Services */,
-				408507C81E2ACFA300C2E0D1 /* State */,
 				40BD24EB1E32F937004C8BD8 /* Storyboards */,
 				408507CB1E2ACFD300C2E0D1 /* ViewControllers */,
 				400E708F1E46CCE900B5477B /* Views */,
@@ -395,11 +510,7 @@
 		40C4AB2B1CE758F400ED92C5 /* MacKeyTests */ = {
 			isa = PBXGroup;
 			children = (
-				404E05791E4FC3AF002F8A95 /* HostsReducerTests.swift */,
-				40C4AB2C1CE758F400ED92C5 /* MacKeyTests.swift */,
 				40C4AB2E1CE758F400ED92C5 /* Info.plist */,
-				40B179DB208D598300A28DB3 /* MasterViewModelTests.swift */,
-				40B179DD208D59DE00A28DB3 /* MacUnlockServiceMock.swift */,
 			);
 			path = MacKeyTests;
 			sourceTree = "<group>";
@@ -427,7 +538,53 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		40774C6120A1261500F3873C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
+		40774C6320A1261500F3873C /* MacKeyUnit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 40774C7520A1261500F3873C /* Build configuration list for PBXNativeTarget "MacKeyUnit" */;
+			buildPhases = (
+				40774C5F20A1261500F3873C /* Sources */,
+				40774C6020A1261500F3873C /* Frameworks */,
+				40774C6120A1261500F3873C /* Headers */,
+				40774C6220A1261500F3873C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MacKeyUnit;
+			productName = MacKeyUnit;
+			productReference = 40774C6420A1261500F3873C /* MacKeyUnit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		40774C6B20A1261500F3873C /* MacKeyUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 40774C7820A1261500F3873C /* Build configuration list for PBXNativeTarget "MacKeyUnitTests" */;
+			buildPhases = (
+				40774C6820A1261500F3873C /* Sources */,
+				40774C6920A1261500F3873C /* Frameworks */,
+				40774C6A20A1261500F3873C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				40774C6F20A1261500F3873C /* PBXTargetDependency */,
+			);
+			name = MacKeyUnitTests;
+			productName = MacKeyUnitTests;
+			productReference = 40774C6C20A1261500F3873C /* MacKeyUnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		40C4AB111CE758F400ED92C5 /* MacKey */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 40C4AB3C1CE758F500ED92C5 /* Build configuration list for PBXNativeTarget "MacKey" */;
@@ -446,25 +603,6 @@
 			productName = MacKey;
 			productReference = 40C4AB121CE758F400ED92C5 /* MacKey.app */;
 			productType = "com.apple.product-type.application";
-		};
-		40C4AB271CE758F400ED92C5 /* MacKeyTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 40C4AB3F1CE758F500ED92C5 /* Build configuration list for PBXNativeTarget "MacKeyTests" */;
-			buildPhases = (
-				40C4AB241CE758F400ED92C5 /* Sources */,
-				40C4AB251CE758F400ED92C5 /* Frameworks */,
-				40C4AB261CE758F400ED92C5 /* Resources */,
-				40B179FA208D672100A28DB3 /* CopyFiles */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				40C4AB2A1CE758F400ED92C5 /* PBXTargetDependency */,
-			);
-			name = MacKeyTests;
-			productName = MacKeyTests;
-			productReference = 40C4AB281CE758F400ED92C5 /* MacKeyTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		40C4AB321CE758F500ED92C5 /* MacKeyUITests */ = {
 			isa = PBXNativeTarget;
@@ -490,20 +628,25 @@
 		40C4AB0A1CE758F300ED92C5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0930;
 				LastUpgradeCheck = 0930;
 				ORGANIZATIONNAME = "Liu Liang";
 				TargetAttributes = {
+					40774C6320A1261500F3873C = {
+						CreatedOnToolsVersion = 9.3;
+						DevelopmentTeam = PWZTK547J6;
+						ProvisioningStyle = Automatic;
+					};
+					40774C6B20A1261500F3873C = {
+						CreatedOnToolsVersion = 9.3;
+						DevelopmentTeam = PWZTK547J6;
+						LastSwiftMigration = 0930;
+						ProvisioningStyle = Automatic;
+					};
 					40C4AB111CE758F400ED92C5 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = PWZTK547J6;
 						LastSwiftMigration = 0930;
-					};
-					40C4AB271CE758F400ED92C5 = {
-						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 7YC8KN9YF3;
-						LastSwiftMigration = 0930;
-						TestTargetID = 40C4AB111CE758F400ED92C5;
 					};
 					40C4AB321CE758F500ED92C5 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -528,13 +671,28 @@
 			projectRoot = "";
 			targets = (
 				40C4AB111CE758F400ED92C5 /* MacKey */,
-				40C4AB271CE758F400ED92C5 /* MacKeyTests */,
 				40C4AB321CE758F500ED92C5 /* MacKeyUITests */,
+				40774C6320A1261500F3873C /* MacKeyUnit */,
+				40774C6B20A1261500F3873C /* MacKeyUnitTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		40774C6220A1261500F3873C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40774C6A20A1261500F3873C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		40C4AB101CE758F400ED92C5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -545,13 +703,6 @@
 				4007F0951E5FD71500463D8D /* Upgrade.storyboard in Resources */,
 				40C4AB1F1CE758F400ED92C5 /* Assets.xcassets in Resources */,
 				40C4AB1D1CE758F400ED92C5 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		40C4AB261CE758F400ED92C5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -602,53 +753,84 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		40774C5F20A1261500F3873C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40774CCA20A3D74C00F3873C /* ProductIdType.swift in Sources */,
+				40774C7C20A1265800F3873C /* AppHelper.swift in Sources */,
+				40774CAA20A2943000F3873C /* SelectHost.swift in Sources */,
+				40774CAB20A2943000F3873C /* AddHost.swift in Sources */,
+				40774CA820A293F200F3873C /* Action.swift in Sources */,
+				40774CC020A3CEDE00F3873C /* Reducer.swift in Sources */,
+				40774CAF20A295DE00F3873C /* MasterViewModel.swift in Sources */,
+				40774CAC20A2943000F3873C /* Upgrade.swift in Sources */,
+				40774CA920A2943000F3873C /* RemoveHost.swift in Sources */,
+				40774CA020A12D2300F3873C /* HostsState.swift in Sources */,
+				40774CC220A3CFA500F3873C /* AppReducer.swift in Sources */,
+				40774C9A20A12CC300F3873C /* HostInfo.swift in Sources */,
+				40774CA320A2936B00F3873C /* HostsReducer.swift in Sources */,
+				40774CAD20A2943000F3873C /* UpdateHost.swift in Sources */,
+				40774CB220A2968200F3873C /* UnlockStatus.swift in Sources */,
+				40774C9E20A12D2300F3873C /* State.swift in Sources */,
+				40774CC420A3D1B500F3873C /* ProductType.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		40774C6820A1261500F3873C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				40774CC620A3D22B00F3873C /* AppReducerTests.swift in Sources */,
+				40774CA420A2936E00F3873C /* HostsReducerTests.swift in Sources */,
+				40774CBB20A2980700F3873C /* MacUnlockServiceMock.swift in Sources */,
+				40774CB820A2978700F3873C /* MasterViewModelTests.swift in Sources */,
+				40774C7F20A1268500F3873C /* AppHelperTests.swift in Sources */,
+				40774CBE20A298EF00F3873C /* DataMock.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		40C4AB0E1CE758F400ED92C5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				400E709C1E4AA10200B5477B /* MasterViewModel.swift in Sources */,
+				40774CB120A2968200F3873C /* UnlockStatus.swift in Sources */,
 				40BD24F11E330BFE004C8BD8 /* HostDetailsViewController.swift in Sources */,
 				4012639F1CE79F6400FAE75C /* MacHost.swift in Sources */,
 				408507CD1E2ACFFE00C2E0D1 /* MasterViewController.swift in Sources */,
 				4050E2BF1E6CE6850002A398 /* MockSSHService.swift in Sources */,
+				40774CA720A293F200F3873C /* Action.swift in Sources */,
 				40A645921E3C359700CB62B1 /* MasterViewController+Routes.swift in Sources */,
 				408507DC1E2B147A00C2E0D1 /* UpdateHost.swift in Sources */,
 				408507CF1E2AD05200C2E0D1 /* AppReducer.swift in Sources */,
 				40774C33209E97B300F3873C /* AppCoordinator.swift in Sources */,
 				408150571E5A65F1005AD37B /* Upgrade.swift in Sources */,
 				400E70981E46CD2100B5477B /* HostListViewCell.swift in Sources */,
+				40774C9F20A12D2300F3873C /* HostsState.swift in Sources */,
 				408507D81E2ADD0E00C2E0D1 /* RemoveHost.swift in Sources */,
+				40774CC720A3D2B200F3873C /* ProductType.swift in Sources */,
 				400E708C1E42CCCC00B5477B /* TouchIDService.swift in Sources */,
-				408507CA1E2ACFCA00C2E0D1 /* State.swift in Sources */,
 				408150601E5A6931005AD37B /* UpgradeService.swift in Sources */,
 				404B995B1E67AB63009312F3 /* HelpViewController.swift in Sources */,
 				40774C3F209FEAAF00F3873C /* AppHelper.swift in Sources */,
 				40A645AC1E3E721400CB62B1 /* SSHService.swift in Sources */,
 				40774C3D209EA16E00F3873C /* PurchasesHelper.swift in Sources */,
 				408508071E2C495200C2E0D1 /* UserDefaultsServivce.swift in Sources */,
-				408507DE1E2BB9AB00C2E0D1 /* HostInfo.swift in Sources */,
 				40A645AA1E3E6EF000CB62B1 /* MacUnlockService.swift in Sources */,
-				408507DA1E2B0AEC00C2E0D1 /* HostsState.swift in Sources */,
 				408507E01E2BEB7000C2E0D1 /* SelectHost.swift in Sources */,
 				400E709B1E4AA10200B5477B /* HostDetailsViewModel.swift in Sources */,
 				408507D41E2ADA8900C2E0D1 /* MacHostsInfoService.swift in Sources */,
+				40774CC120A3CEEC00F3873C /* Reducer.swift in Sources */,
+				40774C9D20A12D2300F3873C /* State.swift in Sources */,
 				40C4AB161CE758F400ED92C5 /* AppDelegate.swift in Sources */,
+				40774CC920A3D74C00F3873C /* ProductIdType.swift in Sources */,
 				408150641E5A7988005AD37B /* UpgradeViewController.swift in Sources */,
+				40774CCC20A3D86300F3873C /* Config.swift in Sources */,
+				40774C9920A12CC300F3873C /* HostInfo.swift in Sources */,
 				408507D61E2ADC6800C2E0D1 /* AddHost.swift in Sources */,
 				40774C2D209E634F00F3873C /* Store.swift in Sources */,
 				408507D11E2AD9C200C2E0D1 /* HostsReducer.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		40C4AB241CE758F400ED92C5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				404E057A1E4FC3AF002F8A95 /* HostsReducerTests.swift in Sources */,
-				40B179DE208D59DE00A28DB3 /* MacUnlockServiceMock.swift in Sources */,
-				40B17A04208D716D00A28DB3 /* HostsStateHelper.swift in Sources */,
-				40B179DC208D598300A28DB3 /* MasterViewModelTests.swift in Sources */,
-				40C4AB2D1CE758F400ED92C5 /* MacKeyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,10 +846,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		40C4AB2A1CE758F400ED92C5 /* PBXTargetDependency */ = {
+		40774C6F20A1261500F3873C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 40C4AB111CE758F400ED92C5 /* MacKey */;
-			targetProxy = 40C4AB291CE758F400ED92C5 /* PBXContainerItemProxy */;
+			target = 40774C6320A1261500F3873C /* MacKeyUnit */;
+			targetProxy = 40774C6E20A1261500F3873C /* PBXContainerItemProxy */;
 		};
 		40C4AB351CE758F500ED92C5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -732,6 +914,143 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		40774C7620A1261500F3873C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = PWZTK547J6;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = MacKeyUnit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nlprliu.MacKeyUnit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		40774C7720A1261500F3873C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = PWZTK547J6;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = MacKeyUnit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nlprliu.MacKeyUnit;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		40774C7920A1261500F3873C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = PWZTK547J6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = MacKeyUnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks $(PROJECT_DIR)/Carthage/Build/Mac";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nlprliu.MacKeyUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REEXPORTED_LIBRARY_PATHS = "";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		40774C7A20A1261500F3873C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = PWZTK547J6;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = MacKeyUnitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks $(PROJECT_DIR)/Carthage/Build/Mac";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = com.nlprliu.MacKeyUnitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REEXPORTED_LIBRARY_PATHS = "";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 		40C4AB3A1CE758F500ED92C5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -883,40 +1202,6 @@
 			};
 			name = Release;
 		};
-		40C4AB401CE758F500ED92C5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = MacKeyTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Lance.MacKeyTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacKey.app/MacKey";
-			};
-			name = Debug;
-		};
-		40C4AB411CE758F500ED92C5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
-				);
-				INFOPLIST_FILE = MacKeyTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Lance.MacKeyTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MacKey.app/MacKey";
-			};
-			name = Release;
-		};
 		40C4AB431CE758F500ED92C5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -952,6 +1237,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		40774C7520A1261500F3873C /* Build configuration list for PBXNativeTarget "MacKeyUnit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40774C7620A1261500F3873C /* Debug */,
+				40774C7720A1261500F3873C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		40774C7820A1261500F3873C /* Build configuration list for PBXNativeTarget "MacKeyUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				40774C7920A1261500F3873C /* Debug */,
+				40774C7A20A1261500F3873C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		40C4AB0D1CE758F300ED92C5 /* Build configuration list for PBXProject "MacKey" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -966,15 +1269,6 @@
 			buildConfigurations = (
 				40C4AB3D1CE758F500ED92C5 /* Debug */,
 				40C4AB3E1CE758F500ED92C5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		40C4AB3F1CE758F500ED92C5 /* Build configuration list for PBXNativeTarget "MacKeyTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				40C4AB401CE758F500ED92C5 /* Debug */,
-				40C4AB411CE758F500ED92C5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -10,11 +10,8 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-protocol Action {}
-
 class Store<S> {
-    typealias Reducer = (S, Action) -> S
-    let reducer: Reducer
+    let reducer: Reducer<S>
     
     var observable : Observable<S> {
         return state.asObservable()
@@ -29,7 +26,7 @@ class Store<S> {
     private let state: BehaviorRelay<S>
     private let disposeBag = DisposeBag()
     
-    init(reducer: @escaping Reducer, initialState: S) {
+    init(reducer: @escaping Reducer<S>, initialState: S) {
         self.reducer = reducer
         state = BehaviorRelay(value: initialState)
         actions.scan(initialState, accumulator: reducer)

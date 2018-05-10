@@ -16,10 +16,11 @@ private let latestHostAliasKey = "latestHostAlias"
 private let disposeBag = DisposeBag()
 
 protocol UserDefaultsPersistable {
-    var latestHostAliasKeySkipFirst: Observable<String> { get }
+    var latestHostAliasSkipFirst: Observable<String> { get }
     var supportSkippingTouchIDSkipFirst: Observable<Bool> { get }
-    var supportSleepModeKeySkipFirst: Observable<Bool> { get }
+    var supportSleepModeSkipFirst: Observable<Bool> { get }
 }
+extension AppHelper: UserDefaultsPersistable {}
 
 class UserDefaultsServivce : NSObject {
     private let userDefaults: UserDefaults
@@ -28,13 +29,13 @@ class UserDefaultsServivce : NSObject {
     }
     
     func saveWhenChanges(_ persistable: UserDefaultsPersistable) {
-        [persistable.latestHostAliasKeySkipFirst.subscribe(onNext: { [weak self] in
+        [persistable.latestHostAliasSkipFirst.subscribe(onNext: { [weak self] in
             self?.latestHostAlias = $0
         }),
          persistable.supportSkippingTouchIDSkipFirst.subscribe(onNext: { [weak self] in
             self?.supportSkippingTouchID = $0
          }),
-         persistable.supportSleepModeKeySkipFirst.subscribe(onNext: { [weak self] in
+         persistable.supportSleepModeSkipFirst.subscribe(onNext: { [weak self] in
             self?.supportSleepMode = $0
          })].forEach { $0.disposed(by: disposeBag) }
     }
