@@ -6,26 +6,29 @@
 //  Copyright © 2017 Liu Liang. All rights reserved.
 //
 
-let appReducer : Reducer<State> = { state, action in
-    var (supportSkippingTouchID, supportSleepMode) = { () -> (Bool, Bool) in 
+extension State: SimpleReducibleState {
+    typealias InputAction = Action
+    
+    func reduce(_ action: Action) -> State {
+        var newState = self
         switch action {
         case let action as Upgrade:
             switch action.productType {
             case .sleepMode:
-                return (state.supportSkippingTouchID, true)
+                newState.supportSleepMode = true
             case .skipTouchID:
-                return (true, state.supportSleepMode)
+                newState.supportSkippingTouchID = true
             case .unknown:
-                return (state.supportSkippingTouchID, state.supportSleepMode)
+                break
             }
         default:
-            return (state.supportSkippingTouchID, state.supportSleepMode)
+            break
         }
-    }()
-    
-    return State(
-        hostsState: HostsReducer.handleAction(action, state:state.hostsState),
-        supportSkippingTouchID: supportSkippingTouchID,
-        supportSleepMode: supportSleepMode
-    )
+        
+        return State(
+            hostsState: HostsReducer.handleAction(action, state:hostsState),
+            supportSkippingTouchID: newState.supportSkippingTouchID,
+            supportSleepMode: newState.supportSleepMode
+        )
+    }
 }

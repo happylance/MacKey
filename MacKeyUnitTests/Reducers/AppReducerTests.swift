@@ -30,7 +30,7 @@ class AppReducerTests: XCTestCase {
                               supportSkippingTouchID: $1,
                               supportSleepMode: $2)
             let action = Upgrade(productType: $0)
-            let newState = appReducer(state, action)
+            let newState = state.reduce(action)
             XCTAssertEqual(newState.supportSkippingTouchID, $3)
             XCTAssertEqual(newState.supportSleepMode, $4)
         }

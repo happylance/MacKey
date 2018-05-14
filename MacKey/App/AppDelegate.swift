@@ -16,7 +16,6 @@ private let initialHostsState = HostsState(
 
 // The global application store, which is responsible for managing the appliction state.
 let store = Store(
-    reducer: appReducer,
     initialState: State(hostsState: initialHostsState, supportSkippingTouchID: UserDefaultsServivce().supportSkippingTouchID, supportSleepMode: UserDefaultsServivce().supportSleepMode)
 )
 

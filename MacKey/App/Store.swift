@@ -10,28 +10,23 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-class Store<S> {
-    let reducer: Reducer<S>
+class Store {
     
-    var observable : Observable<S> {
+    var observable : Observable<State> {
         return state.asObservable()
     }
     
-    var value : S {
+    var value : State {
         return state.value
     }
     
     let actions = PublishRelay<Action>()
     
-    private let state: BehaviorRelay<S>
+    private let state: BehaviorRelay<State>
     private let disposeBag = DisposeBag()
     
-    init(reducer: @escaping Reducer<S>, initialState: S) {
-        self.reducer = reducer
-        state = BehaviorRelay(value: initialState)
-        actions.scan(initialState, accumulator: reducer)
-            .bind(to: state)
-            .disposed(by: disposeBag)
+    init(initialState: State) {
+        state = initialState.getState(actions: actions, disposeBag: disposeBag)
     }
     
     func dispatch(_ action: Action) {
@@ -39,7 +34,7 @@ class Store<S> {
         actions.accept(action)
     }
     
-    func asDriver() -> Driver<S> {
+    func asDriver() -> Driver<State> {
         return state.asDriver()
     }
 }

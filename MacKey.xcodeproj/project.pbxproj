@@ -61,6 +61,18 @@
 		40774CC920A3D74C00F3873C /* ProductIdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CC820A3D74C00F3873C /* ProductIdType.swift */; };
 		40774CCA20A3D74C00F3873C /* ProductIdType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CC820A3D74C00F3873C /* ProductIdType.swift */; };
 		40774CCC20A3D86300F3873C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CCB20A3D86300F3873C /* Config.swift */; };
+		40774CCE20A6821D00F3873C /* HostDetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400E70991E4AA10200B5477B /* HostDetailsViewModel.swift */; };
+		40774CD020A6825000F3873C /* HostDetailsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CCF20A6825000F3873C /* HostDetailsViewModelTests.swift */; };
+		40774CD220A6897B00F3873C /* EditHostState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CD120A6897B00F3873C /* EditHostState.swift */; };
+		40774CD320A6897B00F3873C /* EditHostState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CD120A6897B00F3873C /* EditHostState.swift */; };
+		40774CD520A77BC100F3873C /* ReducibleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CD420A77BC000F3873C /* ReducibleState.swift */; };
+		40774CD620A77BC100F3873C /* ReducibleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CD420A77BC000F3873C /* ReducibleState.swift */; };
+		40774CD920A7856C00F3873C /* ReducibleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CD820A7856C00F3873C /* ReducibleTests.swift */; };
+		40774CDD20A7965B00F3873C /* SimpleReducibleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CDC20A7965B00F3873C /* SimpleReducibleTests.swift */; };
+		40774CDF20A79DE400F3873C /* SimpleReducibleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CDE20A79DE400F3873C /* SimpleReducibleState.swift */; };
+		40774CE020A79DE400F3873C /* SimpleReducibleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CDE20A79DE400F3873C /* SimpleReducibleState.swift */; };
+		40774CE220A8E21800F3873C /* HostDetailsViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CE120A8E21800F3873C /* HostDetailsViewState.swift */; };
+		40774CE320A8E21800F3873C /* HostDetailsViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40774CE120A8E21800F3873C /* HostDetailsViewState.swift */; };
 		408150571E5A65F1005AD37B /* Upgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408150561E5A65F1005AD37B /* Upgrade.swift */; };
 		408150601E5A6931005AD37B /* UpgradeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4081505F1E5A6931005AD37B /* UpgradeService.swift */; };
 		408150641E5A7988005AD37B /* UpgradeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408150631E5A7988005AD37B /* UpgradeViewController.swift */; };
@@ -121,7 +133,7 @@
 		4007F09D1E5FD7D400463D8D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		400E708B1E42CCCC00B5477B /* TouchIDService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TouchIDService.swift; path = Services/TouchIDService.swift; sourceTree = "<group>"; };
 		400E70971E46CD2100B5477B /* HostListViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostListViewCell.swift; sourceTree = "<group>"; };
-		400E70991E4AA10200B5477B /* HostDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HostDetailsViewModel.swift; path = ViewControllers/HostDetailsViewModel.swift; sourceTree = "<group>"; };
+		400E70991E4AA10200B5477B /* HostDetailsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HostDetailsViewModel.swift; sourceTree = "<group>"; };
 		400E709A1E4AA10200B5477B /* MasterViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewModel.swift; sourceTree = "<group>"; };
 		4012639E1CE79F6400FAE75C /* MacHost.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MacHost.swift; path = Models/MacHost.swift; sourceTree = "<group>"; };
 		404B99501E666393009312F3 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
@@ -159,6 +171,13 @@
 		40774CC520A3D22B00F3873C /* AppReducerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducerTests.swift; sourceTree = "<group>"; };
 		40774CC820A3D74C00F3873C /* ProductIdType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductIdType.swift; sourceTree = "<group>"; };
 		40774CCB20A3D86300F3873C /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		40774CCF20A6825000F3873C /* HostDetailsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostDetailsViewModelTests.swift; sourceTree = "<group>"; };
+		40774CD120A6897B00F3873C /* EditHostState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditHostState.swift; sourceTree = "<group>"; };
+		40774CD420A77BC000F3873C /* ReducibleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReducibleState.swift; sourceTree = "<group>"; };
+		40774CD820A7856C00F3873C /* ReducibleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReducibleTests.swift; sourceTree = "<group>"; };
+		40774CDC20A7965B00F3873C /* SimpleReducibleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleReducibleTests.swift; sourceTree = "<group>"; };
+		40774CDE20A79DE400F3873C /* SimpleReducibleState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleReducibleState.swift; sourceTree = "<group>"; };
+		40774CE120A8E21800F3873C /* HostDetailsViewState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HostDetailsViewState.swift; sourceTree = "<group>"; };
 		408150561E5A65F1005AD37B /* Upgrade.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Upgrade.swift; sourceTree = "<group>"; };
 		4081505F1E5A6931005AD37B /* UpgradeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpgradeService.swift; path = Services/UpgradeService.swift; sourceTree = "<group>"; };
 		408150631E5A7988005AD37B /* UpgradeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpgradeViewController.swift; path = ViewControllers/UpgradeViewController.swift; sourceTree = "<group>"; };
@@ -303,6 +322,7 @@
 		40774C7020A1261500F3873C /* MacKeyUnitTests */ = {
 			isa = PBXGroup;
 			children = (
+				40774CD720A7855500F3873C /* Domain */,
 				40774CBC20A298BD00F3873C /* DataMock */,
 				40774CB920A297CE00F3873C /* ServiceMock */,
 				40774CB720A2976F00F3873C /* ViewModels */,
@@ -347,6 +367,8 @@
 				40774C9C20A12D2200F3873C /* HostsState.swift */,
 				40774C9B20A12D2200F3873C /* State.swift */,
 				40774CC820A3D74C00F3873C /* ProductIdType.swift */,
+				40774CD420A77BC000F3873C /* ReducibleState.swift */,
+				40774CDE20A79DE400F3873C /* SimpleReducibleState.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -386,6 +408,8 @@
 		40774CAE20A295BF00F3873C /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				40774CE120A8E21800F3873C /* HostDetailsViewState.swift */,
+				400E70991E4AA10200B5477B /* HostDetailsViewModel.swift */,
 				400E709A1E4AA10200B5477B /* MasterViewModel.swift */,
 			);
 			path = ViewModels;
@@ -395,6 +419,7 @@
 			isa = PBXGroup;
 			children = (
 				40B179DB208D598300A28DB3 /* MasterViewModelTests.swift */,
+				40774CCF20A6825000F3873C /* HostDetailsViewModelTests.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -420,8 +445,18 @@
 			children = (
 				40774CB020A2968200F3873C /* UnlockStatus.swift */,
 				40774CC320A3D1B500F3873C /* ProductType.swift */,
+				40774CD120A6897B00F3873C /* EditHostState.swift */,
 			);
 			path = Enums;
+			sourceTree = "<group>";
+		};
+		40774CD720A7855500F3873C /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				40774CD820A7856C00F3873C /* ReducibleTests.swift */,
+				40774CDC20A7965B00F3873C /* SimpleReducibleTests.swift */,
+			);
+			path = Domain;
 			sourceTree = "<group>";
 		};
 		408507CB1E2ACFD300C2E0D1 /* ViewControllers */ = {
@@ -429,7 +464,6 @@
 			children = (
 				404B995A1E67AB63009312F3 /* HelpViewController.swift */,
 				40BD24F01E330BFE004C8BD8 /* HostDetailsViewController.swift */,
-				400E70991E4AA10200B5477B /* HostDetailsViewModel.swift */,
 				408507CC1E2ACFFE00C2E0D1 /* MasterViewController.swift */,
 				408150631E5A7988005AD37B /* UpgradeViewController.swift */,
 			);
@@ -760,16 +794,21 @@
 				40774CCA20A3D74C00F3873C /* ProductIdType.swift in Sources */,
 				40774C7C20A1265800F3873C /* AppHelper.swift in Sources */,
 				40774CAA20A2943000F3873C /* SelectHost.swift in Sources */,
+				40774CE320A8E21800F3873C /* HostDetailsViewState.swift in Sources */,
 				40774CAB20A2943000F3873C /* AddHost.swift in Sources */,
+				40774CE020A79DE400F3873C /* SimpleReducibleState.swift in Sources */,
 				40774CA820A293F200F3873C /* Action.swift in Sources */,
+				40774CD620A77BC100F3873C /* ReducibleState.swift in Sources */,
 				40774CC020A3CEDE00F3873C /* Reducer.swift in Sources */,
 				40774CAF20A295DE00F3873C /* MasterViewModel.swift in Sources */,
+				40774CD320A6897B00F3873C /* EditHostState.swift in Sources */,
 				40774CAC20A2943000F3873C /* Upgrade.swift in Sources */,
 				40774CA920A2943000F3873C /* RemoveHost.swift in Sources */,
 				40774CA020A12D2300F3873C /* HostsState.swift in Sources */,
 				40774CC220A3CFA500F3873C /* AppReducer.swift in Sources */,
 				40774C9A20A12CC300F3873C /* HostInfo.swift in Sources */,
 				40774CA320A2936B00F3873C /* HostsReducer.swift in Sources */,
+				40774CCE20A6821D00F3873C /* HostDetailsViewModel.swift in Sources */,
 				40774CAD20A2943000F3873C /* UpdateHost.swift in Sources */,
 				40774CB220A2968200F3873C /* UnlockStatus.swift in Sources */,
 				40774C9E20A12D2300F3873C /* State.swift in Sources */,
@@ -781,6 +820,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40774CD020A6825000F3873C /* HostDetailsViewModelTests.swift in Sources */,
+				40774CDD20A7965B00F3873C /* SimpleReducibleTests.swift in Sources */,
+				40774CD920A7856C00F3873C /* ReducibleTests.swift in Sources */,
 				40774CC620A3D22B00F3873C /* AppReducerTests.swift in Sources */,
 				40774CA420A2936E00F3873C /* HostsReducerTests.swift in Sources */,
 				40774CBB20A2980700F3873C /* MacUnlockServiceMock.swift in Sources */,
@@ -801,6 +843,7 @@
 				408507CD1E2ACFFE00C2E0D1 /* MasterViewController.swift in Sources */,
 				4050E2BF1E6CE6850002A398 /* MockSSHService.swift in Sources */,
 				40774CA720A293F200F3873C /* Action.swift in Sources */,
+				40774CD220A6897B00F3873C /* EditHostState.swift in Sources */,
 				40A645921E3C359700CB62B1 /* MasterViewController+Routes.swift in Sources */,
 				408507DC1E2B147A00C2E0D1 /* UpdateHost.swift in Sources */,
 				408507CF1E2AD05200C2E0D1 /* AppReducer.swift in Sources */,
@@ -816,15 +859,18 @@
 				40774C3F209FEAAF00F3873C /* AppHelper.swift in Sources */,
 				40A645AC1E3E721400CB62B1 /* SSHService.swift in Sources */,
 				40774C3D209EA16E00F3873C /* PurchasesHelper.swift in Sources */,
+				40774CE220A8E21800F3873C /* HostDetailsViewState.swift in Sources */,
 				408508071E2C495200C2E0D1 /* UserDefaultsServivce.swift in Sources */,
 				40A645AA1E3E6EF000CB62B1 /* MacUnlockService.swift in Sources */,
 				408507E01E2BEB7000C2E0D1 /* SelectHost.swift in Sources */,
+				40774CD520A77BC100F3873C /* ReducibleState.swift in Sources */,
 				400E709B1E4AA10200B5477B /* HostDetailsViewModel.swift in Sources */,
 				408507D41E2ADA8900C2E0D1 /* MacHostsInfoService.swift in Sources */,
 				40774CC120A3CEEC00F3873C /* Reducer.swift in Sources */,
 				40774C9D20A12D2300F3873C /* State.swift in Sources */,
 				40C4AB161CE758F400ED92C5 /* AppDelegate.swift in Sources */,
 				40774CC920A3D74C00F3873C /* ProductIdType.swift in Sources */,
+				40774CDF20A79DE400F3873C /* SimpleReducibleState.swift in Sources */,
 				408150641E5A7988005AD37B /* UpgradeViewController.swift in Sources */,
 				40774CCC20A3D86300F3873C /* Config.swift in Sources */,
 				40774C9920A12CC300F3873C /* HostInfo.swift in Sources */,

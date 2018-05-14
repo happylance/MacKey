@@ -6,4 +6,6 @@
 //  Copyright © 2018 Liu Liang. All rights reserved.
 //
 
-typealias Reducer<S> = (S, Action) -> S
+typealias Reducer<State, InputAction, OutputAction> = (State, InputAction) -> (State, OutputAction?)
+
+typealias SimpleReducer<State, Action> = (State, Action) -> State

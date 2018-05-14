@@ -125,21 +125,23 @@ class MasterViewController: UIViewController {
         }).disposed(by: disposeBag)
         
         self.editCell$
-            .withLatestFrom(store.observable.asObservable()) { ($0, $1.hostsState.allHosts) }
-            .flatMapFirst { (alias, allHosts) -> Maybe<(HostInfo, EditHostState)> in
+            .withLatestFrom(store.observable) { ($0, $1) }
+            .flatMapFirst { (alias, state) -> Maybe<(HostInfo, HostInfo?)> in
+                let allHosts = state.hostsState.allHosts
                 if let oldHost = allHosts[alias],
                     let hostDetailVC = self.showHostDetailsViewController(animated: true, forNewHost: false) {
-                    hostDetailVC.oldHost = oldHost
-                    return hostDetailVC.getEditHostState().map { (oldHost, $0) }.asObservable().asMaybe()
+                    let hostState = HostDetailsViewState(hostInfo: oldHost, allHostKeys: Array(allHosts.keys), supportSkippingTouchID: state.supportSkippingTouchID)
+                    let hostDetailViewModel = HostDetailsViewModel(initialState: hostState)
+                    hostDetailVC.viewModel = hostDetailViewModel
+                    
+                    return hostDetailViewModel.dismiss$.map { (oldHost, $0) }.asObservable().asMaybe()
                 }
                 return .empty()
             }
-            .subscribe(onNext: { (oldHost, editHostState) in
-                switch editHostState {
-                case let .saved(newHost):
+            .subscribe(onNext: { (oldHost, hostInfo) in
+                if let newHost = hostInfo {
                     store.dispatch(UpdateHost(oldHost: oldHost, newHost: newHost))
                     self.tableView.reloadData()
-                default: break
                 }
                 self.dismiss(animated: true)
             })
@@ -213,21 +215,22 @@ class MasterViewController: UIViewController {
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: nil, action: nil)
         addButton.accessibilityIdentifier = "Add"
         addButton.rx.tap
-            .flatMapFirst { _ -> Single<EditHostState> in
+            .withLatestFrom(store.observable)
+            .flatMapFirst { state -> Single<HostInfo?> in
                 if let hostDetailVC = self.showHostDetailsViewController(animated: true, forNewHost: true) {
-                    return hostDetailVC.getEditHostState()
+                    let hostState = HostDetailsViewState(hostInfo: HostInfo(), allHostKeys: Array(state.hostsState.allHosts.keys), supportSkippingTouchID: state.supportSkippingTouchID)
+                    let hostDetailViewModel = HostDetailsViewModel(initialState: hostState)
+                    hostDetailVC.viewModel = hostDetailViewModel
+                    return hostDetailViewModel.dismiss$.asSingle()
                 }
-                return .just(.cancelled)
+                return .just(nil)
             }
-            .flatMapFirst { editHostState -> Observable<HostInfo> in
+            .flatMapFirst { hostInfo -> Observable<HostInfo> in
                 return Observable.create { observer in
                     self.dismiss(animated: true) {
-                        switch editHostState {
-                        case let .saved(newHost):
+                        if let newHost = hostInfo {
                             store.dispatch(AddHost(host: newHost))
                             observer.onNext(newHost)
-                        default:
-                            break
                         }
                         observer.onCompleted()
                     }
@@ -309,5 +312,11 @@ extension MasterViewController : UITableViewDelegate {
         });
         
         return [deleteRowAction, editRowAction]
+    }
+}
+
+extension Store {
+    var hostsState : HostsState {
+        return store.value.hostsState
     }
 }

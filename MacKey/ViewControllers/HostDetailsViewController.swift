@@ -11,11 +11,6 @@ import Localize_Swift
 import RxSwift
 import RxCocoa
 
-enum EditHostState {
-    case saved(HostInfo)
-    case cancelled
-}
-
 class HostDetailsViewController: UITableViewController {
     @IBOutlet weak var aliasOutlet: UITextField!
     @IBOutlet weak var validationOutlet: UILabel!
@@ -28,12 +23,7 @@ class HostDetailsViewController: UITableViewController {
     
     private var disposeBag = DisposeBag()
     
-    var oldHost = HostInfo()
-    private let editHostState$ = PublishSubject<EditHostState>()
-    
-    func getEditHostState() -> Single<EditHostState> {
-        return editHostState$.asSingle()
-    }
+    var viewModel: HostDetailsViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,6 +34,7 @@ class HostDetailsViewController: UITableViewController {
         saveOutlet.accessibilityIdentifier = "Save"
         cancelOutlet.accessibilityIdentifier = "Cancel"
         
+        let oldHost = viewModel?.initialState.hostInfo ?? HostInfo()
         aliasOutlet?.text = oldHost.alias
         hostOutlet?.text = oldHost.host
         usernameOutlet?.text = oldHost.user
@@ -52,47 +43,45 @@ class HostDetailsViewController: UITableViewController {
         
         validationOutlet.text = "Alias is already taken".localized()
         
-        let requireTouchID$ = BehaviorRelay(value:requireTouchIDOutlet.isOn)
+        guard let viewModel = viewModel else {
+            return
+        }
         
-        requireTouchIDOutlet.rx.isOn
-            .skip(1)
-            .flatMapFirst { isOn -> Observable<Bool> in
-                if (isOn || store.value.supportSkippingTouchID) {
-                    return Observable.just(isOn)
-                } else if let upgradeViewController = self.showUpgradeViewController(
+        viewModel.askForUpgrade$
+            .flatMapFirst { [unowned self] _ -> Observable<()> in
+                if let upgradeViewController = self.showUpgradeViewController(
                     animated: true, forProductType: .skipTouchID) {
                     return upgradeViewController.getPurchaseState$()
-                        .do(onNext: {
-                            if case .cancelled = $0 {
-                                self.requireTouchIDOutlet.isOn = true
-                            }
-                        })
                         .filter { $0 == .purchased }
-                        .map {_ in isOn }
+                        .map { _ in }
                 }
-                return Observable.empty()
-            }
-            .subscribe(onNext:{
-                requireTouchID$.accept($0)
-            })
+                return Observable.empty() }
+            .map { .didUpgrade }
+            .bind(to: viewModel.inputActions)
             .disposed(by: disposeBag)
         
-        let viewModel = HostDetailsViewModel(
-            alias$: aliasOutlet.rx.text.orEmpty.asDriver(),
-            host$: hostOutlet.rx.text.orEmpty.asDriver(),
-            username$: usernameOutlet.rx.text.orEmpty.asDriver(),
-            password$: passwordOutlet.rx.text.orEmpty.asDriver(),
-            requireTouchID$: requireTouchID$.asDriver(),
-            cancelTapped$: cancelOutlet.rx.tap.asDriver(),
-            saveTapped$: saveOutlet.rx.tap.asDriver(),
-            initialHost: oldHost
-        )
+        /*viewModel.dismiss$
+            .subscribe(onNext: { [unowned self] _ in
+                self.dismiss(animated: true)
+            })
+            .disposed(by: disposeBag)*/
         
-        [viewModel.aliasAvailable$.drive(validationOutlet.rx.isHidden),
-         viewModel.saveEnabled$.drive(saveOutlet.rx.isEnabled),
-         viewModel.editHostState$.asObservable().bind(to: editHostState$)]
-        .forEach {
-            $0.disposed(by: disposeBag)
+        [aliasOutlet.rx.text.orEmpty.map { .changeAlias($0) },
+         hostOutlet.rx.text.orEmpty.map { .changeHost($0) },
+         usernameOutlet.rx.text.orEmpty.map { .changeUsername($0) },
+         passwordOutlet.rx.text.orEmpty.map { .changePassword($0) },
+         requireTouchIDOutlet.rx.isOn.skip(1).map { _ in .requireTouchIDTapped },
+         cancelOutlet.rx.tap.map { .cancelTapped },
+         saveOutlet.rx.tap.map { .saveTapped }]
+            .forEach {
+                $0.bind(to: viewModel.inputActions).disposed(by: disposeBag)
+        }
+        
+        [viewModel.aliasAvailable$.bind(to: validationOutlet.rx.isHidden),
+         viewModel.requireTouchID$.bind(to: requireTouchIDOutlet.rx.isOn),
+         viewModel.saveEnabled$.bind(to: saveOutlet.rx.isEnabled)]
+            .forEach {
+                $0.disposed(by: disposeBag)
         }
     }
 }
