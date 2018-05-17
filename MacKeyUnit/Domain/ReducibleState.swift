@@ -13,7 +13,7 @@ protocol ReducibleState {
     associatedtype InputAction
     associatedtype OutputAction
     
-    func reduce(_ inputAction:InputAction) -> (Self, OutputAction?)
+    func reduce(_ inputAction:InputAction) -> (Self?, OutputAction?)
 }
 
 extension ReducibleState {
@@ -21,10 +21,16 @@ extension ReducibleState {
         let state = BehaviorRelay(value: self)
         let outputActions = PublishRelay<OutputAction>()
         
-        inputActions.scan((self, nil)) { $0.0.reduce($1) }
+        inputActions.scan((self, nil, nil)) { (arg0, action: InputAction) -> (Self, Self?, OutputAction?) in
+            let (previousState, _, _) = arg0
+            let (newState, outputAction) = previousState.reduce(action)
+                return (newState ?? previousState, newState, outputAction)
+            }
             .subscribe(onNext: {
-                state.accept($0.0)
-                if let action = $0.1 {
+                if let newState = $0.1 {
+                    state.accept(newState)
+                }
+                if let action = $0.2 {
                     outputActions.accept(action)
                 }
             })

@@ -49,7 +49,7 @@ extension HostDetailsViewState {
 }
 
 extension HostDetailsViewState: ReducibleState {
-    func reduce(_ inputAction: HostDetailsViewInputAction) -> (HostDetailsViewState, HostDetailsViewOutputAction?) {
+    func reduce(_ inputAction: HostDetailsViewInputAction) -> (HostDetailsViewState?, HostDetailsViewOutputAction?) {
         var newState = self
         switch inputAction {
         case .changeAlias(let alias):
@@ -76,9 +76,9 @@ extension HostDetailsViewState: ReducibleState {
             }
             return (newState, .askForUpgrade)
         case .cancelTapped:
-            return (self, .dismiss(nil))
+            return (nil, .dismiss(nil))
         case .saveTapped:
-            return (self, .dismiss(hostInfo))
+            return (nil, .dismiss(hostInfo))
         }
     }
 }

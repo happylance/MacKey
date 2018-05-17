@@ -21,17 +21,14 @@ class HostDetailsViewModel {
     private let disposeBag = DisposeBag()
 
     init(initialState: HostDetailsViewState) {
-        self.initialState = HostDetailsViewState(
-            hostInfo: initialState.hostInfo,
-            allHostKeys: initialState.allHostKeys,
-            supportSkippingTouchID: initialState.supportSkippingTouchID)
-        
-        (state$, outputActions$) = self.initialState
+        self.initialState = initialState
+        (state$, outputActions$) = initialState
             .getStateAndActions(inputActions: inputActions, disposeBag: disposeBag)
     }
 }
 
 extension HostDetailsViewModel {
+    // - MARK: Outputs
     var aliasAvailable$: Observable<Bool> {
         let initialAlias = initialState.hostInfo.alias
         return state$.map { $0.aliasAvailable(initialAlias: initialAlias) }

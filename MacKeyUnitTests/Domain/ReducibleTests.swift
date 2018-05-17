@@ -19,12 +19,12 @@ struct ReducibleTestsState: ReducibleState {
     
     let sum: Int
     
-    func reduce(_ inputAction:ReducibleTestsInputAction) -> (ReducibleTestsState, ReducibleTestsOutputAction?) {
+    func reduce(_ inputAction:ReducibleTestsInputAction) -> (ReducibleTestsState?, ReducibleTestsOutputAction?) {
         switch inputAction {
         case .add(let num):
             return (ReducibleTestsState(sum: sum + num),  nil)
         case .inputAction:
-            return (self,  .outputAction)
+            return (nil,  .outputAction)
         }
     }
 }
@@ -57,7 +57,7 @@ class ReducibleTests: XCTestCase {
                 
                 if $0 {
                     let result = scheduler.start { state.asObservable() }
-                    XCTAssertEqual(result.events.compactMap { $0.value.element?.sum }, [0, 0, 2, 3])
+                    XCTAssertEqual(result.events.compactMap { $0.value.element?.sum }, [0, 2, 3])
                 } else {
                     let result = scheduler.start { outputActions.asObservable() }
                     XCTAssertEqual(result.events.count, 1)
